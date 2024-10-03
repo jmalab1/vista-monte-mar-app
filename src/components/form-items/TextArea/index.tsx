@@ -1,12 +1,13 @@
-import { FunctionComponent } from 'react';
+import { ChangeEventHandler, FunctionComponent } from 'react';
 
 type TTextArea = {
   title: string;
   id: string;
   placeholder: string;
+  callback: ChangeEventHandler;
 };
 
-const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder }) => {
+const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder, callback }) => {
   return (
     <label className="form-control col-span-full">
       <div className="label">
@@ -14,9 +15,11 @@ const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder }) => {
         <span className="label-text-alt"></span>
       </div>
       <textarea
-        className="textarea textarea-bordered h-24"
+        className="textarea textarea-bordered h-32"
         id={id}
+        name={id}
         placeholder={placeholder}
+        onChange={callback}
       ></textarea>
       <div className="label">
         <span className="label-text-alt"></span>
