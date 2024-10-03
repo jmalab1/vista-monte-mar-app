@@ -80,13 +80,6 @@ const ContactForm = () => {
         </div>
       </form>
       {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-      {response && (
-        <div>
-          <h2>Response:</h2>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 };
