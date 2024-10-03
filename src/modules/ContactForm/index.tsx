@@ -4,10 +4,9 @@ import Input from '../../components/form-items/Input';
 import TextArea from '../../components/form-items/TextArea';
 import Upload from '../../components/form-items/Upload';
 import SectionHeader from '../../components/heading/SectionHeader';
+import axios from 'axios';
 
 const ContactForm = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
@@ -27,34 +26,27 @@ const ContactForm = () => {
     }));
   };
   
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(formValues);
 
     setLoading(true);
     setError(null);
+
     try {
-      const response = await fetch('http://localhost:8135/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formValues),
+      axios.post('/api/send-email', formValues)
+      .then((response) => {
+        setResponse(response.data);
+      })
+      .catch((error) => {
+        if (error instanceof Error) {
+          setError(error.message); // Type assertion
+        } else {
+          setError('An unknown error occurred'); // Fallback for unknown types
+        }
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const jsonResponse = await response.json();
-      setResponse(jsonResponse);
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message); // Type assertion
-      } else {
-        setError('An unknown error occurred'); // Fallback for unknown types
-      }
-    }  finally {
+  
+    } finally {
       setLoading(false);
     }
   }

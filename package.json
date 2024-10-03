@@ -15,6 +15,7 @@
     "@material-tailwind/react": "2.1.2",
     "@react-google-maps/api": "^2.19.3",
     "@tailwindcss/typography": "^0.5.15",
+    "axios": "^1.7.7",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "leaflet-providers": "^2.0.0",
