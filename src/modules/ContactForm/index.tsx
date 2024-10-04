@@ -27,12 +27,12 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setLoading(true);
 
-    axios.post('/api/send-email', formValues)
+    await axios.post('/api/send-email', formValues)
       .then((response) => {
         if (response.status === 200) {
           setShowModal(true);
