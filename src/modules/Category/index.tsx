@@ -75,7 +75,7 @@ export const Category = () => {
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Card
-          className="relative grid h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl"
+          className="relative grid h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-cyan-500 via-blue-600 to-indigo-500"
           placeholder={undefined}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
