@@ -4,7 +4,16 @@ const withMT = require('@material-tailwind/react/utils/withMT');
 const config: Config = withMT({
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,mdx,html}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        serif: ['Georgia', 'serif'],
+        mono: ['Menlo', 'Monaco', 'monospace'],
+      },
+      boxShadow: {
+        'inner-lg': 'inset 0 8px 16px rgba(0, 0, 0, 0.25)', // Adjust values as needed
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
