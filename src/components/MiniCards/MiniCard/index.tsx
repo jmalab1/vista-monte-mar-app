@@ -10,19 +10,16 @@ type TMiniCard = {
 const MiniCard: FunctionComponent<TMiniCard> = ({ record, callback, active }) => {
   return (
     <div
-      className={`font-[Helvetica] grid grid-cols-6 items-start rounded-xl bg-base-200 cursor-pointer shadow-inner-lg ${record.name == active ? 'bg-info' : 'hover:bg-base-300'}`}
+      className={`font-[Helvetica] grid grid-cols-6 rounded-xl bg-base-200 cursor-pointer shadow-inner-lg ${record.name == active ? 'border-secondary border border-2 border-dashed' : 'hover:bg-base-300'}`}
       onClick={() => callback(record)}
     >
-      <div className="col-span-5">
-        <div className='p-2'>
-          <p className="font-bold text-xs text-nuetral">
-            {record.name}{' '}
-            <span className="mt-2 content-center">({record.type})</span>
-          </p>
-          <p className="mt-2 text-xs">{record.description}</p>
-        </div>
+      <div className="col-span-5 p-2">
+        <p className="font-bold text-xs text-nuetral">
+          {record.name} ({record.type})
+        </p>
+        <p className="mt-2 text-xs">{record.description}</p>
       </div>
-      <div className='border-l-[1px] border-dashed h-full w-full place-content-center pl-2'>
+      <div className='border-l-[1px] border-dashed place-content-center pl-2'>
         <span className="text-xs text-nuetral">{record.distance}</span>
       </div>
     </div>
