@@ -16,7 +16,7 @@ const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder, callba
         <span className="label-text-alt"></span>
       </div>
       <textarea
-        className="textarea textarea-bordered h-32"
+        className="textarea textarea-bordered h-32 shadow-inner"
         id={id}
         name={id}
         placeholder={placeholder}

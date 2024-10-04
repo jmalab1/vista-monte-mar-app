@@ -33,7 +33,7 @@ export const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <h1 className="text-xl font-bold ml-6">Vista Monte Mar</h1>
+        <h1 className="text-2xl font-bold ml-6">Vista Monte Mar</h1>
       </div>
       <div className="flex-none">
         <label className="flex cursor-pointer gap-2">
@@ -74,7 +74,7 @@ export const Navbar = () => {
         <ul className="menu menu-horizontal px-1">
           {NAV_MENU.map(({ name, href }) => (
             <li className="hidden lg:block">
-              <a href={href}>{name}</a>
+              <a href={href} className='text-md font-bold'>{name}</a>
             </li>
           ))}
         </ul>

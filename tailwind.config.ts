@@ -15,7 +15,7 @@ const config: Config = withMT({
           'primary-focus': '#fce8a1',
           'primary-content': '#ffffff',
 
-          secondary: '#ffdbb3',
+          secondary: '#dfb88d',
           'secondary-focus': '#fdd4a5',
           'secondary-content': '#ffffff',
 
@@ -27,7 +27,7 @@ const config: Config = withMT({
           'neutral-focus': '#8f8f8f',
           'neutral-content': '#ffffff',
 
-          'base-100': '#ffffff',
+          'base-100': '#efefef',
           'base-200': '#f9fafb',
           'base-300': '#b7babe',
           'base-content': '#1e2734',
@@ -67,12 +67,12 @@ const config: Config = withMT({
           'neutral-focus': '#9e9e9e',
           'neutral-content': '#666666',
 
-          'base-100': '#494b50',
+          'base-100': '#1d1d1d',
           'base-200': '#525252',
           'base-300': '#4f4f4f',
           'base-content': '#ffffff',
 
-          info: '#a4d0f4',
+          info: '#567a97',
           success: '#80b3ae',
           warning: '#ffdca8',
           error: '#ffa185',

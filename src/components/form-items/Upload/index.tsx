@@ -13,7 +13,7 @@ const Upload: FunctionComponent<TUpload> = ({ title }) => {
       >
         {title}
       </label>
-      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-nuetral px-6 py-10">
+      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-2 border-base-300 px-6 py-10 shadow-inner">
         <div className="text-center">
           <svg
             className="mx-auto h-12 w-12 text-gray-300"
@@ -30,7 +30,7 @@ const Upload: FunctionComponent<TUpload> = ({ title }) => {
           <div className="mt-4 flex text-sm leading-6 text-gray-600">
             <label
               htmlFor="file-upload"
-              className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+              className="relative cursor-pointer rounded-md bg-white font-semibold text-info p-1 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-blue-500"
             >
               <span>Upload a file</span>
               <input
@@ -40,7 +40,7 @@ const Upload: FunctionComponent<TUpload> = ({ title }) => {
                 className="sr-only"
               />
             </label>
-            <p className="pl-1">or drag and drop</p>
+            <p className="p-1">or drag and drop</p>
           </div>
           <p className="text-xs leading-5 text-gray-600">
             PNG, JPG, GIF up to 10MB
