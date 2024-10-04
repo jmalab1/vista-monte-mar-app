@@ -6,15 +6,15 @@ import {
   LightBulbIcon,
 } from '@heroicons/react/24/solid';
 import { useState } from 'react';
-import RestaurantDetails from '../RestaurantDetails';
-import EmergencyDetails from '../EmergencyDetails';
-import ThingsToDoDetails from '../ThingsToDoDetails';
-import NoteworthyDetails from '../NoteworthyDetails';
+import RestaurantDetails from '../../modules/RestaurantDetails';
+import EmergencyDetails from '../../modules/EmergencyDetails';
+import ThingsToDoDetails from '../../modules/ThingsToDoDetails';
+import NoteworthyDetails from '../../modules/NoteworthyDetails';
 import SectionHeader from '../../components/heading/SectionHeader';
 import CategoryCard from '../../components/Categories/CategoryCard';
 import _ from 'lodash';
-import AbbLogo from '../Logos/AbbLogo';
-import VrboLogo from '../Logos/VrboLogo';
+import AbbLogo from '../../modules/Logos/AbbLogo';
+import VrboLogo from '../../modules/Logos/VrboLogo';
 
 let categories = [
   {
@@ -51,7 +51,7 @@ let categories = [
   },
 ];
 
-export const Category = () => {
+export const JacoBeachSection = () => {
   const [hiddenDivState, setHiddenDivState] = useState('restaurants');
 
   const cardClickCallbackHandler = (id: string) => {
@@ -70,8 +70,9 @@ export const Category = () => {
       <div className="mb-10 grid place-items-center text-center ">
         <SectionHeader
           title="Jaco Beach"
-          subsection="Jaco is a vibrant coastal destination in Costa Rica, known for its stunning beaches, lively nightlife, and rich biodiversity, below are some ideas to get you pumped."
-        />
+        >
+          <p className='!text-nuetral lg:w-6/12 text-lg'>Jaco is a vibrant coastal destination in Costa Rica, known for its stunning beaches, lively nightlife, and rich biodiversity, below are some ideas to get you pumped.</p>
+        </SectionHeader>
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Card
@@ -126,4 +127,4 @@ export const Category = () => {
   );
 };
 
-export default Category;
+export default JacoBeachSection;

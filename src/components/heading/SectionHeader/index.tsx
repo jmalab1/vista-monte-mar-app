@@ -1,28 +1,21 @@
 import { Typography } from '@material-tailwind/react';
+import React from 'react';
 import { FunctionComponent } from 'react';
 
 type TSectionHeader = {
   title: string;
-  subsection?: string;
+  children?: React.ReactNode;
 };
 
 const SectionHeader: FunctionComponent<TSectionHeader> = ({
   title,
-  subsection,
+  children,
 }) => {
   return (
     <>
       <div className="place-items-center text-center">
         <h1 className="text-secondary text-4xl font-bold mt-10">{title}</h1>
-        <Typography
-          variant="lead"
-          className="!text-nuetral lg:w-6/12"
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        >
-          {subsection}
-        </Typography>
+        {children}
       </div>
     </>
   );

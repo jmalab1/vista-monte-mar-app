@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const NAV_MENU = [
   {
-    name: 'Jaco Beach',
-    href: '#jaco_beach',
+    name: 'Home',
+    href: '/',
   },
   {
-    name: 'Contact Us',
-    href: '#contact',
+    name: 'House Rules',
+    href: '/house_rules',
+  },
+  {
+    name: 'About Us',
+    href: '/about_us',
   },
 ];
 
@@ -74,7 +79,7 @@ export const Navbar = () => {
         <ul className="menu menu-horizontal px-1">
           {NAV_MENU.map(({ name, href }) => (
             <li className="hidden lg:block">
-              <a href={href} className='text-md font-bold'>{name}</a>
+              <Link to={href} className='text-md font-bold'>{name}</Link>
             </li>
           ))}
         </ul>
