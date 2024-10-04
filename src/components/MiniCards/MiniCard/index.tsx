@@ -10,7 +10,7 @@ type TMiniCard = {
 const MiniCard: FunctionComponent<TMiniCard> = ({ record, callback, active }) => {
   return (
     <div
-      className={`flex items-start rounded-xl bg-base-200 p-2 cursor-pointer hover:bg-base-300 shadow-md ${record.name == active ? 'bg-info' : ''}`}
+      className={`flex items-start rounded-xl bg-base-200 p-2 cursor-pointer shadow-md ${record.name == active ? 'bg-info' : 'hover:bg-base-300'}`}
       onClick={() => callback(record)}
     >
       <div className="ml-2">
