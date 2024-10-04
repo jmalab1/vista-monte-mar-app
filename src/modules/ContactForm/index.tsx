@@ -5,11 +5,12 @@ import TextArea from '../../components/form-items/TextArea';
 import Upload from '../../components/form-items/Upload';
 import SectionHeader from '../../components/heading/SectionHeader';
 import axios from 'axios';
+import Modal from '../../components/Modal';
 
 const ContactForm = () => {
-  const [response, setResponse] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState(false);
   const [formValues, setFormValues] = useState({
     firstname: '',
     lastname: '',
@@ -25,30 +26,36 @@ const ContactForm = () => {
       [name]: value,
     }));
   };
-  
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formValues);
 
     setLoading(true);
-    setError(null);
 
-    try {
-      axios.post('/api/send-email', formValues)
+    axios.post('/api/send-email', formValues)
       .then((response) => {
-        setResponse(response.data);
-      })
-      .catch((error) => {
-        if (error instanceof Error) {
-          setError(error.message); // Type assertion
-        } else {
-          setError('An unknown error occurred'); // Fallback for unknown types
+        if (response.status === 200) {
+          setShowModal(true);
         }
+      })
+      .catch(() => {
+        setError(true);
+      }).finally(() => {
+        // Always run cleanup code, stop loading spinner
+        setLoading(false);
+
+        setFormValues({
+          firstname: '',
+          lastname: '',
+          email: '',
+          phone_number: '',
+          comment: '',
+        });
       });
-  
-    } finally {
-      setLoading(false);
-    }
+  }
+
+  const modalCallbackHandler = () => {
+    setShowModal(false);
   }
 
   return (
@@ -61,25 +68,29 @@ const ContactForm = () => {
               subsection="Tell us about your visit. We'd love to hear from you."
             />
             <div className="mr-6 ml-6 mt-10 grid grid-cols-1 gap-x-6 sm:grid-cols-6">
-              <Input type="text" title="First Name" id="firstname" required={true} callback={handleChange}/>
-              <Input type="text" title="Last Name" id="lastname" callback={handleChange}/>
-              <Input type="email" title="Email" id="email" required={true} callback={handleChange}/>
-              <Input type="text" title="Phone Number" id="phone_number" callback={handleChange}/>
+              <Input type="text" title="First Name" id="firstname" required={true} callback={handleChange} value={formValues.firstname} />
+              <Input type="text" title="Last Name" id="lastname" callback={handleChange} value={formValues.lastname} />
+              <Input type="email" title="Email" id="email" required={true} callback={handleChange} value={formValues.email} />
+              <Input type="text" title="Phone Number" id="phone_number" callback={handleChange} value={formValues.phone_number} />
               <TextArea
                 title="Comment"
                 id="comment"
                 placeholder="Let us know what you think"
                 callback={handleChange}
+                value={formValues.comment}
               />
               <Upload title="Attachments" />
             </div>
           </div>
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6 mr-4">
-          <ButtonItem title="submit" classValue="btn-secondary" type="submit"/>
+          {loading && <span className="loading loading-spinner loading-md"></span>}
+          <ButtonItem title="submit" classValue="btn-secondary" type="submit" />
         </div>
       </form>
-      {loading && <p>Loading...</p>}
+      {error
+        ? (<Modal showModal={showModal} title="Uh Oh!" text="We've hit a snag, try again some other time!" callback={modalCallbackHandler} />)
+        : (<Modal showModal={showModal} title="We've got your message" text="Thank you for time!" callback={modalCallbackHandler} />)}
     </div>
   );
 };

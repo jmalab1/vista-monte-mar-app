@@ -5,9 +5,10 @@ type TTextArea = {
   id: string;
   placeholder: string;
   callback: ChangeEventHandler;
+  value: string;
 };
 
-const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder, callback }) => {
+const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder, callback, value }) => {
   return (
     <label className="form-control col-span-full">
       <div className="label">
@@ -20,7 +21,8 @@ const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder, callba
         name={id}
         placeholder={placeholder}
         onChange={callback}
-      ></textarea>
+        value={value}
+      />
       <div className="label">
         <span className="label-text-alt"></span>
         <span className="label-text-alt"></span>

@@ -24,4 +24,14 @@ export default defineConfig({
       mangle: true, // Enable variable name mangling
     },
   },
+  server: {
+    proxy: {
+      // When the frontend requests /api/*, it will be proxied to the backend at http://localhost:4000.
+      '/api': {
+        target: 'https://localhost', // Backend server
+        changeOrigin: true,
+        secure: false
+      },
+    },
+  },
 });
