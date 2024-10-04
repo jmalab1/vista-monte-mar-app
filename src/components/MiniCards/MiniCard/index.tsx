@@ -1,16 +1,17 @@
 import { FunctionComponent } from 'react';
-import { TLatLong, TSmallTableRecord } from '../../SmallTable';
+import { TSmallTableRecord } from '../../SmallTable';
 
 type TMiniCard = {
   record: TSmallTableRecord;
-  callback: (arg0: TLatLong) => void;
+  callback: (arg0: TSmallTableRecord) => void;
+  active?: string;
 };
 
-const MiniCard: FunctionComponent<TMiniCard> = ({ record, callback }) => {
+const MiniCard: FunctionComponent<TMiniCard> = ({ record, callback, active }) => {
   return (
     <div
-      className="flex items-start rounded-xl bg-base-200 p-2 cursor-pointer hover:bg-base-300 shadow-md"
-      onClick={() => callback(record.location)}
+      className={`flex items-start rounded-xl bg-base-200 p-2 cursor-pointer hover:bg-base-300 shadow-md ${record.name == active ? 'bg-info' : ''}`}
+      onClick={() => callback(record)}
     >
       <div className="ml-2">
         <p className="font-semibold text-xs text-nuetral">
