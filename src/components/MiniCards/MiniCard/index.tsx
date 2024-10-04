@@ -20,11 +20,10 @@ const MiniCard: FunctionComponent<TMiniCard> = ({ record, callback, active }) =>
             <span className="mt-2 content-center">({record.type})</span>
           </p>
           <p className="mt-2 text-xs">{record.description}</p>
-
         </div>
       </div>
       <div className='border-l-[1px] border-dashed h-full w-full place-content-center pl-2'>
-        <span className="text-xs">{record.distance}</span>
+        <span className="text-xs text-nuetral">{record.distance}</span>
       </div>
     </div>
   );
