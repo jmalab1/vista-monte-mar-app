@@ -25,6 +25,7 @@ export const Navbar = () => {
   };
 
   const [theme, setTheme] = useState(getInitialTheme());
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -35,10 +36,16 @@ export const Navbar = () => {
     setTheme((prev) => (prev === light ? dark : light));
   };
 
+  const handleMenuClick = () => {
+    setIsDrawerOpen(false);
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <h1 className="text-2xl font-bold ml-6">Vista Monte Mar</h1>
+        <Link to={"/"}>
+          <h1 className="text-2xl font-bold ml-6 btn bg-base-100 border-0">Vista Monte Mar</h1>
+        </Link>
       </div>
       <div>
         <label className="swap swap-rotate">
@@ -74,10 +81,10 @@ export const Navbar = () => {
         </ul>
       </div>
       <div className="drawer lg:hidden sm:block w-12 ml-2 mr-2">
-        <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+        <input id="my-drawer" type="checkbox" className="drawer-toggle" checked={isDrawerOpen} onChange={(e) => setIsDrawerOpen(e.target.checked)} />
         <div className="drawer-content">
           {/* Page content here */}
-          <label htmlFor="my-drawer-4" className="drawer-button btn bg-base-100">
+          <label htmlFor="my-drawer" className="drawer-button btn bg-base-100">
             <svg xmlns="http://www.w3.org/2000/svg"
               fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 drawer-button">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -85,11 +92,11 @@ export const Navbar = () => {
           </label>
         </div>
         <div className="drawer-side z-50 opacity-95">
-          <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
+          <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {NAV_MENU.map(({ name, href }) => (
               <li>
-                <Link to={href} className='text-md font-bold'>{name}</Link>
+                <Link to={href} className='text-md font-bold' onClick={handleMenuClick}>{name}</Link>
               </li>
             ))}
           </ul>
