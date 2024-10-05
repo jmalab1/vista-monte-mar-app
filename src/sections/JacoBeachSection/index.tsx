@@ -70,7 +70,7 @@ export const JacoBeachSection = () => {
   };
 
   return (
-    <section className="px-8 pb-20 pt-20 lg:pt-0 bg-base-200 shadow-xl" id="jaco_beach">
+    <section className="px-8 pb-10 bg-base-200 shadow-xl" id="jaco_beach">
       <div className="mb-10 grid place-items-center text-center">
         <SectionHeader
           title="Jaco Beach"
