@@ -95,12 +95,12 @@ export const Navbar = () => {
             </svg>
           </label>
         </div>
-        <div className="drawer-side z-50 opacity-95">
+        <div className="drawer-side z-50 opacity-98">
           <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {NAV_MENU.map(({ name, href }) => (
               <li>
-                <Link to={href} className={`text-md font-bold ${activeMenuItem == name ? "bg-secondary" : ""}`} onClick={(e) => handleMenuClick(e, name)}>{name}</Link>
+                <Link to={href} className={`text-md font-bold ${activeMenuItem == name ? "bg-secondary text-gray-700" : ""}`} onClick={(e) => handleMenuClick(e, name)}>{name}</Link>
               </li>
             ))}
           </ul>
