@@ -67,14 +67,14 @@ export const JacoBeachSection = () => {
 
   return (
     <section className="px-8 pb-20 pt-20 lg:pt-0 bg-base-200 shadow-xl" id="jaco_beach">
-      <div className="mb-10 grid place-items-center text-center ">
+      <div className="mb-10 grid place-items-center text-center">
         <SectionHeader
           title="Jaco Beach"
         >
           <p className='!text-nuetral lg:w-6/12 text-lg'>Jaco is a vibrant coastal destination in Costa Rica, known for its stunning beaches, lively nightlife, and rich biodiversity, below are some ideas to get you pumped.</p>
         </SectionHeader>
       </div>
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 md:ml-32 md:mr-32">
         <Card
           className="relative grid h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-cyan-500 via-blue-600 to-indigo-500"
           placeholder={undefined}
@@ -119,10 +119,12 @@ export const JacoBeachSection = () => {
           ))}
         </div>
       </div>
-      {hiddenDivState == 'restaurants' && <RestaurantDetails />}
-      {hiddenDivState == 'emergency' && <EmergencyDetails />}
-      {hiddenDivState == 'things_to_do' && <ThingsToDoDetails />}
-      {hiddenDivState == 'noteworthy' && <NoteworthyDetails />}
+      <div className="md:ml-32 md:mr-32">
+        {hiddenDivState == 'restaurants' && <RestaurantDetails />}
+        {hiddenDivState == 'emergency' && <EmergencyDetails />}
+        {hiddenDivState == 'things_to_do' && <ThingsToDoDetails />}
+        {hiddenDivState == 'noteworthy' && <NoteworthyDetails />}
+      </div>
     </section>
   );
 };
