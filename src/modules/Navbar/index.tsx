@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const NAV_MENU = [
@@ -17,6 +17,7 @@ const NAV_MENU = [
 ];
 
 export const Navbar = () => {
+  const [activeMenuItem, setActiveMenuItem] = useState("Home");
   const light = 'olight';
   const dark = 'odark';
 
@@ -36,15 +37,18 @@ export const Navbar = () => {
     setTheme((prev) => (prev === light ? dark : light));
   };
 
-  const handleMenuClick = () => {
+  const handleMenuClick = (e: MouseEvent<HTMLAnchorElement>, name: string) => {
+    const button = e.currentTarget as unknown as HTMLButtonElement;
+    button.blur();
     setIsDrawerOpen(false);
+    setActiveMenuItem(name);
   };
 
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to={"/"}>
-          <h1 className="text-2xl font-bold ml-6 btn bg-base-100 border-0">Vista Monte Mar</h1>
+          <h1 className={`text-2xl font-bold ml-6 btn bg-transparent hover:bg-transparent border-none shadow-none`}>Vista Monte Mar</h1>
         </Link>
       </div>
       <div>
@@ -75,7 +79,7 @@ export const Navbar = () => {
         <ul className="flex gap-1 menu menu-horizontal px-1">
           {NAV_MENU.map(({ name, href }) => (
             <li>
-              <Link to={href} className='text-md font-bold'>{name}</Link>
+              <Link to={href} className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? "bg-secondary" : ""}`} onClick={(e) => handleMenuClick(e, name)}>{name}</Link>
             </li>
           ))}
         </ul>
@@ -96,7 +100,7 @@ export const Navbar = () => {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {NAV_MENU.map(({ name, href }) => (
               <li>
-                <Link to={href} className='text-md font-bold' onClick={handleMenuClick}>{name}</Link>
+                <Link to={href} className={`text-md font-bold ${activeMenuItem == name ? "bg-secondary" : ""}`} onClick={(e) => handleMenuClick(e, name)}>{name}</Link>
               </li>
             ))}
           </ul>
