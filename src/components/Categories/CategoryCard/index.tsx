@@ -10,6 +10,7 @@ interface CategoryCardProps {
   icon: React.ElementType;
   callback: (id: string) => void;
   active: boolean;
+  attribution: string;
 }
 
 const CategoryCard = ({
@@ -20,6 +21,7 @@ const CategoryCard = ({
   icon: Icon,
   active,
   callback,
+  attribution,
 }: CategoryCardProps) => {
   return (
     <Card
@@ -64,6 +66,7 @@ const CategoryCard = ({
           </Typography>
         </div>
       </CardBody>
+      <div className='text-[6pt] absolute bottom-0 right-0 bg-white bg-opacity-60 pl-2 pr-2'>{attribution}</div>
     </Card>
   );
 };

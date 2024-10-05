@@ -19,35 +19,39 @@ import VrboLogo from '../../modules/Logos/VrboLogo';
 let categories = [
   {
     id: 'restaurants',
-    img: '/image/blogs/blog-3.png',
+    img: '/image/food.jpg',
     icon: ChartPieIcon,
     title: 'Restaurants',
     desc: 'Looking for a bite to eat?',
     active: true,
+    attribution: "Photo by @rosalindjchang"
   },
   {
     id: 'things_to_do',
-    img: '/image/blogs/blog-12.jpeg',
+    img: '/image/beach-top-view.jpg',
     icon: LightBulbIcon,
     title: 'Things To Do',
     desc: 'Explore Jaco',
     active: false,
+    attribution: "Photo by @photosbychalo"
   },
   {
     id: 'emergency',
-    img: '/image/blogs/blog-10.jpeg',
+    img: '/image/emergency.jpg',
     icon: ChatBubbleOvalLeftEllipsisIcon,
     title: 'Emergency',
     desc: 'Need urgent help?',
     active: false,
+    attribution: "Photo by @charlesdeluvio"
   },
   {
     id: 'noteworthy',
-    img: '/image/blogs/blog-13.png',
+    img: '/image/mountain.jpg',
     icon: PencilSquareIcon,
     title: 'Noteworthy',
     desc: 'Looking for more?',
     active: false,
+    attribution: "Photo by @hiking_corgi"
   },
 ];
 
