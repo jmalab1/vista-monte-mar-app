@@ -28,8 +28,9 @@ let categories = [
     title: 'Restaurants',
     desc: 'Looking for a bite to eat?',
     active: true,
-    attribution: "Photo by @rosalindjchang",
-    photo_link: "https://unsplash.com/@rosalindjchang?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    attribution: 'Photo by @rosalindjchang',
+    photo_link:
+      'https://unsplash.com/@rosalindjchang?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
   {
     id: 'things_to_do',
@@ -38,8 +39,9 @@ let categories = [
     title: 'Things To Do',
     desc: 'Explore Jaco',
     active: false,
-    attribution: "Photo by @lime517",
-    photo_link: "https://unsplash.com/@lime517?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    attribution: 'Photo by @lime517',
+    photo_link:
+      'https://unsplash.com/@lime517?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
   {
     id: 'emergency',
@@ -48,8 +50,9 @@ let categories = [
     title: 'Emergency',
     desc: 'Need urgent help?',
     active: false,
-    attribution: "Photo by @charlesdeluvio",
-    photo_link: "https://unsplash.com/@charlesdeluvio?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    attribution: 'Photo by @charlesdeluvio',
+    photo_link:
+      'https://unsplash.com/@charlesdeluvio?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
   {
     id: 'noteworthy',
@@ -58,8 +61,9 @@ let categories = [
     title: 'Noteworthy',
     desc: 'Looking for more?',
     active: false,
-    attribution: "Photo by @hiking_corgi",
-    photo_link: "https://unsplash.com/@hiking_corgi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    attribution: 'Photo by @hiking_corgi',
+    photo_link:
+      'https://unsplash.com/@hiking_corgi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
 ];
 
@@ -79,11 +83,13 @@ export const JacoBeachSection = () => {
 
   return (
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="jaco_beach">
-      <div className="mb-10 grid place-items-center text-center">
-        <SectionHeader
-          title="Jaco Beach"
-        >
-          <p className='!text-nuetral lg:w-6/12 text-lg'>Jaco is a vibrant coastal destination in Costa Rica, known for its stunning beaches, lively nightlife, and rich biodiversity, below are some ideas to get you pumped.</p>
+      <div className="mb-10 grid place-content-center md:ml-56 md:mr-56">
+        <SectionHeader title="Jaco Beach">
+          <p className="!text-nuetral text-lg">
+            Jaco is a vibrant coastal destination in Costa Rica, known for its
+            stunning beaches, lively nightlife, and rich biodiversity, below are
+            some ideas to get you pumped.
+          </p>
         </SectionHeader>
       </div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 md:ml-32 md:mr-32">
