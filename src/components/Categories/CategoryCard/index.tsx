@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Card, CardBody, Typography } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 
 interface CategoryCardProps {
   id: string;
@@ -11,6 +12,7 @@ interface CategoryCardProps {
   callback: (id: string) => void;
   active: boolean;
   attribution: string;
+  photo_link: string;
 }
 
 const CategoryCard = ({
@@ -22,6 +24,7 @@ const CategoryCard = ({
   active,
   callback,
   attribution,
+  photo_link
 }: CategoryCardProps) => {
   return (
     <Card
@@ -66,7 +69,11 @@ const CategoryCard = ({
           </Typography>
         </div>
       </CardBody>
-      <div className='text-[6pt] absolute bottom-0 right-0 bg-white bg-opacity-60 pl-2 pr-2'>{attribution}</div>
+      <div className='text-[6pt] absolute bottom-0 right-0 bg-white bg-opacity-60 pl-2 pr-2'>
+        <Link to={photo_link} target='_blank'>
+          {attribution}
+        </Link>
+      </div>
     </Card>
   );
 };

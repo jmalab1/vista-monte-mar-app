@@ -9,6 +9,7 @@ const config: Config = withMT({
         sans: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
         serif: ['Georgia', 'serif'],
         mono: ['Menlo', 'Monaco', 'monospace'],
+        pacifico: ['Pacifico', 'cursive'],
       },
       boxShadow: {
         'inner-lg': 'inset 0 8px 16px rgba(0, 0, 0, 0.25)', // Adjust values as needed

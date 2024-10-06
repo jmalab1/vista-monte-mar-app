@@ -15,10 +15,10 @@ import CategoryCard from '../../components/Categories/CategoryCard';
 import _ from 'lodash';
 import AbbLogo from '../../modules/Logos/AbbLogo';
 import VrboLogo from '../../modules/Logos/VrboLogo';
-import PFood from './food.jpg?w=600&webp';
-import PThingsTodo from './surf.jpg?w=600&webp';
-import PEmergency from './emergency.jpg?w=600&webp';
-import PNoteworthy from './mountain.jpg?w=600&webp';
+import PFood from './images/food.jpg?w=600&webp';
+import PThingsTodo from './images/surf.jpg?w=600&webp';
+import PEmergency from './images/emergency.jpg?w=600&webp';
+import PNoteworthy from './images/mountain.jpg?w=600&webp';
 
 let categories = [
   {
@@ -28,7 +28,8 @@ let categories = [
     title: 'Restaurants',
     desc: 'Looking for a bite to eat?',
     active: true,
-    attribution: "Photo by @rosalindjchang"
+    attribution: "Photo by @rosalindjchang",
+    photo_link: "https://unsplash.com/@rosalindjchang?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
   },
   {
     id: 'things_to_do',
@@ -37,7 +38,8 @@ let categories = [
     title: 'Things To Do',
     desc: 'Explore Jaco',
     active: false,
-    attribution: "Photo by @lime517"
+    attribution: "Photo by @lime517",
+    photo_link: "https://unsplash.com/@lime517?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
   },
   {
     id: 'emergency',
@@ -46,7 +48,8 @@ let categories = [
     title: 'Emergency',
     desc: 'Need urgent help?',
     active: false,
-    attribution: "Photo by @charlesdeluvio"
+    attribution: "Photo by @charlesdeluvio",
+    photo_link: "https://unsplash.com/@charlesdeluvio?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
   },
   {
     id: 'noteworthy',
@@ -55,7 +58,8 @@ let categories = [
     title: 'Noteworthy',
     desc: 'Looking for more?',
     active: false,
-    attribution: "Photo by @hiking_corgi"
+    attribution: "Photo by @hiking_corgi",
+    photo_link: "https://unsplash.com/@hiking_corgi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
   },
 ];
 

@@ -48,7 +48,7 @@ export const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to={"/"}>
-          <h1 className={`text-2xl font-bold ml-6 btn bg-transparent hover:bg-transparent border-none shadow-none`}>Vista Monte Mar</h1>
+          <h1 className={`text-2xl font-bold ml-6 btn bg-transparent hover:bg-transparent border-none shadow-none font-[Pacifico]`}>Vista Monte Mar</h1>
         </Link>
       </div>
       <div>
