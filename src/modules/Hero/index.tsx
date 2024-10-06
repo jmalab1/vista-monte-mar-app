@@ -14,7 +14,7 @@ export const Hero = () => {
             <div className="hero-content text-white text-center">
                 <div className="max-w-md">
                     <h1 className="mb-5 text-7xl font-bold font-[Pacifico]">Welcome!</h1>
-                    <p className="mb-5">
+                    <p className="mb-5 text-lg bg-gray-900 bg-opacity-50 rounded">
                         Welcome to Vista Monte Mar! Enjoy a cozy stay with modern amenities in a prime location. We look forward to hosting you!
                     </p>
                 </div>
