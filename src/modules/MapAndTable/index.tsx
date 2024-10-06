@@ -16,7 +16,7 @@ export const MapAndTable: FunctionComponent<TMapAndTable> = ({
 }) => {
   const [latitude, setLatitude] = useState(9.6056);
   const [longitude, setLongitude] = useState(-84.6164);
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState('');
 
   const onClickMiniCard = (record: TSmallTableRecord) => {
     setLatitude(record.location.latitude);
@@ -28,7 +28,11 @@ export const MapAndTable: FunctionComponent<TMapAndTable> = ({
     <div className="md:grid md:grid-cols-1 md:grid-cols-3 md:gap-6 mt-10">
       <MiniCardHolder title={title}>
         {records.map((record) => (
-          <MiniCard record={record} callback={onClickMiniCard} active={active} />
+          <MiniCard
+            record={record}
+            callback={onClickMiniCard}
+            active={active}
+          />
         ))}
       </MiniCardHolder>
       <div className="col-span-2">

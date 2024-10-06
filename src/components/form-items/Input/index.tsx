@@ -5,12 +5,20 @@ type TInput = {
   id: string;
   placeholder?: string;
   required?: boolean;
-  type: "password" | "text" | "email" | "tel";
+  type: 'password' | 'text' | 'email' | 'tel';
   callback: ChangeEventHandler;
   value: string;
 };
 
-const Input: FunctionComponent<TInput> = ({ title, id, placeholder, required, type, callback, value }) => {
+const Input: FunctionComponent<TInput> = ({
+  title,
+  id,
+  placeholder,
+  required,
+  type,
+  callback,
+  value,
+}) => {
   return (
     <label className="form-control sm:col-span-3">
       <div className="label">

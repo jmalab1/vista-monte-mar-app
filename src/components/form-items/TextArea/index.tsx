@@ -8,7 +8,13 @@ type TTextArea = {
   value: string;
 };
 
-const TextArea: FunctionComponent<TTextArea> = ({ title, id, placeholder, callback, value }) => {
+const TextArea: FunctionComponent<TTextArea> = ({
+  title,
+  id,
+  placeholder,
+  callback,
+  value,
+}) => {
   return (
     <label className="form-control col-span-full">
       <div className="label">

@@ -7,7 +7,11 @@ type TMiniCard = {
   active?: string;
 };
 
-const MiniCard: FunctionComponent<TMiniCard> = ({ record, callback, active }) => {
+const MiniCard: FunctionComponent<TMiniCard> = ({
+  record,
+  callback,
+  active,
+}) => {
   return (
     <div
       className={`font-[Helvetica] grid grid-cols-6 rounded-xl bg-base-200 cursor-pointer shadow-inner-lg ${record.name == active ? 'border-secondary border border-2 border-dashed' : 'hover:bg-base-300'}`}
@@ -19,7 +23,7 @@ const MiniCard: FunctionComponent<TMiniCard> = ({ record, callback, active }) =>
         </p>
         <p className="mt-2 text-xs">{record.description}</p>
       </div>
-      <div className='border-l-[1px] border-dashed place-content-center pl-2'>
+      <div className="border-l-[1px] border-dashed place-content-center pl-2">
         <span className="text-xs text-nuetral">{record.distance}</span>
       </div>
     </div>

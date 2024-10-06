@@ -24,7 +24,7 @@ const CategoryCard = ({
   active,
   callback,
   attribution,
-  photo_link
+  photo_link,
 }: CategoryCardProps) => {
   return (
     <Card
@@ -69,8 +69,8 @@ const CategoryCard = ({
           </Typography>
         </div>
       </CardBody>
-      <div className='text-[6pt] absolute bottom-0 right-0 bg-white bg-opacity-60 pl-2 pr-2'>
-        <Link to={photo_link} target='_blank'>
+      <div className="text-[6pt] absolute bottom-0 right-0 bg-white bg-opacity-60 pl-2 pr-2">
+        <Link to={photo_link} target="_blank">
           {attribution}
         </Link>
       </div>
