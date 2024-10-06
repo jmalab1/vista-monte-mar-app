@@ -15,11 +15,15 @@ import CategoryCard from '../../components/Categories/CategoryCard';
 import _ from 'lodash';
 import AbbLogo from '../../modules/Logos/AbbLogo';
 import VrboLogo from '../../modules/Logos/VrboLogo';
+import PFood from './food.jpg?w=600&webp';
+import PThingsTodo from './surf.jpg?w=600&webp';
+import PEmergency from './emergency.jpg?w=600&webp';
+import PNoteworthy from './mountain.jpg?w=600&webp';
 
 let categories = [
   {
     id: 'restaurants',
-    img: '/image/food.jpg',
+    img: PFood,
     icon: ChartPieIcon,
     title: 'Restaurants',
     desc: 'Looking for a bite to eat?',
@@ -28,16 +32,16 @@ let categories = [
   },
   {
     id: 'things_to_do',
-    img: '/image/beach-top-view.jpg',
+    img: PThingsTodo,
     icon: LightBulbIcon,
     title: 'Things To Do',
     desc: 'Explore Jaco',
     active: false,
-    attribution: "Photo by @photosbychalo"
+    attribution: "Photo by @lime517"
   },
   {
     id: 'emergency',
-    img: '/image/emergency.jpg',
+    img: PEmergency,
     icon: ChatBubbleOvalLeftEllipsisIcon,
     title: 'Emergency',
     desc: 'Need urgent help?',
@@ -46,7 +50,7 @@ let categories = [
   },
   {
     id: 'noteworthy',
-    img: '/image/mountain.jpg',
+    img: PNoteworthy,
     icon: PencilSquareIcon,
     title: 'Noteworthy',
     desc: 'Looking for more?',
