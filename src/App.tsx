@@ -7,7 +7,7 @@ import AboutUs from './pages/AboutUs';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/vista_monte_mar/">
       <div>
         <Navbar />
         <div>
