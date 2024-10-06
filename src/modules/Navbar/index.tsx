@@ -1,5 +1,6 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from './images/logo.svg?w-24&webp';
 
 const NAV_MENU = [
   {
@@ -48,7 +49,8 @@ export const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to={"/"}>
-          <h1 className={`text-2xl font-bold ml-6 btn bg-transparent hover:bg-transparent border-none shadow-none font-[Pacifico]`}>Vista Monte Mar</h1>
+          <h1 className={`text-2xl font-bold btn bg-transparent hover:bg-transparent border-none shadow-none font-[Pacifico]`}>
+            <img src={logo} width={64} />Vista Monte Mar</h1>
         </Link>
       </div>
       <div>
