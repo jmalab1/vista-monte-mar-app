@@ -37,7 +37,7 @@ export default defineConfig({
       '/api': {
         target: 'https://localhost', // Backend server
         changeOrigin: true,
-        secure: false,
+        secure: false
       },
     },
   },
