@@ -54,6 +54,44 @@ export const Navbar = () => {
     setActiveMenuItem(name);
   };
 
+  const nav = () => {
+    return NAV_MENU.map(({ name, href, submenu }) => {
+      if (submenu) {
+        return (<li>
+          <details>
+            <summary className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}>{name}</summary>
+            <ul className="rounded-t-none p-2 z-50">
+              {submenu.map(({ name, href }) => (
+                <li>
+                  <Link
+                    to={href}
+                    className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100' : ''}`}
+                    onClick={(e) => handleMenuClick(e, name)}
+                  >
+                    {name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+        );
+      } else {
+        return (
+          <li>
+            <Link
+              to={href}
+              className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100' : ''}`}
+              onClick={(e) => handleMenuClick(e, name)}
+            >
+              {name}
+            </Link>
+          </li>
+        );
+      }
+    })
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -97,41 +135,7 @@ export const Navbar = () => {
       </div>
       <div className="flex-none hidden lg:block">
         <ul className="flex gap-1 menu menu-horizontal px-1">
-          {NAV_MENU.map(({ name, href, submenu }) => {
-            if (submenu) {
-              return (<li>
-                <details>
-                  <summary>{name}</summary>
-                  <ul className="bg-base-100 rounded-t-none p-2 z-50">
-                    {submenu.map(({ name, href }) => (
-                      <li>
-                        <Link
-                          to={href}
-                          className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
-                          onClick={(e) => handleMenuClick(e, name)}
-                        >
-                          {name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li>
-              );
-            } else {
-              return (
-                <li>
-                  <Link
-                    to={href}
-                    className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
-                    onClick={(e) => handleMenuClick(e, name)}
-                  >
-                    {name}
-                  </Link>
-                </li>
-              );
-            }
-          })}
+          {nav()}
         </ul>
       </div>
       <div className="drawer lg:hidden sm:block w-12 ml-2 mr-2">
@@ -168,41 +172,7 @@ export const Navbar = () => {
             className="drawer-overlay"
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {NAV_MENU.map(({ name, href, submenu }) => {
-              if (submenu) {
-                return (<li>
-                  <details>
-                    <summary>{name}</summary>
-                    <ul className="bg-base-100 rounded-t-none p-2 z-50">
-                      {submenu.map(({ name, href }) => (
-                        <li>
-                          <Link
-                            to={href}
-                            className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
-                            onClick={(e) => handleMenuClick(e, name)}
-                          >
-                            {name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                </li>
-                );
-              } else {
-                return (
-                  <li>
-                    <Link
-                      to={href}
-                      className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
-                      onClick={(e) => handleMenuClick(e, name)}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                );
-              }
-            })}
+            {nav()}
           </ul>
         </div>
       </div>
