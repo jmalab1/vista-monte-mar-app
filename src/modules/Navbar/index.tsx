@@ -69,7 +69,7 @@ export const Navbar = () => {
                 <li>
                   <Link
                     to={href}
-                    className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100' : ''}`}
+                    className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
                     onClick={(e) => handleMenuClick(e, name)}
                   >
                     <span className='whitespace-nowrap'>{name}</span>
@@ -85,7 +85,7 @@ export const Navbar = () => {
           <li>
             <Link
               to={href}
-              className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100' : ''}`}
+              className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
               onClick={(e) => handleMenuClick(e, name)}
             >
               {name}
