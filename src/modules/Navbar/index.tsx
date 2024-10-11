@@ -8,8 +8,17 @@ const NAV_MENU = [
     href: '/',
   },
   {
-    name: 'House Rules',
-    href: '/house_rules',
+    name: "Unit Details",
+    submenu: [
+      {
+        name: 'House Rules',
+        href: '/house_rules',
+      },
+      {
+        name: 'Directions',
+        href: '/directions',
+      },
+    ]
   },
   {
     name: 'About Us',
@@ -88,17 +97,41 @@ export const Navbar = () => {
       </div>
       <div className="flex-none hidden lg:block">
         <ul className="flex gap-1 menu menu-horizontal px-1">
-          {NAV_MENU.map(({ name, href }) => (
-            <li>
-              <Link
-                to={href}
-                className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
-                onClick={(e) => handleMenuClick(e, name)}
-              >
-                {name}
-              </Link>
-            </li>
-          ))}
+          {NAV_MENU.map(({ name, href, submenu }) => {
+            if (submenu) {
+              return (<li>
+                <details>
+                  <summary>{name}</summary>
+                  <ul className="bg-base-100 rounded-t-none p-2 z-50">
+                    {submenu.map(({ name, href }) => (
+                      <li>
+                        <Link
+                          to={href}
+                          className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+                          onClick={(e) => handleMenuClick(e, name)}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+              );
+            } else {
+              return (
+                <li>
+                  <Link
+                    to={href}
+                    className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+                    onClick={(e) => handleMenuClick(e, name)}
+                  >
+                    {name}
+                  </Link>
+                </li>
+              );
+            }
+          })}
         </ul>
       </div>
       <div className="drawer lg:hidden sm:block w-12 ml-2 mr-2">
@@ -135,17 +168,41 @@ export const Navbar = () => {
             className="drawer-overlay"
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {NAV_MENU.map(({ name, href }) => (
-              <li>
-                <Link
-                  to={href}
-                  className={`text-md font-bold ${activeMenuItem == name ? 'bg-secondary text-gray-700' : ''}`}
-                  onClick={(e) => handleMenuClick(e, name)}
-                >
-                  {name}
-                </Link>
-              </li>
-            ))}
+            {NAV_MENU.map(({ name, href, submenu }) => {
+              if (submenu) {
+                return (<li>
+                  <details>
+                    <summary>{name}</summary>
+                    <ul className="bg-base-100 rounded-t-none p-2 z-50">
+                      {submenu.map(({ name, href }) => (
+                        <li>
+                          <Link
+                            to={href}
+                            className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+                            onClick={(e) => handleMenuClick(e, name)}
+                          >
+                            {name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </li>
+                );
+              } else {
+                return (
+                  <li>
+                    <Link
+                      to={href}
+                      className={`text-md text-gray-700 font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+                      onClick={(e) => handleMenuClick(e, name)}
+                    >
+                      {name}
+                    </Link>
+                  </li>
+                );
+              }
+            })}
           </ul>
         </div>
       </div>
