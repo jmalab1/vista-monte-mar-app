@@ -8,16 +8,20 @@ const NAV_MENU = [
     href: '/',
   },
   {
-    name: "Unit Details",
+    name: "Visit Information",
     submenu: [
-      {
-        name: 'House Rules',
-        href: '/house_rules',
-      },
       {
         name: 'Directions',
         href: '/directions',
       },
+      {
+        name: 'Arrival',
+        href: '/arrival',
+      },
+      {
+        name: 'House Rules',
+        href: '/house_rules',
+      }
     ]
   },
   {
@@ -68,7 +72,7 @@ export const Navbar = () => {
                     className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100' : ''}`}
                     onClick={(e) => handleMenuClick(e, name)}
                   >
-                    {name}
+                    <span className='whitespace-nowrap'>{name}</span>
                   </Link>
                 </li>
               ))}

@@ -5,6 +5,8 @@ import HouseRules from './pages/HouseRules';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import NotFound from './components/NotFound';
+import Directions from './pages/Directions';
+import Arrival from './pages/Arrival';
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/house_rules" element={<HouseRules />} />
             <Route path="/about_us" element={<AboutUs />} />
+            <Route path="/directions" element={<Directions />} />
+            <Route path="/arrival" element={<Arrival />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
