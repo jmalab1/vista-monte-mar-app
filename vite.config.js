@@ -5,7 +5,7 @@ import { imagetools } from 'vite-imagetools';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
-    base: mode === "server" ? "/vista_monte_mar/" : "/",
+    base: mode === 'server' ? '/vista_monte_mar/' : '/',
     plugins: [react(), imagetools()],
     define: { 'process.env': {} },
     resolve: {
@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: 'https://localhost', // Backend server
           changeOrigin: true,
-          secure: false
+          secure: false,
         },
       },
     },

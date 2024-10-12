@@ -8,7 +8,7 @@ const NAV_MENU = [
     href: '/',
   },
   {
-    name: "Visit Information",
+    name: 'Visit Information',
     submenu: [
       {
         name: 'Directions',
@@ -21,8 +21,8 @@ const NAV_MENU = [
       {
         name: 'House Rules',
         href: '/house_rules',
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'About Us',
@@ -61,24 +61,29 @@ export const Navbar = () => {
   const nav = () => {
     return NAV_MENU.map(({ name, href, submenu }) => {
       if (submenu) {
-        return (<li>
-          <details>
-            <summary className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}>{name}</summary>
-            <ul className="rounded-t-none p-2 z-50">
-              {submenu.map(({ name, href }) => (
-                <li>
-                  <Link
-                    to={href}
-                    className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
-                    onClick={(e) => handleMenuClick(e, name)}
-                  >
-                    <span className='whitespace-nowrap'>{name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </details>
-        </li>
+        return (
+          <li>
+            <details>
+              <summary
+                className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+              >
+                {name}
+              </summary>
+              <ul className="rounded-t-none p-2 z-50">
+                {submenu.map(({ name, href }) => (
+                  <li>
+                    <Link
+                      to={href}
+                      className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
+                      onClick={(e) => handleMenuClick(e, name)}
+                    >
+                      <span className="whitespace-nowrap">{name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </li>
         );
       } else {
         return (
@@ -93,7 +98,7 @@ export const Navbar = () => {
           </li>
         );
       }
-    })
+    });
   };
 
   return (
@@ -138,9 +143,7 @@ export const Navbar = () => {
         </label>
       </div>
       <div className="flex-none hidden lg:block">
-        <ul className="flex gap-1 menu menu-horizontal px-1">
-          {nav()}
-        </ul>
+        <ul className="flex gap-1 menu menu-horizontal px-1">{nav()}</ul>
       </div>
       <div className="drawer lg:hidden sm:block w-12 ml-2 mr-2">
         <input
