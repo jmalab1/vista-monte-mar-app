@@ -5,259 +5,230 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-84.620738, 9.6061, 0]
+        "coordinates": [
+          -84.6298073,
+          9.6754193,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Vista Los Sueños Adventure Park",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6179109,
+          9.5957497,
+          0
+        ]
+      },
+      "properties": {
+        "name": "El Miro",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.1560535,
+          9.4263832,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Manuel Antonio Park Info Center",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.665992,
+          9.651514,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Los Sueños Resort and Marina",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.1674866,
+          9.4261951,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Marina Pez Vela",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.8193397,
+          9.272997,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Nauyaca Waterfalls",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6345862,
+          9.6198549,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Jaco Crocodile tour",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6394375,
+          9.6219375,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Deep Sea Sport Fishing Los Suenos",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.624682,
+          9.6102604,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Costa Rica Fishing Kings",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6596796,
+          9.6846315,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Villa Caletas Hotel",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.620738,
+          9.6061,
+          0
+        ]
       },
       "properties": {
         "name": "Vista Monte Mar - TDM",
-        "styleUrl": "#icon-1603-000000-labelson-nodesc",
-        "styleHash": "29e0a538",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.624244, 9.6172349, 0]
-      },
-      "properties": {
-        "name": "Soda Garabito",
-        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
-        "styleHash": "-3ac0352a",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6242358, 9.6102303, 0]
-      },
-      "properties": {
-        "name": "Restaurante Rústicos",
-        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
-        "styleHash": "-3ac0352a",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6220229, 9.6091733, 0]
-      },
-      "properties": {
-        "name": "Don Casado",
-        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
-        "styleHash": "-3ac0352a",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6243565, 9.610303, 0]
-      },
-      "properties": {
-        "name": "Marea Alta",
-        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
-        "styleHash": "-3ac0352a",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6269384, 9.6126422, 0]
-      },
-      "properties": {
-        "name": "Taco Joint",
-        "styleUrl": "#icon-1577-558B2F-labelson-nodesc",
-        "styleHash": "-5681a128",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.630075, 9.6162094, 0]
-      },
-      "properties": {
-        "name": "Tacos Locos",
-        "styleUrl": "#icon-1577-097138-labelson-nodesc",
-        "styleHash": "-1e2a56d4",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6260274, 9.6118013, 0]
-      },
-      "properties": {
-        "name": "Los Mahi Tacos De Cholo",
-        "styleUrl": "#icon-1577-097138-labelson-nodesc",
-        "styleHash": "-1e2a56d4",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6269691, 9.6120523, 0]
-      },
-      "properties": {
-        "name": "Ohana Sushi, Tapas Y Bar",
-        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
-        "styleHash": "-3305942a",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6265239, 9.6126794, 0]
-      },
-      "properties": {
-        "name": "Sushi At Home",
-        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
-        "styleHash": "-3305942a",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6244917, 9.6101064, 0]
-      },
-      "properties": {
-        "name": "Arigato's",
-        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
-        "styleHash": "-3305942a",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6197412, 9.6109106, 0]
-      },
-      "properties": {
-        "name": "La Guapita Coffee",
-        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
-        "styleHash": "50500154",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.628494, 9.6150839, 0]
-      },
-      "properties": {
-        "name": "Café Bohío",
-        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
-        "styleHash": "50500154",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6241303, 9.6097988, 0]
-      },
-      "properties": {
-        "name": "Jet Fuel Coffee Shop",
-        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
-        "styleHash": "50500154",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6291913, 9.6158163, 0]
-      },
-      "properties": {
-        "name": "The Pizza Shop",
-        "styleUrl": "#icon-1577-795548-labelson-nodesc",
-        "styleHash": "290ba6a8",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6297324, 9.6159413, 0]
-      },
-      "properties": {
-        "name": "Pizzería Rioasis",
-        "styleUrl": "#icon-1577-795548-labelson-nodesc",
-        "styleHash": "290ba6a8",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6224035, 9.6101823, 0]
-      },
-      "properties": {
-        "name": "La Bruschetta JACO",
-        "styleUrl": "#icon-1577-795548-labelson-nodesc",
-        "styleHash": "290ba6a8",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6274774, 9.6139078, 0]
-      },
-      "properties": {
-        "name": "Public House Jaco Grill",
-        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
-        "styleHash": "-10a380a6",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6287816, 9.6153849, 0]
-      },
-      "properties": {
-        "name": "Mary's Diner",
-        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
-        "styleHash": "-10a380a6",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-84.6298394, 9.6154816, 0]
-      },
-      "properties": {
-        "name": "Spot House",
-        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
-        "styleHash": "-10a380a6",
+        "styleUrl": "#icon-1603-000000-nodesc",
+        "styleHash": "5764be7f",
+        "styleMapHash": {
+          "normal": "#icon-1603-000000-nodesc-normal",
+          "highlight": "#icon-1603-000000-nodesc-highlight"
+        },
         "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
       }
     }
