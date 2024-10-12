@@ -64,7 +64,7 @@ const ContactForm = () => {
       <form className="mb-12 lg:mx-72" id="contact" onSubmit={handleSubmit}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <SectionHeader title="Contact Us">
+            <SectionHeader title="Contact Us" centerText={true}>
               Tell us about your visit. We'd love to hear from you.
             </SectionHeader>
             <div className="mr-6 ml-6 mt-10 grid grid-cols-1 gap-x-6 sm:grid-cols-6">

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Vista Monte Mar - TDM",
+    "description": "Hotel offering accommodations with ocean views.",
+    "type": "Accommodation",
+    "distance_km": 0.0
+  },
+  {
+    "name": "Soda Garabito",
+    "description": "A local eatery serving traditional Costa Rican dishes.",
+    "type": "Restaurant",
+    "distance_km": 0.64
+  },
+  {
+    "name": "Restaurante Rústicos",
+    "description": "Rustic-style restaurant offering a variety of local and international cuisines.",
+    "type": "Restaurant",
+    "distance_km": 0.48
+  },
+  {
+    "name": "Don Casado",
+    "description": "A popular restaurant known for its traditional casados (rice and beans dish).",
+    "type": "Restaurant",
+    "distance_km": 0.31
+  },
+  {
+    "name": "Marea Alta",
+    "description": "Seafood restaurant with a stunning view of the ocean.",
+    "type": "Restaurant",
+    "distance_km": 0.41
+  },
+  {
+    "name": "Taco Joint",
+    "description": "Casual dining spot specializing in tacos and other Mexican dishes.",
+    "type": "Restaurant",
+    "distance_km": 0.54
+  },
+  {
+    "name": "Tacos Locos",
+    "description": "Fun eatery known for its creative taco combinations.",
+    "type": "Restaurant",
+    "distance_km": 0.76
+  },
+  {
+    "name": "Los Mahi Tacos De Cholo",
+    "description": "Local favorite for tacos and fresh ingredients.",
+    "type": "Restaurant",
+    "distance_km": 0.54
+  },
+  {
+    "name": "Ohana Sushi, Tapas Y Bar",
+    "description": "Sushi and tapas bar with a lively atmosphere.",
+    "type": "Restaurant",
+    "distance_km": 0.57
+  },
+  {
+    "name": "Sushi At Home",
+    "description": "Sushi delivery and takeout service.",
+    "type": "Restaurant",
+    "distance_km": 0.55
+  },
+  {
+    "name": "Arigato's",
+    "description": "Japanese restaurant offering a range of sushi and other dishes.",
+    "type": "Restaurant",
+    "distance_km": 0.5
+  },
+  {
+    "name": "La Guapita Coffee",
+    "description": "Cozy coffee shop serving freshly brewed coffee and snacks.",
+    "type": "Café",
+    "distance_km": 0.51
+  },
+  {
+    "name": "Café Bohío",
+    "description": "Charming café known for its coffee and local pastries.",
+    "type": "Café",
+    "distance_km": 0.85
+  },
+  {
+    "name": "Jet Fuel Coffee Shop",
+    "description": "Popular spot for coffee enthusiasts offering a variety of brews.",
+    "type": "Café",
+    "distance_km": 0.47
+  },
+  {
+    "name": "The Pizza Shop",
+    "description": "Pizzeria specializing in various pizza styles and toppings.",
+    "type": "Restaurant",
+    "distance_km": 0.89
+  },
+  {
+    "name": "Pizzería Rioasis",
+    "description": "A pizzeria offering a relaxed dining atmosphere with outdoor seating.",
+    "type": "Restaurant",
+    "distance_km": 0.9
+  },
+  {
+    "name": "La Bruschetta JACO",
+    "description": "Italian restaurant known for its bruschetta and other Italian dishes.",
+    "type": "Restaurant",
+    "distance_km": 0.5
+  },
+  {
+    "name": "Public House Jaco Grill",
+    "description": "Casual grill offering a variety of burgers and local dishes.",
+    "type": "Restaurant",
+    "distance_km": 0.79
+  },
+  {
+    "name": "Mary's Diner",
+    "description": "Diner serving breakfast, lunch, and comfort food.",
+    "type": "Restaurant",
+    "distance_km": 0.73
+  },
+  {
+    "name": "Spot House",
+    "description": "Local hangout known for its relaxed vibe and great food.",
+    "type": "Restaurant",
+    "distance_km": 0.81
+  }
+]

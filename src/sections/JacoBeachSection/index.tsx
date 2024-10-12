@@ -84,7 +84,7 @@ export const JacoBeachSection = () => {
   return (
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="jaco_beach">
       <div className="mb-10 grid place-content-center md:ml-56 md:mr-56">
-        <SectionHeader title="Jaco Beach">
+        <SectionHeader title="Jaco Beach" centerText={true}>
           <p className="!text-nuetral text-lg">
             Jaco is a vibrant coastal destination in Costa Rica, known for its
             stunning beaches, lively nightlife, and rich biodiversity, below are

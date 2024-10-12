@@ -12,7 +12,7 @@ const ButtonItem: FunctionComponent<TButton> = ({
   type,
 }) => {
   return (
-    <button type={type} className={`btn btn-sm ${classValue}`}>
+    <button type={type} className={`btn btn-sm ${classValue} text-base-100`}>
       {title}
     </button>
   );

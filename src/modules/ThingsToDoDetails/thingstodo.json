@@ -1,112 +1,192 @@
-[
-  {
-    "name": "Surfing",
-    "description": "Catch waves on Jaco's surf-friendly beaches.",
-    "distance": "0 km",
-    "type": "Water Activity",
-    "location": {
-      "latitude": 9.6018,
-      "longitude": -84.6349
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6298073, 9.6754193, 0]
+      },
+      "properties": {
+        "name": "Vista Los Sueños Adventure Park",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6179109, 9.5957497, 0]
+      },
+      "properties": {
+        "name": "El Miro",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.1560535, 9.4263832, 0]
+      },
+      "properties": {
+        "name": "Manuel Antonio Park Info Center",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.665992, 9.651514, 0]
+      },
+      "properties": {
+        "name": "Los Sueños Resort and Marina",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.1674866, 9.4261951, 0]
+      },
+      "properties": {
+        "name": "Marina Pez Vela",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.8193397, 9.272997, 0]
+      },
+      "properties": {
+        "name": "Nauyaca Waterfalls",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6345862, 9.6198549, 0]
+      },
+      "properties": {
+        "name": "Jaco Crocodile tour",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6394375, 9.6219375, 0]
+      },
+      "properties": {
+        "name": "Deep Sea Sport Fishing Los Suenos",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.624682, 9.6102604, 0]
+      },
+      "properties": {
+        "name": "Costa Rica Fishing Kings",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6596796, 9.6846315, 0]
+      },
+      "properties": {
+        "name": "Villa Caletas Hotel",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.620738, 9.6061, 0]
+      },
+      "properties": {
+        "name": "Vista Monte Mar - TDM",
+        "styleUrl": "#icon-1603-000000-nodesc",
+        "styleHash": "5764be7f",
+        "styleMapHash": {
+          "normal": "#icon-1603-000000-nodesc-normal",
+          "highlight": "#icon-1603-000000-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
     }
-  },
-  {
-    "name": "Visit Playa Hermosa",
-    "description": "Enjoy quieter beaches with bigger waves.",
-    "distance": "1.1 km",
-    "type": "Beach",
-    "location": {
-      "latitude": 9.6107,
-      "longitude": -84.6345
-    }
-  },
-  {
-    "name": "Rainforest Canopy Tour",
-    "description": "Zip-line through the rainforest for stunning views.",
-    "distance": "1.5 km",
-    "type": "Adventure",
-    "location": {
-      "latitude": 9.6112,
-      "longitude": -84.6156
-    }
-  },
-  {
-    "name": "Hiking at Miro Mountain",
-    "description": "Hike for panoramic views and graffiti art.",
-    "distance": "0.9 km",
-    "type": "Hiking",
-    "location": {
-      "latitude": 9.599,
-      "longitude": -84.633
-    }
-  },
-  {
-    "name": "Day Trip to Manuel Antonio National Park",
-    "description": "Explore wildlife and beautiful beaches.",
-    "distance": "70 km",
-    "type": "Nature",
-    "location": {
-      "latitude": 9.3918,
-      "longitude": -84.1455
-    }
-  },
-  {
-    "name": "Explore Jaco’s Nightlife",
-    "description": "Experience lively bars and clubs.",
-    "distance": "0 km",
-    "type": "Entertainment",
-    "location": {
-      "latitude": 9.6018,
-      "longitude": -84.6349
-    }
-  },
-  {
-    "name": "Horseback Riding to Waterfalls",
-    "description": "Ride to hidden waterfalls and swim.",
-    "distance": "2.0 km",
-    "type": "Outdoor Activity",
-    "location": {
-      "latitude": 9.603,
-      "longitude": -84.6102
-    }
-  },
-  {
-    "name": "Crocodile Tour on the Tárcoles River",
-    "description": "See crocodiles and exotic birds on a boat tour.",
-    "distance": "8.1 km",
-    "type": "Wildlife Tour",
-    "location": {
-      "latitude": 9.669,
-      "longitude": -84.6414
-    }
-  },
-  {
-    "name": "ATV Adventure",
-    "description": "Ride ATVs through jungle and mountains.",
-    "distance": "1.8 km",
-    "type": "Adventure",
-    "location": {
-      "latitude": 9.604,
-      "longitude": -84.62
-    }
-  },
-  {
-    "name": "Fishing Charters",
-    "description": "Charter boats for sportfishing adventures.",
-    "distance": "0.3 km",
-    "type": "Water Activity",
-    "location": {
-      "latitude": 9.605,
-      "longitude": -84.634
-    }
-  },
-  {
-    "name": "Yoga on the Beach",
-    "description": "Relax with beachside yoga classes.",
-    "distance": "0 km",
-    "type": "Wellness",
-    "location": {
-      "latitude": 9.6018,
-      "longitude": -84.6349
-    }
-  }
-]
+  ]
+}

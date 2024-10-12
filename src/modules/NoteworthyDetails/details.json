@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Parque Nacional Volcán Turrialba",
+    "description": "A national park featuring the active Turrialba Volcano, known for its hiking trails and diverse wildlife.",
+    "type": "Attraction",
+    "distance_km": 104.02
+  },
+  {
+    "name": "Selvatura Adventure Park",
+    "description": "An adventure park offering canopy tours, zip-lining, and suspension bridges through the cloud forest.",
+    "type": "Attraction",
+    "distance_km": 83.75
+  }
+]
