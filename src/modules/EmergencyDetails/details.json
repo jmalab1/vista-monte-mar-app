@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Jaco doctors",
+    "description": "Local doctors offering medical services.",
+    "type": "Healthcare",
+    "distance_km": 1.68
+  },
+  {
+    "name": "Clínica De Jacó",
+    "description": "A clinic providing healthcare services in Jacó.",
+    "type": "Healthcare",
+    "distance_km": 1.53
+  },
+  {
+    "name": "Laboratorio Jacó",
+    "description": "Laboratory services for medical tests and analysis.",
+    "type": "Healthcare",
+    "distance_km": 1.26
+  },
+  {
+    "name": "Farmacia Jacó",
+    "description": "Pharmacy offering medications and health products.",
+    "type": "Pharmacy",
+    "distance_km": 1.83
+  },
+  {
+    "name": "Farmacia Manantial",
+    "description": "Pharmacy providing a variety of pharmaceutical services.",
+    "type": "Pharmacy",
+    "distance_km": 1.87
+  },
+  {
+    "name": "Garabito Police Station",
+    "description": "Local police station ensuring community safety.",
+    "type": "Government",
+    "distance_km": 2.05
+  },
+  {
+    "name": "Vista Monte Mar - TDM",
+    "description": "Hotel offering accommodations with ocean views.",
+    "type": "Accommodation",
+    "distance_km": 0.13
+  }
+]

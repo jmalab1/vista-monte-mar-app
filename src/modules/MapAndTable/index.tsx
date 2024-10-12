@@ -8,6 +8,7 @@ export type Tfeature = {
   type: string;
   properties: properties;
   geometry: geometry;
+  details?: any;
 };
 
 type properties = {
@@ -25,11 +26,13 @@ type geometry = {
 type TMapAndTable = {
   records: Tfeature[];
   title: string;
+  details: any;
 };
 
 export const MapAndTable: FunctionComponent<TMapAndTable> = ({
   records,
   title,
+  details,
 }) => {
   const [coordinates, setCoordinates] = useState<number[]>([-84.62073, 9.6061]);
   const [active, setActive] = useState('');
@@ -52,6 +55,7 @@ export const MapAndTable: FunctionComponent<TMapAndTable> = ({
               record={record}
               callback={onClickMiniCard}
               active={active}
+              detail={_.find(details, { name: record.properties.name })}
             />
           );
         })}

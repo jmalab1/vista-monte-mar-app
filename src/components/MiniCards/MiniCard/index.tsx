@@ -5,12 +5,14 @@ type TMiniCard = {
   record: Tfeature;
   callback: (arg0: Tfeature) => void;
   active?: string;
+  detail?: any;
 };
 
 const MiniCard: FunctionComponent<TMiniCard> = ({
   record,
   callback,
   active,
+  detail,
 }) => {
   return (
     <div
@@ -19,13 +21,16 @@ const MiniCard: FunctionComponent<TMiniCard> = ({
     >
       <div className="col-span-5 p-2">
         <p className="font-bold text-xs text-nuetral">
-          {record.properties.name} ({record.type})
+          {record.properties.name}
+          {detail.type && <> ({detail.type})</>}
         </p>
-        {/* <p className="mt-2 text-xs">{record.description}</p> */}
+        <p className="mt-2 text-xs">{detail.description}</p>
       </div>
-      {/* <div className="border-l-[1px] border-dashed place-content-center pl-2">
-        <span className="text-xs text-nuetral">{record.distance}</span>
-      </div> */}
+      {detail.distance_km && (
+        <div className="border-l-[1px] border-dashed place-content-center pl-2">
+          <span className="text-xs text-nuetral">{detail.distance_km} km</span>
+        </div>
+      )}
     </div>
   );
 };
