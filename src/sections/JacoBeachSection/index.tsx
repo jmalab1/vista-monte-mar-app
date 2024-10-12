@@ -110,7 +110,7 @@ export const JacoBeachSection = () => {
             <p className="mt-4 mb-14 font-normal text-white opacity-50">
               Enjoy our condo steps from the Pacific coast! Perfect for 4
               guests, it features modern amenities, a pool, and easy access to
-              local adventures. Book now for your Costa Rica getaway!s
+              local adventures. Book now for your Costa Rica getaway!
             </p>
             <div className="flex gap-6 text-white justify-center">
               <AbbLogo size={40} />
