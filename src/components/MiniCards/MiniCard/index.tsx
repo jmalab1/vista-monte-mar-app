@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import { TSmallTableRecord } from '../../SmallTable';
+import { Tfeature } from '../../../modules/MapAndTable';
 
 type TMiniCard = {
-  record: TSmallTableRecord;
-  callback: (arg0: TSmallTableRecord) => void;
+  record: Tfeature;
+  callback: (arg0: Tfeature) => void;
   active?: string;
 };
 
@@ -14,18 +14,18 @@ const MiniCard: FunctionComponent<TMiniCard> = ({
 }) => {
   return (
     <div
-      className={`font-[Helvetica] grid grid-cols-6 rounded-xl bg-base-200 cursor-pointer shadow-inner-lg ${record.name == active ? 'border-secondary border border-2 border-dashed' : 'hover:bg-base-300'}`}
+      className={`font-[Helvetica] grid grid-cols-6 rounded-xl bg-base-200 cursor-pointer shadow-inner-lg ${record.properties.name == active ? 'border-secondary border border-2 border-dashed' : 'hover:bg-base-300'}`}
       onClick={() => callback(record)}
     >
       <div className="col-span-5 p-2">
         <p className="font-bold text-xs text-nuetral">
-          {record.name} ({record.type})
+          {record.properties.name} ({record.type})
         </p>
-        <p className="mt-2 text-xs">{record.description}</p>
+        {/* <p className="mt-2 text-xs">{record.description}</p> */}
       </div>
-      <div className="border-l-[1px] border-dashed place-content-center pl-2">
+      {/* <div className="border-l-[1px] border-dashed place-content-center pl-2">
         <span className="text-xs text-nuetral">{record.distance}</span>
-      </div>
+      </div> */}
     </div>
   );
 };

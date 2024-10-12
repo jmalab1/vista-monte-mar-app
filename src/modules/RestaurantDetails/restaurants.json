@@ -1,52 +1,265 @@
-[
-  {
-    "name": "Tsunami Sushi",
-    "description": "Sushi and Japanese cuisine with ocean views.",
-    "distance": "1.2 km",
-    "type": "Restaurant",
-    "location": {
-      "latitude": 9.601523,
-      "longitude": -84.634095
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.620738, 9.6061, 0]
+      },
+      "properties": {
+        "name": "Vista Monte Mar - TDM",
+        "styleUrl": "#icon-1603-000000-labelson-nodesc",
+        "styleHash": "29e0a538",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.624244, 9.6172349, 0]
+      },
+      "properties": {
+        "name": "Soda Garabito",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6242358, 9.6102303, 0]
+      },
+      "properties": {
+        "name": "Restaurante Rústicos",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6220229, 9.6091733, 0]
+      },
+      "properties": {
+        "name": "Don Casado",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6243565, 9.610303, 0]
+      },
+      "properties": {
+        "name": "Marea Alta",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6269384, 9.6126422, 0]
+      },
+      "properties": {
+        "name": "Taco Joint",
+        "styleUrl": "#icon-1577-558B2F-labelson-nodesc",
+        "styleHash": "-5681a128",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.630075, 9.6162094, 0]
+      },
+      "properties": {
+        "name": "Tacos Locos",
+        "styleUrl": "#icon-1577-097138-labelson-nodesc",
+        "styleHash": "-1e2a56d4",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6260274, 9.6118013, 0]
+      },
+      "properties": {
+        "name": "Los Mahi Tacos De Cholo",
+        "styleUrl": "#icon-1577-097138-labelson-nodesc",
+        "styleHash": "-1e2a56d4",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6269691, 9.6120523, 0]
+      },
+      "properties": {
+        "name": "Ohana Sushi, Tapas Y Bar",
+        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
+        "styleHash": "-3305942a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6265239, 9.6126794, 0]
+      },
+      "properties": {
+        "name": "Sushi At Home",
+        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
+        "styleHash": "-3305942a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6244917, 9.6101064, 0]
+      },
+      "properties": {
+        "name": "Arigato's",
+        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
+        "styleHash": "-3305942a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6197412, 9.6109106, 0]
+      },
+      "properties": {
+        "name": "La Guapita Coffee",
+        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
+        "styleHash": "50500154",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.628494, 9.6150839, 0]
+      },
+      "properties": {
+        "name": "Café Bohío",
+        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
+        "styleHash": "50500154",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6241303, 9.6097988, 0]
+      },
+      "properties": {
+        "name": "Jet Fuel Coffee Shop",
+        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
+        "styleHash": "50500154",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6291913, 9.6158163, 0]
+      },
+      "properties": {
+        "name": "The Pizza Shop",
+        "styleUrl": "#icon-1577-795548-labelson-nodesc",
+        "styleHash": "290ba6a8",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6297324, 9.6159413, 0]
+      },
+      "properties": {
+        "name": "Pizzería Rioasis",
+        "styleUrl": "#icon-1577-795548-labelson-nodesc",
+        "styleHash": "290ba6a8",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6224035, 9.6101823, 0]
+      },
+      "properties": {
+        "name": "La Bruschetta JACO",
+        "styleUrl": "#icon-1577-795548-labelson-nodesc",
+        "styleHash": "290ba6a8",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6274774, 9.6139078, 0]
+      },
+      "properties": {
+        "name": "Public House Jaco Grill",
+        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
+        "styleHash": "-10a380a6",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6287816, 9.6153849, 0]
+      },
+      "properties": {
+        "name": "Mary's Diner",
+        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
+        "styleHash": "-10a380a6",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6298394, 9.6154816, 0]
+      },
+      "properties": {
+        "name": "Spot House",
+        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
+        "styleHash": "-10a380a6",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
     }
-  },
-  {
-    "name": "The Green Room",
-    "description": "Healthy restaurant with vegan options.",
-    "distance": "1.0 km",
-    "type": "Restaurant",
-    "location": {
-      "latitude": 9.601798,
-      "longitude": -84.63478
-    }
-  },
-  {
-    "name": "Pizzeria Il Pomodoro",
-    "description": "Italian pizza place with a cozy atmosphere.",
-    "distance": "0.9 km",
-    "type": "Restaurant",
-    "location": {
-      "latitude": 9.601252,
-      "longitude": -84.634584
-    }
-  },
-  {
-    "name": "Los Amigos",
-    "description": "Casual dining with a variety of international dishes.",
-    "distance": "0.7 km",
-    "type": "Restaurant",
-    "location": {
-      "latitude": 9.601512,
-      "longitude": -84.63421
-    }
-  },
-  {
-    "name": "Soda Jaco",
-    "description": "Local Costa Rican food in a casual setting.",
-    "distance": "1.1 km",
-    "type": "Restaurant",
-    "location": {
-      "latitude": 9.601345,
-      "longitude": -84.634056
-    }
-  }
-]
+  ]
+}

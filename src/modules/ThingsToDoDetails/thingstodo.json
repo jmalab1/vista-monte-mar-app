@@ -1,112 +1,265 @@
-[
-  {
-    "name": "Surfing",
-    "description": "Catch waves on Jaco's surf-friendly beaches.",
-    "distance": "0 km",
-    "type": "Water Activity",
-    "location": {
-      "latitude": 9.6018,
-      "longitude": -84.6349
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.620738, 9.6061, 0]
+      },
+      "properties": {
+        "name": "Vista Monte Mar - TDM",
+        "styleUrl": "#icon-1603-000000-labelson-nodesc",
+        "styleHash": "29e0a538",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.624244, 9.6172349, 0]
+      },
+      "properties": {
+        "name": "Soda Garabito",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6242358, 9.6102303, 0]
+      },
+      "properties": {
+        "name": "Restaurante Rústicos",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6220229, 9.6091733, 0]
+      },
+      "properties": {
+        "name": "Don Casado",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6243565, 9.610303, 0]
+      },
+      "properties": {
+        "name": "Marea Alta",
+        "styleUrl": "#icon-1577-E65100-labelson-nodesc",
+        "styleHash": "-3ac0352a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6269384, 9.6126422, 0]
+      },
+      "properties": {
+        "name": "Taco Joint",
+        "styleUrl": "#icon-1577-558B2F-labelson-nodesc",
+        "styleHash": "-5681a128",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.630075, 9.6162094, 0]
+      },
+      "properties": {
+        "name": "Tacos Locos",
+        "styleUrl": "#icon-1577-097138-labelson-nodesc",
+        "styleHash": "-1e2a56d4",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6260274, 9.6118013, 0]
+      },
+      "properties": {
+        "name": "Los Mahi Tacos De Cholo",
+        "styleUrl": "#icon-1577-097138-labelson-nodesc",
+        "styleHash": "-1e2a56d4",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6269691, 9.6120523, 0]
+      },
+      "properties": {
+        "name": "Ohana Sushi, Tapas Y Bar",
+        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
+        "styleHash": "-3305942a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6265239, 9.6126794, 0]
+      },
+      "properties": {
+        "name": "Sushi At Home",
+        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
+        "styleHash": "-3305942a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6244917, 9.6101064, 0]
+      },
+      "properties": {
+        "name": "Arigato's",
+        "styleUrl": "#icon-1577-9C27B0-labelson-nodesc",
+        "styleHash": "-3305942a",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6197412, 9.6109106, 0]
+      },
+      "properties": {
+        "name": "La Guapita Coffee",
+        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
+        "styleHash": "50500154",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.628494, 9.6150839, 0]
+      },
+      "properties": {
+        "name": "Café Bohío",
+        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
+        "styleHash": "50500154",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6241303, 9.6097988, 0]
+      },
+      "properties": {
+        "name": "Jet Fuel Coffee Shop",
+        "styleUrl": "#icon-1577-FFEA00-labelson-nodesc",
+        "styleHash": "50500154",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6291913, 9.6158163, 0]
+      },
+      "properties": {
+        "name": "The Pizza Shop",
+        "styleUrl": "#icon-1577-795548-labelson-nodesc",
+        "styleHash": "290ba6a8",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6297324, 9.6159413, 0]
+      },
+      "properties": {
+        "name": "Pizzería Rioasis",
+        "styleUrl": "#icon-1577-795548-labelson-nodesc",
+        "styleHash": "290ba6a8",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6224035, 9.6101823, 0]
+      },
+      "properties": {
+        "name": "La Bruschetta JACO",
+        "styleUrl": "#icon-1577-795548-labelson-nodesc",
+        "styleHash": "290ba6a8",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6274774, 9.6139078, 0]
+      },
+      "properties": {
+        "name": "Public House Jaco Grill",
+        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
+        "styleHash": "-10a380a6",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6287816, 9.6153849, 0]
+      },
+      "properties": {
+        "name": "Mary's Diner",
+        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
+        "styleHash": "-10a380a6",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.6298394, 9.6154816, 0]
+      },
+      "properties": {
+        "name": "Spot House",
+        "styleUrl": "#icon-1577-0288D1-labelson-nodesc",
+        "styleHash": "-10a380a6",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
     }
-  },
-  {
-    "name": "Visit Playa Hermosa",
-    "description": "Enjoy quieter beaches with bigger waves.",
-    "distance": "1.1 km",
-    "type": "Beach",
-    "location": {
-      "latitude": 9.6107,
-      "longitude": -84.6345
-    }
-  },
-  {
-    "name": "Rainforest Canopy Tour",
-    "description": "Zip-line through the rainforest for stunning views.",
-    "distance": "1.5 km",
-    "type": "Adventure",
-    "location": {
-      "latitude": 9.6112,
-      "longitude": -84.6156
-    }
-  },
-  {
-    "name": "Hiking at Miro Mountain",
-    "description": "Hike for panoramic views and graffiti art.",
-    "distance": "0.9 km",
-    "type": "Hiking",
-    "location": {
-      "latitude": 9.599,
-      "longitude": -84.633
-    }
-  },
-  {
-    "name": "Day Trip to Manuel Antonio National Park",
-    "description": "Explore wildlife and beautiful beaches.",
-    "distance": "70 km",
-    "type": "Nature",
-    "location": {
-      "latitude": 9.3918,
-      "longitude": -84.1455
-    }
-  },
-  {
-    "name": "Explore Jaco's Nightlife",
-    "description": "Experience lively bars and clubs.",
-    "distance": "0 km",
-    "type": "Entertainment",
-    "location": {
-      "latitude": 9.6018,
-      "longitude": -84.6349
-    }
-  },
-  {
-    "name": "Horseback Riding to Waterfalls",
-    "description": "Ride to hidden waterfalls and swim.",
-    "distance": "2.0 km",
-    "type": "Outdoor Activity",
-    "location": {
-      "latitude": 9.603,
-      "longitude": -84.6102
-    }
-  },
-  {
-    "name": "Crocodile Tour on the Tárcoles River",
-    "description": "See crocodiles and exotic birds on a boat tour.",
-    "distance": "8.1 km",
-    "type": "Wildlife Tour",
-    "location": {
-      "latitude": 9.669,
-      "longitude": -84.6414
-    }
-  },
-  {
-    "name": "ATV Adventure",
-    "description": "Ride ATVs through jungle and mountains.",
-    "distance": "1.8 km",
-    "type": "Adventure",
-    "location": {
-      "latitude": 9.604,
-      "longitude": -84.62
-    }
-  },
-  {
-    "name": "Fishing Charters",
-    "description": "Charter boats for sportfishing adventures.",
-    "distance": "0.3 km",
-    "type": "Water Activity",
-    "location": {
-      "latitude": 9.605,
-      "longitude": -84.634
-    }
-  },
-  {
-    "name": "Yoga on the Beach",
-    "description": "Relax with beachside yoga classes.",
-    "distance": "0 km",
-    "type": "Wellness",
-    "location": {
-      "latitude": 9.6018,
-      "longitude": -84.6349
-    }
-  }
-]
+  ]
+}

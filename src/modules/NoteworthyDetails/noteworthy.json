@@ -1,52 +1,39 @@
-[
-  {
-    "name": "Jaco Beach",
-    "description": "Famous beach for surfing and relaxation.",
-    "distance": "1.0 km",
-    "type": "Beach",
-    "location": {
-      "latitude": 9.6049,
-      "longitude": -84.6289
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-83.7677148, 10.0167979, 0]
+      },
+      "properties": {
+        "name": "Parque Nacional Volcán Turrialba",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.7986056, 10.3424275, 0]
+      },
+      "properties": {
+        "name": "Selvatura Adventure Park",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
     }
-  },
-  {
-    "name": "Carara National Park",
-    "description": "Wildlife refuge with hiking trails.",
-    "distance": "9.0 km",
-    "type": "National Park",
-    "location": {
-      "latitude": 9.724,
-      "longitude": -84.6342
-    }
-  },
-  {
-    "name": "Jaco Walk",
-    "description": "Popular pedestrian promenade with shops.",
-    "distance": "0.5 km",
-    "type": "Shopping",
-    "location": {
-      "latitude": 9.6012,
-      "longitude": -84.634
-    }
-  },
-  {
-    "name": "Pico Blanco",
-    "description": "A scenic viewpoint for hiking enthusiasts.",
-    "distance": "15.0 km",
-    "type": "Hiking",
-    "location": {
-      "latitude": 9.6681,
-      "longitude": -84.6622
-    }
-  },
-  {
-    "name": "Rainforest Adventures",
-    "description": "Zip-lining tours through the rainforest.",
-    "distance": "8.5 km",
-    "type": "Adventure Park",
-    "location": {
-      "latitude": 9.6198,
-      "longitude": -84.5859
-    }
-  }
-]
+  ]
+}
