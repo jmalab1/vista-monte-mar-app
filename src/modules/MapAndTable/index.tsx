@@ -34,8 +34,10 @@ export const MapAndTable: FunctionComponent<TMapAndTable> = ({
   title,
   details,
 }) => {
-  const [coordinates, setCoordinates] = useState<number[]>([-84.62073, 9.6061]);
-  const [active, setActive] = useState('');
+  const [coordinates, setCoordinates] = useState<number[]>(
+    records[0].geometry.coordinates
+  );
+  const [active, setActive] = useState(records[0].properties.name);
 
   const onClickMiniCard = (record: Tfeature) => {
     setCoordinates(record.geometry.coordinates);

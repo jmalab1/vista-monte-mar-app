@@ -5,19 +5,6 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-84.620738, 9.6061, 0]
-      },
-      "properties": {
-        "name": "Vista Monte Mar - TDM",
-        "styleUrl": "#icon-1603-000000-labelson-nodesc",
-        "styleHash": "29e0a538",
-        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
         "coordinates": [-84.624244, 9.6172349, 0]
       },
       "properties": {

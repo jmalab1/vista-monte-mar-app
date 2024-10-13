@@ -59,13 +59,9 @@ const RoutingControl = ({ start, end, name }) => {
 
         // Add popup content based on the marker
         if (i === 0) {
-          marker.bindPopup(
-            '<b>Vista Monte Mar</b>'
-          );
+          marker.bindPopup('<b>Vista Monte Mar</b>');
         } else if (i === 1) {
-          marker.bindPopup(
-            `<b>${name}</b>`
-          );
+          marker.bindPopup(`<b>${name}</b>`);
         }
 
         return marker;

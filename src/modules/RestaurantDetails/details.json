@@ -1,11 +1,5 @@
 [
   {
-    "name": "Vista Monte Mar - TDM",
-    "description": "Hotel offering accommodations with ocean views.",
-    "type": "Accommodation",
-    "distance_km": 0.0
-  },
-  {
     "name": "Soda Garabito",
     "description": "A local eatery serving traditional Costa Rican dishes.",
     "type": "Restaurant",
