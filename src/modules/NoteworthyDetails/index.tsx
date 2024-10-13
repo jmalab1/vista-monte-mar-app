@@ -6,7 +6,7 @@ export const NoteworthyDetails = () => {
   return (
     <MapAndTable
       records={noteworthy.features}
-      title="Further Away"
+      title="Noteworthy"
       details={details}
     />
   );

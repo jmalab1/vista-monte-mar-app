@@ -1,5 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Tfeature } from '../../../modules/MapAndTable';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDiamondTurnRight } from '@fortawesome/free-solid-svg-icons';
 
 type TMiniCard = {
   record: Tfeature;
@@ -28,7 +31,15 @@ const MiniCard: FunctionComponent<TMiniCard> = ({
       </div>
       {detail.distance_km && (
         <div className="border-l-[1px] border-dashed place-content-center pl-2">
-          <span className="text-xs text-nuetral">{detail.distance_km} km</span>
+          <span className="text-xs text-nuetral whitespace-nowrap block">
+            {detail.distance_km} km
+          </span>
+          <Link
+            to={`https://www.google.com/maps/dir/?api=1&origin=Condominio+Torres+del+Mar&destination=${record.properties.name}+jaco+${detail.type}`}
+            target="_blank"
+          >
+            <FontAwesomeIcon icon={faDiamondTurnRight} />
+          </Link>
         </div>
       )}
     </div>

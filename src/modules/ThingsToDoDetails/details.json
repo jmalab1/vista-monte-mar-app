@@ -3,60 +3,60 @@
     "name": "Vista Los Sueños Adventure Park",
     "description": "An adventure park offering various outdoor activities and fun experiences.",
     "type": "Recreation",
-    "distance_km": 7.77
+    "distance_km": 9.2
   },
   {
     "name": "El Miro",
     "description": "A viewpoint offering stunning vistas of the surrounding area.",
     "type": "Attraction",
-    "distance_km": 1.19
+    "distance_km": 1.4
   },
   {
     "name": "Manuel Antonio Park Info Center",
     "description": "Information center for visitors of Manuel Antonio National Park.",
     "type": "Visitor Center",
-    "distance_km": 54.74
+    "distance_km": 65.7
   },
   {
     "name": "Los Sueños Resort and Marina",
     "description": "A luxury resort and marina offering various activities.",
     "type": "Resort",
-    "distance_km": 7.08
+    "distance_km": 10.9
   },
   {
     "name": "Marina Pez Vela",
     "description": "A beautiful marina with various restaurants and shops.",
     "type": "Marina",
-    "distance_km": 53.58
+    "distance_km": 65.2
   },
   {
     "name": "Nauyaca Waterfalls",
     "description": "A stunning waterfall located in the rainforest.",
     "type": "Natural Attraction",
-    "distance_km": 95.39
+    "distance_km": 113
   },
   {
     "name": "Jaco Crocodile tour",
     "description": "An exciting tour to see crocodiles in their natural habitat.",
     "type": "Tour",
-    "distance_km": 2.16
+    "distance_km": 21.4
   },
   {
     "name": "Deep Sea Sport Fishing Los Suenos",
     "description": "Sport fishing tours in the ocean.",
     "type": "Fishing",
-    "distance_km": 2.7
+    "distance_km": 3.1
   },
   {
     "name": "Costa Rica Fishing Kings",
     "description": "Fishing tours with experienced guides.",
     "type": "Fishing",
-    "distance_km": 0.63
+    "distance_km": 0.8
   },
   {
     "name": "Villa Caletas Hotel",
     "description": "A beautiful hotel with stunning ocean views.",
     "type": "Hotel",
-    "distance_km": 9.72
+    "distance_km": 14.2
   }
 ]
