@@ -101,7 +101,7 @@ const ContactForm = () => {
               <TextArea
                 title="Comment"
                 id="comment"
-                placeholder="Let us know what you think."
+                placeholder="Let us know what you think"
                 callback={handleChange}
                 value={formValues.comment}
               />
