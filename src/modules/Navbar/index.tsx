@@ -34,17 +34,18 @@ const NAV_MENU = [
   },
 ];
 
+const light = 'olight';
+const dark = 'odark';
+
+const getInitialTheme = () => {
+  return localStorage.getItem('theme') ?? light;
+};
+
 export const Navbar = () => {
-  const [activeMenuItem, setActiveMenuItem] = useState('Home');
-  const light = 'olight';
-  const dark = 'odark';
-
-  const getInitialTheme = () => {
-    return localStorage.getItem('theme') ?? light;
-  };
-
   const [theme, setTheme] = useState(getInitialTheme());
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState('Home');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -58,8 +59,10 @@ export const Navbar = () => {
   const handleMenuClick = (e: MouseEvent<HTMLAnchorElement>, name: string) => {
     const button = e.currentTarget as unknown as HTMLButtonElement;
     button.blur();
+
     setIsDrawerOpen(false);
     setActiveMenuItem(name);
+    setDropdownOpen(false);
   };
 
   const nav = () => {
@@ -67,9 +70,13 @@ export const Navbar = () => {
       if (submenu) {
         return (
           <li>
-            <details>
+            <details open={dropdownOpen}>
               <summary
-                className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+                className={`text-md font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setDropdownOpen(true);
+                }}
               >
                 {name}
               </summary>
@@ -78,7 +85,7 @@ export const Navbar = () => {
                   <li>
                     <Link
                       to={href}
-                      className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
+                      className={`text-md font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
                       onClick={(e) => handleMenuClick(e, name)}
                     >
                       <span className="whitespace-nowrap">{name}</span>
