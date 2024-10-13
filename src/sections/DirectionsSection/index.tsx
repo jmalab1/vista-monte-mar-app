@@ -1,5 +1,9 @@
+import { Link } from 'react-router-dom';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
 import SectionHeader from '../../components/heading/SectionHeader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDiamondTurnRight } from '@fortawesome/free-solid-svg-icons';
+import { Button } from '@material-tailwind/react';
 
 export const DirectionsSection = () => {
   return (
@@ -12,6 +16,21 @@ export const DirectionsSection = () => {
               on the Central Pacific coast. It is roughly 1.5 hours, depending
               on traffic, from San Juan Santamaria International Airport (SJO).
             </Paragraph>
+            <Button
+              title={'Directions'}
+              type={'button'}
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+            >
+              <Link
+                to={`https://www.google.com/maps/dir/?api=1&origin=SJO&destination=Condominio+Torres+del+Mar`}
+                target="_blank"
+              >
+                Direction{' '}
+                <FontAwesomeIcon icon={faDiamondTurnRight} size="xl" />
+              </Link>
+            </Button>
           </SectionHeader>
           <SectionHeader title="Navigation">
             <Paragraph>
