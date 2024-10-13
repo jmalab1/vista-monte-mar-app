@@ -23,6 +23,7 @@
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "leaflet-providers": "^2.0.0",
+    "leaflet-routing-machine": "^3.2.12",
     "leaflet.awesome-markers": "^2.0.5",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
