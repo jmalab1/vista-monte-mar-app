@@ -1,19 +1,19 @@
 [
   {
     "name": "Vista Los Sueños Adventure Park",
-    "description": "An adventure park offering various outdoor activities and fun experiences.",
+    "description": "Located at the north end of Jaco, this place offers zip lining, canopy tour, repelling, atving, horseback riding, waterfalls ",
     "type": "Recreation",
     "distance_km": 9.2
   },
   {
     "name": "El Miro",
-    "description": "A viewpoint offering stunning vistas of the surrounding area.",
+    "description": "This abandoned unfinished mansion is a hike close by with 2 viewing decks that provide panoramic view of Playa Jaco. The first viewing deck is about a 20 minute hike, and then another 25 minutes to the second viewing deck.",
     "type": "Attraction",
     "distance_km": 1.4
   },
   {
     "name": "Manuel Antonio Park Info Center",
-    "description": "Information center for visitors of Manuel Antonio National Park.",
+    "description": "1 hour south of Jaco, this national park has trails, white sand beaches, and has a lot of wildlife like sloths, monkeys, deer, macaws and iguanas. ",
     "type": "Visitor Center",
     "distance_km": 65.7
   },
@@ -37,13 +37,13 @@
   },
   {
     "name": "Jaco Crocodile tour",
-    "description": "An exciting tour to see crocodiles in their natural habitat.",
+    "description": "If you're brave, ride a river boat along Rio Tarcoles to experience the mangroves, birds, and the abundance of crocodiles just 30 minutes north. If you're not brave enough, you can just drive to the bridge over Rio Tarcoles to view the crocodiles right under.",
     "type": "Tour",
     "distance_km": 21.4
   },
   {
     "name": "Deep Sea Sport Fishing Los Suenos",
-    "description": "Sport fishing tours in the ocean.",
+    "description": "If sport fishing is your thing, you can book a boat for the day to head out and catch Yellowfin Tuna, Mahi, Marlin, Snapper, Rooster fish and Costa Rica's waters have the largest concentration of pacific sailfish.",
     "type": "Fishing",
     "distance_km": 3.1
   },

@@ -6,7 +6,7 @@ export const HouseRulesSection = () => {
   return (
     <section className="px-8 pb-10 pt-0 bg-base-200 shadow-xl" id="house_rules">
       <div className="mb-10 grid">
-        <SectionHeader title="House Rules" centerText={true}>
+        <SectionHeader title="House Rules">
           <div className="lg:mb-12 pt-8 space-y-6">
             {rules.map((rule) => (
               <div

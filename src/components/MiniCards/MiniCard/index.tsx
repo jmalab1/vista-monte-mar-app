@@ -19,10 +19,10 @@ const MiniCard: FunctionComponent<TMiniCard> = ({
 }) => {
   return (
     <div
-      className={`font-[Helvetica] grid grid-cols-6 rounded-xl bg-base-200 cursor-pointer shadow-inner-lg ${record.properties.name == active ? 'border-secondary border border-2 border-dashed' : 'hover:bg-base-300'}`}
+      className={`font-[Helvetica] grid grid-cols-12 rounded-xl bg-base-200 cursor-pointer shadow-inner-lg ${record.properties.name == active ? 'border-secondary border border-2 border-dashed' : 'hover:bg-base-300'}`}
       onClick={() => callback(record)}
     >
-      <div className="col-span-5 p-2">
+      <div className="col-span-10 p-2">
         <p className="font-bold text-xs text-nuetral">
           {record.properties.name}
           {detail.type && <> ({detail.type})</>}

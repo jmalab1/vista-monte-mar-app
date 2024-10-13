@@ -22,6 +22,10 @@ const NAV_MENU = [
         name: 'House Rules',
         href: '/house_rules',
       },
+      {
+        name: 'Checkout Instructions',
+        href: '/checkout',
+      },
     ],
   },
   {
