@@ -10,7 +10,7 @@ export const DirectionsSection = () => {
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="house_rules">
       <div className="mb-10 grid">
         <div className="lg:ml-56 lg:mr-56">
-          <SectionHeader title="Directions and How to Get there">
+          <SectionHeader title="Directions and How to get there">
             <SectionHeader
               title="Location, Airport and Travel Time"
               textSize="2xl"

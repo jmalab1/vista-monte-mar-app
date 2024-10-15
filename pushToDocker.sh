@@ -2,5 +2,6 @@
 npm install
 npm run build
 
-docker build -t jmalab24/vista-monte-mar-app:latest .
-docker push jmalab24/vista-monte-mar-app:latest
+docker buildx create --use
+# docker buildx build --platform linux/amd64 -t jmalab24/vista-monte-mar-app:latest --load .
+docker buildx build --platform linux/amd64 -t jmalab24/vista-monte-mar-app:latest --push .
