@@ -116,11 +116,20 @@ export const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to={'/'}>
-          <div className="btn bg-transparent hover:bg-transparent border-none shadow-none flex">
+          <div className="btn bg-transparent hover:bg-transparent border-none shadow-none flex block min-w-40">
             <img src={logo} className="w-14 flex-none" />
-            <h1 className={`text-2xl font-bold font-[Pacifico] flex-1`}>
+            <h1
+              className={`text-2xl font-bold font-[Pacifico] flex-1 hidden md:block`}
+            >
               Vista Monte Mar
             </h1>
+            <div
+              className={`text-[12px] font-bold font-[Pacifico] flex-1 block md:hidden text-left`}
+            >
+              <h1>Vista</h1>
+              <h1>Monte</h1>
+              <h1>Mar</h1>
+            </div>
           </div>
         </Link>
       </div>
