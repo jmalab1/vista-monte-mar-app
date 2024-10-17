@@ -15,7 +15,7 @@ export const ArrivalSection = () => {
                 required to register all guests.
               </Paragraph>
             </SectionHeader>
-            <SectionHeader title="Navigation" textSize="2xl">
+            <SectionHeader title="Upon Arrival" textSize="2xl">
               <Paragraph>
                 At the gate house, upon your arrival, they will take down your
                 plate number and ask for identification to verify against the
@@ -31,7 +31,7 @@ export const ArrivalSection = () => {
                 community's safety.
               </Paragraph>
             </SectionHeader>
-            <SectionHeader title="Entering/Exiting the Unit">
+            <SectionHeader title="Entering/Exiting the Unit" textSize="2xl">
               <Paragraph>
                 We provide each guest with a unique keyless entry code to access
                 the unit for the duration of the stay. This is changed every
