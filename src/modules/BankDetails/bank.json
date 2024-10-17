@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6271318,
+          9.6137684,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Banco Nacional",
+        "styleUrl": "#icon-1512-E65100-labelson-nodesc",
+        "styleHash": "1db8f2f5",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.624741,
+          9.6109604,
+          0
+        ]
+      },
+      "properties": {
+        "name": "BAC Credomatic - Sucursal Jacó",
+        "styleUrl": "#icon-1512-E65100-labelson-nodesc",
+        "styleHash": "1db8f2f5",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6353835,
+          9.6212563,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Banco de Costa Rica",
+        "styleUrl": "#icon-1512-E65100-labelson-nodesc",
+        "styleHash": "1db8f2f5",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    }
+  ]
+}

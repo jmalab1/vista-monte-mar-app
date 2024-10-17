@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Banco Nacional",
+    "description": "Near the bus stop inthe Centro Comercial Plaza",
+    "type": "",
+    "distance_km": 1.2
+  },
+  {
+    "name": "BAC Credomatic - Sucursal Jacó",
+    "description": "Across from Pachis Pan, Banco Nacional is central in Jaco ",
+    "type": "",
+    "distance_km": 0.8
+  },
+  {
+    "name": "Banco de Costa Rica",
+    "description": "Located in Jaco Walk and usually has the highest withdrawal limits",
+    "type": "",
+    "distance_km": 2.5
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Maxi Palí $",
+    "description": "A discount supermarket with groceries, household goods, and personal care items.",
+    "type": "Supermarket",
+    "distance_km": 3.7
+  },
+  {
+    "name": "Mas X Menos $$",
+    "description": "Large supermarket chain with good selection of grocery essentials, fresh produce, meats and household items.",
+    "type": "Supermarket",
+    "distance_km": 1.2
+  },
+  {
+    "name": "MegaSuper $$$",
+    "description": "Offers a wide range of groceries like fresh produce, pantry items and household essentials.",
+    "type": "Supermarket",
+    "distance_km": 1.9
+  },
+  {
+    "name": "Auto Mercado Plaza Herradura $$$",
+    "description": "A little outside of Jaco and has all the specialty items and premium goods. It is slightly more expensive, but has many items you might find in the United States or Canada.",
+    "type": "Supermarket",
+    "distance_km": 7.8
+  }
+]

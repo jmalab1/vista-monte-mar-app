@@ -4,12 +4,15 @@ import {
   ChatBubbleOvalLeftEllipsisIcon,
   ChartPieIcon,
   LightBulbIcon,
+  CurrencyDollarIcon,
+  BuildingStorefrontIcon,
 } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import RestaurantDetails from '../../modules/RestaurantDetails';
 import EmergencyDetails from '../../modules/EmergencyDetails';
 import ThingsToDoDetails from '../../modules/ThingsToDoDetails';
 import NoteworthyDetails from '../../modules/NoteworthyDetails';
+import GroceryDetails from '../../modules/GroceryDetails';
 import SectionHeader from '../../components/heading/SectionHeader';
 import CategoryCard from '../../components/Categories/CategoryCard';
 import _ from 'lodash';
@@ -19,6 +22,10 @@ import PFood from './images/food.jpg?w=600&webp';
 import PThingsTodo from './images/surf.jpg?w=600&webp';
 import PEmergency from './images/emergency.jpg?w=600&webp';
 import PNoteworthy from './images/mountain.jpg?w=600&webp';
+import PGrocery from './images/grocery.jpg?w=600&webp';
+import PBank from './images/atm.jpg?w=600&webp';
+import Paragraph from '../../components/ElementWrapper/Paragraph';
+import BankDetails from '../../modules/BankDetails';
 
 let categories = [
   {
@@ -65,6 +72,28 @@ let categories = [
     photo_link:
       'https://unsplash.com/@hiking_corgi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
+  {
+    id: 'groceries',
+    img: PGrocery,
+    icon: BuildingStorefrontIcon,
+    title: 'Groceries',
+    desc: 'Make sure to have the necessities',
+    active: false,
+    attribution: 'Photo by @foodiesfeed',
+    photo_link:
+      'https://unsplash.com/@foodiesfeed?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+  },
+  {
+    id: 'banks',
+    img: PBank,
+    icon: CurrencyDollarIcon,
+    title: 'Banks',
+    desc: 'Short on cash?',
+    active: false,
+    attribution: 'Photo by @julian21',
+    photo_link:
+      'https://unsplash.com/@julian21?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+  },
 ];
 
 export const JacoBeachSection = () => {
@@ -85,16 +114,16 @@ export const JacoBeachSection = () => {
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="jaco_beach">
       <div className="mb-10 grid place-content-center md:ml-56 md:mr-56">
         <SectionHeader title="Jaco Beach" centerText={true}>
-          <p className="!text-nuetral text-lg">
-            Jaco is a vibrant coastal destination in Costa Rica, known for its
-            stunning beaches, lively nightlife, and rich biodiversity, below are
-            some ideas to get you pumped.
-          </p>
+          <Paragraph>
+            Jaco is the most developed beach town on the Pacific Coast of Costa Rica.
+            Located in the province of Puntarenas, it is known for its beautiful beach sceneries, stunning sunset, surfing waves, and various nature-centered activities.
+            Below are some information to get you pumped for your visit.
+          </Paragraph>
         </SectionHeader>
       </div>
-      <div className="grid gap-6 grid-cols-2 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 md:ml-32 md:mr-32">
+      <div className="grid grid-cols-2 grid-rows-5 lg:grid-cols-5 lg:grid-rows-2 gap-4 md:ml-32 md:mr-32">
         <Card
-          className="relative grid col-span-2 lg:col-span-1 h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-cyan-500 via-blue-600 to-indigo-500"
+          className="relative col-span-2 row-span-2 h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-cyan-500 via-blue-600 to-indigo-500"
           placeholder={undefined}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
@@ -118,30 +147,24 @@ export const JacoBeachSection = () => {
             </div>
           </CardBody>
         </Card>
-        <div className="col-span-1 flex flex-col gap-6">
-          {categories.slice(0, 2).map((props, key) => (
+
+        {categories.map((props, key) => (
+          <div className={`row-start-${key}`}>
             <CategoryCard
               key={key}
               {...props}
               callback={cardClickCallbackHandler}
             />
-          ))}
-        </div>
-        <div className="col-span-1 flex flex-col gap-6">
-          {categories.slice(2, 4).map((props, key) => (
-            <CategoryCard
-              key={key}
-              {...props}
-              callback={cardClickCallbackHandler}
-            />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
       <div className="md:ml-32 md:mr-32">
         {hiddenDivState == 'restaurants' && <RestaurantDetails />}
         {hiddenDivState == 'emergency' && <EmergencyDetails />}
         {hiddenDivState == 'things_to_do' && <ThingsToDoDetails />}
         {hiddenDivState == 'noteworthy' && <NoteworthyDetails />}
+        {hiddenDivState == 'groceries' && <GroceryDetails />}
+        {hiddenDivState == 'banks' && <BankDetails />}
       </div>
     </section>
   );

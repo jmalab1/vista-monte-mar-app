@@ -32,14 +32,6 @@ export const ArrivalSection = () => {
           </SectionHeader>
           <SectionHeader title="Entering/Exiting the Unit">
             <Paragraph>
-              The condo unit is 2604. It is in the second tower, pass the rancho
-              style pool area. We recommend parking behind the building where
-              the main entrance is. The unit is on the 6th floor, facing the
-              mountain. As soon as you get off of the elevator, it is the unit
-              to the right.
-            </Paragraph>
-
-            <Paragraph>
               We provide each guest with a unique keyless entry code to access
               the unit for the duration of the stay. This is changed every
               reservation so you can rest assured yoiur unit is safe and secure.

@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6265751,
+          9.6295594,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Maxi Palí $",
+        "styleUrl": "#icon-1578-3949AB-labelson-nodesc",
+        "styleHash": "239cd813",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6266568,
+          9.6131254,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Mas X Menos $$",
+        "styleUrl": "#icon-1578-3949AB-labelson-nodesc",
+        "styleHash": "239cd813",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6306996,
+          9.6175365,
+          0
+        ]
+      },
+      "properties": {
+        "name": "MegaSuper $$$",
+        "styleUrl": "#icon-1578-3949AB-labelson-nodesc",
+        "styleHash": "239cd813",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.6392111,
+          9.6609882,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Auto Mercado Plaza Herradura $$$",
+        "styleUrl": "#icon-1578-3949AB-labelson-nodesc",
+        "styleHash": "239cd813",
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    }
+  ]
+}
