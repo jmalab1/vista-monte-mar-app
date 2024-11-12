@@ -35,14 +35,19 @@ export const ArrivalSection = () => {
               <Paragraph>
                 We provide each guest with a unique keyless entry code to access
                 the unit for the duration of the stay. This is changed every
-                reservation so you can rest assured yoiur unit is safe and secure.
+                reservation so you can rest assured your items are safe and secured.
               </Paragraph>
 
               <Paragraph>
-                To unlock, enter the 4 digit code provided to you and press the
-                check button. To lock, press the padlock button. From the
-                inside, simply turn the dial to lock the door. The door will
-                also automatically lock after a minute.
+                To unlock, press the Shlage button followed by entering the 4 digit code provided.
+                To lock, press the Shlage button. From the inside, simply turn the dial to lock the door.
+                The door will also automatically lock after some time.
+              </Paragraph>
+            </SectionHeader>
+            <SectionHeader title="Wi-Fi Access" textSize="2xl">
+              <Paragraph>
+                We provide a complimentary access to the internet. You can connect to the Wi-Fi (VMM-guest) by scanning the QR code
+                available at the unit. You can also access using the provided password.
               </Paragraph>
             </SectionHeader>
           </SectionHeader>

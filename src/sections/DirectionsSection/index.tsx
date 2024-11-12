@@ -40,13 +40,13 @@ export const DirectionsSection = () => {
             <SectionHeader title="Navigation" textSize="2xl">
               <Paragraph>
                 We recommend using Waze to navigate around Costa Rica. It tends
-                to be more accurate and up-to-date than Google map in road
+                to be more accurate and up-to-date than Google Maps in road
                 delays and routes around Costa Rica.
               </Paragraph>
             </SectionHeader>
             <SectionHeader title="Transportation" textSize="2xl">
               <Paragraph>
-                At the airport you can get a taxi in the arrival area. Below are
+                You can get a taxi in the arrival area at the airport. Below are
                 alternative airport transfer company/contact you could arrange
                 transfer with. We would be happy to also assist in arranging
                 transfer - just let us know.
