@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.leaflet-control-container {
+    @apply text-gray-800; /* Tailwind utility classes */
+}
