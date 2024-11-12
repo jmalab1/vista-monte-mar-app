@@ -19,9 +19,9 @@ import _ from 'lodash';
 import AbbLogo from '../../modules/Logos/AbbLogo';
 import VrboLogo from '../../modules/Logos/VrboLogo';
 import PFood from './images/food.jpg?w=600&webp';
-import PThingsTodo from './images/surf.jpg?w=600&webp';
+import PThingsTodo from './images/things_to_do.jpg?w=600&webp';
 import PEmergency from './images/emergency.jpg?w=600&webp';
-import PNoteworthy from './images/mountain.jpg?w=600&webp';
+import PNoteworthy from './images/artwork.jpg?w=600&webp';
 import PGrocery from './images/grocery.jpg?w=600&webp';
 import PBank from './images/atm.jpg?w=600&webp';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
@@ -35,9 +35,6 @@ let categories = [
     title: 'Restaurants',
     desc: 'Looking for a bite to eat?',
     active: true,
-    attribution: 'Photo by @rosalindjchang',
-    photo_link:
-      'https://unsplash.com/@rosalindjchang?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
   },
   {
     id: 'things_to_do',
@@ -45,10 +42,7 @@ let categories = [
     icon: LightBulbIcon,
     title: 'Things To Do',
     desc: 'Explore Jaco',
-    active: false,
-    attribution: 'Photo by @lime517',
-    photo_link:
-      'https://unsplash.com/@lime517?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+    active: false
   },
   {
     id: 'emergency',
@@ -67,10 +61,7 @@ let categories = [
     icon: PencilSquareIcon,
     title: 'Noteworthy',
     desc: 'Looking for more?',
-    active: false,
-    attribution: 'Photo by @hiking_corgi',
-    photo_link:
-      'https://unsplash.com/@hiking_corgi?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+    active: false
   },
   {
     id: 'groceries',
@@ -78,10 +69,7 @@ let categories = [
     icon: BuildingStorefrontIcon,
     title: 'Groceries',
     desc: 'Make sure to have the necessities',
-    active: false,
-    attribution: 'Photo by @foodiesfeed',
-    photo_link:
-      'https://unsplash.com/@foodiesfeed?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
+    active: false
   },
   {
     id: 'banks',
