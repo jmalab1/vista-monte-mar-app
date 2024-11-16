@@ -32,7 +32,7 @@ export const DirectionsSection = () => {
                   to={`https://www.google.com/maps/dir/?api=1&origin=SJO&destination=Condominio+Torres+del+Mar`}
                   target="_blank"
                 >
-                  Direction{' '}
+                  <span className='mr-2'>Directions</span>
                   <FontAwesomeIcon icon={faDiamondTurnRight} size="xl" />
                 </Link>
               </Button>
