@@ -3,13 +3,13 @@
     "name": "Vista Los Sueños Adventure Park",
     "description": "Located at the north end of Jaco, this place offers zip lining, canopy tour, repelling, atving, horseback riding, waterfalls ",
     "type": "Recreation",
-    "distance_km": 9.2
+    "distance_km": 9.1
   },
   {
     "name": "El Miro",
     "description": "This abandoned unfinished mansion is a hike close by with 2 viewing decks that provide panoramic view of Playa Jaco. The first viewing deck is about a 20 minute hike, and then another 25 minutes to the second viewing deck.",
     "type": "Attraction",
-    "distance_km": 1.4
+    "distance_km": 1.5
   },
   {
     "name": "Manuel Antonio Park Info Center",
@@ -21,25 +21,25 @@
     "name": "Los Sueños Resort and Marina",
     "description": "A luxury resort and marina offering various activities.",
     "type": "Resort",
-    "distance_km": 10.9
+    "distance_km": 11.5
   },
   {
     "name": "Marina Pez Vela",
     "description": "A beautiful marina with various restaurants and shops.",
     "type": "Marina",
-    "distance_km": 65.2
+    "distance_km": 65.1
   },
   {
     "name": "Nauyaca Waterfalls",
     "description": "A stunning waterfall located in the rainforest.",
     "type": "Natural Attraction",
-    "distance_km": 113
+    "distance_km": 113.4
   },
   {
     "name": "Jaco Crocodile tour",
     "description": "If you're brave, ride a river boat along Rio Tarcoles to experience the mangroves, birds, and the abundance of crocodiles just 30 minutes north. If you're not brave enough, you can just drive to the bridge over Rio Tarcoles to view the crocodiles right under.",
     "type": "Tour",
-    "distance_km": 21.4
+    "distance_km": 2.3
   },
   {
     "name": "Deep Sea Sport Fishing Los Suenos",

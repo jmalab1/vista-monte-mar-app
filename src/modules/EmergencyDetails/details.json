@@ -3,13 +3,13 @@
     "name": "Jaco doctors",
     "description": "Local doctors offering medical services.",
     "type": "Healthcare",
-    "distance_km": 2.6
+    "distance_km": 1.9
   },
   {
     "name": "Clínica De Jacó",
     "description": "A clinic providing healthcare services in Jacó.",
     "type": "Healthcare",
-    "distance_km": 0.55
+    "distance_km": 0.5
   },
   {
     "name": "Laboratorio Jacó",

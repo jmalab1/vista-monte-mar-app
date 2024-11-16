@@ -1,14 +1,20 @@
 [
   {
+    "name": "Arenal Volcano",
+    "description": "Arenal Volcano (Spanish: Volcán Arenal) is an active andesitic stratovolcano in north-western Costa Rica around 90 km (56 mi) northwest of San José, in the province of Alajuela, canton of San Carlos, and district of La Fortuna.",
+    "type": "Attraction",
+    "distance_km": 161
+  },
+  {
     "name": "Parque Nacional Volcán Turrialba",
     "description": "A national park featuring the active Turrialba Volcano, known for its hiking trails and diverse wildlife.",
     "type": "Attraction",
-    "distance_km": 169
+    "distance_km": 156
   },
   {
     "name": "Selvatura Adventure Park",
     "description": "An adventure park offering canopy tours, zip-lining, and suspension bridges through the cloud forest.",
     "type": "Attraction",
-    "distance_km": 127
+    "distance_km": 125.5
   }
 ]

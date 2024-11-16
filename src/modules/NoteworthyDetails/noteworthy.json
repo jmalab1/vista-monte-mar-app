@@ -5,7 +5,32 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-83.7677148, 10.0167979, 0]
+        "coordinates": [
+          -84.7031794,
+          10.4626262,
+          0
+        ]
+      },
+      "properties": {
+        "name": "Arenal Volcano",
+        "styleUrl": "#icon-1899-0288D1-nodesc",
+        "styleHash": "48999a20",
+        "styleMapHash": {
+          "normal": "#icon-1899-0288D1-nodesc-normal",
+          "highlight": "#icon-1899-0288D1-nodesc-highlight"
+        },
+        "icon": "https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.7677148,
+          10.0167979,
+          0
+        ]
       },
       "properties": {
         "name": "Parque Nacional Volcán Turrialba",
@@ -22,7 +47,11 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-84.7986056, 10.3424275, 0]
+        "coordinates": [
+          -84.7986056,
+          10.3424275,
+          0
+        ]
       },
       "properties": {
         "name": "Selvatura Adventure Park",
