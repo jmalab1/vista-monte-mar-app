@@ -109,7 +109,7 @@ export const JacoBeachSection = () => {
           </Paragraph>
         </SectionHeader>
       </div>
-      <div className="grid grid-cols-2 grid-rows-5 lg:grid-cols-5 lg:grid-rows-2 gap-4 md:ml-32 md:mr-32">
+      <div className="grid grid-cols-2 lg:grid-cols-5 lg:grid-rows-2 gap-4 md:ml-32 md:mr-32">
         <Card
           className="relative col-span-2 row-span-2 h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-cyan-500 via-blue-600 to-indigo-500"
           placeholder={undefined}

@@ -28,7 +28,7 @@ const CategoryCard = ({
 }: CategoryCardProps) => {
   return (
     <Card
-      className={`relative grid min-h-[12rem] w-full overflow-hidden ${active ? 'grayscale' : 'hover:cursor-pointer transition-transform duration-300 transform hover:scale-105'}`}
+      className={`relative grid lg:min-h-[12rem] w-full overflow-hidden ${active ? 'grayscale' : 'hover:cursor-pointer transition-transform duration-300 transform hover:scale-105'}`}
       placeholder={undefined}
       onPointerEnterCapture={undefined}
       onPointerLeaveCapture={undefined}
@@ -46,7 +46,7 @@ const CategoryCard = ({
         onPointerEnterCapture={undefined}
         onPointerLeaveCapture={undefined}
       >
-        <Icon className="h-8 w-8 text-white" />
+        <Icon className="h-8 w-8 text-white hidden lg:block" />
         <div>
           <Typography
             variant="h5"
@@ -60,7 +60,7 @@ const CategoryCard = ({
           </Typography>
           <Typography
             color="white"
-            className="text-xs font-bold opacity-50"
+            className="text-xs font-bold opacity-50 hidden lg:block"
             placeholder={undefined}
             onPointerEnterCapture={undefined}
             onPointerLeaveCapture={undefined}
