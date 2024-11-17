@@ -24,7 +24,7 @@ const Carousel: FunctionComponent<CarouselType> = ({ children }) => {
                 "isAutoPlay": true,
                 "isAutoHeight": true
             }' className="relative">
-            <div className="hs-carousel relative overflow-hidden w-full min-h-[500px] bg-white rounded-lg">
+            <div className="hs-carousel relative overflow-hidden w-full min-h-[600px] bg-white rounded-lg">
                 <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                     {children}
                 </div>

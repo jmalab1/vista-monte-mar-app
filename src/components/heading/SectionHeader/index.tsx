@@ -18,7 +18,7 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
     <>
       <div className={centerText ? 'place-content-center text-center' : ''}>
         <h1
-          className={`text-secondary ${textSize ? 'text-' + textSize : 'text-4xl'} font-bold mt-10 font-pacifico`}
+          className={`text-secondary ${textSize ? 'text-' + textSize : 'text-4xl'} font-bold mt-20 font-pacifico`}
         >
           {title}
         </h1>
