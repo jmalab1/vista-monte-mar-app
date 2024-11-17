@@ -4,8 +4,8 @@ const withMT = require('@material-tailwind/react/utils/withMT');
 const config: Config = withMT({
   content: [
     './index.html', 
-    './src/**/*.{js,ts,jsx,tsx,mdx,html}',
     './node_modules/preline/preline.js',
+    './src/**/*.{js,ts,jsx,tsx,mdx,html}',
   ],
   theme: {
     extend: {
@@ -23,7 +23,7 @@ const config: Config = withMT({
   plugins: [
     require('@tailwindcss/typography'), 
     require('daisyui'),
-    require('preline/plugin'),
+    require('preline/plugin')
   ],
   daisyui: {
     themes: [

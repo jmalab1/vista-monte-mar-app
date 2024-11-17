@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Footer from './modules/Footer';
 import Navbar from './modules/Navbar';
 import HouseRules from './pages/HouseRules';
@@ -8,6 +8,7 @@ import NotFound from './components/NotFound';
 import Directions from './pages/Directions';
 import Arrival from './pages/Arrival';
 import Checkout from './pages/Checkout';
+import './index.css';
 
 const App = () => {
   return (
