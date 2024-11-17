@@ -1,10 +1,22 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
+import "preline/preline";
+import { IStaticMethods } from "preline/preline";
+
+declare global {
+    interface Window {
+        HSStaticMethods: IStaticMethods;
+    }
+}
 
 type CarouselType = {
     children: React.ReactNode;
 }
 
 const Carousel: FunctionComponent<CarouselType> = ({ children }) => {
+    useEffect(() => {
+        window.HSStaticMethods.autoInit();
+    }, []);
+
     return (
         <div data-hs-carousel='{
                 "loadingClasses": "opacity-0",

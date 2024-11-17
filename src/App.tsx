@@ -8,21 +8,8 @@ import NotFound from './components/NotFound';
 import Directions from './pages/Directions';
 import Arrival from './pages/Arrival';
 import Checkout from './pages/Checkout';
-import "preline/preline";
-import { IStaticMethods } from "preline/preline";
-import { useEffect } from 'react';
-
-declare global {
-  interface Window {
-    HSStaticMethods: IStaticMethods;
-  }
-}
 
 const App = () => {
-  useEffect(() => {
-    window.HSStaticMethods.autoInit();
-  }, []);
-
   return (
     <BrowserRouter basename="/vista_monte_mar/">
       <div>
