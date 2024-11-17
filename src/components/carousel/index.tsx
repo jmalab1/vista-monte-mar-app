@@ -20,7 +20,7 @@ const Carousel: FunctionComponent<CarouselType> = ({ children }) => {
     return (
         <div data-hs-carousel='{
                 "loadingClasses": "opacity-0",
-                "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer",
+                "dotsItemClasses": "hs-carousel-active:bg-secondary hs-carousel-active:border-secondary size-3 border border-gray-400 rounded-full cursor-pointer",
                 "isAutoPlay": true,
                 "isAutoHeight": true
             }' className="relative">
