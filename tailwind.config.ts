@@ -2,7 +2,11 @@ import type { Config } from 'tailwindcss';
 const withMT = require('@material-tailwind/react/utils/withMT');
 
 const config: Config = withMT({
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,mdx,html}'],
+  content: [
+    './index.html', 
+    './src/**/*.{js,ts,jsx,tsx,mdx,html}',
+    'node_modules/preline/dist/*.js',
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -16,7 +20,11 @@ const config: Config = withMT({
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [
+    require('@tailwindcss/typography'), 
+    require('daisyui'),
+    require('preline/plugin'),
+  ],
   daisyui: {
     themes: [
       {
