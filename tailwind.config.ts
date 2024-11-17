@@ -5,7 +5,7 @@ const config: Config = withMT({
   content: [
     './index.html', 
     './src/**/*.{js,ts,jsx,tsx,mdx,html}',
-    'node_modules/preline/dist/*.js',
+    './node_modules/preline/preline.js',
   ],
   theme: {
     extend: {
