@@ -1,7 +1,7 @@
-import one from './images/1.jpg?w=1400&webp';
-import two from './images/2.jpg?w=1400&webp';
-import three from './images/3.jpg?w=1400&webp';
-import four from './images/4.jpg?w=1400&webp';
+import one from './images/1.jpg?w=800&webp';
+import two from './images/2.jpg?w=800&webp';
+import three from './images/3.jpg?w=800&webp';
+import four from './images/4.jpg?w=800&webp';
 import Carousel from '../../components/carousel';
 import CarouselItem from '../../components/carousel/carousel-item';
 
