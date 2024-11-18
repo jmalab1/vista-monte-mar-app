@@ -2,6 +2,8 @@ import one from './images/1.jpg?w=800&webp';
 import two from './images/2.jpg?w=800&webp';
 import three from './images/3.jpg?w=800&webp';
 import four from './images/4.jpg?w=800&webp';
+import five from './images/5.jpg?w=800&webp';
+import six from './images/6.jpg?w=800&webp';
 import Carousel from '../../components/carousel';
 import CarouselItem from '../../components/carousel/carousel-item';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
@@ -20,6 +22,8 @@ export const Hero = () => {
             <CarouselItem img={two} />
             <CarouselItem img={three} />
             <CarouselItem img={four} />
+            <CarouselItem img={five} />
+            <CarouselItem img={six} />
           </Carousel>
         </div>
       </div>
