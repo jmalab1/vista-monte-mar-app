@@ -51,15 +51,40 @@ export const DirectionsSection = () => {
                 transfer with. We would be happy to also assist in arranging
                 transfer - just let us know.
               </Paragraph>
-              <ul>
-                <li>
-                  CR Travels & Tours: + 506-6019-3784,
-                  crtravelsandtour@gmail.com
-                </li>
-                <li>Tranfers & Tours Costa Rica: +506-8858-8333</li>
-                <li>Arturo Saenz-Garcia: +506-8822-1921</li>
-                <li>Rich Coast Connections - +506-8309-4521</li>
-              </ul>
+              <div className="flex flex-col">
+                <div className="-m-1.5 overflow-x-auto">
+                  <div className="p-1.5 min-w-full inline-block align-middle">
+                    <div className="overflow-hidden">
+                      <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                        <thead>
+                          <tr>
+                            <th scope="col" className="px-3 py-3 text-start text-xs font-medium text-nuetral uppercase">Company Name</th>
+                            <th scope="col" className="px-3 py-3 text-start text-xs font-medium text-nuetral uppercase">Contact Info</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y">
+                          <tr>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">CR Travels & Tours</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-6019-3784, crtravelsandtour@gmail.com</td>
+                          </tr>
+                          <tr>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">Tranfers & Tours Costa Rica</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-8858-8333</td>
+                          </tr>
+                          <tr>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">Arturo Saenz-Garcia</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-8822-1921</td>
+                          </tr>
+                          <tr>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">Rich Coast Connections</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-8309-4521</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </SectionHeader>
           </SectionHeader>
         </div>
