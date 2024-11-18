@@ -64,20 +64,20 @@ export const DirectionsSection = () => {
                         </thead>
                         <tbody className="divide-y">
                           <tr>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">CR Travels & Tours</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-6019-3784, crtravelsandtour@gmail.com</td>
+                            <td className="px-6 py-4 text-sm font-medium text-nuetral">CR Travels & Tours</td>
+                            <td className="px-6 py-4 text-sm text-nuetral">+506-6019-3784, crtravelsandtour@gmail.com</td>
                           </tr>
                           <tr>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">Tranfers & Tours Costa Rica</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-8858-8333</td>
+                            <td className="px-6 py-4 text-sm font-medium text-nuetral">Tranfers & Tours Costa Rica</td>
+                            <td className="px-6 py-4 text-sm text-nuetral">+506-8858-8333</td>
                           </tr>
                           <tr>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">Arturo Saenz-Garcia</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-8822-1921</td>
+                            <td className="px-6 py-4 text-sm font-medium text-nuetral">Arturo Saenz-Garcia</td>
+                            <td className="px-6 py-4 text-sm text-nuetral">+506-8822-1921</td>
                           </tr>
                           <tr>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-nuetral">Rich Coast Connections</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-nuetral">+506-8309-4521</td>
+                            <td className="px-6 py-4 text-sm font-medium text-nuetral">Rich Coast Connections</td>
+                            <td className="px-6 py-4 text-sm text-nuetral">+506-8309-4521</td>
                           </tr>
                         </tbody>
                       </table>
