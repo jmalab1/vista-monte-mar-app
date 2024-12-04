@@ -32,6 +32,7 @@ import image30 from './images/image (30).jpg?w=800&webp';
 import image31 from './images/image (31).jpg?w=800&webp';
 import image32 from './images/image (32).jpg?w=800&webp';
 import image33 from './images/image (33).jpg?w=800&webp';
+import movie from './movie/movie.mp4?w=800&webp';
 
 export const GallerySection = () => {
   const images = [
@@ -45,9 +46,15 @@ export const GallerySection = () => {
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="house_rules">
       <div className="mb-10 grid lg:ml-56 lg:mr-56">
         <SectionHeader title="Gallery">
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-10">
+          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 pt-10">
+            <div className="break-inside-avoid mb-8">
+              <video className="h-auto max-w-full rounded-lg" autoPlay muted controls loop>
+                <source src={movie} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
             {images.map((image, index) => (
-              <div className=" break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8">
                 <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
               </div>
             ))}
