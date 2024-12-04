@@ -30,7 +30,7 @@ export const ArrivalSection = () => {
             </SectionHeader>
             <SectionHeader title="Entering/Exiting the Unit" textSize="2xl">
               <Paragraph>
-                The condo unit is 2604. It is in the second tower, past the rancho-style pool area. We
+                The condo unit is located in the second tower, past the rancho-style pool area. We
                 recommend parking behind the building where the main entrance is.  The unit is on
                 the 6th floor, facing the mountain. As soon as you get off of the elevator, go left and
                 then right to go around the wall and our unit is down the hallway.
