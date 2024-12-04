@@ -16,10 +16,8 @@ export const DirectionsSection = () => {
               textSize="2xl"
             >
               <Paragraph>
-                We are located in Torres del Mar Condominiums in Jaco, Costa
-                Rica on the Central Pacific coast. It is roughly 1.5 hours,
-                depending on traffic, from San Juan Santamaria International
-                Airport (SJO).
+                We are located in Torres del Mar Condominiums in Jaco, Costa Rica on the Central Pacific coast.
+                It is roughly 1.5 hours, depending on traffic, from San Juan Santamaria International Airport (SJO).
               </Paragraph>
               <Button
                 title={'Directions'}
@@ -39,17 +37,15 @@ export const DirectionsSection = () => {
             </SectionHeader>
             <SectionHeader title="Navigation" textSize="2xl">
               <Paragraph>
-                We recommend using Waze to navigate around Costa Rica. It tends
-                to be more accurate and up-to-date than Google Maps in road
-                delays and routes around Costa Rica.
+                We recommend using Waze to navigate around Costa Rica. It tends to be more accurate and
+                up-to-date than Google Maps in road delays and routes around Costa Rica. Enjoy the scenic ride.
               </Paragraph>
             </SectionHeader>
             <SectionHeader title="Transportation" textSize="2xl">
               <Paragraph>
-                You can get a taxi in the arrival area at the airport. Below are
-                alternative airport transfer company/contact you could arrange
-                transfer with. We would be happy to also assist in arranging
-                transfer - just let us know.
+                At the airport, you can get a taxi in the arrival area. Below are alternative airport
+                transfer companies/contacts you could arrange a transfer with. We would be happy
+                to also assist in arranging the transfer - just let us know.
               </Paragraph>
               <div className="flex flex-col">
                 <div className="-m-1.5 overflow-x-auto">
