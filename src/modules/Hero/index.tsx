@@ -1,9 +1,8 @@
-import one from './images/1.jpg?w=800&webp';
-import two from './images/2.jpg?w=800&webp';
-import three from './images/3.jpg?w=800&webp';
-import four from './images/4.jpg?w=800&webp';
-import five from './images/5.jpg?w=800&webp';
-import six from './images/6.jpg?w=800&webp';
+import image1 from './images/image (2).jpg?w=1200&webp';
+import image2 from './images/image (10).jpg?w=1200&webp';
+import image3 from './images/image (12).jpg?w=1200&webp';
+import image4 from './images/image (21).jpg?w=1200&webp';
+import image5 from './images/image (30).jpg?w=1200&webp';
 import Carousel from '../../components/carousel';
 import CarouselItem from '../../components/carousel/carousel-item';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
@@ -18,12 +17,11 @@ export const Hero = () => {
         </div>
         <div className="lg:col-span-4 mt-10 lg:mt-0">
           <Carousel>
-            <CarouselItem img={one} />
-            <CarouselItem img={two} />
-            <CarouselItem img={three} />
-            <CarouselItem img={four} />
-            <CarouselItem img={five} />
-            <CarouselItem img={six} />
+            <CarouselItem img={image1} />
+            <CarouselItem img={image2} />
+            <CarouselItem img={image3} />
+            <CarouselItem img={image4} />
+            <CarouselItem img={image5} />
           </Carousel>
         </div>
       </div>

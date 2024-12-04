@@ -1,7 +1,7 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from './images/logo.svg?w=256&webp';
-import Breadcrumb from '../../components/breadcrumb';
+//import Breadcrumb from '../../components/breadcrumb';
 import { findInJson } from '../../utility/findInJsonUtil';
 
 const NAV_MENU = [
@@ -33,6 +33,11 @@ const NAV_MENU = [
         crumb: ["Home", "Visit Information"]
       },
     ],
+  },
+  {
+    name: 'Gallery',
+    href: '/gallery',
+    crumb: ["Home"]
   },
   {
     name: 'About Us',
@@ -216,9 +221,9 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className='ml-10 mt-4 mb-4'>
+      {/* <div className='ml-10 mt-4 mb-4'>
         <Breadcrumb crumbs={crumbs} active={activeMenuItem} />
-      </div>
+      </div> */}
     </>
   );
 };

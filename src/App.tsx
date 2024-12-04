@@ -9,6 +9,7 @@ import Directions from './pages/Directions';
 import Arrival from './pages/Arrival';
 import Checkout from './pages/Checkout';
 import './index.css';
+import Gallery from './pages/Gallery';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/directions" element={<Directions />} />
             <Route path="/arrival" element={<Arrival />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
