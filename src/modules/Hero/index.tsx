@@ -6,6 +6,7 @@ import image5 from './images/image (30).jpg?w=1200&webp';
 import Carousel from '../../components/carousel';
 import CarouselItem from '../../components/carousel/carousel-item';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
+import { Link } from 'react-router-dom';
 
 export const Hero = () => {
   return (
@@ -13,7 +14,13 @@ export const Hero = () => {
       <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
         <div className="lg:col-span-3">
           <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-8xl text-center lg:text-left font-pacifico text-secondary">Welcome!</h1>
-          <Paragraph>Welcome to Vista Monte Mar! Enjoy a cozy stay with modern amenities in a prime location. We look forward to hosting you!</Paragraph>
+          <Paragraph>
+            Welcome to Vista Monte Mar! Enjoy a cozy stay with modern amenities in a prime location. We look forward to hosting you!
+          </Paragraph>
+          <Link to="/gallery">
+            <button className="btn btn-sm btn-secondary text-base-100">
+              Want to see more photos?
+            </button></Link>
         </div>
         <div className="lg:col-span-4 mt-10 lg:mt-0">
           <Carousel>
