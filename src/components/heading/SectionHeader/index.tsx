@@ -1,11 +1,13 @@
 import React from 'react';
 import { FunctionComponent } from 'react';
+import HorizontalLine from '../../HorizontalLine';
 
 type TSectionHeader = {
   title: string;
   children?: React.ReactNode;
   centerText?: boolean;
   textSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  horizontalLine?: boolean;
 };
 
 const SectionHeader: FunctionComponent<TSectionHeader> = ({
@@ -13,6 +15,7 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
   children,
   centerText,
   textSize,
+  horizontalLine
 }) => {
   return (
     <>
@@ -22,6 +25,7 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
         >
           {title}
         </h1>
+        {horizontalLine && <HorizontalLine />}
         {children}
       </div>
     </>

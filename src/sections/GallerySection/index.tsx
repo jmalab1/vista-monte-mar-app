@@ -30,7 +30,7 @@ import c1 from '/src/assets/common/image (1).jpg?w=800&webp';
 import c2 from '/src/assets/common/image (2).jpg?w=800&webp';
 import m1 from '/src/assets/misc/image (1).jpg?w=800&webp';
 import m2 from '/src/assets/misc/image (2).jpg?w=800&webp';
-import movie from './movie/Condo.mov?w=800&webp';
+import movie from '/src/assets/movie/Condo.mov?w=800&webp';
 
 export const GallerySection = () => {
   const balcony = [
@@ -76,7 +76,7 @@ export const GallerySection = () => {
             </video>
           </div>
         </SectionHeader>
-        <SectionHeader title="Living Room">
+        <SectionHeader title="Living Room" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {living_room.map((image, index) => (
               <div className="break-inside-avoid mb-8">
@@ -85,7 +85,7 @@ export const GallerySection = () => {
             ))}
           </div>
         </SectionHeader>
-        <SectionHeader title="Balcony">
+        <SectionHeader title="Balcony" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {balcony.map((image, index) => (
               <div className="break-inside-avoid mb-8">
@@ -94,7 +94,7 @@ export const GallerySection = () => {
             ))}
           </div>
         </SectionHeader>
-        <SectionHeader title="Kitchen">
+        <SectionHeader title="Kitchen" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {kitchen.map((image, index) => (
               <div className="break-inside-avoid mb-8">
@@ -103,7 +103,7 @@ export const GallerySection = () => {
             ))}
           </div>
         </SectionHeader>
-        <SectionHeader title="Bedrooms">
+        <SectionHeader title="Bedrooms" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {bedrooms.map((image, index) => (
               <div className="break-inside-avoid mb-8">
@@ -112,7 +112,7 @@ export const GallerySection = () => {
             ))}
           </div>
         </SectionHeader>
-        <SectionHeader title="Bathrooms">
+        <SectionHeader title="Bathrooms" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {bathrooms.map((image, index) => (
               <div className="break-inside-avoid mb-8">
@@ -121,7 +121,7 @@ export const GallerySection = () => {
             ))}
           </div>
         </SectionHeader>
-        <SectionHeader title="Miscellaneous">
+        <SectionHeader title="Miscellaneous" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {misc.map((image, index) => (
               <div className="break-inside-avoid mb-8">
@@ -130,7 +130,7 @@ export const GallerySection = () => {
             ))}
           </div>
         </SectionHeader>
-        <SectionHeader title="Common Areas">
+        <SectionHeader title="Common Areas" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {common.map((image, index) => (
               <div className="break-inside-avoid mb-8">
@@ -139,7 +139,7 @@ export const GallerySection = () => {
             ))}
           </div>
         </SectionHeader>
-        <SectionHeader title="Nature">
+        <SectionHeader title="Nature" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {nature.map((image, index) => (
               <div className="break-inside-avoid mb-8">
