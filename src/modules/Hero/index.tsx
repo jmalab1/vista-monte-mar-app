@@ -1,8 +1,8 @@
-import image1 from './images/image (2).jpg?w=1200&webp';
-import image2 from './images/image (10).jpg?w=1200&webp';
-import image3 from './images/image (12).jpg?w=1200&webp';
-import image4 from './images/image (21).jpg?w=1200&webp';
-import image5 from './images/image (30).jpg?w=1200&webp';
+import jacosign from '../../assets/nature/image (1).jpg?w=1200&webp';
+import lr1 from '../../assets/living_room/image (3).jpg?w=1200&webp';
+import k1 from '../../assets/kitchen/image (5).jpg?w=1200&webp';
+import k2 from '../../assets/kitchen/image (4).jpg?w=1200&webp';
+import pool from '../../assets/common/image (2).jpg?w=1200&webp';
 import Carousel from '../../components/carousel';
 import CarouselItem from '../../components/carousel/carousel-item';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
@@ -28,11 +28,11 @@ export const Hero = () => {
         </div>
         <div className="lg:col-span-4 mt-10 lg:mt-0">
           <Carousel>
-            <CarouselItem img={image1} />
-            <CarouselItem img={image2} />
-            <CarouselItem img={image3} />
-            <CarouselItem img={image4} />
-            <CarouselItem img={image5} />
+            <CarouselItem img={jacosign} />
+            <CarouselItem img={lr1} />
+            <CarouselItem img={k1} />
+            <CarouselItem img={k2} />
+            <CarouselItem img={pool} />
           </Carousel>
         </div>
       </div>

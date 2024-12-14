@@ -18,12 +18,12 @@ import CategoryCard from '../../components/Categories/CategoryCard';
 import _ from 'lodash';
 import AbbLogo from '../../modules/Logos/AbbLogo';
 import VrboLogo from '../../modules/Logos/VrboLogo';
-import PFood from './images/food.jpg?w=600&webp';
-import PThingsTodo from './images/things_to_do.jpg?w=600&webp';
-import PEmergency from './images/emergency.jpg?w=600&webp';
-import PNoteworthy from './images/artwork.jpg?w=600&webp';
-import PGrocery from './images/grocery.jpg?w=600&webp';
-import PBank from './images/atm.jpg?w=600&webp';
+import PFood from '../../assets/misc/food.jpg?w=600&webp';
+import PThingsTodo from '../../assets/misc/things_to_do.jpg?w=600&webp';
+import PEmergency from '../../assets/misc/emergency.jpg?w=600&webp';
+import PNoteworthy from '../../assets/misc/artwork.jpg?w=600&webp';
+import PGrocery from '../../assets/misc/grocery.jpg?w=600&webp';
+import PBank from '../../assets/misc/atm.jpg?w=600&webp';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
 import BankDetails from '../../modules/BankDetails';
 
