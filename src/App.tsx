@@ -17,7 +17,7 @@ import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 const App = () => {
   return (
     <BrowserRouter basename="/vista_monte_mar/">
-      <ScrollToTop showUnder={160}>
+      <ScrollToTop showUnder={160} style={{ zIndex: 1000000 }}>
         <FontAwesomeIcon icon={faArrowCircleUp} size='2xl' />
       </ScrollToTop>
       <div>
@@ -36,7 +36,7 @@ const App = () => {
         </div>
         <Footer />
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 };
 
