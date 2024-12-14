@@ -10,10 +10,16 @@ import Arrival from './pages/Arrival';
 import Checkout from './pages/Checkout';
 import './index.css';
 import Gallery from './pages/Gallery';
+import ScrollToTop from 'react-scroll-up';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 
 const App = () => {
   return (
     <BrowserRouter basename="/vista_monte_mar/">
+      <ScrollToTop showUnder={160}>
+        <FontAwesomeIcon icon={faArrowCircleUp} size='2xl' />
+      </ScrollToTop>
       <div>
         <Navbar />
         <div>
