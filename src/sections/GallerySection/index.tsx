@@ -30,7 +30,7 @@ import c1 from '/src/assets/common/image (1).jpg?w=800&webp';
 import c2 from '/src/assets/common/image (2).jpg?w=800&webp';
 import m1 from '/src/assets/misc/image (1).jpg?w=800&webp';
 import m2 from '/src/assets/misc/image (2).jpg?w=800&webp';
-import movie from '/src/assets/movie/Condo.mov?w=800&webp';
+import movie from '/src/assets/movie/Condo.mp4?w=800&webp';
 
 export const GallerySection = () => {
   const balcony = [balcony1, balcony2, balcony3];
