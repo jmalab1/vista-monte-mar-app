@@ -34,10 +34,7 @@ const MiniCard: FunctionComponent<TMiniCard> = ({
           <span className="text-xs text-nuetral whitespace-nowrap block">
             {detail.distance_km} km
           </span>
-          <div
-            className="tooltip tooltip-left"
-            data-tip="Get Directions"
-          >
+          <div className="tooltip tooltip-left" data-tip="Get Directions">
             <Link
               to={`https://www.google.com/maps/dir/?api=1&origin=Condominio+Torres+del+Mar&destination=${record.properties.name}+jaco+${detail.type}`}
               target="_blank"

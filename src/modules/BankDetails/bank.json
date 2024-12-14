@@ -5,11 +5,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -84.6271318,
-          9.6137684,
-          0
-        ]
+        "coordinates": [-84.6271318, 9.6137684, 0]
       },
       "properties": {
         "name": "Banco Nacional",
@@ -22,11 +18,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -84.624741,
-          9.6109604,
-          0
-        ]
+        "coordinates": [-84.624741, 9.6109604, 0]
       },
       "properties": {
         "name": "BAC Credomatic - Sucursal Jacó",
@@ -39,11 +31,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -84.6353835,
-          9.6212563,
-          0
-        ]
+        "coordinates": [-84.6353835, 9.6212563, 0]
       },
       "properties": {
         "name": "Banco de Costa Rica",

@@ -15,34 +15,34 @@ const NAV_MENU = [
       {
         name: 'Directions',
         href: '/directions',
-        crumb: ["Home", "Visit Information"]
+        crumb: ['Home', 'Visit Information'],
       },
       {
         name: 'Arrival',
         href: '/arrival',
-        crumb: ["Home", "Visit Information"]
+        crumb: ['Home', 'Visit Information'],
       },
       {
         name: 'House Rules',
         href: '/house_rules',
-        crumb: ["Home", "Visit Information"]
+        crumb: ['Home', 'Visit Information'],
       },
       {
         name: 'Checkout Instructions',
         href: '/checkout',
-        crumb: ["Home", "Visit Information"]
+        crumb: ['Home', 'Visit Information'],
       },
     ],
   },
   {
     name: 'Gallery',
     href: '/gallery',
-    crumb: ["Home"]
+    crumb: ['Home'],
   },
   {
     name: 'About Us',
     href: '/about_us',
-    crumb: ["Home"]
+    crumb: ['Home'],
   },
 ];
 
@@ -192,7 +192,10 @@ export const Navbar = () => {
           />
           <div className="drawer-content">
             {/* Page content here */}
-            <label htmlFor="my-drawer" className="drawer-button btn bg-base-100">
+            <label
+              htmlFor="my-drawer"
+              className="drawer-button btn bg-base-100"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

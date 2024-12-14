@@ -42,7 +42,7 @@ let categories = [
     icon: LightBulbIcon,
     title: 'Things To Do',
     desc: 'Explore Jaco',
-    active: false
+    active: false,
   },
   {
     id: 'emergency',
@@ -61,7 +61,7 @@ let categories = [
     icon: PencilSquareIcon,
     title: 'Noteworthy',
     desc: 'Looking for more?',
-    active: false
+    active: false,
   },
   {
     id: 'groceries',
@@ -69,7 +69,7 @@ let categories = [
     icon: BuildingStorefrontIcon,
     title: 'Groceries',
     desc: 'Make sure to have the necessities',
-    active: false
+    active: false,
   },
   {
     id: 'banks',
@@ -103,9 +103,11 @@ export const JacoBeachSection = () => {
       <div className="mb-10 grid place-content-center md:ml-56 md:mr-56">
         <SectionHeader title="Jaco Beach" centerText={true}>
           <Paragraph>
-            Jaco is the most developed beach town on the Pacific Coast of Costa Rica.
-            Located in the province of Puntarenas, it is known for its beautiful beach sceneries, stunning sunset, surfing waves, and various nature-centered activities.
-            Below are some information to get you pumped for your visit.
+            Jaco is the most developed beach town on the Pacific Coast of Costa
+            Rica. Located in the province of Puntarenas, it is known for its
+            beautiful beach sceneries, stunning sunset, surfing waves, and
+            various nature-centered activities. Below are some information to
+            get you pumped for your visit.
           </Paragraph>
         </SectionHeader>
       </div>

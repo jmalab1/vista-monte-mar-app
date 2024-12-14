@@ -4,11 +4,7 @@ import details from './details.json';
 
 export const BankDetails = () => {
   return (
-    <MapAndTable
-      records={bank.features}
-      title="Banks"
-      details={details}
-    />
+    <MapAndTable records={bank.features} title="Banks" details={details} />
   );
 };
 

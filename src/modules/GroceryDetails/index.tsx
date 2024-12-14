@@ -4,11 +4,7 @@ import details from './details.json';
 
 export const GroceryDetails = () => {
   return (
-    <MapAndTable
-      records={grocery.features}
-      title="Grocery"
-      details={details}
-    />
+    <MapAndTable records={grocery.features} title="Grocery" details={details} />
   );
 };
 

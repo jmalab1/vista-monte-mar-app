@@ -15,7 +15,7 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
   children,
   centerText,
   textSize,
-  horizontalLine
+  horizontalLine,
 }) => {
   return (
     <>

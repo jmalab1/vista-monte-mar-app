@@ -1,6 +1,13 @@
-import { faBowlFood, faPersonBiking, faPersonRunning, faPlane, faSailboat, faUmbrellaBeach } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import {
+  faBowlFood,
+  faPersonBiking,
+  faPersonRunning,
+  faPlane,
+  faSailboat,
+  faUmbrellaBeach,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useState } from 'react';
 
 const HorizontalLine = () => {
   const icons = [
@@ -9,7 +16,7 @@ const HorizontalLine = () => {
     faSailboat,
     faUmbrellaBeach,
     faPersonRunning,
-    faBowlFood
+    faBowlFood,
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,7 +24,7 @@ const HorizontalLine = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev: number) => (prev + 1) % icons.length);
-    }, 1000);
+    }, 1500);
     return () => clearInterval(interval);
   }, [icons.length]);
 

@@ -1,8 +1,4 @@
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-} from 'react-leaflet';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import 'leaflet-providers';

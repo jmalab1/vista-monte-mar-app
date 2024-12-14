@@ -13,14 +13,18 @@ export const Hero = () => {
     <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pb-10 pt-10">
       <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
         <div className="lg:col-span-3">
-          <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-8xl text-center lg:text-left font-pacifico text-secondary">Welcome!</h1>
+          <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-8xl text-center lg:text-left font-pacifico text-secondary">
+            Welcome!
+          </h1>
           <Paragraph>
-            Welcome to Vista Monte Mar! Enjoy a cozy stay with modern amenities in a prime location. We look forward to hosting you!
+            Welcome to Vista Monte Mar! Enjoy a cozy stay with modern amenities
+            in a prime location. We look forward to hosting you!
           </Paragraph>
           <Link to="/gallery">
             <button className="btn btn-sm btn-secondary text-base-100">
               Want to see more photos?
-            </button></Link>
+            </button>
+          </Link>
         </div>
         <div className="lg:col-span-4 mt-10 lg:mt-0">
           <Carousel>

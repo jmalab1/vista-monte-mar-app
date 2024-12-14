@@ -33,44 +33,33 @@ import m2 from '/src/assets/misc/image (2).jpg?w=800&webp';
 import movie from '/src/assets/movie/Condo.mov?w=800&webp';
 
 export const GallerySection = () => {
-  const balcony = [
-    balcony1, balcony2, balcony3
-  ];
+  const balcony = [balcony1, balcony2, balcony3];
 
-  const living_room = [
-    lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8
-  ];
+  const living_room = [lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8];
 
-  const kitchen = [
-    k1, k2, k3, k4, k5
-  ];
+  const kitchen = [k1, k2, k3, k4, k5];
 
-  const bedrooms = [
-    br1, br2, br3, br4, br5
-  ];
+  const bedrooms = [br1, br2, br3, br4, br5];
 
-  const bathrooms = [
-    bt1, bt2, bt3
-  ];
+  const bathrooms = [bt1, bt2, bt3];
 
-  const nature = [
-    n1, n2, n3
-  ];
+  const nature = [n1, n2, n3];
 
-  const common = [
-    c1, c2
-  ];
+  const common = [c1, c2];
 
-  const misc = [
-    m1, m2
-  ];
+  const misc = [m1, m2];
 
   return (
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="gallery">
       <div className="mb-10 grid lg:ml-56 lg:mr-56">
         <SectionHeader title="Gallery" centerText={true}>
           <div className="mt-8 mb-8">
-            <video className="h-auto max-w-full rounded-lg" autoPlay controls loop>
+            <video
+              className="h-auto max-w-full rounded-lg"
+              autoPlay
+              controls
+              loop
+            >
               <source src={movie} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -80,7 +69,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {living_room.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
@@ -89,7 +82,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {balcony.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
@@ -98,7 +95,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {kitchen.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
@@ -107,7 +108,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {bedrooms.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
@@ -116,7 +121,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {bathrooms.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
@@ -125,7 +134,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {misc.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
@@ -134,7 +147,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {common.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
@@ -143,7 +160,11 @@ export const GallerySection = () => {
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {nature.map((image, index) => (
               <div className="break-inside-avoid mb-8">
-                <img className="h-auto max-w-full rounded-lg" src={image} alt={"image " + (index + 1)} />
+                <img
+                  className="h-auto max-w-full rounded-lg"
+                  src={image}
+                  alt={'image ' + (index + 1)}
+                />
               </div>
             ))}
           </div>
