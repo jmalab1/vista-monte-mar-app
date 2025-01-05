@@ -20,7 +20,7 @@ export const CheckoutSection = () => {
             ))}
           </div>
           <Paragraph>
-            Please leave us a review on Airbnb/VRBO. We hope you had a great
+            Please leave us a review on Airbnb. We hope you had a great
             experience at Vista Monte Mar and look forward to hosting you again
             soon. We strive to provide the best experience to our guests so if
             there is anything we can do better to make your stay more

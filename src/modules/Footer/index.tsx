@@ -1,5 +1,5 @@
 import AbbLogo from '../Logos/AbbLogo';
-import VrboLogo from '../Logos/VrboLogo';
+//import VrboLogo from '../Logos/VrboLogo';
 
 export const Footer = () => {
   return (
@@ -9,7 +9,7 @@ export const Footer = () => {
       </aside>
       <nav className="flex justify-self-end">
         <AbbLogo size={24} />
-        <VrboLogo size={24} />
+        {/* <VrboLogo size={24} /> */}
       </nav>
     </footer>
   );

@@ -133,7 +133,7 @@ export const JacoBeachSection = () => {
             </p>
             <div className="flex gap-6 text-white justify-center">
               <AbbLogo size={40} />
-              <VrboLogo size={40} />
+              {/* <VrboLogo size={40} /> */}
             </div>
           </CardBody>
         </Card>
