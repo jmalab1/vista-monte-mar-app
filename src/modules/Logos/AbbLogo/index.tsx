@@ -7,7 +7,7 @@ type TLogos = {
 export const AbbLogo: FunctionComponent<TLogos> = ({ size }) => {
   return (
     <>
-      <a href="https://www.airbnb.com/" target="_blank">
+      <a href="https://www.airbnb.com/l/CdacQQqk" target="_blank">
         <svg
           width={size}
           height={size}
