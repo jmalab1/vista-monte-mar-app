@@ -8,6 +8,7 @@ import NotFound from './components/NotFound';
 import Directions from './pages/Directions';
 import Arrival from './pages/Arrival';
 import Checkout from './pages/Checkout';
+import Inventory from './pages/Inventory';
 import './index.css';
 import Gallery from './pages/Gallery';
 import ScrollToTop from 'react-scroll-up';
@@ -31,6 +32,7 @@ const App = () => {
             <Route path="/arrival" element={<Arrival />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/inventory" element={<Inventory />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

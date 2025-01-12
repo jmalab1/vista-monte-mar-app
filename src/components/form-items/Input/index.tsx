@@ -5,7 +5,7 @@ type TInput = {
   id: string;
   placeholder?: string;
   required?: boolean;
-  type: 'password' | 'text' | 'email' | 'tel';
+  type: 'password' | 'text' | 'email' | 'tel' | 'number';
   callback: ChangeEventHandler;
   value: string;
 };
