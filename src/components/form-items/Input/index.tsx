@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FunctionComponent } from 'react';
 
 type TInput = {
-  title: string;
+  title?: string;
   id: string;
   placeholder?: string;
   required?: boolean;
@@ -21,10 +21,12 @@ const Input: FunctionComponent<TInput> = ({
 }) => {
   return (
     <label className="form-control sm:col-span-3">
-      <div className="label">
-        <span className="label-text">{title}</span>
-        <span className="label-text-alt"></span>
-      </div>
+      {title && (
+        <div className="label">
+          <span className="label-text">{title}</span>
+          <span className="label-text-alt"></span>
+        </div>
+      )}
       <input
         type={type}
         id={id}
