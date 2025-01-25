@@ -6,6 +6,7 @@ type TTextArea = {
   placeholder: string;
   callback: ChangeEventHandler;
   value: string;
+  required?: boolean;
 };
 
 const TextArea: FunctionComponent<TTextArea> = ({
@@ -14,6 +15,7 @@ const TextArea: FunctionComponent<TTextArea> = ({
   placeholder,
   callback,
   value,
+  required = false
 }) => {
   return (
     <label className="form-control col-span-full">
@@ -28,6 +30,7 @@ const TextArea: FunctionComponent<TTextArea> = ({
         placeholder={placeholder}
         onChange={callback}
         value={value}
+        required={required}
       />
       <div className="label">
         <span className="label-text-alt"></span>

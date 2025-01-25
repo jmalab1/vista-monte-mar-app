@@ -7,9 +7,12 @@ import axios from 'axios';
 import Modal from '../../components/Modal';
 
 const ContactForm = () => {
-  const [showModal, setShowModal] = useState(false);
+  const modalDefault = {
+    title: "",
+    text: ""
+  };
+  const [modalValues, setModalValues] = useState(modalDefault);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [formValues, setFormValues] = useState({
     firstname: '',
     lastname: '',
@@ -35,11 +38,24 @@ const ContactForm = () => {
       .post('/api/send-email', formValues)
       .then((response) => {
         if (response.status === 200) {
-          setShowModal(true);
+          setModalValues({
+            title: "We've got your message",
+            text: "Thank you for time!"
+          });
         }
       })
-      .catch(() => {
-        setError(true);
+      .catch(error => {
+        if (error.response && error.response.status === 429) {
+          setModalValues({
+            title: "Uh Oh!",
+            text: "The limit to sending a message has been reached. Please Try again later."
+          });
+        } else {
+          setModalValues({
+            title: "Uh Oh!",
+            text: "We've hit a snag, try again some other time!"
+          });
+        }
       })
       .finally(() => {
         // Always run cleanup code, stop loading spinner
@@ -56,7 +72,7 @@ const ContactForm = () => {
   };
 
   const modalCallbackHandler = () => {
-    setShowModal(false);
+    setModalValues(modalDefault);
   };
 
   return (
@@ -103,6 +119,7 @@ const ContactForm = () => {
                 id="comment"
                 placeholder="Let us know what you think"
                 callback={handleChange}
+                required={true}
                 value={formValues.comment}
               />
             </div>
@@ -115,18 +132,11 @@ const ContactForm = () => {
           <ButtonItem title="submit" classValue="btn-secondary" type="submit" />
         </div>
       </form>
-      {error ? (
+      {modalValues.title != "" && (
         <Modal
-          showModal={showModal}
-          title="Uh Oh!"
-          text="We've hit a snag, try again some other time!"
-          callback={modalCallbackHandler}
-        />
-      ) : (
-        <Modal
-          showModal={showModal}
-          title="We've got your message"
-          text="Thank you for time!"
+          showModal={true}
+          title={modalValues.title}
+          text={modalValues.text}
           callback={modalCallbackHandler}
         />
       )}
