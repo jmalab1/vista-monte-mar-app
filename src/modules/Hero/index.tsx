@@ -10,7 +10,7 @@ import { shuffle } from 'lodash';
 
 export const Hero = () => {
   const [mounted, setMounted] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{ src: string; caption: string } | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [originData, setOriginData] = useState<{ x: number; y: number; rotation: number } | null>(null);
@@ -18,10 +18,18 @@ export const Hero = () => {
 
   const polaroidRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const images = useMemo(() => shuffle([jacosign, lr1, k1, k2, pool]), []);
+  const rawImages = [
+    { src: jacosign, caption: 'Jaco Beach' },
+    { src: lr1, caption: 'Cozy Living Room' },
+    { src: k1, caption: 'Modern Kitchen' },
+    { src: k2, caption: 'Cooking with a View' },
+    { src: pool, caption: 'Relaxing Pool' },
+  ];
+
+  const images = useMemo(() => shuffle(rawImages), []);
 
   const polaroids = useMemo(() => {
-    return images.map((img, index) => {
+    return images.map((item, index) => {
       // Zig-zag pattern for vertical position to minimize overlap
       // Even indices: Top 0-10%
       // Odd indices: Top 40-50%
@@ -40,14 +48,14 @@ export const Hero = () => {
       const delay = index * 800;
 
       return {
-        img,
+        ...item,
         top: `${randomTop}%`,
         left: `${Math.max(0, Math.min(90, randomLeft))}%`, // Clamp between 0 and 90%
         rotation,
         delay,
       };
     });
-  }, []);
+  }, [images]);
 
   useEffect(() => {
     // Small delay to ensure initial state (opacity 0, etc.) is painted before animating
@@ -77,7 +85,7 @@ export const Hero = () => {
 
     setOriginData({ x: centerX, y: centerY, rotation });
     setSelectedIndex(index);
-    setSelectedImage(polaroids[index].img);
+    setSelectedImage({ src: polaroids[index].src, caption: polaroids[index].caption });
 
     // Use requestAnimationFrame to ensure the modal renders in the "closed" state (at origin) first
     requestAnimationFrame(() => {
@@ -149,14 +157,17 @@ export const Hero = () => {
             >
               <div
                 ref={(el) => (polaroidRefs.current[index] = el)}
-                className="bg-white p-3 pb-10 shadow-xl rounded-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-0 cursor-pointer min-w-[16rem]"
+                className="bg-white p-3 pb-12 shadow-xl rounded-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-0 cursor-pointer min-w-[16rem]"
                 onClick={() => handleImageClick(index)}
               >
                 <img
-                  src={polaroid.img}
-                  alt={`Polaroid ${index + 1}`}
+                  src={polaroid.src}
+                  alt={polaroid.caption}
                   className="w-64 h-64 object-cover max-w-none"
                 />
+                <p className="font-pacifico text-gray-700 text-center mt-3 text-xl transform -rotate-2 opacity-90">
+                  {polaroid.caption}
+                </p>
               </div>
             </div>
           ))}
@@ -164,13 +175,16 @@ export const Hero = () => {
 
         {/* Mobile Fallback - Carousel */}
         <div className="lg:hidden mt-10 carousel carousel-center w-full p-4 space-x-4 bg-transparent rounded-box">
-          {images.map((img, index) => (
-            <div key={index} className="carousel-item">
+          {images.map((item, index) => (
+            <div key={index} className="carousel-item flex flex-col items-center bg-white p-2 pb-8 rounded-sm shadow-lg">
               <img
-                src={img}
-                alt={`Mobile Polaroid ${index + 1}`}
-                className="rounded-box w-64 aspect-square object-cover shadow-lg"
+                src={item.src}
+                alt={item.caption}
+                className="w-64 aspect-square object-cover"
               />
+              <p className="font-pacifico text-gray-700 text-center mt-2 text-lg transform -rotate-1">
+                {item.caption}
+              </p>
             </div>
           ))}
         </div>
@@ -192,7 +206,7 @@ export const Hero = () => {
             top: isModalVisible ? '50%' : `${originData.y}px`,
             left: isModalVisible ? '50%' : `${originData.x}px`,
             width: isModalVisible ? 'min(90vw, 600px)' : '17.5rem', // 16rem + padding
-            height: isModalVisible ? 'auto' : '19.25rem', // 16rem + padding
+            height: isModalVisible ? 'auto' : '20rem', // Match polaroid height
             transform: `translate(-50%, -50%) rotate(${isModalVisible ? 0 : originData.rotation}deg)`,
             transition: 'all 500ms cubic-bezier(0.34, 1.56, 0.64, 1)', // Bouncy effect
           }}
@@ -205,10 +219,13 @@ export const Hero = () => {
               &times;
             </button>
           <img
-            src={selectedImage}
+            src={selectedImage.src}
             alt="Full size"
-            className="w-full h-full object-cover"
+            className="w-full h-auto object-cover max-h-[80vh]"
           />
+          <p className={`font-pacifico text-gray-700 text-center mt-4 text-3xl transform -rotate-1 transition-opacity duration-500 ${isModalVisible ? 'opacity-100' : 'opacity-0'}`}>
+            {selectedImage.caption}
+          </p>
         </div>
       )}
     </div>
