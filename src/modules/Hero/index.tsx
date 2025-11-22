@@ -161,15 +161,15 @@ export const Hero = () => {
           ))}
         </div>
 
-        {/* Mobile Fallback */}
-        <div className="lg:hidden mt-10 grid grid-cols-1 gap-8">
-          {images.slice(0, 2).map((img, index) => (
-             <div
-               key={index}
-               className={`bg-white p-3 pb-10 shadow-xl rounded-sm transform ${index % 2 === 0 ? '-rotate-2' : 'rotate-1'}`}
-               onClick={() => handleImageClick(index)}
-             >
-              <img src={img} alt="Mobile Polaroid" className="w-full aspect-square object-cover block" />
+        {/* Mobile Fallback - Carousel */}
+        <div className="lg:hidden mt-10 carousel carousel-center w-full p-4 space-x-4 bg-transparent rounded-box">
+          {images.map((img, index) => (
+            <div key={index} className="carousel-item">
+              <img
+                src={img}
+                alt={`Mobile Polaroid ${index + 1}`}
+                className="rounded-box w-64 aspect-square object-cover shadow-lg"
+              />
             </div>
           ))}
         </div>
