@@ -36,7 +36,7 @@ export const Hero = () => {
       const rotation = Math.random() * 40 - 20;
 
       // Random delay
-      const delay = index * 150 + Math.random() * 100;
+      const delay = index * 800;
 
       return {
         img,
@@ -49,12 +49,20 @@ export const Hero = () => {
   }, []);
 
   useEffect(() => {
-    setMounted(true);
+    // Small delay to ensure initial state (opacity 0, etc.) is painted before animating
+    const mountTimer = setTimeout(() => {
+      setMounted(true);
+    }, 100);
+
     // Disable the slow transition after the initial animation is done
-    const timer = setTimeout(() => {
+    const completeTimer = setTimeout(() => {
       setAnimationsCompleted(true);
-    }, 2000);
-    return () => clearTimeout(timer);
+    }, 5000);
+
+    return () => {
+      clearTimeout(mountTimer);
+      clearTimeout(completeTimer);
+    };
   }, []);
 
   const handleImageClick = (index: number) => {
@@ -124,12 +132,13 @@ export const Hero = () => {
           {polaroids.map((polaroid, index) => (
             <div
               key={index}
-              className={`absolute hover:z-50 ${!animationsCompleted ? 'transition-all duration-1000 ease-out' : ''}`}
+              className="absolute hover:z-50"
               style={{
                 top: polaroid.top,
                 left: polaroid.left,
-                transitionDelay: !animationsCompleted ? `${polaroid.delay}ms` : '0ms',
-                transition: !animationsCompleted ? undefined : 'none',
+                transition: !animationsCompleted
+                  ? `all 1000ms ease-out ${polaroid.delay}ms`
+                  : 'none',
                 transform: mounted
                   ? `rotate(${polaroid.rotation}deg) scale(1) translateY(0)`
                   : `rotate(${polaroid.rotation}deg) scale(1.5) translateY(-100px)`,
