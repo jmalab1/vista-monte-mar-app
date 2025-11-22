@@ -13,6 +13,7 @@ export const Hero = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [originData, setOriginData] = useState<{ x: number; y: number; rotation: number } | null>(null);
+  const [animationsCompleted, setAnimationsCompleted] = useState(false);
 
   const polaroidRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -49,6 +50,11 @@ export const Hero = () => {
 
   useEffect(() => {
     setMounted(true);
+    // Disable the slow transition after the initial animation is done
+    const timer = setTimeout(() => {
+      setAnimationsCompleted(true);
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleImageClick = (index: number) => {
@@ -118,11 +124,12 @@ export const Hero = () => {
           {polaroids.map((polaroid, index) => (
             <div
               key={index}
-              className="absolute transition-all duration-1000 ease-out hover:z-50"
+              className={`absolute hover:z-50 ${!animationsCompleted ? 'transition-all duration-1000 ease-out' : ''}`}
               style={{
                 top: polaroid.top,
                 left: polaroid.left,
-                transitionDelay: `${polaroid.delay}ms`,
+                transitionDelay: !animationsCompleted ? `${polaroid.delay}ms` : '0ms',
+                transition: !animationsCompleted ? undefined : 'none',
                 transform: mounted
                   ? `rotate(${polaroid.rotation}deg) scale(1) translateY(0)`
                   : `rotate(${polaroid.rotation}deg) scale(1.5) translateY(-100px)`,
