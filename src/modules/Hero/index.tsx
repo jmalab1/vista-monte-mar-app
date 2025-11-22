@@ -6,6 +6,7 @@ import pool from '../../assets/common/image (2).jpg?w=1200&webp';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useMemo, useRef } from 'react';
+import { shuffle } from 'lodash';
 
 export const Hero = () => {
   const [mounted, setMounted] = useState(false);
@@ -17,7 +18,7 @@ export const Hero = () => {
 
   const polaroidRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const images = [jacosign, lr1, k1, k2, pool];
+  const images = useMemo(() => shuffle([jacosign, lr1, k1, k2, pool]), []);
 
   const polaroids = useMemo(() => {
     return images.map((img, index) => {
