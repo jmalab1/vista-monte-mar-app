@@ -180,7 +180,7 @@ export const Hero = () => {
             >
               <div
                 ref={(el) => (polaroidRefs.current[index] = el)}
-                className="bg-white p-3 pb-12 shadow-xl rounded-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-0 cursor-pointer min-w-[16rem]"
+                className="bg-[#fdfbf7] border border-gray-200 p-3 pb-12 shadow-xl rounded-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-0 cursor-pointer min-w-[16rem]"
                 onClick={() => handleImageClick(index)}
               >
                 <img
@@ -199,7 +199,7 @@ export const Hero = () => {
         {/* Mobile Fallback - Carousel */}
         <div className="lg:hidden mt-10 carousel carousel-center w-full p-4 space-x-4 bg-transparent rounded-box">
           {images.map((item, index) => (
-            <div key={index} className="carousel-item flex flex-col items-center bg-white p-2 pb-8 rounded-sm shadow-lg">
+            <div key={index} className="carousel-item flex flex-col items-center bg-[#fdfbf7] border border-gray-200 p-2 pb-8 rounded-sm shadow-lg">
               <img
                 src={item.src}
                 alt={item.caption}
@@ -224,7 +224,7 @@ export const Hero = () => {
       {/* Animated Polaroid Modal */}
       {selectedImage && originData && (
         <div
-          className="fixed z-[100] bg-white p-3 pb-12 shadow-2xl rounded-sm cursor-pointer overflow-hidden"
+          className="fixed z-[100] bg-[#fdfbf7] border border-gray-200 p-3 pb-12 shadow-2xl rounded-sm cursor-pointer overflow-hidden"
           style={{
             top: isModalVisible ? '50%' : `${originData.y}px`,
             left: isModalVisible ? '50%' : `${originData.x}px`,
