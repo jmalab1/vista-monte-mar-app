@@ -84,9 +84,9 @@ export const Hero = () => {
       const maxWidth = 600;
       const targetWidth = Math.min(viewportWidth * 0.9, maxWidth);
 
-      // Polaroid ratio: Width = 17.5rem, Height = 22rem (approx)
-      // Ratio = 22 / 17.5 = 1.257
-      const ratio = 22 / 17.5;
+      // Polaroid ratio: Width = 17.5rem, Height = 20rem (approx)
+      // Ratio = 20 / 17.5 = 1.1428
+      const ratio = 20 / 17.5;
       const targetHeight = targetWidth * ratio;
 
       setExpandedHeight(targetHeight);
@@ -180,14 +180,17 @@ export const Hero = () => {
             >
               <div
                 ref={(el) => (polaroidRefs.current[index] = el)}
-                className="bg-[#fdfbf7] border border-gray-200 p-3 pb-12 shadow-xl rounded-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-0 cursor-pointer min-w-[16rem]"
+                className="polaroid-texture polaroid-shadow border border-gray-200 p-3 pb-12 rounded-sm transform transition-transform duration-300 hover:scale-110 hover:rotate-0 cursor-pointer min-w-[16rem]"
                 onClick={() => handleImageClick(index)}
               >
-                <img
-                  src={polaroid.src}
-                  alt={polaroid.caption}
-                  className="w-64 h-64 object-cover max-w-none"
-                />
+                <div className="relative">
+                  <img
+                    src={polaroid.src}
+                    alt={polaroid.caption}
+                    className="w-64 h-64 object-cover max-w-none"
+                  />
+                  <div className="absolute inset-0 polaroid-img-shadow pointer-events-none"></div>
+                </div>
                 <p className="font-pacifico text-gray-700 text-center mt-3 text-xl transform -rotate-2 opacity-90 whitespace-nowrap">
                   {polaroid.caption}
                 </p>
@@ -199,12 +202,15 @@ export const Hero = () => {
         {/* Mobile Fallback - Carousel */}
         <div className="lg:hidden mt-10 carousel carousel-center w-full p-4 space-x-4 bg-transparent rounded-box">
           {images.map((item, index) => (
-            <div key={index} className="carousel-item flex flex-col items-center bg-[#fdfbf7] border border-gray-200 p-2 pb-8 rounded-sm shadow-lg">
-              <img
-                src={item.src}
-                alt={item.caption}
-                className="w-64 aspect-square object-cover"
-              />
+            <div key={index} className="carousel-item flex flex-col items-center polaroid-texture polaroid-shadow border border-gray-200 p-2 pb-8 rounded-sm">
+              <div className="relative">
+                <img
+                  src={item.src}
+                  alt={item.caption}
+                  className="w-64 aspect-square object-cover"
+                />
+                <div className="absolute inset-0 polaroid-img-shadow pointer-events-none"></div>
+              </div>
               <p className="font-pacifico text-gray-700 text-center mt-2 text-lg transform -rotate-1 whitespace-nowrap">
                 {item.caption}
               </p>
@@ -224,7 +230,7 @@ export const Hero = () => {
       {/* Animated Polaroid Modal */}
       {selectedImage && originData && (
         <div
-          className="fixed z-[100] bg-[#fdfbf7] border border-gray-200 p-3 pb-12 shadow-2xl rounded-sm cursor-pointer overflow-hidden"
+          className="fixed z-[100] polaroid-texture polaroid-shadow border border-gray-200 p-3 pb-12 rounded-sm cursor-pointer overflow-hidden"
           style={{
             top: isModalVisible ? '50%' : `${originData.y}px`,
             left: isModalVisible ? '50%' : `${originData.x}px`,
@@ -241,11 +247,14 @@ export const Hero = () => {
             >
               &times;
             </button>
-          <img
-            src={selectedImage.src}
-            alt="Full size"
-            className="w-full aspect-square object-cover"
-          />
+          <div className="relative w-full aspect-square">
+            <img
+              src={selectedImage.src}
+              alt="Full size"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 polaroid-img-shadow pointer-events-none"></div>
+          </div>
           <p
             className={`font-pacifico text-gray-700 text-center mt-3 transform -rotate-1 ${isModalVisible ? 'text-3xl' : 'text-xl'}`}
             style={{ transition: 'all 500ms cubic-bezier(0.34, 1.1, 0.64, 1)' }}
