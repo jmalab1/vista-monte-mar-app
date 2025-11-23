@@ -15,8 +15,11 @@ export const Hero = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [originData, setOriginData] = useState<{ x: number; y: number; rotation: number } | null>(null);
   const [animationsCompleted, setAnimationsCompleted] = useState(false);
+  const [zIndexes, setZIndexes] = useState<number[]>([10, 11, 12, 13, 14]);
+  const [expandedHeight, setExpandedHeight] = useState<number | null>(null);
 
   const polaroidRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const ghostRef = useRef<HTMLDivElement>(null);
 
   const rawImages = [
     { src: jacosign, caption: 'Jaco Beach' },
@@ -74,9 +77,35 @@ export const Hero = () => {
     };
   }, []);
 
+  // Calculate target height based on polaroid aspect ratio
+  useEffect(() => {
+    if (selectedImage) {
+      const viewportWidth = window.innerWidth;
+      const maxWidth = 600;
+      const targetWidth = Math.min(viewportWidth * 0.9, maxWidth);
+
+      // Polaroid ratio: Width = 17.5rem, Height = 22rem (approx)
+      // Ratio = 22 / 17.5 = 1.257
+      const ratio = 22 / 17.5;
+      const targetHeight = targetWidth * ratio;
+
+      setExpandedHeight(targetHeight);
+
+      requestAnimationFrame(() => {
+        setIsModalVisible(true);
+      });
+    }
+  }, [selectedImage]);
+
   const handleImageClick = (index: number) => {
     const el = polaroidRefs.current[index];
     if (!el) return;
+
+    // Update z-index to be on top
+    const maxZ = Math.max(...zIndexes);
+    const newZIndexes = [...zIndexes];
+    newZIndexes[index] = maxZ + 1;
+    setZIndexes(newZIndexes);
 
     const rect = el.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -86,14 +115,7 @@ export const Hero = () => {
     setOriginData({ x: centerX, y: centerY, rotation });
     setSelectedIndex(index);
     setSelectedImage({ src: polaroids[index].src, caption: polaroids[index].caption });
-
-    // Use requestAnimationFrame to ensure the modal renders in the "closed" state (at origin) first
-    requestAnimationFrame(() => {
-      // Double RAF to ensure layout is calculated
-      requestAnimationFrame(() => {
-        setIsModalVisible(true);
-      });
-    });
+    // isModalVisible will be set in the useEffect
   };
 
   const closeModal = () => {
@@ -117,6 +139,7 @@ export const Hero = () => {
       setSelectedImage(null);
       setSelectedIndex(null);
       setOriginData(null);
+      setExpandedHeight(null);
     }, 500);
   };
 
@@ -152,7 +175,7 @@ export const Hero = () => {
                   ? `rotate(${polaroid.rotation}deg) scale(1) translateY(0)`
                   : `rotate(${polaroid.rotation}deg) scale(1.5) translateY(-100px)`,
                 opacity: mounted && index !== selectedIndex ? 1 : 0, // Hide if selected
-                zIndex: index + 10,
+                zIndex: zIndexes[index],
               }}
             >
               <div
@@ -165,7 +188,7 @@ export const Hero = () => {
                   alt={polaroid.caption}
                   className="w-64 h-64 object-cover max-w-none"
                 />
-                <p className="font-pacifico text-gray-700 text-center mt-3 text-xl transform -rotate-2 opacity-90">
+                <p className="font-pacifico text-gray-700 text-center mt-3 text-xl transform -rotate-2 opacity-90 whitespace-nowrap">
                   {polaroid.caption}
                 </p>
               </div>
@@ -182,7 +205,7 @@ export const Hero = () => {
                 alt={item.caption}
                 className="w-64 aspect-square object-cover"
               />
-              <p className="font-pacifico text-gray-700 text-center mt-2 text-lg transform -rotate-1">
+              <p className="font-pacifico text-gray-700 text-center mt-2 text-lg transform -rotate-1 whitespace-nowrap">
                 {item.caption}
               </p>
             </div>
@@ -201,14 +224,14 @@ export const Hero = () => {
       {/* Animated Polaroid Modal */}
       {selectedImage && originData && (
         <div
-          className="fixed z-[100] bg-white p-3 pb-10 shadow-2xl rounded-sm cursor-pointer overflow-hidden"
+          className="fixed z-[100] bg-white p-3 pb-12 shadow-2xl rounded-sm cursor-pointer overflow-hidden"
           style={{
             top: isModalVisible ? '50%' : `${originData.y}px`,
             left: isModalVisible ? '50%' : `${originData.x}px`,
             width: isModalVisible ? 'min(90vw, 600px)' : '17.5rem', // 16rem + padding
-            height: isModalVisible ? 'auto' : '20rem', // Match polaroid height
+            height: isModalVisible && expandedHeight ? `${expandedHeight}px` : '22rem', // Animate to measured height
             transform: `translate(-50%, -50%) rotate(${isModalVisible ? 0 : originData.rotation}deg)`,
-            transition: 'all 500ms cubic-bezier(0.34, 1.56, 0.64, 1)', // Bouncy effect
+            transition: 'all 500ms cubic-bezier(0.34, 1.1, 0.64, 1)', // Reduced bounce effect
           }}
           onClick={closeModal}
         >
@@ -221,9 +244,9 @@ export const Hero = () => {
           <img
             src={selectedImage.src}
             alt="Full size"
-            className="w-full h-auto object-cover max-h-[80vh]"
+            className="w-full aspect-square object-cover"
           />
-          <p className={`font-pacifico text-gray-700 text-center mt-4 text-3xl transform -rotate-1 transition-opacity duration-500 ${isModalVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <p className="font-pacifico text-gray-700 text-center mt-3 text-3xl transform -rotate-1">
             {selectedImage.caption}
           </p>
         </div>
