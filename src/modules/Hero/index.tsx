@@ -246,7 +246,10 @@ export const Hero = () => {
             alt="Full size"
             className="w-full aspect-square object-cover"
           />
-          <p className="font-pacifico text-gray-700 text-center mt-3 text-3xl transform -rotate-1">
+          <p
+            className={`font-pacifico text-gray-700 text-center mt-3 transform -rotate-1 ${isModalVisible ? 'text-3xl' : 'text-xl'}`}
+            style={{ transition: 'all 500ms cubic-bezier(0.34, 1.1, 0.64, 1)' }}
+          >
             {selectedImage.caption}
           </p>
         </div>
