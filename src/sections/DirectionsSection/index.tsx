@@ -4,6 +4,7 @@ import SectionHeader from '../../components/heading/SectionHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiamondTurnRight } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@material-tailwind/react';
+import MapboxMap from '../../components/MapboxMap';
 
 export const DirectionsSection = () => {
   return (
@@ -41,6 +42,12 @@ export const DirectionsSection = () => {
                   <span>Directions</span>
                 </Link>
               </Button>
+              <div className="mt-10">
+                <MapboxMap
+                  coordinates={[-84.20408, 9.99805]}
+                  name="SJO Airport"
+                />
+              </div>
             </SectionHeader>
             <SectionHeader
               title="Navigation"
