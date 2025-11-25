@@ -82,7 +82,7 @@ const MapboxMap: FunctionComponent<TMapboxMap> = ({ coordinates, name }) => {
   }, [latLon]);
 
   return (
-    <div className="rounded-lg shadow-lg relative mb-5 z-0">
+    <div className="rounded-xl overflow-hidden shadow-lg relative mb-5 z-0">
       <MapContainer
         center={latLon}
         zoom={14}

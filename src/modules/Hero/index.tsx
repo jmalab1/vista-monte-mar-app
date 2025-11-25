@@ -19,7 +19,6 @@ export const Hero = () => {
   const [expandedHeight, setExpandedHeight] = useState<number | null>(null);
 
   const polaroidRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const ghostRef = useRef<HTMLDivElement>(null);
 
   const rawImages = [
     { src: jacosign, caption: 'Jaco Beach' },
@@ -241,12 +240,12 @@ export const Hero = () => {
           }}
           onClick={closeModal}
         >
-           <button
-              className={`absolute top-2 right-2 text-gray-800 text-2xl font-bold z-10 transition-opacity duration-300 ${isModalVisible ? 'opacity-100' : 'opacity-0'}`}
-              onClick={(e) => { e.stopPropagation(); closeModal(); }}
-            >
-              &times;
-            </button>
+          <button
+            className={`absolute top-2 right-2 text-gray-800 text-2xl font-bold z-10 transition-opacity duration-300 ${isModalVisible ? 'opacity-100' : 'opacity-0'}`}
+            onClick={(e) => { e.stopPropagation(); closeModal(); }}
+          >
+            &times;
+          </button>
           <div className="relative w-full aspect-square">
             <img
               src={selectedImage.src}
