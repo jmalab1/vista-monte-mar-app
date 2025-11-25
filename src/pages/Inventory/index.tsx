@@ -164,7 +164,8 @@ const inventoryNote: Record<string, string> = Object.keys(inventory).reduce(
 );
 
 const Inventory = () => {
-  const [inventoryCountValues, setInventoryCountValues] = useState(inventoryCount);
+  const [inventoryCountValues, setInventoryCountValues] =
+    useState(inventoryCount);
   const [inventoryNoteValues, setInventoryNoteValues] = useState(inventoryNote);
 
   const handleCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {

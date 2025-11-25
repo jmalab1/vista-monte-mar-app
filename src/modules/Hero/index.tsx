@@ -7,13 +7,21 @@ import Paragraph from '../../components/ElementWrapper/Paragraph';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { shuffle } from 'lodash';
+import InfiniteCarousel from '../../components/InfiniteCarousel';
 
 export const Hero = () => {
   const [mounted, setMounted] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<{ src: string; caption: string } | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string;
+    caption: string;
+  } | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [originData, setOriginData] = useState<{ x: number; y: number; rotation: number } | null>(null);
+  const [originData, setOriginData] = useState<{
+    x: number;
+    y: number;
+    rotation: number;
+  } | null>(null);
   const [animationsCompleted, setAnimationsCompleted] = useState(false);
   const [zIndexes, setZIndexes] = useState<number[]>([10, 11, 12, 13, 14]);
   const [expandedHeight, setExpandedHeight] = useState<number | null>(null);
@@ -113,7 +121,10 @@ export const Hero = () => {
 
     setOriginData({ x: centerX, y: centerY, rotation });
     setSelectedIndex(index);
-    setSelectedImage({ src: polaroids[index].src, caption: polaroids[index].caption });
+    setSelectedImage({
+      src: polaroids[index].src,
+      caption: polaroids[index].caption,
+    });
     // isModalVisible will be set in the useEffect
   };
 
@@ -199,23 +210,26 @@ export const Hero = () => {
         </div>
 
         {/* Mobile Fallback - Carousel */}
-        <div className="lg:hidden mt-10 carousel carousel-center w-full p-4 space-x-4 bg-transparent rounded-box">
-          {images.map((item, index) => (
-            <div key={index} className="carousel-item flex flex-col items-center polaroid-texture polaroid-shadow bg-[#fdfbf7] border border-gray-200 p-2 pb-8 rounded-sm">
+        <InfiniteCarousel className="lg:hidden mt-10">
+          {[...images, ...images, ...images, ...images].map((item, index) => (
+            <div
+              key={`${index}-${item.caption}`}
+              className="carousel-item flex flex-col items-center polaroid-texture polaroid-shadow bg-[#fdfbf7] border border-gray-200 p-2 pb-8 rounded-sm min-w-[18rem]"
+            >
               <div className="relative">
                 <img
                   src={item.src}
                   alt={item.caption}
-                  className="w-64 aspect-square object-cover"
+                  className="w-64 aspect-square object-cover pointer-events-none"
                 />
                 <div className="absolute inset-0 polaroid-img-shadow pointer-events-none"></div>
               </div>
-              <p className="font-pacifico text-gray-700 text-center mt-2 text-lg transform -rotate-1 whitespace-nowrap">
+              <p className="font-pacifico text-gray-700 text-center mt-2 text-lg transform -rotate-1 whitespace-nowrap pointer-events-none">
                 {item.caption}
               </p>
             </div>
           ))}
-        </div>
+        </InfiniteCarousel>
       </div>
 
       {/* Modal Backdrop */}
@@ -234,7 +248,10 @@ export const Hero = () => {
             top: isModalVisible ? '50%' : `${originData.y}px`,
             left: isModalVisible ? '50%' : `${originData.x}px`,
             width: isModalVisible ? 'min(90vw, 600px)' : '17.5rem', // 16rem + padding
-            height: isModalVisible && expandedHeight ? `${expandedHeight}px` : '22rem', // Animate to measured height
+            height:
+              isModalVisible && expandedHeight
+                ? `${expandedHeight}px`
+                : '22rem', // Animate to measured height
             transform: `translate(-50%, -50%) rotate(${isModalVisible ? 0 : originData.rotation}deg)`,
             transition: 'all 500ms cubic-bezier(0.34, 1.1, 0.64, 1)', // Reduced bounce effect
           }}
@@ -242,7 +259,10 @@ export const Hero = () => {
         >
           <button
             className={`absolute top-2 right-2 text-gray-800 text-2xl font-bold z-10 transition-opacity duration-300 ${isModalVisible ? 'opacity-100' : 'opacity-0'}`}
-            onClick={(e) => { e.stopPropagation(); closeModal(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeModal();
+            }}
           >
             &times;
           </button>

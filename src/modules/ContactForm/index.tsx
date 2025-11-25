@@ -8,8 +8,8 @@ import Modal from '../../components/Modal';
 
 const ContactForm = () => {
   const modalDefault = {
-    title: "",
-    text: ""
+    title: '',
+    text: '',
   };
   const [modalValues, setModalValues] = useState(modalDefault);
   const [loading, setLoading] = useState(false);
@@ -40,20 +40,20 @@ const ContactForm = () => {
         if (response.status === 200) {
           setModalValues({
             title: "We've got your message",
-            text: "Thank you for time!"
+            text: 'Thank you for time!',
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 429) {
           setModalValues({
-            title: "Uh Oh!",
-            text: "The limit to sending a message has been reached. Please Try again later."
+            title: 'Uh Oh!',
+            text: 'The limit to sending a message has been reached. Please Try again later.',
           });
         } else {
           setModalValues({
-            title: "Uh Oh!",
-            text: "We've hit a snag, try again some other time!"
+            title: 'Uh Oh!',
+            text: "We've hit a snag, try again some other time!",
           });
         }
       })
@@ -132,7 +132,7 @@ const ContactForm = () => {
           <ButtonItem title="submit" classValue="btn-secondary" type="submit" />
         </div>
       </form>
-      {modalValues.title != "" && (
+      {modalValues.title != '' && (
         <Modal
           showModal={true}
           title={modalValues.title}

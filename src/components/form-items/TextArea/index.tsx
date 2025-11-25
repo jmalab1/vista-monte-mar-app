@@ -15,7 +15,7 @@ const TextArea: FunctionComponent<TTextArea> = ({
   placeholder,
   callback,
   value,
-  required = false
+  required = false,
 }) => {
   return (
     <label className="form-control col-span-full">
