@@ -1,8 +1,13 @@
 import jacosign from '../../assets/nature/image (1).jpg?w=1200&webp';
+import jacosignThumb from '../../assets/nature/image (1).jpg?w=400&webp';
 import lr1 from '../../assets/living_room/image (3).jpg?w=1200&webp';
+import lr1Thumb from '../../assets/living_room/image (3).jpg?w=400&webp';
 import k1 from '../../assets/kitchen/image (5).jpg?w=1200&webp';
+import k1Thumb from '../../assets/kitchen/image (5).jpg?w=400&webp';
 import k2 from '../../assets/kitchen/image (4).jpg?w=1200&webp';
+import k2Thumb from '../../assets/kitchen/image (4).jpg?w=400&webp';
 import pool from '../../assets/common/image (2).jpg?w=1200&webp';
+import poolThumb from '../../assets/common/image (2).jpg?w=400&webp';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useMemo, useRef } from 'react';
@@ -29,11 +34,11 @@ export const Hero = () => {
   const polaroidRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const rawImages = [
-    { src: jacosign, caption: 'Jaco Beach' },
-    { src: lr1, caption: 'Cozy Living Room' },
-    { src: k1, caption: 'Modern Kitchen' },
-    { src: k2, caption: 'Cooking with a View' },
-    { src: pool, caption: 'Relaxing Pool' },
+    { src: jacosign, thumbnail: jacosignThumb, caption: 'Jaco Beach' },
+    { src: lr1, thumbnail: lr1Thumb, caption: 'Cozy Living Room' },
+    { src: k1, thumbnail: k1Thumb, caption: 'Modern Kitchen' },
+    { src: k2, thumbnail: k2Thumb, caption: 'Cooking with a View' },
+    { src: pool, thumbnail: poolThumb, caption: 'Relaxing Pool' },
   ];
 
   const images = useMemo(() => shuffle(rawImages), []);
@@ -179,13 +184,14 @@ export const Hero = () => {
                 top: polaroid.top,
                 left: polaroid.left,
                 transition: !animationsCompleted
-                  ? `all 1000ms ease-out ${polaroid.delay}ms`
+                  ? `transform 1000ms ease-out ${polaroid.delay}ms, opacity 1000ms ease-out ${polaroid.delay}ms`
                   : 'none',
                 transform: mounted
                   ? `rotate(${polaroid.rotation}deg) scale(1) translateY(0)`
                   : `rotate(${polaroid.rotation}deg) scale(1.5) translateY(-100px)`,
                 opacity: mounted && index !== selectedIndex ? 1 : 0, // Hide if selected
                 zIndex: zIndexes[index],
+                willChange: 'transform, opacity',
               }}
             >
               <div
@@ -195,7 +201,7 @@ export const Hero = () => {
               >
                 <div className="relative">
                   <img
-                    src={polaroid.src}
+                    src={polaroid.thumbnail}
                     alt={polaroid.caption}
                     className="w-64 h-64 object-cover max-w-none"
                   />
@@ -218,7 +224,7 @@ export const Hero = () => {
             >
               <div className="relative">
                 <img
-                  src={item.src}
+                  src={item.thumbnail}
                   alt={item.caption}
                   className="w-64 aspect-square object-cover pointer-events-none"
                 />
