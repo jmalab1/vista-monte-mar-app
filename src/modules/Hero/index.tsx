@@ -158,7 +158,7 @@ export const Hero = () => {
       <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
         <div className="lg:col-span-3">
           <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-8xl text-center lg:text-left font-pacifico text-secondary">
-            Welcome!
+            Welcome Dude!
           </h1>
           <Paragraph>
             Welcome to Vista Monte Mar! Enjoy a cozy stay with modern amenities
