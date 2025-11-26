@@ -78,7 +78,7 @@ export const GallerySection = () => {
   return (
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="gallery">
       <div className="mb-10 grid lg:ml-56 lg:mr-56">
-        <SectionHeader title="Gallery" centerText={true}>
+        <SectionHeader title="Photos/Videos" centerText={true}>
           <div className="mt-8 mb-8">
             <video
               className="h-auto max-w-full rounded-lg"

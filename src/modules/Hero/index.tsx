@@ -166,7 +166,7 @@ export const Hero = () => {
           </Paragraph>
           <Link to="/gallery">
             <button className="btn btn-sm btn-secondary text-base-100">
-              Want to see more photos?
+              Want to see more photos/videos?
             </button>
           </Link>
         </div>
