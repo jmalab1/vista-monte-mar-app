@@ -1,10 +1,16 @@
 # Vista Monte Mar
 
-Welcome to the **Vista Monte Mar** web application repository. This project is a modern, responsive single-page application (SPA) designed to provide guests with all the necessary information for their stay at Vista Monte Mar.
+Welcome to the **Vista Monte Mar** web application repository. This project is a
+modern, responsive single-page application (SPA) designed to provide guests with
+all the necessary information for their stay at Vista Monte Mar.
 
 ## 🏠 About the Project
 
-Vista Monte Mar is a guest information portal that offers a seamless experience for visitors. It includes details about the property, house rules, directions, local attractions, and more. The application is built to be user-friendly and visually appealing, ensuring guests have a pleasant digital experience alongside their physical stay.
+Vista Monte Mar is a guest information portal that offers a seamless experience
+for visitors. It includes details about the property, house rules, directions,
+local attractions, and more. The application is built to be user-friendly and
+visually appealing, ensuring guests have a pleasant digital experience alongside
+their physical stay.
 
 ## ✨ Features
 
@@ -20,11 +26,16 @@ Vista Monte Mar is a guest information portal that offers a seamless experience 
 
 This project is built using the following technologies:
 
-- **[React](https://react.dev/):** A JavaScript library for building user interfaces.
-- **[Vite](https://vitejs.dev/):** Next Generation Frontend Tooling for fast development and building.
-- **[TypeScript](https://www.typescriptlang.org/):** Typed JavaScript for better developer experience and code quality.
-- **[Tailwind CSS](https://tailwindcss.com/):** A utility-first CSS framework for rapid UI development.
-- **[Leaflet](https://leafletjs.com/) & [React Leaflet](https://react-leaflet.js.org/):** For interactive maps.
+- **[React](https://react.dev/):** A JavaScript library for building user
+  interfaces.
+- **[Vite](https://vitejs.dev/):** Next Generation Frontend Tooling for fast
+  development and building.
+- **[TypeScript](https://www.typescriptlang.org/):** Typed JavaScript for better
+  developer experience and code quality.
+- **[Tailwind CSS](https://tailwindcss.com/):** A utility-first CSS framework
+  for rapid UI development.
+- **[Leaflet](https://leafletjs.com/) &
+  [React Leaflet](https://react-leaflet.js.org/):** For interactive maps.
 - **[FontAwesome](https://fontawesome.com/):** For scalable vector icons.
 
 ## 🚀 Getting Started
@@ -39,6 +50,7 @@ Follow these steps to get the project running on your local machine.
 ### Installation
 
 1.  **Clone the repository:**
+
     ```bash
     git clone <repository-url>
     cd vista-monte-mar-app
@@ -59,7 +71,8 @@ To start the development server with Hot Module Replacement (HMR):
 npm run dev
 ```
 
-Open your browser and navigate to `http://localhost:5173/vista_monte_mar/` (or the URL shown in your terminal).
+Open your browser and navigate to `http://localhost:5173/vista_monte_mar/` (or
+the URL shown in your terminal).
 
 ### Production Build
 
@@ -88,11 +101,12 @@ npm run preview
 
 This project includes Docker support for containerized deployment.
 
-- **Build Docker Image:** You can use the provided `Dockerfile` to build an image.
+- **Build Docker Image:** You can use the provided `Dockerfile` to build an
+  image.
 - **Helper Scripts:**
-    - `pushToDocker.sh`: Script to build and push the image to a registry.
-    - `pushToDockerDev.sh`: Script for development image push.
-    - `run.sh`: Entry point script for the container.
+  - `pushToDocker.sh`: Script to build and push the image to a registry.
+  - `pushToDockerDev.sh`: Script for development image push.
+  - `run.sh`: Entry point script for the container.
 
 ## 📄 License
 
