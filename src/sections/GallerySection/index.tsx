@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import SectionHeader from '../../components/heading/SectionHeader';
+import ImageModal from '../../components/ImageModal';
 import balcony1 from '/src/assets/balcony/image (1).jpg?w=800&webp';
 import balcony2 from '/src/assets/balcony/image (2).jpg?w=800&webp';
 import balcony3 from '/src/assets/balcony/image (3).jpg?w=800&webp';
@@ -33,6 +35,10 @@ import m2 from '/src/assets/misc/image (2).jpg?w=800&webp';
 import movie from '/src/assets/movie/Condo.mp4?w=800&webp';
 
 export const GallerySection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [allImages, setAllImages] = useState<string[]>([]);
+
   const balcony = [balcony1, balcony2, balcony3];
 
   const living_room = [lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8];
@@ -49,10 +55,30 @@ export const GallerySection = () => {
 
   const misc = [m1, m2];
 
+  const handleImageClick = (categoryImages: string[], imageIndex: number) => {
+    setAllImages(categoryImages);
+    setCurrentImageIndex(imageIndex);
+    setIsModalOpen(true);
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + allImages.length) % allImages.length
+    );
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="gallery">
       <div className="mb-10 grid lg:ml-56 lg:mr-56">
-        <SectionHeader title="Gallery" centerText={true}>
+        <SectionHeader title="Photos/Videos" centerText={true}>
           <div className="mt-8 mb-8">
             <video
               className="h-auto max-w-full rounded-lg"
@@ -68,11 +94,12 @@ export const GallerySection = () => {
         <SectionHeader title="Living Room" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {living_room.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(living_room, index)}
                 />
               </div>
             ))}
@@ -81,11 +108,12 @@ export const GallerySection = () => {
         <SectionHeader title="Balcony" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {balcony.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(balcony, index)}
                 />
               </div>
             ))}
@@ -94,11 +122,12 @@ export const GallerySection = () => {
         <SectionHeader title="Kitchen" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {kitchen.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(kitchen, index)}
                 />
               </div>
             ))}
@@ -107,11 +136,12 @@ export const GallerySection = () => {
         <SectionHeader title="Bedrooms" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {bedrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(bedrooms, index)}
                 />
               </div>
             ))}
@@ -120,11 +150,12 @@ export const GallerySection = () => {
         <SectionHeader title="Bathrooms" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {bathrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(bathrooms, index)}
                 />
               </div>
             ))}
@@ -133,11 +164,12 @@ export const GallerySection = () => {
         <SectionHeader title="Miscellaneous" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {misc.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(misc, index)}
                 />
               </div>
             ))}
@@ -146,11 +178,12 @@ export const GallerySection = () => {
         <SectionHeader title="Common Areas" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {common.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(common, index)}
                 />
               </div>
             ))}
@@ -159,17 +192,27 @@ export const GallerySection = () => {
         <SectionHeader title="Nature" horizontalLine={true}>
           <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
             {nature.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
+              <div className="break-inside-avoid mb-8" key={index}>
                 <img
-                  className="h-auto max-w-full rounded-lg"
+                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
                   src={image}
                   alt={'image ' + (index + 1)}
+                  onClick={() => handleImageClick(nature, index)}
                 />
               </div>
             ))}
           </div>
         </SectionHeader>
       </div>
+
+      <ImageModal
+        isOpen={isModalOpen}
+        currentIndex={currentImageIndex}
+        images={allImages}
+        onClose={handleClose}
+        onNext={handleNext}
+        onPrev={handlePrev}
+      />
     </section>
   );
 };

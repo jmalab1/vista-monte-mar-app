@@ -35,7 +35,7 @@ const NAV_MENU = [
     ],
   },
   {
-    name: 'Gallery',
+    name: 'Photos/Videos',
     href: '/gallery',
     crumb: ['Home'],
   },
