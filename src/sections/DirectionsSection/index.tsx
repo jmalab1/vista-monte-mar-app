@@ -39,7 +39,7 @@ export const DirectionsSection = () => {
                     size="xl"
                     className="mr-2"
                   />
-                  <span>Directions</span>
+                  <span>Directions (Google Maps)</span>
                 </Link>
               </Button>
               <div className="mt-10">
