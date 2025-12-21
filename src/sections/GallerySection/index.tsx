@@ -37,6 +37,7 @@ import movie from '/src/assets/movie/Condo.mp4?w=800&webp';
 export const GallerySection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState<'photos' | 'videos'>('photos');
   const [allImages, setAllImages] = useState<string[]>([]);
 
   const balcony = [balcony1, balcony2, balcony3];
@@ -78,131 +79,162 @@ export const GallerySection = () => {
   return (
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="gallery">
       <div className="mb-10 grid lg:ml-56 lg:mr-56">
-        <SectionHeader title="Photos/Videos" centerText={true}>
-          <div className="mt-8 mb-8">
-            <video
-              className="h-auto max-w-full rounded-lg"
-              autoPlay
-              controls
-              loop
+        <div className="flex justify-center mt-10 mb-6 font-pacifico">
+          <div role="tablist" className="tabs tabs-boxed tabs-lg bg-base-300/50 p-1">
+            <button
+              role="tab"
+              className={`tab transition-all duration-300 ${activeTab === 'photos'
+                ? 'tab-active !bg-secondary !text-white shadow-md'
+                : 'text-base-content hover:text-secondary'
+                }`}
+              onClick={() => setActiveTab('photos')}
             >
-              <source src={movie} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+              Photos
+            </button>
+            <button
+              role="tab"
+              className={`tab transition-all duration-300 ${activeTab === 'videos'
+                ? 'tab-active !bg-secondary !text-white shadow-md'
+                : 'text-base-content hover:text-secondary'
+                }`}
+              onClick={() => setActiveTab('videos')}
+            >
+              Videos
+            </button>
           </div>
-        </SectionHeader>
-        <SectionHeader title="Living Room" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {living_room.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(living_room, index)}
-                />
+        </div>
+
+        {activeTab === 'videos' && (
+          <SectionHeader title="Condo Tour" centerText={true}>
+            <div className="mt-8 mb-8">
+              <video
+                className="h-auto max-w-full rounded-lg mx-auto"
+                controls
+                loop
+              >
+                <source src={movie} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </SectionHeader>
+        )}
+
+        {activeTab === 'photos' && (
+          <>
+            <SectionHeader title="Living Room" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {living_room.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(living_room, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Balcony" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {balcony.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(balcony, index)}
-                />
+            </SectionHeader>
+            <SectionHeader title="Balcony" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {balcony.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(balcony, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Kitchen" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {kitchen.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(kitchen, index)}
-                />
+            </SectionHeader>
+            <SectionHeader title="Kitchen" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {kitchen.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(kitchen, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Bedrooms" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {bedrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(bedrooms, index)}
-                />
+            </SectionHeader>
+            <SectionHeader title="Bedrooms" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {bedrooms.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(bedrooms, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Bathrooms" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {bathrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(bathrooms, index)}
-                />
+            </SectionHeader>
+            <SectionHeader title="Bathrooms" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {bathrooms.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(bathrooms, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Miscellaneous" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {misc.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(misc, index)}
-                />
+            </SectionHeader>
+            <SectionHeader title="Miscellaneous" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {misc.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(misc, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Common Areas" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {common.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(common, index)}
-                />
+            </SectionHeader>
+            <SectionHeader title="Common Areas" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {common.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(common, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Nature" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {nature.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(nature, index)}
-                />
+            </SectionHeader>
+            <SectionHeader title="Nature" horizontalLine={true}>
+              <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
+                {nature.map((image, index) => (
+                  <div className="break-inside-avoid mb-8" key={index}>
+                    <img
+                      className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+                      src={image}
+                      alt={'image ' + (index + 1)}
+                      onClick={() => handleImageClick(nature, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </SectionHeader>
+            </SectionHeader>
+          </>
+        )}
       </div>
 
       <ImageModal
