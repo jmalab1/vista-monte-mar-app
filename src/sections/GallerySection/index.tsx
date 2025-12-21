@@ -80,23 +80,28 @@ export const GallerySection = () => {
     <section className="px-8 pb-10 bg-base-200 shadow-xl" id="gallery">
       <div className="mb-10 grid lg:ml-56 lg:mr-56">
         <div className="flex justify-center mt-10 mb-6 font-pacifico">
-          <div role="tablist" className="tabs tabs-boxed tabs-lg bg-base-300/50 p-1">
+          <div
+            role="tablist"
+            className="tabs tabs-boxed tabs-lg bg-base-300/50 p-1"
+          >
             <button
               role="tab"
-              className={`tab transition-all duration-300 ${activeTab === 'photos'
-                ? 'tab-active !bg-secondary !text-white shadow-md'
-                : 'text-base-content hover:text-secondary'
-                }`}
+              className={`tab transition-all duration-300 ${
+                activeTab === 'photos'
+                  ? 'tab-active !bg-secondary !text-white shadow-md'
+                  : 'text-base-content hover:text-secondary'
+              }`}
               onClick={() => setActiveTab('photos')}
             >
               Photos
             </button>
             <button
               role="tab"
-              className={`tab transition-all duration-300 ${activeTab === 'videos'
-                ? 'tab-active !bg-secondary !text-white shadow-md'
-                : 'text-base-content hover:text-secondary'
-                }`}
+              className={`tab transition-all duration-300 ${
+                activeTab === 'videos'
+                  ? 'tab-active !bg-secondary !text-white shadow-md'
+                  : 'text-base-content hover:text-secondary'
+              }`}
               onClick={() => setActiveTab('videos')}
             >
               Videos

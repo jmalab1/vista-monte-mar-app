@@ -46,6 +46,7 @@ export const DirectionsSection = () => {
                 <MapboxMap
                   coordinates={[-84.20408, 9.99805]}
                   name="SJO Airport"
+                  reverseRoute={true}
                 />
               </div>
             </SectionHeader>

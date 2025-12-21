@@ -13,6 +13,7 @@ import 'leaflet-routing-machine';
 type TMapboxMap = {
   coordinates: number[];
   name: string;
+  reverseRoute?: boolean;
 };
 
 const locate = L.AwesomeMarkers.icon({
@@ -32,29 +33,40 @@ const reverseCoordinates = (coordinates: number[]): LatLngExpression => {
 };
 
 // Component to set up routing control
-const RoutingControl = ({ start, end, name }) => {
+const RoutingControl = ({ start, end, name, reverseRoute }) => {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
 
     const routingControl = L.Routing.control({
-      waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
+      waypoints: reverseRoute
+        ? [L.latLng(end[0], end[1]), L.latLng(start[0], start[1])]
+        : [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
       routeWhileDragging: true,
       createMarker: function (
         i: number,
         waypoint: { latLng: L.LatLngExpression }
       ) {
         // Create markers with custom icons and popups
-        const marker = L.marker(waypoint.latLng, {
-          icon: i === 0 ? home : locate, // Use start icon for start and end icon for end
-        });
+        const isStart = i === 0;
+        const icon = reverseRoute
+          ? isStart
+            ? locate
+            : home
+          : isStart
+            ? home
+            : locate;
+
+        const marker = L.marker(waypoint.latLng, { icon });
 
         // Add popup content based on the marker
-        if (i === 0) {
-          marker.bindPopup('<b>Vista Monte Mar</b>');
-        } else if (i === 1) {
-          marker.bindPopup(`<b>${name}</b>`);
+        if (reverseRoute) {
+          if (i === 1) marker.bindPopup('<b>Vista Monte Mar</b>');
+          else if (i === 0) marker.bindPopup(`<b>${name}</b>`);
+        } else {
+          if (i === 0) marker.bindPopup('<b>Vista Monte Mar</b>');
+          else if (i === 1) marker.bindPopup(`<b>${name}</b>`);
         }
 
         return marker;
@@ -70,7 +82,11 @@ const RoutingControl = ({ start, end, name }) => {
   return null;
 };
 
-const MapboxMap: FunctionComponent<TMapboxMap> = ({ coordinates, name }) => {
+const MapboxMap: FunctionComponent<TMapboxMap> = ({
+  coordinates,
+  name,
+  reverseRoute = false,
+}) => {
   const latLon = reverseCoordinates(coordinates);
   const mapRef = useRef<any>(null);
 
@@ -93,7 +109,12 @@ const MapboxMap: FunctionComponent<TMapboxMap> = ({ coordinates, name }) => {
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <RoutingControl start={[9.6061, -84.62073]} end={latLon} name={name} />
+        <RoutingControl
+          start={[9.6061, -84.62073]}
+          end={latLon}
+          name={name}
+          reverseRoute={reverseRoute}
+        />
       </MapContainer>
     </div>
   );
