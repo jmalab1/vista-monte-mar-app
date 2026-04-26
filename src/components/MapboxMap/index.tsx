@@ -82,11 +82,12 @@ const MapboxMap: FunctionComponent<TMapboxMap> = ({ coordinates, name }) => {
   }, [latLon]);
 
   return (
-    <div className="rounded-lg shadow-lg relative mb-5 z-0">
+    <div className="relative z-0 mb-5 overflow-hidden rounded-2xl border border-base-300 shadow-lg">
       <MapContainer
         center={latLon}
         zoom={14}
         ref={mapRef}
+        className="rounded-2xl"
         style={{ height: '26rem', width: '100%' }}
       >
         <TileLayer
