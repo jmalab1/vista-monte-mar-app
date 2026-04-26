@@ -14,7 +14,7 @@ const Inventory = () => {
   const { showToast } = useToast();
   const [saving, setSaving] = useState(false);
   const { isAuthenticated } = useAuth();
-  const [inventoryObj, setInventoryObj] = useState({});
+  const [inventoryObj, setInventoryObj] = useState<Record<string, any>>({});
   const [formData, setFormData] = useState<Record<string, Record<string, any>>>(
     {}
   );
@@ -35,9 +35,15 @@ const Inventory = () => {
         setInventoryObj(inventoryListing.data);
         setFormData(inventory.data);
       })
-      .catch((error) => {
+      .catch(() => {
         showToast('Oh no! Unable to get inventory.', 'error');
       });
+
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
   }, [isAuthenticated, showToast]);
 
   const handleChange = (
@@ -71,7 +77,7 @@ const Inventory = () => {
     try {
       await axios.post('/api/save-inventory', dataToSave);
       showToast('Inventory saved successfully!', 'success');
-    } catch (error) {
+    } catch {
       showToast('Oh no! Failed to save updates :(', 'error');
     } finally {
       setTimeout(() => {
@@ -95,7 +101,7 @@ const Inventory = () => {
     setFormData((prev) => {
       const updatedData = {
         ...prev,
-        [parentID]: _.mapValues(prev[parentID], (value, key) => {
+        [parentID]: _.mapValues(prev[parentID], (_value, key) => {
           // Get the field type from inventoryObj
           const fieldType = inventoryObj[parentID]?.fields?.[key]?.type;
 

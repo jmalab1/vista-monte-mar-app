@@ -1,9 +1,4 @@
-import {
-  FunctionComponent,
-  useState,
-  ChangeEventHandler,
-  ChangeEvent,
-} from 'react';
+import { FunctionComponent, ChangeEventHandler, ChangeEvent } from 'react';
 
 type TCheckbox = {
   title?: string;
@@ -20,12 +15,8 @@ const Checkbox: FunctionComponent<TCheckbox> = ({
   readOnly = false,
   onChange,
 }) => {
-  const [isChecked, setIsChecked] = useState(checked);
-
   const handleChange = (e: ChangeEvent<Element>) => {
     if (readOnly) return;
-    const newChecked = !isChecked;
-    setIsChecked(newChecked);
 
     if (onChange) {
       onChange(e);
@@ -38,14 +29,14 @@ const Checkbox: FunctionComponent<TCheckbox> = ({
         type="checkbox"
         id={id}
         className="checkbox checkbox-secondary"
-        checked={isChecked}
+        checked={checked}
         readOnly={readOnly}
         onChange={handleChange}
       />
       {title && (
         <div className="label">
           <span
-            className={`label-text block text-gray-700 text-sm font-bold ${isChecked ? 'line-through' : ''}`}
+            className={`label-text block text-gray-700 text-sm font-bold ${checked ? 'line-through' : ''}`}
           >
             {title}
           </span>

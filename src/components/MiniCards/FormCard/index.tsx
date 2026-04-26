@@ -11,7 +11,7 @@ import Paragraph from '../../ElementWrapper/Paragraph';
 type TFormCard = {
   title: string;
   fields?: Record<string, { type: string; name: string; value?: string }>;
-  value: Record<string, any>;
+  value: Record<string, unknown> | boolean;
   parentID: string;
   onChange: (parentID: string, id: string, e: any) => void;
   onReset?: (parentID: string) => void;
@@ -29,6 +29,29 @@ const FormCard: FunctionComponent<TFormCard> = ({
   onBlur,
   checkbox,
 }) => {
+  const getFieldValue = (fieldKey: string): string => {
+    if (value && typeof value === 'object') {
+      const raw = (value as Record<string, unknown>)[fieldKey];
+      if (raw === undefined || raw === null) {
+        return '';
+      }
+      return String(raw);
+    }
+    return '';
+  };
+
+  const getChecked = (): boolean => {
+    if (typeof value === 'boolean') {
+      return value;
+    }
+
+    if (value && typeof value === 'object') {
+      return Boolean((value as Record<string, unknown>).checked);
+    }
+
+    return false;
+  };
+
   const getJsx = (
     parentID: string,
     inputType: string,
@@ -77,7 +100,14 @@ const FormCard: FunctionComponent<TFormCard> = ({
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md h-full">
-      {checkbox && <Checkbox id={parentID} title={title}></Checkbox>}
+      {checkbox && (
+        <Checkbox
+          id={parentID}
+          title={title}
+          checked={getChecked()}
+          onChange={(e) => onChange(parentID, 'checked', e)}
+        />
+      )}
       {!checkbox && (
         <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
           {title}
@@ -98,7 +128,7 @@ const FormCard: FunctionComponent<TFormCard> = ({
             fv.type,
             fk,
             fv.name,
-            value?.[fk] || '',
+            getFieldValue(fk),
             fv.value || ''
           )
         )}

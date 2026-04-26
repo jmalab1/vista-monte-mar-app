@@ -8,6 +8,30 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { shuffle } from 'lodash';
 
+const POLAROID_LAYOUT_STORAGE_KEY = 'hero-polaroid-layout-v1';
+
+type PolaroidLayout = {
+  src: string;
+  caption: string;
+  top: string;
+  left: string;
+  rotation: number;
+  delay: number;
+};
+
+const isValidPolaroidLayout = (value: unknown): value is PolaroidLayout[] => {
+  if (!Array.isArray(value)) return false;
+
+  return value.every((item) =>
+    typeof item?.src === 'string' &&
+    typeof item?.caption === 'string' &&
+    typeof item?.top === 'string' &&
+    typeof item?.left === 'string' &&
+    typeof item?.rotation === 'number' &&
+    typeof item?.delay === 'number'
+  );
+};
+
 export const Hero = () => {
   const [mounted, setMounted] = useState(false);
   const [selectedImage, setSelectedImage] = useState<{ src: string; caption: string } | null>(null);
@@ -32,7 +56,24 @@ export const Hero = () => {
   const images = useMemo(() => shuffle(rawImages), []);
 
   const polaroids = useMemo(() => {
-    return images.map((item, index) => {
+    const savedLayoutRaw = localStorage.getItem(POLAROID_LAYOUT_STORAGE_KEY);
+
+    if (savedLayoutRaw) {
+      try {
+        const savedLayout = JSON.parse(savedLayoutRaw);
+        if (
+          isValidPolaroidLayout(savedLayout) &&
+          savedLayout.length === images.length &&
+          images.every((image) => savedLayout.some((saved) => saved.src === image.src && saved.caption === image.caption))
+        ) {
+          return savedLayout;
+        }
+      } catch {
+        // Ignore malformed localStorage and regenerate.
+      }
+    }
+
+    const generatedLayout = images.map((item, index) => {
       // Zig-zag pattern for vertical position to minimize overlap
       // Even indices: Top 0-10%
       // Odd indices: Top 40-50%
@@ -58,6 +99,10 @@ export const Hero = () => {
         delay,
       };
     });
+
+    localStorage.setItem(POLAROID_LAYOUT_STORAGE_KEY, JSON.stringify(generatedLayout));
+
+    return generatedLayout;
   }, [images]);
 
   useEffect(() => {

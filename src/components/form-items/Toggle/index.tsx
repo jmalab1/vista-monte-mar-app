@@ -1,9 +1,4 @@
-import {
-  FunctionComponent,
-  useState,
-  ChangeEventHandler,
-  ChangeEvent,
-} from 'react';
+import { FunctionComponent, ChangeEventHandler, ChangeEvent } from 'react';
 
 type TToggle = {
   title?: string;
@@ -20,12 +15,8 @@ const Toggle: FunctionComponent<TToggle> = ({
   readOnly = false,
   onChange,
 }) => {
-  const [isChecked, setIsChecked] = useState(checked);
-
   const handleChange = (e: ChangeEvent<Element>) => {
     if (readOnly) return;
-    const newChecked = !isChecked;
-    setIsChecked(newChecked);
 
     if (onChange) {
       onChange(e);
@@ -46,7 +37,7 @@ const Toggle: FunctionComponent<TToggle> = ({
         type="checkbox"
         id={id}
         className="toggle toggle-secondary"
-        checked={isChecked}
+        checked={checked}
         readOnly={readOnly}
         onChange={handleChange}
       />

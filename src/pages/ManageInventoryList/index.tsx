@@ -20,7 +20,7 @@ const ManageInventory: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [code, setCode] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [validJson, setValidJson] = useState<string>('');
+  const [validJson, setValidJson] = useState<Record<string, any>>({});
   const [showModal, setShowModal] = useState(false);
 
   // Fetch data on component mount
@@ -58,20 +58,21 @@ const ManageInventory: React.FC = () => {
       setValidJson(parsedCode);
       setErrorMessage('');
 
-      await axiosInstance
-        .post('/api/update-inventory-listing', code, {
+      const response = await axiosInstance.post(
+        '/api/update-inventory-listing',
+        parsedCode,
+        {
           headers: {
             'Content-Type': 'application/json',
           },
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            showToast('Inventory Listing Updated Successfully.', 'success');
-          }
-        })
-        .catch((error) => {
-          showToast('Inventory Listing Update Failed.', 'error');
-        });
+        }
+      );
+
+      if (response.status === 200) {
+        showToast('Inventory Listing Updated Successfully.', 'success');
+      } else {
+        showToast('Inventory Listing Update Failed.', 'error');
+      }
     } catch (error) {
       if (error instanceof SyntaxError) {
         const errorDetails = error.message;
@@ -85,6 +86,8 @@ const ManageInventory: React.FC = () => {
         } else {
           setErrorMessage('Invalid JSON. Please check your code.');
         }
+      } else {
+        showToast('Inventory Listing Update Failed.', 'error');
       }
     } finally {
       setTimeout(() => {
@@ -154,7 +157,7 @@ const ManageInventory: React.FC = () => {
                     <FormCard
                       title={value.name}
                       fields={value.fields}
-                      callback={() => {}}
+                      onChange={() => {}}
                       value={{}}
                       parentID={key}
                     ></FormCard>

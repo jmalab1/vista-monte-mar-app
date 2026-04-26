@@ -11,6 +11,11 @@ import Arrival from './pages/Arrival';
 import Checkout from './pages/Checkout';
 import './index.css';
 import Gallery from './pages/Gallery';
+import Login from './pages/Login';
+import ManageInventory from './pages/ManageInventoryList';
+import ManageChecklist from './pages/ManageChecklist';
+import Inventory from './pages/Inventory';
+import Checklist from './pages/Checklist';
 import ScrollToTop from 'react-scroll-up';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
@@ -51,6 +56,11 @@ const App = () => {
             <Route path="/arrival" element={<Arrival />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/manage_inventory" element={<ManageInventory />} />
+            <Route path="/manage_checklist" element={<ManageChecklist />} />
+            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/checklist" element={<Checklist />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

@@ -14,10 +14,8 @@ const Checklist = () => {
   const { isAuthenticated } = useAuth();
   const { showToast } = useToast();
   const [saving, setSaving] = useState(false);
-  const [checklistObj, setChecklistObj] = useState({});
-  const [formData, setFormData] = useState<Record<string, Record<string, any>>>(
-    {}
-  );
+  const [checklistObj, setChecklistObj] = useState<Record<string, any>>({});
+  const [formData, setFormData] = useState<Record<string, any>>({});
 
   // Ref to store the debounce timer ID, so it can be cleared on each trigger
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
@@ -35,10 +33,46 @@ const Checklist = () => {
         setChecklistObj(inventoryListing.data);
         setFormData(inventory.data);
       })
-      .catch((error) => {
-        showToast('Oh no! Unable to get inventory.', 'error');
+      .catch(() => {
+        showToast('Oh no! Unable to get checklist.', 'error');
       });
-  }, []);
+
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, [isAuthenticated, showToast]);
+
+  const handleChange = (
+    parentID: string,
+    id: string,
+    e: React.ChangeEvent<Element>
+  ) => {
+    const { value, type, checked } = e.target as HTMLInputElement;
+
+    setFormData((prevFormData) => {
+      const currentParentValue = prevFormData[parentID];
+      const nextValue = type === 'checkbox' ? checked : value;
+      const updatedParentValue =
+        currentParentValue &&
+        typeof currentParentValue === 'object' &&
+        !Array.isArray(currentParentValue)
+          ? { ...currentParentValue, [id]: nextValue }
+          : id === 'checked'
+            ? nextValue
+            : { [id]: nextValue };
+
+      const updatedData = {
+        ...prevFormData,
+        [parentID]: updatedParentValue,
+      };
+
+      handleDebouncedSave(updatedData);
+
+      return updatedData;
+    });
+  };
 
   const saveForm = async (dataToSave = formData) => {
     if (saving) return; // Prevent save if already loading
@@ -46,8 +80,8 @@ const Checklist = () => {
 
     try {
       await axios.post('/api/save-checklist', dataToSave);
-      showToast('Inventory saved successfully!', 'success');
-    } catch (error) {
+      showToast('Checklist saved successfully!', 'success');
+    } catch {
       showToast('Oh no! Failed to save updates :(', 'error');
     } finally {
       setTimeout(() => {
@@ -93,7 +127,7 @@ const Checklist = () => {
                     <FormCard
                       title={value.name}
                       fields={value.fields}
-                      onChange={() => {}}
+                      onChange={handleChange}
                       value={formData[key]}
                       parentID={key}
                       checkbox={true}
