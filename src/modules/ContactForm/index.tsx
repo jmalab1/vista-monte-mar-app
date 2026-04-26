@@ -3,16 +3,17 @@ import ButtonItem from '../../components/form-items/ButtonItem';
 import Input from '../../components/form-items/Input';
 import TextArea from '../../components/form-items/TextArea';
 import SectionHeader from '../../components/heading/SectionHeader';
-import axios from 'axios';
+import axios from '../../utility/axiosInstance';
 import Modal from '../../components/Modal';
+import Container from '../../components/Container';
 
 const ContactForm = () => {
   const modalDefault = {
-    title: "",
-    text: ""
+    title: '',
+    text: '',
   };
   const [modalValues, setModalValues] = useState(modalDefault);
-  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [formValues, setFormValues] = useState({
     firstname: '',
     lastname: '',
@@ -32,7 +33,7 @@ const ContactForm = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    setLoading(true);
+    setSaving(true);
 
     await axios
       .post('/api/send-email', formValues)
@@ -40,26 +41,26 @@ const ContactForm = () => {
         if (response.status === 200) {
           setModalValues({
             title: "We've got your message",
-            text: "Thank you for time!"
+            text: 'Thank you for time!',
           });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response && error.response.status === 429) {
           setModalValues({
-            title: "Uh Oh!",
-            text: "The limit to sending a message has been reached. Please Try again later."
+            title: 'Uh Oh!',
+            text: 'The limit to sending a message has been reached. Please Try again later.',
           });
         } else {
           setModalValues({
-            title: "Uh Oh!",
-            text: "We've hit a snag, try again some other time!"
+            title: 'Uh Oh!',
+            text: "We've hit a snag, try again some other time!",
           });
         }
       })
       .finally(() => {
         // Always run cleanup code, stop loading spinner
-        setLoading(false);
+        setSaving(false);
 
         setFormValues({
           firstname: '',
@@ -76,63 +77,59 @@ const ContactForm = () => {
   };
 
   return (
-    <div>
-      <form className="mb-12 lg:mx-72" id="contact" onSubmit={handleSubmit}>
-        <div className="space-y-12">
-          <div className="border-b border-gray-900/10 pb-12">
-            <SectionHeader title="Contact Us" centerText={true}>
-              Tell us about your visit. We'd love to hear from you.
-            </SectionHeader>
-            <div className="mr-6 ml-6 mt-10 grid grid-cols-1 gap-x-6 sm:grid-cols-6">
-              <Input
-                type="text"
-                title="First Name"
-                id="firstname"
-                required={true}
-                callback={handleChange}
-                value={formValues.firstname}
-              />
-              <Input
-                type="text"
-                title="Last Name"
-                id="lastname"
-                callback={handleChange}
-                value={formValues.lastname}
-              />
-              <Input
-                type="email"
-                title="Email"
-                id="email"
-                required={true}
-                callback={handleChange}
-                value={formValues.email}
-              />
-              <Input
-                type="text"
-                title="Phone Number"
-                id="phone_number"
-                callback={handleChange}
-                value={formValues.phone_number}
-              />
-              <TextArea
-                title="Comment"
-                id="comment"
-                placeholder="Let us know what you think"
-                callback={handleChange}
-                required={true}
-                value={formValues.comment}
-              />
-            </div>
-          </div>
+    <Container classValue="lg:px-72">
+      <form id="contact" onSubmit={handleSubmit}>
+        <SectionHeader title="Contact Us" centerText={true}>
+          Tell us about your visit. We'd love to hear from you.
+        </SectionHeader>
+        <div className="mt-10 grid grid-cols-1 gap-x-6 sm:grid-cols-6">
+          <Input
+            type="text"
+            title="First Name"
+            id="firstname"
+            required={true}
+            onChange={handleChange}
+            value={formValues.firstname}
+          />
+          <Input
+            type="text"
+            title="Last Name"
+            id="lastname"
+            onChange={handleChange}
+            value={formValues.lastname}
+          />
+          <Input
+            type="email"
+            title="Email"
+            id="email"
+            required={true}
+            onChange={handleChange}
+            value={formValues.email}
+          />
+          <Input
+            type="text"
+            title="Phone Number"
+            id="phone_number"
+            onChange={handleChange}
+            value={formValues.phone_number}
+          />
+          <TextArea
+            title="Comment"
+            id="comment"
+            placeholder="Let us know what you think"
+            onChange={handleChange}
+            required={true}
+            value={formValues.comment}
+            rows={5}
+          />
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6 mr-4">
-          {loading && (
-            <span className="loading loading-spinner loading-md"></span>
-          )}
-          <ButtonItem title="submit" classValue="btn-secondary" type="submit" />
+          <ButtonItem classValue="btn-secondary" type="submit" saving={saving}>
+            Submit
+          </ButtonItem>
         </div>
       </form>
-      {modalValues.title != "" && (
+      {modalValues.title != '' && (
         <Modal
           showModal={true}
           title={modalValues.title}
@@ -140,7 +137,7 @@ const ContactForm = () => {
           callback={modalCallbackHandler}
         />
       )}
-    </div>
+    </Container>
   );
 };
 

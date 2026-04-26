@@ -1,6 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Footer from './modules/Footer';
 import Navbar from './modules/Navbar';
 import HouseRules from './pages/HouseRules';
@@ -10,7 +9,6 @@ import NotFound from './components/NotFound';
 import Directions from './pages/Directions';
 import Arrival from './pages/Arrival';
 import Checkout from './pages/Checkout';
-import Inventory from './pages/Inventory';
 import './index.css';
 import Gallery from './pages/Gallery';
 import ScrollToTop from 'react-scroll-up';
@@ -53,7 +51,6 @@ const App = () => {
             <Route path="/arrival" element={<Arrival />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/gallery" element={<Gallery />} />
-            {/* <Route path="/inventory" element={<Inventory />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

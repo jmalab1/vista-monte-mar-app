@@ -17,7 +17,6 @@ import SectionHeader from '../../components/heading/SectionHeader';
 import CategoryCard from '../../components/Categories/CategoryCard';
 import _ from 'lodash';
 import AbbLogo from '../../modules/Logos/AbbLogo';
-import VrboLogo from '../../modules/Logos/VrboLogo';
 import PFood from '../../assets/misc/food.jpg?w=600&webp';
 import PThingsTodo from '../../assets/misc/things_to_do.jpg?w=600&webp';
 import PEmergency from '../../assets/misc/emergency.jpg?w=600&webp';
@@ -26,6 +25,7 @@ import PGrocery from '../../assets/misc/grocery.jpg?w=600&webp';
 import PBank from '../../assets/misc/atm.jpg?w=600&webp';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
 import BankDetails from '../../modules/BankDetails';
+import Container from '../../components/Container';
 
 let categories = [
   {
@@ -99,31 +99,29 @@ export const JacoBeachSection = () => {
   };
 
   return (
-    <section className="px-8 pb-10 bg-base-200 shadow-xl" id="jaco_beach">
-      <div className="mb-10 grid place-content-center md:ml-56 md:mr-56">
-        <SectionHeader title="Jaco Beach" centerText={true}>
-          <Paragraph>
-            Jaco is the most developed beach town on the Pacific Coast of Costa
-            Rica. Located in the province of Puntarenas, it is known for its
-            beautiful beach sceneries, stunning sunset, surfing waves, and
-            various nature-centered activities. Below are some information to
-            get you pumped for your visit.
-          </Paragraph>
-        </SectionHeader>
-      </div>
-      <div className="grid grid-cols-2 lg:grid-cols-5 lg:grid-rows-2 gap-4 md:ml-32 md:mr-32">
+    <Container classValue="bg-base-200 lg:px-8">
+      <SectionHeader title="Jaco Beach" centerText={true}>
+        <Paragraph>
+          Jaco is the most developed beach town on the Pacific Coast of Costa
+          Rica. Located in the province of Puntarenas, it is known for its
+          beautiful beach sceneries, stunning sunset, surfing waves, and various
+          nature-centered activities. Below are some information to get you
+          pumped for your visit.
+        </Paragraph>
+      </SectionHeader>
+      <div className="grid grid-cols-2 lg:grid-cols-5 lg:grid-rows-2 gap-4">
         <Card
           className="relative col-span-2 row-span-2 h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-cyan-500 via-blue-600 to-indigo-500"
           placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
+          onPointerEnter={undefined}
+          onPointerLeave={undefined}
         >
           <div className="absolute inset-0 h-full w-full bg-gray-900/75" />
           <CardBody
             className="relative w-full"
             placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
+            onPointerEnter={undefined}
+            onPointerLeave={undefined}
           >
             <p className="mt-9 text-white text-2xl">Book With Us</p>
             <p className="mt-4 mb-14 font-normal text-white opacity-50">
@@ -140,15 +138,11 @@ export const JacoBeachSection = () => {
 
         {categories.map((props, key) => (
           <div className={`row-start-${key}`}>
-            <CategoryCard
-              key={key}
-              {...props}
-              callback={cardClickCallbackHandler}
-            />
+            <CategoryCard {...props} callback={cardClickCallbackHandler} />
           </div>
         ))}
       </div>
-      <div className="md:ml-32 md:mr-32">
+      <div>
         {hiddenDivState == 'restaurants' && <RestaurantDetails />}
         {hiddenDivState == 'emergency' && <EmergencyDetails />}
         {hiddenDivState == 'things_to_do' && <ThingsToDoDetails />}
@@ -156,7 +150,7 @@ export const JacoBeachSection = () => {
         {hiddenDivState == 'groceries' && <GroceryDetails />}
         {hiddenDivState == 'banks' && <BankDetails />}
       </div>
-    </section>
+    </Container>
   );
 };
 

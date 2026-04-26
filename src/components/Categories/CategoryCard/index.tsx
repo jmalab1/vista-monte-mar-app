@@ -30,8 +30,8 @@ const CategoryCard = ({
     <Card
       className={`relative grid lg:min-h-[12rem] w-full overflow-hidden ${active ? 'grayscale' : 'hover:cursor-pointer transition-transform duration-300 transform hover:scale-105'}`}
       placeholder={undefined}
-      onPointerEnterCapture={undefined}
-      onPointerLeaveCapture={undefined}
+      onPointerEnter={undefined}
+      onPointerLeave={undefined}
       onClick={() => callback(id)}
     >
       <img
@@ -43,8 +43,8 @@ const CategoryCard = ({
       <CardBody
         className="relative flex flex-col justify-between"
         placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
+        onPointerEnter={undefined}
+        onPointerLeave={undefined}
       >
         <Icon className="h-8 w-8 text-white hidden lg:block" />
         <div>
@@ -53,8 +53,8 @@ const CategoryCard = ({
             className="mb-1"
             color="white"
             placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
+            onPointerEnter={undefined}
+            onPointerLeave={undefined}
           >
             {title}
           </Typography>
@@ -62,8 +62,8 @@ const CategoryCard = ({
             color="white"
             className="text-xs font-bold opacity-50 hidden lg:block"
             placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
+            onPointerEnter={undefined}
+            onPointerLeave={undefined}
           >
             {desc}
           </Typography>

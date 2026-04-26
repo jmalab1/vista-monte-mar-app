@@ -5,6 +5,8 @@ type TModal = {
   title: string;
   text: string;
   callback: MouseEventHandler;
+  children?: React.ReactNode;
+  classValue?: string;
 };
 
 const Modal: FunctionComponent<TModal> = ({
@@ -12,16 +14,16 @@ const Modal: FunctionComponent<TModal> = ({
   text,
   showModal,
   callback,
+  children,
+  classValue,
 }) => {
   return (
     <>
-      <dialog
-        id="my_modal_2"
-        className={`modal ${showModal ? 'modal-open' : ''}`}
-      >
-        <div className="modal-box">
+      <dialog className={`modal ${showModal ? 'modal-open' : ''}`}>
+        <div className={`modal-box ${classValue}`}>
           <h3 className="font-bold text-lg">{title}</h3>
           <p className="py-4">{text}</p>
+          {children}
           <div className="modal-action">
             <button className="btn" onClick={callback}>
               OK

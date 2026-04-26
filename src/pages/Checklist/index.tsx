@@ -1,20 +1,20 @@
-import SectionHeader from '../../components/heading/SectionHeader';
-import _ from 'lodash';
-import axios from '../../utility/axiosInstance';
-import { useEffect, useState, useRef } from 'react';
-import { useToast } from '../../context/ToastContext';
-import FormCard from '../../components/MiniCards/FormCard';
-import ButtonItem from '../../components/form-items/ButtonItem';
+import { useEffect, useRef, useState } from 'react';
 import Container from '../../components/Container';
+import SectionHeader from '../../components/heading/SectionHeader';
 import AdminNav from '../../modules/AdminNav';
 import { useAuth } from '../../context/AuthContext';
+import FormCard from '../../components/MiniCards/FormCard';
+import { useToast } from '../../context/ToastContext';
+import axios from '../../utility/axiosInstance';
+import _ from 'lodash';
 import { Navigate } from 'react-router-dom';
+import ButtonItem from '../../components/form-items/ButtonItem';
 
-const Inventory = () => {
+const Checklist = () => {
+  const { isAuthenticated } = useAuth();
   const { showToast } = useToast();
   const [saving, setSaving] = useState(false);
-  const { isAuthenticated } = useAuth();
-  const [inventoryObj, setInventoryObj] = useState({});
+  const [checklistObj, setChecklistObj] = useState({});
   const [formData, setFormData] = useState<Record<string, Record<string, any>>>(
     {}
   );
@@ -28,48 +28,24 @@ const Inventory = () => {
     }
 
     Promise.all([
-      axios.get('/api/inventory-listing'),
-      axios.get('/api/get-inventory'),
+      axios.get('/api/checklist-listing'),
+      axios.get('/api/get-checklist'),
     ])
       .then(([inventoryListing, inventory]) => {
-        setInventoryObj(inventoryListing.data);
+        setChecklistObj(inventoryListing.data);
         setFormData(inventory.data);
       })
       .catch((error) => {
         showToast('Oh no! Unable to get inventory.', 'error');
       });
-  }, [isAuthenticated, showToast]);
-
-  const handleChange = (
-    parentID: string,
-    id: string,
-    e: React.ChangeEvent<Element>
-  ) => {
-    const { value, type, checked } = e.target as HTMLInputElement;
-
-    // Update formData immutably
-    setFormData((prevFormData) => {
-      const updatedData = {
-        ...prevFormData,
-        [parentID]: {
-          ...prevFormData[parentID],
-          [id]: type === 'checkbox' ? checked : value,
-        },
-      };
-
-      // Call debounced save immediately after form change
-      handleDebouncedSave(updatedData);
-
-      return updatedData;
-    });
-  };
+  }, []);
 
   const saveForm = async (dataToSave = formData) => {
     if (saving) return; // Prevent save if already loading
     setSaving(true);
 
     try {
-      await axios.post('/api/save-inventory', dataToSave);
+      await axios.post('/api/save-checklist', dataToSave);
       showToast('Inventory saved successfully!', 'success');
     } catch (error) {
       showToast('Oh no! Failed to save updates :(', 'error');
@@ -91,44 +67,15 @@ const Inventory = () => {
     }, 1000); // Adjust the delay as needed (1000ms = 1 second)
   };
 
-  const handleReset = (parentID: string) => {
-    setFormData((prev) => {
-      const updatedData = {
-        ...prev,
-        [parentID]: _.mapValues(prev[parentID], (value, key) => {
-          // Get the field type from inventoryObj
-          const fieldType = inventoryObj[parentID]?.fields?.[key]?.type;
-
-          // Reset based on field type
-          switch (fieldType) {
-            case 'number':
-              return '0'; // Reset number fields to '0'
-            case 'textarea':
-              return ''; // Reset textarea fields to an empty string
-            case 'toggle':
-              return false; // Reset toggle fields to false
-            default:
-              return ''; // Default to an empty string
-          }
-        }),
-      };
-
-      // Immediately save the latest state using debounced save
-      handleDebouncedSave(updatedData);
-
-      return updatedData;
-    });
-  };
-
   return (
     <Container classValue="bg-base-200 lg:px-8">
       {!isAuthenticated && <Navigate to="/login" />}
       {isAuthenticated && (
         <div className="lg:grid lg:grid-cols-6 gap-4">
-          <AdminNav page="inventory" />
+          <AdminNav page="checklist" />
           <div className="col-span-5">
             <SectionHeader
-              title="Inventory"
+              title="Checklist"
               horizontalLine={true}
               headerPadding={0}
             >
@@ -141,15 +88,15 @@ const Inventory = () => {
                 Save
               </ButtonItem>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-                {_.map(inventoryObj, (value, key) => (
+                {_.map(checklistObj, (value, key) => (
                   <div key={key}>
                     <FormCard
                       title={value.name}
                       fields={value.fields}
-                      onChange={handleChange}
+                      onChange={() => {}}
                       value={formData[key]}
                       parentID={key}
-                      onReset={handleReset}
+                      checkbox={true}
                     ></FormCard>
                   </div>
                 ))}
@@ -162,4 +109,4 @@ const Inventory = () => {
   );
 };
 
-export default Inventory;
+export default Checklist;

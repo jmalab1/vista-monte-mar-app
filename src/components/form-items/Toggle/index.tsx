@@ -1,32 +1,37 @@
 import {
-  ChangeEventHandler,
-  FocusEventHandler,
   FunctionComponent,
+  useState,
+  ChangeEventHandler,
+  ChangeEvent,
 } from 'react';
 
-type TInput = {
+type TToggle = {
   title?: string;
   id: string;
-  placeholder?: string;
-  required?: boolean;
-  type: 'password' | 'text' | 'email' | 'tel' | 'number';
-  onChange?: ChangeEventHandler;
-  value: string;
+  checked?: boolean;
   readOnly?: boolean;
-  onBlur?: FocusEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler;
 };
 
-const Input: FunctionComponent<TInput> = ({
+const Toggle: FunctionComponent<TToggle> = ({
   title,
   id,
-  placeholder,
-  required,
-  type,
+  checked = false,
+  readOnly = false,
   onChange,
-  value,
-  readOnly,
-  onBlur,
 }) => {
+  const [isChecked, setIsChecked] = useState(checked);
+
+  const handleChange = (e: ChangeEvent<Element>) => {
+    if (readOnly) return;
+    const newChecked = !isChecked;
+    setIsChecked(newChecked);
+
+    if (onChange) {
+      onChange(e);
+    }
+  };
+
   return (
     <label className="form-control sm:col-span-3">
       {title && (
@@ -38,16 +43,12 @@ const Input: FunctionComponent<TInput> = ({
         </div>
       )}
       <input
-        type={type}
+        type="checkbox"
         id={id}
-        name={id}
-        placeholder={placeholder}
-        className="input input-bordered input-sm shadow-inner"
-        required={required}
-        onChange={onChange}
-        value={value}
+        className="toggle toggle-secondary"
+        checked={isChecked}
         readOnly={readOnly}
-        onBlur={onBlur}
+        onChange={handleChange}
       />
       <div className="label">
         <span className="label-text-alt"></span>
@@ -57,4 +58,4 @@ const Input: FunctionComponent<TInput> = ({
   );
 };
 
-export default Input;
+export default Toggle;

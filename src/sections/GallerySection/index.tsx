@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import SectionHeader from '../../components/heading/SectionHeader';
 import balcony1 from '/src/assets/balcony/image (1).jpg?w=800&webp';
 import balcony2 from '/src/assets/balcony/image (2).jpg?w=800&webp';
@@ -31,8 +32,11 @@ import c2 from '/src/assets/common/image (2).jpg?w=800&webp';
 import m1 from '/src/assets/misc/image (1).jpg?w=800&webp';
 import m2 from '/src/assets/misc/image (2).jpg?w=800&webp';
 import movie from '/src/assets/movie/Condo.mp4?w=800&webp';
+import Container from '../../components/Container';
 
 export const GallerySection = () => {
+  const [activeTab, setActiveTab] = useState<'photos' | 'videos'>('photos');
+
   const balcony = [balcony1, balcony2, balcony3];
 
   const living_room = [lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8];
@@ -49,11 +53,51 @@ export const GallerySection = () => {
 
   const misc = [m1, m2];
 
+  const renderImageSection = (title: string, images: string[]) => (
+    <SectionHeader title={title} horizontalLine={true}>
+      <div className="columns-1 gap-7 mt-8 md:columns-2 xl:columns-3">
+        {images.map((image, index) => (
+          <div className="break-inside-avoid mb-8" key={`${title}-${index}`}>
+            <img
+              className="h-auto max-w-full rounded-lg"
+              src={image}
+              alt={`${title} image ${index + 1}`}
+            />
+          </div>
+        ))}
+      </div>
+    </SectionHeader>
+  );
+
   return (
-    <section className="px-8 pb-10 bg-base-200 shadow-xl" id="gallery">
-      <div className="mb-10 grid lg:ml-56 lg:mr-56">
-        <SectionHeader title="Gallery" centerText={true}>
-          <div className="mt-8 mb-8">
+    <Container classValue="bg-base-200 lg:px-8">
+      <SectionHeader title="Gallery" centerText={true}>
+        <div className="my-8 flex justify-center">
+          <div className="tabs tabs-boxed border border-secondary/20 bg-base-100 shadow">
+            <button
+              className={`tab min-w-28 text-base font-bold normal-case tracking-wide ${
+                activeTab === 'photos' ? 'tab-active' : ''
+              }`}
+              onClick={() => setActiveTab('photos')}
+              type="button"
+            >
+              Photos
+            </button>
+            <button
+              className={`tab min-w-28 text-base font-bold normal-case tracking-wide ${
+                activeTab === 'videos' ? 'tab-active' : ''
+              }`}
+              onClick={() => setActiveTab('videos')}
+              type="button"
+            >
+              Videos
+            </button>
+          </div>
+        </div>
+      </SectionHeader>
+      {activeTab === 'videos' ? (
+        <SectionHeader title="Videos" horizontalLine={true}>
+          <div className="my-8 place-items-center lg:mx-40">
             <video
               className="h-auto max-w-full rounded-lg"
               autoPlay
@@ -65,112 +109,19 @@ export const GallerySection = () => {
             </video>
           </div>
         </SectionHeader>
-        <SectionHeader title="Living Room" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {living_room.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Balcony" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {balcony.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Kitchen" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {kitchen.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Bedrooms" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {bedrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Bathrooms" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {bathrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Miscellaneous" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {misc.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Common Areas" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {common.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Nature" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {nature.map((image, index) => (
-              <div className="break-inside-avoid mb-8">
-                <img
-                  className="h-auto max-w-full rounded-lg"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-      </div>
-    </section>
+      ) : (
+        <>
+          {renderImageSection('Living Room', living_room)}
+          {renderImageSection('Balcony', balcony)}
+          {renderImageSection('Kitchen', kitchen)}
+          {renderImageSection('Bedrooms', bedrooms)}
+          {renderImageSection('Bathrooms', bathrooms)}
+          {renderImageSection('Miscellaneous', misc)}
+          {renderImageSection('Common Areas', common)}
+          {renderImageSection('Nature', nature)}
+        </>
+      )}
+    </Container>
   );
 };
 
