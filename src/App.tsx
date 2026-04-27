@@ -16,6 +16,7 @@ import ManageInventory from './pages/ManageInventoryList';
 import ManageChecklist from './pages/ManageChecklist';
 import Inventory from './pages/Inventory';
 import Checklist from './pages/Checklist';
+import History from './pages/History';
 import ScrollToTop from 'react-scroll-up';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
@@ -61,6 +62,7 @@ const App = () => {
             <Route path="/manage_checklist" element={<ManageChecklist />} />
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/checklist" element={<Checklist />} />
+            <Route path="/history" element={<History />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

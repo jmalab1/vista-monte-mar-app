@@ -37,7 +37,6 @@ Defined in `src/App.tsx` with basename `/vista_monte_mar/`:
 ## Local Dev
 
 ```bash
-cd C:\Users\malab\Documents\dev\vista-monte-mar-app
 npm install
 npm run dev
 ```
@@ -54,13 +53,30 @@ Scripts:
 - Vite proxies `/api` to `https://localhost` with `secure: false`.
 - BrowserRouter basename is `/vista_monte_mar/`.
 - Nginx rewrites root `/` to `/vista_monte_mar/`.
-- Nginx proxies `/api/` to backend host `server:8135`.
+- Nginx proxies `/api/` to the runtime-configured upstream, defaulting to `http://127.0.0.1:8135`.
 
 ## Docker Notes
 
 - `pushToDocker.sh` builds/pushes: `jmalab24/vista-monte-mar-app:latest`
 - `pushToDockerDev.sh` builds/pushes: `jmalab24/vista-monte-mar-app:dev`
-- Container uses nginx and serves built output from `/app/dist`.
+- Container now builds the app inside Docker and serves built output from `/app/dist`.
+- `API_UPSTREAM` is injected at container startup and defaults to `http://127.0.0.1:8135`.
+
+## k3s Deploy
+
+Development flow:
+- Run locally with `npm run dev`
+- Deploy via the sibling `vista-monte-mar-services` repo
+
+Ownership:
+- This repo owns the frontend source and Docker image build
+- `vista-monte-mar-services` owns Kubernetes manifests, deploy scripts, ingress, and cluster wiring
+
+Required deploy env vars:
+- Managed in `vista-monte-mar-services`
+
+Optional deploy env vars:
+- Managed in `vista-monte-mar-services`
 
 ## First Files To Open
 
@@ -68,5 +84,4 @@ Scripts:
 2. `src/pages/Home/index.tsx`
 3. `src/modules/ContactForm/index.tsx`
 4. `vite.config.js`
-5. `conf/server.conf`
-
+5. `conf/server.conf.template`

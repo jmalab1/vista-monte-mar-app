@@ -10,12 +10,119 @@ import _ from 'lodash';
 import { Navigate } from 'react-router-dom';
 import ButtonItem from '../../components/form-items/ButtonItem';
 
+type ChecklistItemConfig = {
+  name?: string;
+  fields?: Record<string, { type: string; name: string; value?: string }>;
+  day?: string | number;
+};
+
+type ChecklistSection = {
+  label: string;
+  sortOrder: number;
+  items: Array<{ idPath: string; config: ChecklistItemConfig }>;
+};
+
+const isObject = (value: unknown): value is Record<string, unknown> => {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+};
+
+const isChecklistItem = (value: unknown): value is ChecklistItemConfig => {
+  return isObject(value) && Boolean((value as ChecklistItemConfig).fields);
+};
+
+const getDayMeta = (
+  rawDay: string | number | undefined,
+  fallbackKey: string
+): { label: string; order: number } => {
+  const fallback = { label: 'Checklist', order: Number.MAX_SAFE_INTEGER };
+
+  const normalizeDay = (text: string): { label: string; order: number } | null => {
+    const trimmed = text.trim();
+    const dayMatch = trimmed.match(/^(?:day\s*)?(\d+)$/i);
+
+    if (dayMatch) {
+      const dayNum = Number(dayMatch[1]);
+      return { label: `Day ${dayNum}`, order: dayNum };
+    }
+
+    return null;
+  };
+
+  if (typeof rawDay === 'number' && Number.isFinite(rawDay)) {
+    return { label: `Day ${rawDay}`, order: rawDay };
+  }
+
+  if (typeof rawDay === 'string') {
+    const parsed = normalizeDay(rawDay);
+    if (parsed) {
+      return parsed;
+    }
+    return { label: rawDay, order: Number.MAX_SAFE_INTEGER - 1 };
+  }
+
+  const fromKey = normalizeDay(fallbackKey);
+  if (fromKey) {
+    return fromKey;
+  }
+
+  return fallback;
+};
+
+const buildSections = (checklist: Record<string, unknown>): ChecklistSection[] => {
+  const grouped = new Map<string, ChecklistSection>();
+
+  const ensureSection = (label: string, order: number): ChecklistSection => {
+    if (!grouped.has(label)) {
+      grouped.set(label, { label, sortOrder: order, items: [] });
+    }
+    return grouped.get(label) as ChecklistSection;
+  };
+
+  _.forEach(checklist, (value, key) => {
+    if (isChecklistItem(value)) {
+      const { label, order } = getDayMeta(value.day, key);
+      ensureSection(label, order).items.push({ idPath: key, config: value });
+      return;
+    }
+
+    if (isObject(value) && isObject(value.items)) {
+      const group = value as {
+        name?: string;
+        day?: string | number;
+        items: Record<string, unknown>;
+      };
+
+      const dayMeta = getDayMeta(group.day, key);
+      const label = group.name?.trim() || dayMeta.label;
+      const section = ensureSection(label, dayMeta.order);
+
+      _.forEach(group.items, (itemValue, itemKey) => {
+        if (isChecklistItem(itemValue)) {
+          section.items.push({ idPath: `${key}.${itemKey}`, config: itemValue });
+        }
+      });
+    }
+  });
+
+  return Array.from(grouped.values())
+    .map((section) => ({
+      ...section,
+      items: section.items.sort((a, b) => a.idPath.localeCompare(b.idPath)),
+    }))
+    .sort((a, b) => {
+      if (a.sortOrder !== b.sortOrder) {
+        return a.sortOrder - b.sortOrder;
+      }
+      return a.label.localeCompare(b.label);
+    });
+};
+
 const Checklist = () => {
   const { isAuthenticated } = useAuth();
   const { showToast } = useToast();
   const [saving, setSaving] = useState(false);
-  const [checklistObj, setChecklistObj] = useState<Record<string, any>>({});
-  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [checklistObj, setChecklistObj] = useState<Record<string, unknown>>({});
+  const [formData, setFormData] = useState<Record<string, unknown>>({});
 
   // Ref to store the debounce timer ID, so it can be cleared on each trigger
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
@@ -52,7 +159,8 @@ const Checklist = () => {
     const { value, type, checked } = e.target as HTMLInputElement;
 
     setFormData((prevFormData) => {
-      const currentParentValue = prevFormData[parentID];
+      const updatedData = _.cloneDeep(prevFormData);
+      const currentParentValue = _.get(updatedData, parentID);
       const nextValue = type === 'checkbox' ? checked : value;
       const updatedParentValue =
         currentParentValue &&
@@ -63,10 +171,7 @@ const Checklist = () => {
             ? nextValue
             : { [id]: nextValue };
 
-      const updatedData = {
-        ...prevFormData,
-        [parentID]: updatedParentValue,
-      };
+      _.set(updatedData, parentID, updatedParentValue);
 
       handleDebouncedSave(updatedData);
 
@@ -101,6 +206,8 @@ const Checklist = () => {
     }, 1000); // Adjust the delay as needed (1000ms = 1 second)
   };
 
+  const checklistSections = buildSections(checklistObj);
+
   return (
     <Container classValue="bg-base-200 lg:px-8">
       {!isAuthenticated && <Navigate to="/login" />}
@@ -121,20 +228,26 @@ const Checklist = () => {
               >
                 Save
               </ButtonItem>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-                {_.map(checklistObj, (value, key) => (
-                  <div key={key}>
-                    <FormCard
-                      title={value.name}
-                      fields={value.fields}
-                      onChange={handleChange}
-                      value={formData[key]}
-                      parentID={key}
-                      checkbox={true}
-                    ></FormCard>
+
+              {_.map(checklistSections, (section) => (
+                <div key={section.label} className="mt-6 first:mt-4">
+                  <h3 className="text-lg font-semibold mb-3">{section.label}</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {_.map(section.items, (item) => (
+                      <div key={item.idPath}>
+                        <FormCard
+                          title={item.config.name || item.idPath}
+                          fields={item.config.fields}
+                          onChange={handleChange}
+                          value={_.get(formData, item.idPath) as Record<string, unknown>}
+                          parentID={item.idPath}
+                          checkbox={true}
+                        ></FormCard>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </SectionHeader>
           </div>
         </div>

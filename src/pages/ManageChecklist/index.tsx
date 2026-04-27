@@ -12,13 +12,120 @@ import AdminNav from '../../modules/AdminNav';
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 
+type ChecklistItemConfig = {
+  name?: string;
+  fields?: Record<string, { type: string; name: string; value?: string }>;
+  day?: string | number;
+};
+
+type ChecklistSection = {
+  label: string;
+  sortOrder: number;
+  items: Array<{ idPath: string; config: ChecklistItemConfig }>;
+};
+
+const isObject = (value: unknown): value is Record<string, unknown> => {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+};
+
+const isChecklistItem = (value: unknown): value is ChecklistItemConfig => {
+  return isObject(value) && Boolean((value as ChecklistItemConfig).fields);
+};
+
+const getDayMeta = (
+  rawDay: string | number | undefined,
+  fallbackKey: string
+): { label: string; order: number } => {
+  const fallback = { label: 'Checklist', order: Number.MAX_SAFE_INTEGER };
+
+  const normalizeDay = (text: string): { label: string; order: number } | null => {
+    const trimmed = text.trim();
+    const dayMatch = trimmed.match(/^(?:day\s*)?(\d+)$/i);
+
+    if (dayMatch) {
+      const dayNum = Number(dayMatch[1]);
+      return { label: `Day ${dayNum}`, order: dayNum };
+    }
+
+    return null;
+  };
+
+  if (typeof rawDay === 'number' && Number.isFinite(rawDay)) {
+    return { label: `Day ${rawDay}`, order: rawDay };
+  }
+
+  if (typeof rawDay === 'string') {
+    const parsed = normalizeDay(rawDay);
+    if (parsed) {
+      return parsed;
+    }
+    return { label: rawDay, order: Number.MAX_SAFE_INTEGER - 1 };
+  }
+
+  const fromKey = normalizeDay(fallbackKey);
+  if (fromKey) {
+    return fromKey;
+  }
+
+  return fallback;
+};
+
+const buildSections = (checklist: Record<string, unknown>): ChecklistSection[] => {
+  const grouped = new Map<string, ChecklistSection>();
+
+  const ensureSection = (label: string, order: number): ChecklistSection => {
+    if (!grouped.has(label)) {
+      grouped.set(label, { label, sortOrder: order, items: [] });
+    }
+    return grouped.get(label) as ChecklistSection;
+  };
+
+  _.forEach(checklist, (value, key) => {
+    if (isChecklistItem(value)) {
+      const { label, order } = getDayMeta(value.day, key);
+      ensureSection(label, order).items.push({ idPath: key, config: value });
+      return;
+    }
+
+    if (isObject(value) && isObject(value.items)) {
+      const group = value as {
+        name?: string;
+        day?: string | number;
+        items: Record<string, unknown>;
+      };
+
+      const dayMeta = getDayMeta(group.day, key);
+      const label = group.name?.trim() || dayMeta.label;
+      const section = ensureSection(label, dayMeta.order);
+
+      _.forEach(group.items, (itemValue, itemKey) => {
+        if (isChecklistItem(itemValue)) {
+          section.items.push({ idPath: `${key}.${itemKey}`, config: itemValue });
+        }
+      });
+    }
+  });
+
+  return Array.from(grouped.values())
+    .map((section) => ({
+      ...section,
+      items: section.items.sort((a, b) => a.idPath.localeCompare(b.idPath)),
+    }))
+    .sort((a, b) => {
+      if (a.sortOrder !== b.sortOrder) {
+        return a.sortOrder - b.sortOrder;
+      }
+      return a.label.localeCompare(b.label);
+    });
+};
+
 const ManageChecklist: React.FC = () => {
   const { showToast } = useToast();
   const { isAuthenticated } = useAuth();
   const [saving, setSaving] = useState(false);
   const [code, setCode] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [validJson, setValidJson] = useState<Record<string, any>>({});
+  const [validJson, setValidJson] = useState<Record<string, unknown>>({});
   const [showModal, setShowModal] = useState(false);
 
   // Fetch data on component mount
@@ -103,6 +210,8 @@ const ManageChecklist: React.FC = () => {
     return { line, column };
   };
 
+  const checklistSections = buildSections(validJson);
+
   return (
     <Container classValue="bg-base-200 lg:px-8">
       {!isAuthenticated && <Navigate to="/login" />}
@@ -147,16 +256,24 @@ const ManageChecklist: React.FC = () => {
                 callback={() => setShowModal(false)}
                 classValue="max-w-[1000px]"
               >
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 border">
-                  {_.map(validJson, (value, key) => (
-                    <FormCard
-                      title={value.name}
-                      fields={value.fields}
-                      onChange={() => {}}
-                      value={{}}
-                      parentID={key}
-                      checkbox={true}
-                    ></FormCard>
+                <div className="space-y-5 border p-2">
+                  {_.map(checklistSections, (section) => (
+                    <div key={section.label}>
+                      <h3 className="text-lg font-semibold mb-3">{section.label}</h3>
+                      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {_.map(section.items, (item) => (
+                          <FormCard
+                            key={item.idPath}
+                            title={item.config.name || item.idPath}
+                            fields={item.config.fields}
+                            onChange={() => {}}
+                            value={{}}
+                            parentID={item.idPath}
+                            checkbox={true}
+                          ></FormCard>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </Modal>

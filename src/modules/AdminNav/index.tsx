@@ -29,6 +29,11 @@ const AdminNav: FunctionComponent<TAdminNav> = ({ page }) => {
         active={page == 'checklist'}
         url={'/checklist'}
       />
+      <ConnectedButtonItem
+        title={'History'}
+        active={page == 'history'}
+        url={'/history'}
+      />
     </ConnectedButtons>
   );
 };
