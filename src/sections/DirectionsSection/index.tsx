@@ -10,18 +10,23 @@ import MapboxMap from '../../components/MapboxMap';
 export const DirectionsSection = () => {
   return (
     <Container classValue="bg-base-200">
-      <SectionHeader title="Directions">
+      <SectionHeader
+        title="Directions"
+        classValue="mx-auto w-full max-w-6xl"
+        contentClassValue="mt-8 space-y-10"
+      >
         <SectionHeader
           title="Location, Airport and Travel Time"
           textSize="2xl"
           horizontalLine={true}
+          contentClassValue="mt-5"
         >
           <Paragraph>
             We are located in Torres del Mar Condominiums in Jaco, Costa Rica on
             the Central Pacific coast. It is roughly 1.5 hours, depending on
             traffic, from San Juan Santamaria International Airport (SJO).
           </Paragraph>
-          <ButtonItem type={'button'} classValue="w-40 btn-secondary">
+          <ButtonItem type={'button'} classValue="w-full sm:w-40 btn-secondary">
             <Link
               to={`https://www.google.com/maps/dir/?api=1&origin=SJO&destination=Condominio+Torres+del+Mar`}
               target="_blank"
@@ -35,7 +40,12 @@ export const DirectionsSection = () => {
             </Link>
           </ButtonItem>
         </SectionHeader>
-        <SectionHeader title="Navigation" textSize="2xl" horizontalLine={true}>
+        <SectionHeader
+          title="Navigation"
+          textSize="2xl"
+          horizontalLine={true}
+          contentClassValue="mt-5"
+        >
           <Paragraph>
             We recommend using Waze to navigate around Costa Rica. It tends to
             be more accurate and up-to-date than Google Maps in road delays and
@@ -52,6 +62,7 @@ export const DirectionsSection = () => {
           title="Transportation"
           textSize="2xl"
           horizontalLine={true}
+          contentClassValue="mt-5"
         >
           <Paragraph>
             At the airport, you can get a taxi in the arrival area. Below are
@@ -61,20 +72,20 @@ export const DirectionsSection = () => {
           </Paragraph>
           <div className="flex flex-col">
             <div className="-m-1.5 overflow-x-auto">
-              <div className="p-1.5 min-w-full inline-block align-middle">
-                <div className="overflow-hidden">
+              <div className="inline-block min-w-full p-1.5 align-middle">
+                <div className="overflow-hidden rounded-2xl border border-[#eadccf] bg-white/85">
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
                     <thead>
-                      <tr>
+                      <tr className="bg-[#f9f1e7]">
                         <th
                           scope="col"
-                          className="px-3 py-3 text-start text-xs font-medium text-nuetral uppercase"
+                          className="px-3 py-3 text-start text-xs font-medium uppercase text-slate-600"
                         >
                           Company Name
                         </th>
                         <th
                           scope="col"
-                          className="px-3 py-3 text-start text-xs font-medium text-nuetral uppercase"
+                          className="px-3 py-3 text-start text-xs font-medium uppercase text-slate-600"
                         >
                           Contact Info
                         </th>
@@ -82,10 +93,10 @@ export const DirectionsSection = () => {
                     </thead>
                     <tbody className="divide-y">
                       <tr>
-                        <td className="px-6 py-4 text-sm font-medium text-nuetral">
+                        <td className="px-4 py-4 text-sm font-medium text-slate-700 sm:px-6">
                           CR Travels & Tours
                         </td>
-                        <td className="px-6 py-4 text-sm text-nuetral">
+                        <td className="px-4 py-4 text-sm text-slate-600 sm:px-6">
                           <a href="tel:506-6019-3784">+506-6019-3784</a>,{' '}
                           <a href="mailto:crtravelsandtour@gmail.com">
                             crtravelsandtour@gmail.com
@@ -93,26 +104,26 @@ export const DirectionsSection = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td className="px-6 py-4 text-sm font-medium text-nuetral">
+                        <td className="px-4 py-4 text-sm font-medium text-slate-700 sm:px-6">
                           Tranfers & Tours Costa Rica
                         </td>
-                        <td className="px-6 py-4 text-sm text-nuetral">
+                        <td className="px-4 py-4 text-sm text-slate-600 sm:px-6">
                           <a href="tel:506-8858-8333">+506-8858-8333</a>
                         </td>
                       </tr>
                       <tr>
-                        <td className="px-6 py-4 text-sm font-medium text-nuetral">
+                        <td className="px-4 py-4 text-sm font-medium text-slate-700 sm:px-6">
                           Arturo Saenz-Garcia
                         </td>
-                        <td className="px-6 py-4 text-sm text-nuetral">
+                        <td className="px-4 py-4 text-sm text-slate-600 sm:px-6">
                           <a href="tel:506-8822-1921">+506-8822-1921</a>
                         </td>
                       </tr>
                       <tr>
-                        <td className="px-6 py-4 text-sm font-medium text-nuetral">
+                        <td className="px-4 py-4 text-sm font-medium text-slate-700 sm:px-6">
                           Rich Coast Connections
                         </td>
-                        <td className="px-6 py-4 text-sm text-nuetral">
+                        <td className="px-4 py-4 text-sm text-slate-600 sm:px-6">
                           <a href="tel:506-8309-4521">+506-8309-4521</a>
                         </td>
                       </tr>

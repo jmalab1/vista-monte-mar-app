@@ -8,7 +8,7 @@ type TParagraph = {
 const Paragraph: FunctionComponent<TParagraph> = ({ children, classValue }) => {
   return (
     <>
-      <p className={`text-md mt-3 mb-3 ${classValue}`}>{children}</p>
+      <p className={`my-3 text-base leading-7 text-slate-600 ${classValue}`}>{children}</p>
     </>
   );
 };

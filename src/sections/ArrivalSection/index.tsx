@@ -5,11 +5,16 @@ import SectionHeader from '../../components/heading/SectionHeader';
 export const ArrivalSection = () => {
   return (
     <Container classValue="bg-base-200">
-      <SectionHeader title="Registration, Arriving and Unit Access ">
+      <SectionHeader
+        title="Registration, Arriving and Unit Access"
+        classValue="mx-auto w-full max-w-5xl"
+        contentClassValue="mt-8 space-y-10"
+      >
         <SectionHeader
           title="Before Arrival"
           textSize="2xl"
           horizontalLine={true}
+          contentClassValue="mt-5"
         >
           <Paragraph>
             Prior to arrival, you will need to provide us with all guests' full
@@ -22,6 +27,7 @@ export const ArrivalSection = () => {
           title="Upon Arrival"
           textSize="2xl"
           horizontalLine={true}
+          contentClassValue="mt-5"
         >
           <Paragraph>
             At the gatehouse, upon your arrival, they will take down your plate
@@ -41,6 +47,7 @@ export const ArrivalSection = () => {
           title="Entering/Exiting the Unit"
           textSize="2xl"
           horizontalLine={true}
+          contentClassValue="mt-5"
         >
           <Paragraph>
             The condo unit is located in the second tower, past the rancho-style
@@ -66,6 +73,7 @@ export const ArrivalSection = () => {
           title="Wi-Fi Access"
           textSize="2xl"
           horizontalLine={true}
+          contentClassValue="mt-5"
         >
           <Paragraph>
             We provide a complimentary access to the internet. You can connect

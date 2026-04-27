@@ -88,7 +88,7 @@ const MapboxMap: FunctionComponent<TMapboxMap> = ({ coordinates, name }) => {
         zoom={14}
         ref={mapRef}
         className="rounded-2xl"
-        style={{ height: '26rem', width: '100%' }}
+        style={{ height: 'min(26rem, 70vh)', width: '100%' }}
       >
         <TileLayer
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"

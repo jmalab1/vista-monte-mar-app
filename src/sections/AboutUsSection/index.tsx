@@ -8,6 +8,7 @@ export const AboutUsSection = () => {
       <SectionHeader
         title="About Us and Our Home"
         classValue="mx-auto w-full max-w-5xl px-2 lg:px-8"
+        contentClassValue="mt-6"
       >
         {about.map((a, index) => (
           <p

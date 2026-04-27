@@ -8,24 +8,24 @@ import {
   BuildingStorefrontIcon,
 } from '@heroicons/react/24/solid';
 import { useState } from 'react';
+import _ from 'lodash';
 import RestaurantDetails from '../../modules/RestaurantDetails';
 import EmergencyDetails from '../../modules/EmergencyDetails';
 import ThingsToDoDetails from '../../modules/ThingsToDoDetails';
 import NoteworthyDetails from '../../modules/NoteworthyDetails';
 import GroceryDetails from '../../modules/GroceryDetails';
+import BankDetails from '../../modules/BankDetails';
+import AbbLogo from '../../modules/Logos/AbbLogo';
 import SectionHeader from '../../components/heading/SectionHeader';
 import CategoryCard from '../../components/Categories/CategoryCard';
-import _ from 'lodash';
-import AbbLogo from '../../modules/Logos/AbbLogo';
+import Paragraph from '../../components/ElementWrapper/Paragraph';
+import Container from '../../components/Container';
 import PFood from '../../assets/misc/food.jpg?w=600&webp';
 import PThingsTodo from '../../assets/misc/things_to_do.jpg?w=600&webp';
 import PEmergency from '../../assets/misc/emergency.jpg?w=600&webp';
 import PNoteworthy from '../../assets/misc/artwork.jpg?w=600&webp';
 import PGrocery from '../../assets/misc/grocery.jpg?w=600&webp';
 import PBank from '../../assets/misc/atm.jpg?w=600&webp';
-import Paragraph from '../../components/ElementWrapper/Paragraph';
-import BankDetails from '../../modules/BankDetails';
-import Container from '../../components/Container';
 
 let categories = [
   {
@@ -35,6 +35,8 @@ let categories = [
     title: 'Restaurants',
     desc: 'Looking for a bite to eat?',
     active: true,
+    attribution: '',
+    photo_link: '',
   },
   {
     id: 'things_to_do',
@@ -43,6 +45,8 @@ let categories = [
     title: 'Things To Do',
     desc: 'Explore Jaco',
     active: false,
+    attribution: '',
+    photo_link: '',
   },
   {
     id: 'emergency',
@@ -62,6 +66,8 @@ let categories = [
     title: 'Noteworthy',
     desc: 'Looking for more?',
     active: false,
+    attribution: '',
+    photo_link: '',
   },
   {
     id: 'groceries',
@@ -70,6 +76,8 @@ let categories = [
     title: 'Groceries',
     desc: 'Make sure to have the necessities',
     active: false,
+    attribution: '',
+    photo_link: '',
   },
   {
     id: 'banks',
@@ -89,68 +97,67 @@ export const JacoBeachSection = () => {
 
   const cardClickCallbackHandler = (id: string) => {
     _.each(categories, (category) => {
-      category.active = false;
-
-      if (id == category.id) {
-        category.active = true;
-      }
+      category.active = id === category.id;
     });
     setHiddenDivState(id);
   };
 
   return (
-    <Container classValue="bg-base-200 lg:px-8">
-      <SectionHeader title="Jaco Beach" centerText={true}>
-        <Paragraph>
-          Jaco is the most developed beach town on the Pacific Coast of Costa
-          Rica. Located in the province of Puntarenas, it is known for its
-          beautiful beach sceneries, stunning sunset, surfing waves, and various
-          nature-centered activities. Below are some information to get you
-          pumped for your visit.
-        </Paragraph>
-      </SectionHeader>
-      <div className="grid grid-cols-2 lg:grid-cols-5 lg:grid-rows-2 gap-4">
-        <Card
-          className="relative col-span-2 row-span-2 h-full w-full place-items-center overflow-hidden text-center bg-nuetral shadow-xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-cyan-500 via-blue-600 to-indigo-500"
-          placeholder={undefined}
-          onPointerEnter={undefined}
-          onPointerLeave={undefined}
-        >
-          <div className="absolute inset-0 h-full w-full bg-gray-900/75" />
-          <CardBody
-            className="relative w-full"
+    <section className="pb-16">
+      <Container classValue="gap-8 bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(243,248,248,0.9))] lg:px-8">
+        <div className="flex flex-col gap-3">
+          <p className="section-kicker text-center">Around Jaco</p>
+          <SectionHeader title="Jaco Beach" centerText={true}>
+            <Paragraph>
+              Jaco is one of the most lively beach towns on Costa Rica&apos;s Pacific coast,
+              known for sunsets, surf, food, and easy access to nature-filled day trips.
+              Use these local guides to shape the kind of stay you want.
+            </Paragraph>
+          </SectionHeader>
+        </div>
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1.2fr_1fr]">
+          <Card
+            className="relative h-full min-h-[18rem] w-full overflow-hidden rounded-[2rem] border-0 shadow-[0_20px_60px_rgba(24,47,58,0.2)]"
             placeholder={undefined}
             onPointerEnter={undefined}
             onPointerLeave={undefined}
           >
-            <p className="mt-9 text-white text-2xl">Book With Us</p>
-            <p className="mt-4 mb-14 font-normal text-white opacity-50">
-              Enjoy our condo steps from the Pacific coast! Perfect for 4
-              guests, it features modern amenities, a pool, and easy access to
-              local adventures. Book now for your Costa Rica getaway!
-            </p>
-            <div className="flex gap-6 text-white justify-center">
-              <AbbLogo size={40} />
-              {/* <VrboLogo size={40} /> */}
-            </div>
-          </CardBody>
-        </Card>
-
-        {categories.map((props, key) => (
-          <div className={`row-start-${key}`}>
-            <CategoryCard {...props} callback={cardClickCallbackHandler} />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(78,171,182,0.65),_rgba(28,86,119,0.95))]" />
+            <CardBody
+              className="relative flex h-full flex-col justify-between p-6 sm:p-8"
+              placeholder={undefined}
+              onPointerEnter={undefined}
+              onPointerLeave={undefined}
+            >
+              <div>
+                <p className="section-kicker text-white/80">Book Direct</p>
+                <p className="mt-4 text-2xl font-semibold text-white sm:text-3xl">Your beach days start here</p>
+                <p className="mt-4 max-w-lg text-base leading-7 text-white/75">
+                  Enjoy a bright condo steps from the Pacific coast, with space to unwind,
+                  dip in the pool, and return from adventures to something calm and comfortable.
+                </p>
+              </div>
+              <div className="flex items-center gap-6 text-white">
+                <AbbLogo size={44} />
+              </div>
+            </CardBody>
+          </Card>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-2">
+            {categories.map((props) => (
+              <CategoryCard key={props.id} {...props} callback={cardClickCallbackHandler} />
+            ))}
           </div>
-        ))}
-      </div>
-      <div>
-        {hiddenDivState == 'restaurants' && <RestaurantDetails />}
-        {hiddenDivState == 'emergency' && <EmergencyDetails />}
-        {hiddenDivState == 'things_to_do' && <ThingsToDoDetails />}
-        {hiddenDivState == 'noteworthy' && <NoteworthyDetails />}
-        {hiddenDivState == 'groceries' && <GroceryDetails />}
-        {hiddenDivState == 'banks' && <BankDetails />}
-      </div>
-    </Container>
+        </div>
+        <div className="rounded-[1.75rem] border border-white/80 bg-white/70 p-4 shadow-inner sm:p-6">
+          {hiddenDivState == 'restaurants' && <RestaurantDetails />}
+          {hiddenDivState == 'emergency' && <EmergencyDetails />}
+          {hiddenDivState == 'things_to_do' && <ThingsToDoDetails />}
+          {hiddenDivState == 'noteworthy' && <NoteworthyDetails />}
+          {hiddenDivState == 'groceries' && <GroceryDetails />}
+          {hiddenDivState == 'banks' && <BankDetails />}
+        </div>
+      </Container>
+    </section>
   );
 };
 

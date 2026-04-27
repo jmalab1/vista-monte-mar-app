@@ -59,9 +59,7 @@ const ContactForm = () => {
         }
       })
       .finally(() => {
-        // Always run cleanup code, stop loading spinner
         setSaving(false);
-
         setFormValues({
           firstname: '',
           lastname: '',
@@ -77,58 +75,85 @@ const ContactForm = () => {
   };
 
   return (
-    <Container classValue="lg:px-72">
-      <form id="contact" onSubmit={handleSubmit}>
-        <SectionHeader title="Contact Us" centerText={true}>
-          Tell us about your visit. We'd love to hear from you.
-        </SectionHeader>
-        <div className="mt-10 grid grid-cols-1 gap-x-6 sm:grid-cols-6">
-          <Input
-            type="text"
-            title="First Name"
-            id="firstname"
-            required={true}
-            onChange={handleChange}
-            value={formValues.firstname}
-          />
-          <Input
-            type="text"
-            title="Last Name"
-            id="lastname"
-            onChange={handleChange}
-            value={formValues.lastname}
-          />
-          <Input
-            type="email"
-            title="Email"
-            id="email"
-            required={true}
-            onChange={handleChange}
-            value={formValues.email}
-          />
-          <Input
-            type="text"
-            title="Phone Number"
-            id="phone_number"
-            onChange={handleChange}
-            value={formValues.phone_number}
-          />
-          <TextArea
-            title="Comment"
-            id="comment"
-            placeholder="Let us know what you think"
-            onChange={handleChange}
-            required={true}
-            value={formValues.comment}
-            rows={5}
-          />
+    <section className="pb-20">
+      <Container classValue="bg-[linear-gradient(180deg,rgba(247,251,252,0.95),rgba(255,248,242,0.98))]">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div className="rounded-[1.75rem] bg-[linear-gradient(180deg,#245465,#1f3f4c)] p-6 text-white shadow-[0_20px_60px_rgba(22,51,61,0.22)] sm:p-8">
+            <p className="section-kicker text-white/75">Stay In Touch</p>
+            <h2 className="mt-4 font-pacifico text-4xl text-[#ffd8b4] sm:text-5xl">Contact Us</h2>
+            <p className="mt-6 max-w-md text-base leading-7 text-white/75">
+              Tell us about your plans, your questions, or what would make your stay feel
+              especially easy. We&apos;d love to hear from you.
+            </p>
+            <div className="mt-8 space-y-3 text-sm text-white/80">
+              <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3">
+                Friendly support for visit questions
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3">
+                Great for planning arrival details in advance
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3">
+                Quick note or full message, both are welcome
+              </div>
+            </div>
+          </div>
+          <form
+            id="contact"
+            onSubmit={handleSubmit}
+            className="rounded-[1.75rem] border border-white/80 bg-white/80 p-6 shadow-lg backdrop-blur sm:p-8"
+          >
+            <SectionHeader title="Plan Your Visit" centerText={false} headerPadding={0}>
+              Share a few details and we&apos;ll be in touch.
+            </SectionHeader>
+            <div className="mt-8 grid grid-cols-1 gap-x-6 sm:grid-cols-6">
+              <Input
+                type="text"
+                title="First Name"
+                id="firstname"
+                required={true}
+                onChange={handleChange}
+                value={formValues.firstname}
+              />
+              <Input
+                type="text"
+                title="Last Name"
+                id="lastname"
+                onChange={handleChange}
+                value={formValues.lastname}
+              />
+              <Input
+                type="email"
+                title="Email"
+                id="email"
+                required={true}
+                onChange={handleChange}
+                value={formValues.email}
+              />
+              <Input
+                type="text"
+                title="Phone Number"
+                id="phone_number"
+                onChange={handleChange}
+                value={formValues.phone_number}
+              />
+              <TextArea
+                title="Comment"
+                id="comment"
+                placeholder="Tell us what you're planning or what you'd like to know"
+                onChange={handleChange}
+                required={true}
+                value={formValues.comment}
+                rows={5}
+              />
+            </div>
+            <div className="mr-1 mt-6 flex items-center justify-end gap-x-6">
+              <ButtonItem classValue="btn-secondary" type="submit" saving={saving}>
+                Submit
+              </ButtonItem>
+            </div>
+          </form>
         </div>
-        <div className="mt-6 flex items-center justify-end gap-x-6 mr-4">
-          <ButtonItem classValue="btn-secondary" type="submit" saving={saving}>
-            Submit
-          </ButtonItem>
-        </div>
-      </form>
+      </Container>
       {modalValues.title != '' && (
         <Modal
           showModal={true}
@@ -137,7 +162,7 @@ const ContactForm = () => {
           callback={modalCallbackHandler}
         />
       )}
-    </Container>
+    </section>
   );
 };
 

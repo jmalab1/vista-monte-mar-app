@@ -4,11 +4,11 @@ import JacoBeachSection from '../../sections/JacoBeachSection';
 
 const Home = () => {
   return (
-    <>
+    <div className="page-shell flex flex-col gap-12">
       <Hero />
       <JacoBeachSection />
       <ContactForm />
-    </>
+    </div>
   );
 };
 

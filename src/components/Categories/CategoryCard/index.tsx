@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Card, CardBody, Typography } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 
@@ -11,8 +10,8 @@ interface CategoryCardProps {
   icon: React.ElementType;
   callback: (id: string) => void;
   active: boolean;
-  attribution: string;
-  photo_link: string;
+  attribution?: string;
+  photo_link?: string;
 }
 
 const CategoryCard = ({
@@ -28,7 +27,11 @@ const CategoryCard = ({
 }: CategoryCardProps) => {
   return (
     <Card
-      className={`relative grid lg:min-h-[12rem] w-full overflow-hidden ${active ? 'grayscale' : 'hover:cursor-pointer transition-transform duration-300 transform hover:scale-105'}`}
+      className={`relative grid min-h-[7rem] w-full overflow-hidden rounded-[1.25rem] border-0 shadow-md transition duration-300 sm:min-h-[8.5rem] sm:rounded-[1.5rem] ${
+        active
+          ? 'scale-[0.98] ring-2 ring-[#d8a47b]'
+          : 'hover:cursor-pointer hover:scale-[1.02] hover:shadow-xl'
+      }`}
       placeholder={undefined}
       onPointerEnter={undefined}
       onPointerLeave={undefined}
@@ -39,18 +42,25 @@ const CategoryCard = ({
         alt={title}
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
-      <div className="absolute inset-0 h-full w-full bg-black/50" />
+      <div className={`absolute inset-0 h-full w-full ${active ? 'bg-[#204b5a]/50' : 'bg-black/45'}`} />
       <CardBody
-        className="relative flex flex-col justify-between"
+        className="relative flex h-full flex-col justify-between p-3 sm:p-4 lg:p-5"
         placeholder={undefined}
         onPointerEnter={undefined}
         onPointerLeave={undefined}
       >
-        <Icon className="h-8 w-8 text-white hidden lg:block" />
+        <div className="flex items-start justify-between gap-3">
+          <Icon className="hidden h-7 w-7 text-white lg:block" />
+          {active && (
+            <span className="rounded-full border border-white/60 bg-white/20 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.18em] text-white sm:px-3 sm:text-[11px]">
+              Viewing
+            </span>
+          )}
+        </div>
         <div>
           <Typography
             variant="h5"
-            className="mb-1"
+            className="mb-1 text-base sm:text-lg lg:text-xl"
             color="white"
             placeholder={undefined}
             onPointerEnter={undefined}
@@ -60,7 +70,7 @@ const CategoryCard = ({
           </Typography>
           <Typography
             color="white"
-            className="text-xs font-bold opacity-50 hidden lg:block"
+            className="hidden text-sm font-medium leading-6 text-white/75 lg:block"
             placeholder={undefined}
             onPointerEnter={undefined}
             onPointerLeave={undefined}
@@ -69,12 +79,15 @@ const CategoryCard = ({
           </Typography>
         </div>
       </CardBody>
-      <div className="text-[6pt] absolute bottom-0 right-0 bg-white bg-opacity-60 pl-2 pr-2">
-        <Link to={photo_link} target="_blank">
-          {attribution}
-        </Link>
-      </div>
+      {attribution && photo_link && (
+        <div className="absolute bottom-2 right-2 rounded-full bg-white/70 px-2 py-1 text-[8px] text-slate-700 backdrop-blur sm:text-[9px]">
+          <Link to={photo_link} target="_blank">
+            {attribution}
+          </Link>
+        </div>
+      )}
     </Card>
   );
 };
+
 export default CategoryCard;

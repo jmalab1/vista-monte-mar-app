@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import SectionHeader from '../../components/heading/SectionHeader';
 import balcony1 from '/src/assets/balcony/image (1).jpg?w=800&webp';
 import balcony2 from '/src/assets/balcony/image (2).jpg?w=800&webp';
@@ -34,93 +33,120 @@ import m2 from '/src/assets/misc/image (2).jpg?w=800&webp';
 import movie from '/src/assets/movie/Condo.mp4?w=800&webp';
 import Container from '../../components/Container';
 
+type GalleryGroup = {
+  title: string;
+  description: string;
+  images: string[];
+};
+
+const galleryGroups: GalleryGroup[] = [
+  {
+    title: 'Living Room',
+    description: 'Main shared space with open seating, natural light, and relaxed gathering areas.',
+    images: [lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8],
+  },
+  {
+    title: 'Balcony',
+    description: 'Outdoor views and quiet corners for coffee, sunsets, and fresh air.',
+    images: [balcony1, balcony2, balcony3],
+  },
+  {
+    title: 'Kitchen',
+    description: 'Cooking and prep space with the essentials for an easy stay-in meal.',
+    images: [k1, k2, k3, k4, k5],
+  },
+  {
+    title: 'Bedrooms',
+    description: 'Sleeping areas set up for a comfortable, low-stress home base.',
+    images: [br1, br2, br3, br4, br5],
+  },
+  {
+    title: 'Bathrooms',
+    description: 'Clean, bright utility spaces with the basics close at hand.',
+    images: [bt1, bt2, bt3],
+  },
+  {
+    title: 'Common Areas',
+    description: 'Shared building spaces that shape the overall experience around the condo.',
+    images: [c1, c2],
+  },
+  {
+    title: 'Nature',
+    description: 'A few views from the surrounding area that help set the mood of the trip.',
+    images: [n1, n2, n3],
+  },
+  {
+    title: 'Miscellaneous',
+    description: 'Extra details and moments from around the property and stay.',
+    images: [m1, m2],
+  },
+];
+
+const renderPhotoGrid = (images: string[], title: string) => (
+  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    {images.map((image, index) => (
+      <figure
+        key={`${title}-${index}`}
+        className="aspect-[4/3] overflow-hidden rounded-[1.4rem] border border-white/80 bg-white/70 shadow-[0_12px_30px_rgba(34,56,69,0.08)]"
+      >
+        <img
+          className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]"
+          src={image}
+          alt={`${title} image ${index + 1}`}
+        />
+      </figure>
+    ))}
+  </div>
+);
+
 export const GallerySection = () => {
-  const [activeTab, setActiveTab] = useState<'photos' | 'videos'>('photos');
-
-  const balcony = [balcony1, balcony2, balcony3];
-
-  const living_room = [lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8];
-
-  const kitchen = [k1, k2, k3, k4, k5];
-
-  const bedrooms = [br1, br2, br3, br4, br5];
-
-  const bathrooms = [bt1, bt2, bt3];
-
-  const nature = [n1, n2, n3];
-
-  const common = [c1, c2];
-
-  const misc = [m1, m2];
-
-  const renderImageSection = (title: string, images: string[]) => (
-    <SectionHeader title={title} horizontalLine={true}>
-      <div className="columns-1 gap-7 mt-8 md:columns-2 xl:columns-3">
-        {images.map((image, index) => (
-          <div className="break-inside-avoid mb-8" key={`${title}-${index}`}>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src={image}
-              alt={`${title} image ${index + 1}`}
-            />
-          </div>
-        ))}
-      </div>
-    </SectionHeader>
-  );
-
   return (
     <Container classValue="bg-base-200 lg:px-8">
-      <SectionHeader title="Gallery" centerText={true}>
-        <div className="my-8 flex justify-center">
-          <div className="tabs tabs-boxed border border-secondary/20 bg-base-100 shadow">
-            <button
-              className={`tab min-w-28 text-base font-bold normal-case tracking-wide ${
-                activeTab === 'photos' ? 'tab-active' : ''
-              }`}
-              onClick={() => setActiveTab('photos')}
-              type="button"
-            >
-              Photos
-            </button>
-            <button
-              className={`tab min-w-28 text-base font-bold normal-case tracking-wide ${
-                activeTab === 'videos' ? 'tab-active' : ''
-              }`}
-              onClick={() => setActiveTab('videos')}
-              type="button"
-            >
-              Videos
-            </button>
-          </div>
+      <SectionHeader
+        title="Gallery"
+        centerText={true}
+        classValue="mx-auto w-full max-w-6xl"
+        contentClassValue="mt-6"
+      >
+        <p className="mx-auto max-w-3xl text-base leading-7 text-slate-600">
+          A room-by-room look at the condo, plus a few surrounding views to help you get a feel
+          for the stay before you arrive.
+        </p>
+      </SectionHeader>
+
+      <SectionHeader
+        title="Video Tour"
+        horizontalLine={true}
+        classValue="mx-auto w-full max-w-6xl"
+        contentClassValue="mt-6"
+      >
+        <div className="overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/70 p-2 shadow-[0_16px_36px_rgba(34,56,69,0.1)] sm:p-3">
+          <video
+            className="h-auto max-w-full rounded-[1.1rem]"
+            controls
+            loop
+          >
+            <source src={movie} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </SectionHeader>
-      {activeTab === 'videos' ? (
-        <SectionHeader title="Videos" horizontalLine={true}>
-          <div className="my-8 place-items-center lg:mx-40">
-            <video
-              className="h-auto max-w-full rounded-lg"
-              autoPlay
-              controls
-              loop
-            >
-              <source src={movie} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </SectionHeader>
-      ) : (
-        <>
-          {renderImageSection('Living Room', living_room)}
-          {renderImageSection('Balcony', balcony)}
-          {renderImageSection('Kitchen', kitchen)}
-          {renderImageSection('Bedrooms', bedrooms)}
-          {renderImageSection('Bathrooms', bathrooms)}
-          {renderImageSection('Miscellaneous', misc)}
-          {renderImageSection('Common Areas', common)}
-          {renderImageSection('Nature', nature)}
-        </>
-      )}
+
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 sm:gap-12">
+        {galleryGroups.map((group) => (
+          <SectionHeader
+            key={group.title}
+            title={group.title}
+            horizontalLine={true}
+            contentClassValue="mt-6"
+          >
+            <p className="mb-6 max-w-3xl text-base leading-7 text-slate-600">
+              {group.description}
+            </p>
+            {renderPhotoGrid(group.images, group.title)}
+          </SectionHeader>
+        ))}
+      </div>
     </Container>
   );
 };

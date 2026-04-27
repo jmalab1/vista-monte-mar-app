@@ -10,6 +10,7 @@ type TSectionHeader = {
   horizontalLine?: boolean;
   classValue?: string;
   headerPadding?: number;
+  contentClassValue?: string;
 };
 
 const SectionHeader: FunctionComponent<TSectionHeader> = ({
@@ -20,6 +21,7 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
   horizontalLine,
   classValue,
   headerPadding = 14,
+  contentClassValue = 'mt-5',
 }) => {
   let classNamePlus = classValue ? classValue : '';
 
@@ -29,14 +31,17 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
 
   return (
     <>
-      <div className={`mt-${headerPadding} ${classNamePlus} ${classValue}`}>
+      <div
+        className={classNamePlus}
+        style={{ marginTop: `${headerPadding * 0.25}rem` }}
+      >
         <h1
-          className={`text-secondary ${textSize ? 'text-' + textSize : 'text-4xl'} font-bold font-pacifico`}
+          className={`font-pacifico text-[#d48a58] ${textSize ? 'text-' + textSize : 'text-4xl sm:text-5xl'}`}
         >
           {title}
         </h1>
         {horizontalLine && <HorizontalLine />}
-        {children}
+        {children && <div className={contentClassValue}>{children}</div>}
       </div>
     </>
   );
