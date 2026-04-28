@@ -20,24 +20,6 @@ import History from './pages/History';
 import ScrollToTop from 'react-scroll-up';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
-
-const VisitorTracker = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    axios
-      .post('/api/track-visitor', {
-        path: location.pathname,
-        referrer: document.referrer || null,
-      })
-      .catch(() => {
-        // Tracking should never break page usage.
-      });
-  }, [location.pathname]);
-
-  return null;
-};
 
 const RouteScrollToTop = () => {
   const location = useLocation();
@@ -52,7 +34,6 @@ const RouteScrollToTop = () => {
 const App = () => {
   return (
     <BrowserRouter basename="/vista_monte_mar/">
-      <VisitorTracker />
       <RouteScrollToTop />
       <ScrollToTop showUnder={160} style={{ zIndex: 1000000 }}>
         <FontAwesomeIcon icon={faArrowCircleUp} size="2xl" />
