@@ -1,15 +1,17 @@
+log_format visitor_json escape=json '{"time":"$time_iso8601","remote_addr":"$remote_addr","method":"$request_method","uri":"$uri","status":$status,"referer":"$http_referer","user_agent":"$http_user_agent","request_time":$request_time}';
+
 server {
     listen 80;
     server_name localhost;
 
     root /app/dist;
     index index.html;
-
     location / {
         rewrite ^/$ /vista_monte_mar/ permanent;
     }
 
     location /vista_monte_mar/ {
+        access_log /var/log/nginx/visitor_traffic.log visitor_json;
         rewrite ^/vista_monte_mar/(.*)$ /$1 break;
         try_files $uri $uri/ /index.html;
     }
