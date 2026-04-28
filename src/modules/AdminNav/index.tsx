@@ -1,39 +1,18 @@
 import ConnectedButtons from '../../components/form-items/ConnectedButtons';
 import ConnectedButtonItem from '../../components/form-items/ConnectedButtons/ConntectedButtonItems';
 import { FunctionComponent } from 'react';
+import { adminNavItems, AdminNavItem } from '../../components/admin/adminNavItems';
 
 type TAdminNav = {
-  page: string;
+  page: AdminNavItem['key'] | string;
 };
 
 const AdminNav: FunctionComponent<TAdminNav> = ({ page }) => {
   return (
     <ConnectedButtons>
-      <ConnectedButtonItem
-        title={'Manage Inventory'}
-        active={page == 'manage_inventory'}
-        url={'/manage_inventory'}
-      />
-      <ConnectedButtonItem
-        title={'Manage Checklist'}
-        active={page == 'manage_checklist'}
-        url={'/manage_checklist'}
-      />
-      <ConnectedButtonItem
-        title={'Inventory'}
-        active={page == 'inventory'}
-        url={'/inventory'}
-      />
-      <ConnectedButtonItem
-        title={'Checklist'}
-        active={page == 'checklist'}
-        url={'/checklist'}
-      />
-      <ConnectedButtonItem
-        title={'History'}
-        active={page == 'history'}
-        url={'/history'}
-      />
+      {adminNavItems.map((item) => (
+        <ConnectedButtonItem key={item.key} title={item.label} active={page === item.key} url={item.href} />
+      ))}
     </ConnectedButtons>
   );
 };

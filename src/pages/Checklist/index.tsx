@@ -1,7 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import Container from '../../components/Container';
-import SectionHeader from '../../components/heading/SectionHeader';
-import AdminNav from '../../modules/AdminNav';
 import { useAuth } from '../../context/AuthContext';
 import FormCard from '../../components/MiniCards/FormCard';
 import { useToast } from '../../context/ToastContext';
@@ -9,6 +6,10 @@ import axios from '../../utility/axiosInstance';
 import _ from 'lodash';
 import { Navigate } from 'react-router-dom';
 import ButtonItem from '../../components/form-items/ButtonItem';
+import AdminDashboardLayout from '../../layouts/AdminDashboardLayout';
+import AdminTopbar from '../../components/admin/AdminTopbar';
+import AdminSurfaceCard from '../../components/admin/AdminSurfaceCard';
+import AdminStatPill from '../../components/admin/AdminStatPill';
 
 type ChecklistItemConfig = {
   name?: string;
@@ -209,17 +210,14 @@ const Checklist = () => {
   const checklistSections = buildSections(checklistObj);
 
   return (
-    <Container classValue="bg-base-200 lg:px-8">
+    <>
       {!isAuthenticated && <Navigate to="/login" />}
       {isAuthenticated && (
-        <div className="lg:grid lg:grid-cols-6 gap-4">
-          <AdminNav page="checklist" />
-          <div className="col-span-5">
-            <SectionHeader
-              title="Checklist"
-              horizontalLine={true}
-              headerPadding={0}
-            >
+        <AdminDashboardLayout activeNavKey="checklist">
+          <AdminTopbar
+            title="Checklist"
+            subtitle="Track checklist progress by day and category. Changes autosave in the background."
+            actions={
               <ButtonItem
                 classValue={'btn-secondary'}
                 type={'button'}
@@ -228,11 +226,25 @@ const Checklist = () => {
               >
                 Save
               </ButtonItem>
+            }
+          />
 
-              {_.map(checklistSections, (section) => (
-                <div key={section.label} className="mt-6 first:mt-4">
-                  <h3 className="text-lg font-semibold mb-3">{section.label}</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <AdminStatPill label="Sections" value={checklistSections.length} tone="info" />
+            <AdminStatPill
+              label="Cards"
+              value={checklistSections.reduce((total, section) => total + section.items.length, 0)}
+            />
+            <AdminStatPill label="Save State" value={saving ? 'Saving' : 'Ready'} />
+          </div>
+
+          {_.map(checklistSections, (section) => (
+            <AdminSurfaceCard
+              key={section.label}
+              title={section.label}
+              subtitle="Checklist entries for this section."
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {_.map(section.items, (item) => (
                       <div key={item.idPath}>
                         <FormCard
@@ -245,14 +257,12 @@ const Checklist = () => {
                         ></FormCard>
                       </div>
                     ))}
-                  </div>
-                </div>
-              ))}
-            </SectionHeader>
-          </div>
-        </div>
+              </div>
+            </AdminSurfaceCard>
+          ))}
+        </AdminDashboardLayout>
       )}
-    </Container>
+    </>
   );
 };
 

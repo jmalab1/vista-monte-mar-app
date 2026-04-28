@@ -69,6 +69,31 @@ This project is built using the following technologies:
   [React Leaflet](https://react-leaflet.js.org/):** For interactive maps.
 - **[FontAwesome](https://fontawesome.com/):** For scalable vector icons.
 
+## Auth UI
+
+- `/login` uses a business-oriented auth layout inspired by Untitled UI dashboard/auth patterns.
+- Auth logic and API contracts remain unchanged (`/api/login`, `/api/verify-token`).
+- Reusable auth presentation components live in `src/components/auth` and `src/layouts`.
+- `/forgot-password` is scaffolded with the same layout for future recovery flow implementation.
+
+## Admin Dashboard UI
+
+- Authenticated routes now share a unified shell via `src/layouts/AdminDashboardLayout.tsx`.
+- Shared dashboard primitives live in `src/components/admin`:
+  - `AdminSidebar`
+  - `AdminTopbar`
+  - `AdminSurfaceCard`
+  - `AdminStatPill`
+  - `adminNavItems` (single source of truth for admin navigation labels/routes)
+- Unified shell is used by:
+  - `/manage_inventory`
+  - `/manage_checklist`
+  - `/inventory`
+  - `/checklist`
+  - `/history`
+- Legacy `src/modules/AdminNav` remains as a compatibility adapter and now reads from `adminNavItems` to avoid route/label drift.
+- This redesign is presentation-only; authenticated page logic, API payloads, and auth protection behavior are unchanged.
+
 ## 🚀 Getting Started
 
 Follow these steps to get the project running on your local machine.

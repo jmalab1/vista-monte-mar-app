@@ -12,6 +12,7 @@ import Checkout from './pages/Checkout';
 import './index.css';
 import Gallery from './pages/Gallery';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 import ManageInventory from './pages/ManageInventoryList';
 import ManageChecklist from './pages/ManageChecklist';
 import Inventory from './pages/Inventory';
@@ -50,6 +51,7 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/manage_inventory" element={<ManageInventory />} />
             <Route path="/manage_checklist" element={<ManageChecklist />} />
             <Route path="/inventory" element={<Inventory />} />

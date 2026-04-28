@@ -1,8 +1,8 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthComponent from '../../components/Authentication';
 import { useAuth } from '../../context/AuthContext';
-import Container from '../../components/Container';
-import React from 'react';
+import AuthBusinessLayout from '../../layouts/AuthBusinessLayout';
 
 const Login = () => {
   const { isAuthenticated } = useAuth();
@@ -14,10 +14,23 @@ const Login = () => {
     }
   }, [isAuthenticated, navigate]);
 
+  if (isAuthenticated) {
+    return null;
+  }
+
   return (
-    <Container classValue="bg-base-200 lg:px-8 min-h-screen">
-      {!isAuthenticated && <AuthComponent />}
-    </Container>
+    <AuthBusinessLayout
+      title="Sign in to Admin Console"
+      subtitle="Access operations, checklist workflows, and traffic insights."
+      panelTitle="Property Operations Portal"
+      panelBullets={[
+        'Manage inventory and checklist updates with audit visibility.',
+        'Review traffic history and operational activity in one place.',
+        'Secure access with token-based session verification.',
+      ]}
+    >
+      <AuthComponent />
+    </AuthBusinessLayout>
   );
 };
 

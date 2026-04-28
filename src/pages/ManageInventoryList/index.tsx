@@ -1,17 +1,18 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import axiosInstance from '../../utility/axiosInstance';
-import SectionHeader from '../../components/heading/SectionHeader';
 import { useToast } from '../../context/ToastContext';
 import FormCard from '../../components/MiniCards/FormCard';
 import _ from 'lodash';
 import ButtonItem from '../../components/form-items/ButtonItem';
 import Modal from '../../components/Modal';
-import Container from '../../components/Container';
 import CodeEditor from '../../components/CodeEditor';
-import AdminNav from '../../modules/AdminNav';
 import { useAuth } from '../../context/AuthContext';
 import { useAuthToken } from '../../hooks/useAuthToken';
 import { Navigate } from 'react-router-dom';
+import AdminDashboardLayout from '../../layouts/AdminDashboardLayout';
+import AdminTopbar from '../../components/admin/AdminTopbar';
+import AdminStatPill from '../../components/admin/AdminStatPill';
+import AdminSurfaceCard from '../../components/admin/AdminSurfaceCard';
 
 const ManageInventory: React.FC = () => {
   const { showToast } = useToast();
@@ -109,66 +110,73 @@ const ManageInventory: React.FC = () => {
   };
 
   return (
-    <Container classValue="bg-base-200 lg:px-8">
+    <>
       {!isAuthenticated && <Navigate to="/login" />}
       {isAuthenticated && (
-        <div className="lg:grid lg:grid-cols-6 gap-4">
-          <AdminNav page="manage_inventory" />
-          <div className="col-span-5">
-            <SectionHeader
-              title="Manage Inventory Listing"
-              horizontalLine={true}
-              headerPadding={0}
-            >
-              <div className="bg-white p-8 rounded-lg shadow-lg mt-2">
-                {/* Code Editor with Line Numbers */}
-                <CodeEditor code={code} onChange={handleInputChange} />
-                <div className="grid grid-cols-2 gap-4">
-                  <ButtonItem
-                    onClick={handleSubmitClick}
-                    classValue="btn-secondary mt-4"
-                    type="button"
-                    saving={saving}
-                  >
-                    Submit
-                  </ButtonItem>
-                  <ButtonItem
-                    onClick={() => setShowModal(true)}
-                    classValue="btn-info mt-4"
-                    type="button"
-                  >
-                    Preview
-                  </ButtonItem>
-                </div>
+        <AdminDashboardLayout activeNavKey="manage_inventory">
+          <AdminTopbar
+            title="Manage Inventory Listing"
+            subtitle="Edit inventory listing JSON and preview rendered forms."
+          />
 
-                <div className="pt-6">{errorMessage}</div>
-              </div>
-
-              {/* Displaying Code Block */}
-              <Modal
-                showModal={showModal}
-                title={'Form Preview'}
-                text={''}
-                callback={() => setShowModal(false)}
-                classValue="max-w-[1000px]"
-              >
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 border">
-                  {_.map(validJson, (value, key) => (
-                    <FormCard
-                      title={value.name}
-                      fields={value.fields}
-                      onChange={() => {}}
-                      value={{}}
-                      parentID={key}
-                    ></FormCard>
-                  ))}
-                </div>
-              </Modal>
-            </SectionHeader>
+          <div className="flex flex-wrap items-center gap-2">
+            <AdminStatPill label="Records" value={Object.keys(validJson).length} tone="info" />
+            <AdminStatPill
+              label="Parser"
+              value={errorMessage ? 'Invalid JSON' : 'Valid JSON'}
+              tone={errorMessage ? 'danger' : 'success'}
+            />
+            <AdminStatPill label="Save State" value={saving ? 'Saving' : 'Ready'} />
           </div>
-        </div>
+
+          <AdminSurfaceCard
+            title="Inventory JSON Editor"
+            subtitle="Submit writes changes to the listing endpoint. Preview opens the form modal."
+          >
+            <CodeEditor code={code} onChange={handleInputChange} />
+            <div className="grid grid-cols-2 gap-4">
+              <ButtonItem
+                onClick={handleSubmitClick}
+                classValue="btn-secondary mt-4"
+                type="button"
+                saving={saving}
+              >
+                Submit
+              </ButtonItem>
+              <ButtonItem
+                onClick={() => setShowModal(true)}
+                classValue="btn-info mt-4"
+                type="button"
+              >
+                Preview
+              </ButtonItem>
+            </div>
+
+            <div className="pt-6">{errorMessage}</div>
+          </AdminSurfaceCard>
+
+          <Modal
+            showModal={showModal}
+            title={'Form Preview'}
+            text={''}
+            callback={() => setShowModal(false)}
+            classValue="max-w-[1000px]"
+          >
+            <div className="grid gap-4 border md:grid-cols-2 lg:grid-cols-4">
+              {_.map(validJson, (value, key) => (
+                <FormCard
+                  title={value.name}
+                  fields={value.fields}
+                  onChange={() => {}}
+                  value={{}}
+                  parentID={key}
+                ></FormCard>
+              ))}
+            </div>
+          </Modal>
+        </AdminDashboardLayout>
       )}
-    </Container>
+    </>
   );
 };
 

@@ -1,14 +1,15 @@
-import SectionHeader from '../../components/heading/SectionHeader';
 import _ from 'lodash';
 import axios from '../../utility/axiosInstance';
 import { useEffect, useState, useRef } from 'react';
 import { useToast } from '../../context/ToastContext';
 import FormCard from '../../components/MiniCards/FormCard';
 import ButtonItem from '../../components/form-items/ButtonItem';
-import Container from '../../components/Container';
-import AdminNav from '../../modules/AdminNav';
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
+import AdminDashboardLayout from '../../layouts/AdminDashboardLayout';
+import AdminTopbar from '../../components/admin/AdminTopbar';
+import AdminSurfaceCard from '../../components/admin/AdminSurfaceCard';
+import AdminStatPill from '../../components/admin/AdminStatPill';
 
 const Inventory = () => {
   const { showToast } = useToast();
@@ -127,17 +128,14 @@ const Inventory = () => {
   };
 
   return (
-    <Container classValue="bg-base-200 lg:px-8">
+    <>
       {!isAuthenticated && <Navigate to="/login" />}
       {isAuthenticated && (
-        <div className="lg:grid lg:grid-cols-6 gap-4">
-          <AdminNav page="inventory" />
-          <div className="col-span-5">
-            <SectionHeader
-              title="Inventory"
-              horizontalLine={true}
-              headerPadding={0}
-            >
+        <AdminDashboardLayout activeNavKey="inventory">
+          <AdminTopbar
+            title="Inventory"
+            subtitle="Update live inventory values. Changes autosave and can be saved manually."
+            actions={
               <ButtonItem
                 classValue={'btn-secondary'}
                 type={'button'}
@@ -146,6 +144,18 @@ const Inventory = () => {
               >
                 Save
               </ButtonItem>
+            }
+          />
+
+          <div className="flex flex-wrap items-center gap-2">
+            <AdminStatPill label="Cards" value={Object.keys(inventoryObj).length} tone="info" />
+            <AdminStatPill label="Save State" value={saving ? 'Saving' : 'Ready'} />
+          </div>
+
+          <AdminSurfaceCard
+            title="Inventory Form Cards"
+            subtitle="Edit each inventory card. Changes queue a debounced save."
+          >
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                 {_.map(inventoryObj, (value, key) => (
                   <div key={key}>
@@ -160,11 +170,10 @@ const Inventory = () => {
                   </div>
                 ))}
               </div>
-            </SectionHeader>
-          </div>
-        </div>
+          </AdminSurfaceCard>
+        </AdminDashboardLayout>
       )}
-    </Container>
+    </>
   );
 };
 

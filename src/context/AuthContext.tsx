@@ -36,6 +36,7 @@ const safeRemoveStorageItem = (key: string): void => {
 
 interface AuthContextProps {
   token: string | null;
+  username: string | null;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
@@ -49,14 +50,24 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [token, setToken] = useState<string | null>(safeGetStorageItem('token'));
+  const [username, setUsername] = useState<string | null>(safeGetStorageItem('username'));
 
   useEffect(() => {
     if (token) {
       safeSetStorageItem('token', token);
     } else {
       safeRemoveStorageItem('token');
+      setUsername(null);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (username) {
+      safeSetStorageItem('username', username);
+    } else {
+      safeRemoveStorageItem('username');
+    }
+  }, [username]);
 
   useEffect(() => {
     const checkTokenValidity = async () => {
@@ -84,6 +95,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       });
       const token = response.data.token;
       setToken(token);
+      setUsername(username);
     } catch (error) {
       throw new Error(
         'Login failed. Please check your credentials and try again.'
@@ -93,12 +105,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = () => {
     setToken(null);
+    setUsername(null);
   };
 
   const isAuthenticated = !!token;
 
   return (
-    <AuthContext.Provider value={{ token, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ token, username, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
