@@ -92,7 +92,7 @@ export const JacoBeachSection = () => {
   const cardClickCallbackHandler = (id: string) => setHiddenDivState(id);
 
   return (
-    <section className="pb-16">
+    <section className="">
       <Container classValue="gap-8 bg-[linear-gradient(180deg,rgba(255,250,244,0.96),rgba(243,248,248,0.9))] lg:px-8">
         <div className="flex flex-col gap-3">
           <p className="section-kicker text-center">Around Jaco</p>

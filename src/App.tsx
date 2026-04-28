@@ -39,10 +39,21 @@ const VisitorTracker = () => {
   return null;
 };
 
+const RouteScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
+  return null;
+};
+
 const App = () => {
   return (
     <BrowserRouter basename="/vista_monte_mar/">
       <VisitorTracker />
+      <RouteScrollToTop />
       <ScrollToTop showUnder={160} style={{ zIndex: 1000000 }}>
         <FontAwesomeIcon icon={faArrowCircleUp} size="2xl" />
       </ScrollToTop>

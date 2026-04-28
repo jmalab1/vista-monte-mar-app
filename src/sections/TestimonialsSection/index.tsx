@@ -102,7 +102,7 @@ const TestimonialsSection = () => {
   const filteredTotal = useMemo(() => reviews.length, [reviews.length]);
 
   return (
-    <section className="pb-16">
+    <section className="">
       <Container classValue="gap-8 bg-[linear-gradient(180deg,rgba(255,252,248,0.96),rgba(238,247,247,0.92))]">
         <div className="flex flex-col gap-3">
           <p className="section-kicker text-center">Guest Testimonials</p>
