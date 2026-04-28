@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "vite --mode server",
+    "dev:frontend": "vite",
     "build": "vite build --mode server",
     "lint": "eslint .",
     "preview": "vite preview",

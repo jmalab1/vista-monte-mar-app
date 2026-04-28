@@ -206,7 +206,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="section-frame relative pb-12 pt-6 sm:pt-8 lg:pb-20">
+    <section className="section-frame relative pb-12 pt-6 sm:pt-8 lg:pb-12">
       <div className="absolute left-4 top-8 h-28 w-28 rounded-full bg-[#ffd7b1]/60 blur-3xl sm:h-40 sm:w-40" />
       <div className="absolute right-6 top-16 h-32 w-32 rounded-full bg-[#9ed3d2]/40 blur-3xl sm:h-48 sm:w-48" />
       <div className="sunset-panel relative overflow-visible px-4 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-12">

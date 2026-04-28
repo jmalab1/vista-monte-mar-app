@@ -8,7 +8,6 @@ import {
   BuildingStorefrontIcon,
 } from '@heroicons/react/24/solid';
 import { useState } from 'react';
-import _ from 'lodash';
 import RestaurantDetails from '../../modules/RestaurantDetails';
 import EmergencyDetails from '../../modules/EmergencyDetails';
 import ThingsToDoDetails from '../../modules/ThingsToDoDetails';
@@ -27,14 +26,13 @@ import PNoteworthy from '../../assets/misc/artwork.jpg?w=600&webp';
 import PGrocery from '../../assets/misc/grocery.jpg?w=600&webp';
 import PBank from '../../assets/misc/atm.jpg?w=600&webp';
 
-let categories = [
+const categories = [
   {
     id: 'restaurants',
     img: PFood,
     icon: ChartPieIcon,
     title: 'Restaurants',
     desc: 'Looking for a bite to eat?',
-    active: true,
     attribution: '',
     photo_link: '',
   },
@@ -44,7 +42,6 @@ let categories = [
     icon: LightBulbIcon,
     title: 'Things To Do',
     desc: 'Explore Jaco',
-    active: false,
     attribution: '',
     photo_link: '',
   },
@@ -54,7 +51,6 @@ let categories = [
     icon: ChatBubbleOvalLeftEllipsisIcon,
     title: 'Emergency',
     desc: 'Need urgent help?',
-    active: false,
     attribution: 'Photo by @charlesdeluvio',
     photo_link:
       'https://unsplash.com/@charlesdeluvio?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
@@ -65,7 +61,6 @@ let categories = [
     icon: PencilSquareIcon,
     title: 'Noteworthy',
     desc: 'Looking for more?',
-    active: false,
     attribution: '',
     photo_link: '',
   },
@@ -75,7 +70,6 @@ let categories = [
     icon: BuildingStorefrontIcon,
     title: 'Groceries',
     desc: 'Make sure to have the necessities',
-    active: false,
     attribution: '',
     photo_link: '',
   },
@@ -85,7 +79,6 @@ let categories = [
     icon: CurrencyDollarIcon,
     title: 'Banks',
     desc: 'Short on cash?',
-    active: false,
     attribution: 'Photo by @julian21',
     photo_link:
       'https://unsplash.com/@julian21?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash',
@@ -95,12 +88,8 @@ let categories = [
 export const JacoBeachSection = () => {
   const [hiddenDivState, setHiddenDivState] = useState('restaurants');
 
-  const cardClickCallbackHandler = (id: string) => {
-    _.each(categories, (category) => {
-      category.active = id === category.id;
-    });
-    setHiddenDivState(id);
-  };
+  const activeCategory = categories.find(({ id }) => id === hiddenDivState);
+  const cardClickCallbackHandler = (id: string) => setHiddenDivState(id);
 
   return (
     <section className="pb-16">
@@ -115,7 +104,7 @@ export const JacoBeachSection = () => {
             </Paragraph>
           </SectionHeader>
         </div>
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1.2fr_1fr]">
+        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_1.2fr]">
           <Card
             className="relative h-full min-h-[18rem] w-full overflow-hidden rounded-[2rem] border-0 shadow-[0_20px_60px_rgba(24,47,58,0.2)]"
             placeholder={undefined}
@@ -142,10 +131,28 @@ export const JacoBeachSection = () => {
               </div>
             </CardBody>
           </Card>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-2">
-            {categories.map((props) => (
-              <CategoryCard key={props.id} {...props} callback={cardClickCallbackHandler} />
-            ))}
+          <div className="rounded-[2rem] border border-white/80 bg-[linear-gradient(180deg,rgba(255,251,246,0.94),rgba(241,247,247,0.9))] p-4 shadow-[0_18px_45px_rgba(36,61,70,0.1)] sm:p-5">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="section-kicker text-left">Local Guide</p>
+                <p className="mt-2 text-xl font-semibold text-[#23404b]">Choose a map category</p>
+              </div>
+              {activeCategory && (
+                <span className="hidden rounded-full border border-[#d9c1ab] bg-white/80 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9b5d31] sm:inline-flex">
+                  {activeCategory.title}
+                </span>
+              )}
+            </div>
+            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {categories.map((props) => (
+                <CategoryCard
+                  key={props.id}
+                  {...props}
+                  active={hiddenDivState === props.id}
+                  callback={cardClickCallbackHandler}
+                />
+              ))}
+            </div>
           </div>
         </div>
         <div className="rounded-[1.75rem] border border-white/80 bg-white/70 p-4 shadow-inner sm:p-6">

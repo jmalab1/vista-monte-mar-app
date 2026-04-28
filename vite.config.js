@@ -4,6 +4,13 @@ import { imagetools } from 'vite-imagetools';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  const isWsl = Boolean(process.env.WSL_DISTRO_NAME);
+  const isMountedWindowsPath = process.cwd().startsWith('/mnt/');
+  const usePolling =
+    process.env.VITE_USE_POLLING === '1' || (isWsl && isMountedWindowsPath);
+  const apiProxyTarget =
+    process.env.VITE_API_PROXY_TARGET || 'http://127.0.0.1:8135';
+
   return {
     base: mode === 'server' ? '/vista_monte_mar/' : '/',
     plugins: [react(), imagetools()],
@@ -33,10 +40,16 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      watch: usePolling
+        ? {
+            usePolling: true,
+            interval: 150,
+          }
+        : undefined,
       proxy: {
-        // When the frontend requests /api/*, it will be proxied to the backend at http://localhost:4000.
+        // Frontend /api/* requests are proxied to the backend.
         '/api': {
-          target: 'https://localhost', // Backend server
+          target: apiProxyTarget,
           changeOrigin: true,
           secure: false,
         },

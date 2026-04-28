@@ -75,7 +75,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="pb-20">
+    <section className="pb-12">
       <Container classValue="bg-[linear-gradient(180deg,rgba(247,251,252,0.95),rgba(255,248,242,0.98))]">
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="rounded-[1.75rem] bg-[linear-gradient(180deg,#245465,#1f3f4c)] p-6 text-white shadow-[0_20px_60px_rgba(22,51,61,0.22)] sm:p-8">

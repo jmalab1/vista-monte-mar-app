@@ -6,6 +6,16 @@ See the local deployment and operations runbook:
 
 - [CODEBASE_WIKI.md](./CODEBASE_WIKI.md)
 
+## Frontend-Only Local Dev
+
+To run only the frontend with the Vite dev server:
+
+```bash
+npm run dev:frontend
+```
+
+This starts Vite in normal local mode (base path `/`) with HMR enabled.
+
 ## k3s Deploy
 
 Local development stays in this repo. Kubernetes deployment assets live in the sibling `vista-monte-mar-services` repo.

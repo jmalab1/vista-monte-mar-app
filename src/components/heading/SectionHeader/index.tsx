@@ -33,7 +33,6 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
     <>
       <div
         className={classNamePlus}
-        style={{ marginTop: `${headerPadding * 0.25}rem` }}
       >
         <h1
           className={`font-pacifico text-[#d48a58] ${textSize ? 'text-' + textSize : 'text-4xl sm:text-5xl'}`}
