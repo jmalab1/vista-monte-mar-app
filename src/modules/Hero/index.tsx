@@ -10,10 +10,29 @@ import k1Thumb from '../../assets/kitchen/image (5).jpg?w=400&webp';
 import k2 from '../../assets/kitchen/image (4).jpg?w=1200&webp';
 import k2Thumb from '../../assets/kitchen/image (4).jpg?w=400&webp';
 import pool from '../../assets/common/image (2).jpg?w=1200&webp';
+import InfiniteCarousel from '../../components/InfiniteCarousel';
 
 const POLAROID_LAYOUT_STORAGE_KEY = 'hero-polaroid-layout-v1';
 const POLAROID_ANIMATION_PLAYED_STORAGE_KEY = 'hero-polaroid-animation-played-v2';
 const POLAROID_Z_INDEX_STORAGE_KEY = 'hero-polaroid-z-indexes-v1';
+
+const safeGetStorageItem = (key: string): string | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+};
+
+const safeSetStorageItem = (key: string, value: string): void => {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // no-op
+  }
+};
 
 type PolaroidLayout = {
   src: string;
@@ -41,7 +60,8 @@ const isValidZIndexState = (value: unknown): value is number[] =>
   Array.isArray(value) && value.every((item) => typeof item === 'number');
 
 export const Hero = () => {
-  const hasPlayedAnimation = localStorage.getItem(POLAROID_ANIMATION_PLAYED_STORAGE_KEY) === 'true';
+  const hasPlayedAnimation =
+    safeGetStorageItem(POLAROID_ANIMATION_PLAYED_STORAGE_KEY) === 'true';
 
   const [mounted, setMounted] = useState(hasPlayedAnimation);
   const [selectedImage, setSelectedImage] = useState<{ src: string; caption: string } | null>(null);
@@ -64,7 +84,7 @@ export const Hero = () => {
   const images = useMemo(() => shuffle(rawImages), []);
 
   const polaroids = useMemo(() => {
-    const savedLayoutRaw = localStorage.getItem(POLAROID_LAYOUT_STORAGE_KEY);
+    const savedLayoutRaw = safeGetStorageItem(POLAROID_LAYOUT_STORAGE_KEY);
 
     if (savedLayoutRaw) {
       try {
@@ -98,14 +118,14 @@ export const Hero = () => {
       };
     });
 
-    localStorage.setItem(POLAROID_LAYOUT_STORAGE_KEY, JSON.stringify(generatedLayout));
+    safeSetStorageItem(POLAROID_LAYOUT_STORAGE_KEY, JSON.stringify(generatedLayout));
 
     return generatedLayout;
   }, [images]);
 
   const zIndexes = useMemo(() => {
     const defaultZIndexes = polaroids.map((_, index) => index + 10);
-    const savedZIndexesRaw = localStorage.getItem(POLAROID_Z_INDEX_STORAGE_KEY);
+    const savedZIndexesRaw = safeGetStorageItem(POLAROID_Z_INDEX_STORAGE_KEY);
 
     if (!savedZIndexesRaw) {
       return defaultZIndexes;
@@ -140,7 +160,7 @@ export const Hero = () => {
 
     const completeTimer = setTimeout(() => {
       setAnimationsCompleted(true);
-      localStorage.setItem(POLAROID_ANIMATION_PLAYED_STORAGE_KEY, 'true');
+      safeSetStorageItem(POLAROID_ANIMATION_PLAYED_STORAGE_KEY, 'true');
     }, 5000);
 
     return () => {
@@ -173,7 +193,7 @@ export const Hero = () => {
     const newZIndexes = [...storedZIndexes];
     newZIndexes[index] = maxZ + 1;
     setStoredZIndexes(newZIndexes);
-    localStorage.setItem(POLAROID_Z_INDEX_STORAGE_KEY, JSON.stringify(newZIndexes));
+    safeSetStorageItem(POLAROID_Z_INDEX_STORAGE_KEY, JSON.stringify(newZIndexes));
 
     const rect = el.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;

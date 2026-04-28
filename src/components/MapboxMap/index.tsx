@@ -45,44 +45,56 @@ const RoutingControl = ({ start, end, name }) => {
 
   useEffect(() => {
     if (!map) return;
+    if (!(L as any).Routing?.control || !(L as any).Routing?.osrmv1) {
+      return;
+    }
 
     let currentRoutingControl: any = null;
     let disposed = false;
     let fallbackAttempted = false;
 
     const buildRoutingControl = (serviceUrl: string) => {
-      const control = L.Routing.control({
-        router: L.Routing.osrmv1({
-          serviceUrl,
-        }),
-        waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
-        routeWhileDragging: true,
-        showAlternatives: false,
-        fitSelectedRoutes: true,
-        createMarker: function (
-          i: number,
-          waypoint: { latLng: L.LatLngExpression }
-        ) {
-          // Create markers with custom icons and popups
-          const marker = L.marker(waypoint.latLng, {
-            icon: i === 0 ? home : locate, // Use start icon for start and end icon for end
-          });
+      let control: any = null;
+      try {
+        control = L.Routing.control({
+          router: L.Routing.osrmv1({
+            serviceUrl,
+          }),
+          waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
+          routeWhileDragging: true,
+          showAlternatives: false,
+          fitSelectedRoutes: true,
+          createMarker: function (
+            i: number,
+            waypoint: { latLng: L.LatLngExpression }
+          ) {
+            // Create markers with custom icons and popups
+            const marker = L.marker(waypoint.latLng, {
+              icon: i === 0 ? home : locate, // Use start icon for start and end icon for end
+            });
 
-          // Add popup content based on the marker
-          if (i === 0) {
-            marker.bindPopup('<b>Vista Monte Mar</b>');
-          } else if (i === 1) {
-            marker.bindPopup(`<b>${name}</b>`);
-          }
+            // Add popup content based on the marker
+            if (i === 0) {
+              marker.bindPopup('<b>Vista Monte Mar</b>');
+            } else if (i === 1) {
+              marker.bindPopup(`<b>${name}</b>`);
+            }
 
-          return marker;
-        },
-      }).addTo(map);
+            return marker;
+          },
+        }).addTo(map);
+      } catch {
+        return null;
+      }
 
       control.on('routingerror', () => {
         if (disposed || fallbackAttempted) return;
         fallbackAttempted = true;
-        map.removeControl(control);
+        try {
+          map.removeControl(control);
+        } catch {
+          // no-op
+        }
         currentRoutingControl = buildRoutingControl(FALLBACK_ROUTING_SERVICE_URL);
       });
 
@@ -95,7 +107,11 @@ const RoutingControl = ({ start, end, name }) => {
     return () => {
       disposed = true;
       if (currentRoutingControl) {
-        map.removeControl(currentRoutingControl);
+        try {
+          map.removeControl(currentRoutingControl);
+        } catch {
+          // no-op
+        }
       }
     };
   }, [map, start, end]);

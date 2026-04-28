@@ -7,6 +7,33 @@ import React, {
 } from 'react';
 import axiosInstance from '../utility/axiosInstance';
 
+const safeGetStorageItem = (key: string): string | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+};
+
+const safeSetStorageItem = (key: string, value: string): void => {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // no-op
+  }
+};
+
+const safeRemoveStorageItem = (key: string): void => {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.removeItem(key);
+  } catch {
+    // no-op
+  }
+};
+
 interface AuthContextProps {
   token: string | null;
   login: (username: string, password: string) => Promise<void>;
@@ -21,15 +48,13 @@ export const AuthContext = createContext<AuthContextProps | undefined>(
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem('token')
-  );
+  const [token, setToken] = useState<string | null>(safeGetStorageItem('token'));
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem('token', token);
+      safeSetStorageItem('token', token);
     } else {
-      localStorage.removeItem('token');
+      safeRemoveStorageItem('token');
     }
   }, [token]);
 
