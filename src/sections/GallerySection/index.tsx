@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import SectionHeader from '../../components/heading/SectionHeader';
+import ImageModal from '../../components/ImageModal';
 import balcony1 from '/src/assets/balcony/image (1).jpg?w=800&webp';
 import balcony2 from '/src/assets/balcony/image (2).jpg?w=800&webp';
 import balcony3 from '/src/assets/balcony/image (3).jpg?w=800&webp';

@@ -2,9 +2,13 @@ import { Link } from 'react-router-dom';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { shuffle } from 'lodash';
 import jacosign from '../../assets/nature/image (1).jpg?w=1200&webp';
+import jacosignThumb from '../../assets/nature/image (1).jpg?w=400&webp';
 import lr1 from '../../assets/living_room/image (3).jpg?w=1200&webp';
+import lr1Thumb from '../../assets/living_room/image (3).jpg?w=400&webp';
 import k1 from '../../assets/kitchen/image (5).jpg?w=1200&webp';
+import k1Thumb from '../../assets/kitchen/image (5).jpg?w=400&webp';
 import k2 from '../../assets/kitchen/image (4).jpg?w=1200&webp';
+import k2Thumb from '../../assets/kitchen/image (4).jpg?w=400&webp';
 import pool from '../../assets/common/image (2).jpg?w=1200&webp';
 
 const POLAROID_LAYOUT_STORAGE_KEY = 'hero-polaroid-layout-v1';
@@ -335,6 +339,28 @@ export const Hero = () => {
             </div>
           </div>
         </div>
+
+        {/* Mobile Fallback - Carousel */}
+        <InfiniteCarousel className="lg:hidden mt-10">
+          {[...images, ...images, ...images, ...images].map((item, index) => (
+            <div
+              key={`${index}-${item.caption}`}
+              className="carousel-item flex flex-col items-center polaroid-texture polaroid-shadow bg-[#fdfbf7] border border-gray-200 p-2 pb-8 rounded-sm min-w-[18rem]"
+            >
+              <div className="relative">
+                <img
+                  src={item.thumbnail}
+                  alt={item.caption}
+                  className="w-64 aspect-square object-cover pointer-events-none"
+                />
+                <div className="absolute inset-0 polaroid-img-shadow pointer-events-none"></div>
+              </div>
+              <p className="font-pacifico text-gray-700 text-center mt-2 text-lg transform -rotate-1 whitespace-nowrap pointer-events-none">
+                {item.caption}
+              </p>
+            </div>
+          ))}
+        </InfiniteCarousel>
       </div>
 
       {selectedImage && (
