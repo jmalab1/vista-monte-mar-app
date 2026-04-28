@@ -236,7 +236,7 @@ export const Hero = () => {
         <div className="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.95),_transparent_70%)]" />
         <div className="grid lg:grid-cols-7 lg:items-center lg:gap-x-10 xl:gap-x-12">
           <div className="animate-fade-up lg:col-span-3">
-            <p className="section-kicker text-center lg:text-left">Oceanfront Comfort</p>
+            <p className="section-kicker text-center lg:text-left">Mountain-view Coastal Stay</p>
             <h1 className="mt-4 block text-center font-pacifico text-5xl leading-none text-[#d48a58] sm:text-6xl lg:text-left lg:text-8xl">
               Welcome
             </h1>

@@ -104,58 +104,69 @@ export const JacoBeachSection = () => {
             </Paragraph>
           </SectionHeader>
         </div>
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_1.2fr]">
-          <Card
-            className="relative h-full min-h-[18rem] w-full overflow-hidden rounded-[2rem] border-0 shadow-[0_20px_60px_rgba(24,47,58,0.2)]"
+
+        <Card
+          className="relative w-full overflow-hidden rounded-[2rem] border-0 shadow-[0_20px_60px_rgba(24,47,58,0.2)]"
+          placeholder={undefined}
+          onPointerEnter={undefined}
+          onPointerLeave={undefined}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(78,171,182,0.65),_rgba(28,86,119,0.95))]" />
+          <CardBody
+            className="relative flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8"
             placeholder={undefined}
             onPointerEnter={undefined}
             onPointerLeave={undefined}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(78,171,182,0.65),_rgba(28,86,119,0.95))]" />
-            <CardBody
-              className="relative flex h-full flex-col justify-between p-6 sm:p-8"
-              placeholder={undefined}
-              onPointerEnter={undefined}
-              onPointerLeave={undefined}
-            >
-              <div>
-                <p className="section-kicker text-white/80">Book Direct</p>
-                <p className="mt-4 text-2xl font-semibold text-white sm:text-3xl">Your beach days start here</p>
-                <p className="mt-4 max-w-lg text-base leading-7 text-white/75">
-                  Enjoy a bright condo steps from the Pacific coast, with space to unwind,
-                  dip in the pool, and return from adventures to something calm and comfortable.
-                </p>
-              </div>
-              <div className="flex items-center gap-6 text-white">
-                <AbbLogo size={44} />
-              </div>
-            </CardBody>
-          </Card>
-          <div className="rounded-[2rem] border border-white/80 bg-[linear-gradient(180deg,rgba(255,251,246,0.94),rgba(241,247,247,0.9))] p-4 shadow-[0_18px_45px_rgba(36,61,70,0.1)] sm:p-5">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="section-kicker text-left">Local Guide</p>
-                <p className="mt-2 text-xl font-semibold text-[#23404b]">Choose a map category</p>
-              </div>
-              {activeCategory && (
-                <span className="hidden rounded-full border border-[#d9c1ab] bg-white/80 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9b5d31] sm:inline-flex">
-                  {activeCategory.title}
-                </span>
-              )}
+            <div>
+              <p className="section-kicker text-white/80">Book Direct</p>
+              <p className="mt-3 text-2xl font-semibold text-white sm:text-3xl">Your beach days start here</p>
+              <p className="mt-3 max-w-2xl text-base leading-7 text-white/80">
+                Enjoy a bright condo steps from the Pacific coast, with space to unwind, dip in the pool,
+                and return from adventures to something calm and comfortable.
+              </p>
             </div>
-            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {categories.map((props) => (
-                <CategoryCard
-                  key={props.id}
-                  {...props}
-                  active={hiddenDivState === props.id}
-                  callback={cardClickCallbackHandler}
-                />
-              ))}
+            <div className="flex items-center text-white">
+              <AbbLogo size={44} />
             </div>
+          </CardBody>
+        </Card>
+
+        <div className="rounded-[2rem] border border-white/80 bg-[linear-gradient(180deg,rgba(255,251,246,0.94),rgba(241,247,247,0.9))] p-4 shadow-[0_18px_45px_rgba(36,61,70,0.1)] sm:p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="section-kicker text-left">Map Categories</p>
+              <p className="mt-2 text-xl font-semibold text-[#23404b]">Pick category first</p>
+            </div>
+            {activeCategory && (
+              <span className="hidden rounded-full border border-[#d9c1ab] bg-white/80 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9b5d31] sm:inline-flex">
+                {activeCategory.title}
+              </span>
+            )}
+          </div>
+
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {categories.map((props) => (
+              <CategoryCard
+                key={props.id}
+                {...props}
+                active={hiddenDivState === props.id}
+                callback={cardClickCallbackHandler}
+              />
+            ))}
           </div>
         </div>
-        <div className="rounded-[1.75rem] border border-white/80 bg-white/70 p-4 shadow-inner sm:p-6">
+
+        <div className="rounded-[2rem] border border-white/80 bg-[linear-gradient(180deg,rgba(255,251,246,0.94),rgba(241,247,247,0.9))] p-4 shadow-[0_18px_45px_rgba(36,61,70,0.1)] sm:p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#dfe8e6] pb-4">
+            <div>
+              <p className="section-kicker text-left">Results</p>
+              <p className="mt-2 text-lg font-semibold text-[#23404b]">
+                {activeCategory?.title ?? 'Local places'}
+              </p>
+            </div>
+            <p className="text-sm text-slate-600">Tap map markers or table rows for details.</p>
+          </div>
           {hiddenDivState == 'restaurants' && <RestaurantDetails />}
           {hiddenDivState == 'emergency' && <EmergencyDetails />}
           {hiddenDivState == 'things_to_do' && <ThingsToDoDetails />}

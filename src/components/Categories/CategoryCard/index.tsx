@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardBody, Typography } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
 
 interface CategoryCardProps {
   id: string;
@@ -96,9 +95,7 @@ const CategoryCard = ({
       </CardBody>
       {attribution && photo_link && (
         <div className="absolute bottom-2 right-2 max-w-[6.25rem] rounded-full bg-white/88 px-2 py-1 text-center text-[7px] leading-tight text-slate-700 backdrop-blur sm:text-[8px]">
-          <Link to={photo_link} target="_blank">
-            {attribution}
-          </Link>
+          {attribution}
         </div>
       )}
     </Card>

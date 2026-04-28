@@ -220,7 +220,7 @@ export const MapAndTable: FunctionComponent<TMapAndTable> = ({
                       {placeName}
                     </p>
                     <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider ${
+                      className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider ${
                         isActive
                           ? 'bg-[#0f766e] text-white'
                           : 'bg-[#e2e8f0] text-slate-600'

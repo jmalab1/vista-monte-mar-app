@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite --mode server",
-    "dev:frontend": "vite",
+    "dev:frontend": "vite --host 0.0.0.0 --port 5173 --strictPort",
     "build": "vite build --mode server",
     "lint": "eslint .",
     "preview": "vite preview",
