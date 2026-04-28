@@ -47,20 +47,17 @@ export const MapAndTable: FunctionComponent<TMapAndTable> = ({
   return (
     <div className="md:grid md:grid-cols-1 md:grid-cols-3 md:gap-6 mt-10">
       <MiniCardHolder title={title}>
-        {records.map((record) => {
-          if (record.properties.name == 'Vista Monte Mar - TDM') {
-            return;
-          }
-
-          return (
+        {records
+          .filter((record) => record.properties.name !== 'Vista Monte Mar - TDM')
+          .map((record) => (
             <MiniCard
+              key={record.properties.name}
               record={record}
               callback={onClickMiniCard}
               active={active}
               detail={_.find(details, { name: record.properties.name })}
             />
-          );
-        })}
+          ))}
       </MiniCardHolder>
       <div className="col-span-2">
         <MapboxMap coordinates={coordinates} name={active} />

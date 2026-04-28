@@ -15,6 +15,14 @@ type TMapboxMap = {
   name: string;
 };
 
+const PRIMARY_ROUTING_SERVICE_URL =
+  import.meta.env.VITE_ROUTING_SERVICE_URL ||
+  'https://routing.openstreetmap.de/routed-car/route/v1';
+
+const FALLBACK_ROUTING_SERVICE_URL =
+  import.meta.env.VITE_ROUTING_FALLBACK_URL ||
+  'https://router.project-osrm.org/route/v1';
+
 const locate = L.AwesomeMarkers.icon({
   icon: 'location-arrow',
   markerColor: 'blue',
@@ -38,32 +46,57 @@ const RoutingControl = ({ start, end, name }) => {
   useEffect(() => {
     if (!map) return;
 
-    const routingControl = L.Routing.control({
-      waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
-      routeWhileDragging: true,
-      createMarker: function (
-        i: number,
-        waypoint: { latLng: L.LatLngExpression }
-      ) {
-        // Create markers with custom icons and popups
-        const marker = L.marker(waypoint.latLng, {
-          icon: i === 0 ? home : locate, // Use start icon for start and end icon for end
-        });
+    let currentRoutingControl: any = null;
+    let disposed = false;
+    let fallbackAttempted = false;
 
-        // Add popup content based on the marker
-        if (i === 0) {
-          marker.bindPopup('<b>Vista Monte Mar</b>');
-        } else if (i === 1) {
-          marker.bindPopup(`<b>${name}</b>`);
-        }
+    const buildRoutingControl = (serviceUrl: string) => {
+      const control = L.Routing.control({
+        router: L.Routing.osrmv1({
+          serviceUrl,
+        }),
+        waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
+        routeWhileDragging: true,
+        showAlternatives: false,
+        fitSelectedRoutes: true,
+        createMarker: function (
+          i: number,
+          waypoint: { latLng: L.LatLngExpression }
+        ) {
+          // Create markers with custom icons and popups
+          const marker = L.marker(waypoint.latLng, {
+            icon: i === 0 ? home : locate, // Use start icon for start and end icon for end
+          });
 
-        return marker;
-      },
-    }).addTo(map);
+          // Add popup content based on the marker
+          if (i === 0) {
+            marker.bindPopup('<b>Vista Monte Mar</b>');
+          } else if (i === 1) {
+            marker.bindPopup(`<b>${name}</b>`);
+          }
+
+          return marker;
+        },
+      }).addTo(map);
+
+      control.on('routingerror', () => {
+        if (disposed || fallbackAttempted) return;
+        fallbackAttempted = true;
+        map.removeControl(control);
+        currentRoutingControl = buildRoutingControl(FALLBACK_ROUTING_SERVICE_URL);
+      });
+
+      return control;
+    };
+
+    currentRoutingControl = buildRoutingControl(PRIMARY_ROUTING_SERVICE_URL);
 
     // Cleanup on component unmount
     return () => {
-      map.removeControl(routingControl);
+      disposed = true;
+      if (currentRoutingControl) {
+        map.removeControl(currentRoutingControl);
+      }
     };
   }, [map, start, end]);
 
