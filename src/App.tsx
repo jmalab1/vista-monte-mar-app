@@ -32,15 +32,46 @@ const RouteScrollToTop = () => {
   return null;
 };
 
-const App = () => {
+const APP_CHROME_HIDDEN_ROUTES = new Set([
+  '/login',
+  '/forgot-password',
+  '/manage_inventory',
+  '/manage_checklist',
+  '/inventory',
+  '/checklist',
+  '/history',
+]);
+
+const ADMIN_ROUTES = new Set([
+  '/manage_inventory',
+  '/manage_checklist',
+  '/inventory',
+  '/checklist',
+  '/history',
+]);
+
+const AppShell = () => {
+  const location = useLocation();
+  const shouldHideChrome = APP_CHROME_HIDDEN_ROUTES.has(location.pathname);
+  const isAdminRoute = ADMIN_ROUTES.has(location.pathname);
+
+  useEffect(() => {
+    document.body.classList.toggle('admin-mode', isAdminRoute);
+    return () => {
+      document.body.classList.remove('admin-mode');
+    };
+  }, [isAdminRoute]);
+
   return (
-    <BrowserRouter basename="/vista_monte_mar/">
+    <>
       <RouteScrollToTop />
-      <ScrollToTop showUnder={160} style={{ zIndex: 1000000 }}>
-        <FontAwesomeIcon icon={faArrowCircleUp} size="2xl" />
-      </ScrollToTop>
+      {!shouldHideChrome && (
+        <ScrollToTop showUnder={160} style={{ zIndex: 1000000 }}>
+          <FontAwesomeIcon icon={faArrowCircleUp} size="2xl" />
+        </ScrollToTop>
+      )}
       <div>
-        <Navbar />
+        {!shouldHideChrome && <Navbar />}
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -60,8 +91,16 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
-        <Footer />
+        {!shouldHideChrome && <Footer />}
       </div>
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <BrowserRouter basename="/vista_monte_mar/">
+      <AppShell />
     </BrowserRouter>
   );
 };

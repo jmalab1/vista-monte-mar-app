@@ -13,10 +13,12 @@ const AdminDashboardLayout = ({ children, activeNavKey, sidebarFooter }: Props) 
   const footer = sidebarFooter ?? <AdminUserProfile />;
 
   return (
-    <div className="min-h-screen bg-slate-50 px-4 py-6 lg:px-8">
-      <div className="mx-auto grid w-full max-w-7xl gap-4 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-6">
+    <div className="min-h-screen bg-slate-100">
+      <div className="grid w-full gap-4 p-4 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-4 lg:p-6">
         <AdminSidebar activeKey={activeNavKey} footer={footer} />
-        <main className="space-y-4 lg:space-y-6">{children}</main>
+        <main className="min-w-0 space-y-4 border border-slate-300 bg-slate-50 p-4 lg:space-y-6 lg:p-6">
+          {children}
+        </main>
       </div>
     </div>
   );

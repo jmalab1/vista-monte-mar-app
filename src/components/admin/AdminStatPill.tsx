@@ -9,18 +9,18 @@ type Props = {
 };
 
 const toneClasses: Record<Tone, string> = {
-  neutral: 'border-slate-200 bg-slate-100 text-slate-700',
-  success: 'border-emerald-200 bg-emerald-50 text-emerald-700',
-  warning: 'border-amber-200 bg-amber-50 text-amber-700',
-  danger: 'border-rose-200 bg-rose-50 text-rose-700',
-  info: 'border-sky-200 bg-sky-50 text-sky-700',
+  neutral: 'border-slate-300 bg-white text-slate-800',
+  success: 'border-emerald-300 bg-emerald-50 text-emerald-900',
+  warning: 'border-slate-300 bg-slate-50 text-slate-900',
+  danger: 'border-rose-300 bg-rose-50 text-rose-900',
+  info: 'border-blue-300 bg-blue-50 text-blue-900',
 };
 
 const AdminStatPill = ({ label, value, tone = 'neutral' }: Props) => {
   return (
     <div
       className={[
-        'inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold',
+        'inline-flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold shadow-sm',
         toneClasses[tone],
       ].join(' ')}
     >

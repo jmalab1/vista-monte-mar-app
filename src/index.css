@@ -15,6 +15,11 @@ body {
     linear-gradient(180deg, #fffdf8 0%, #f7f3ec 34%, #f3f7f7 100%);
 }
 
+body.admin-mode {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
 #root {
   min-height: 100vh;
 }

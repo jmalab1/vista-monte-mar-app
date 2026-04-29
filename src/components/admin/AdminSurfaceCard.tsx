@@ -12,12 +12,12 @@ const AdminSurfaceCard = ({ children, title, subtitle, actions, className = '' }
   return (
     <section
       className={[
-        'rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6',
+        'rounded-lg border border-slate-300 bg-white p-5 shadow-none sm:p-6',
         className,
       ].join(' ')}
     >
       {(title || subtitle || actions) && (
-        <div className="mb-4 flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 pb-4">
+        <div className="mb-5 flex flex-wrap items-start justify-between gap-3 border-b border-slate-300 pb-4">
           <div>
             {title && <h2 className="text-lg font-semibold text-slate-900">{title}</h2>}
             {subtitle && <p className="mt-1 text-sm text-slate-600">{subtitle}</p>}

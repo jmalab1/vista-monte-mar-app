@@ -20,13 +20,13 @@ const Login = () => {
 
   return (
     <AuthBusinessLayout
-      title="Sign in to Admin Console"
-      subtitle="Access operations, checklist workflows, and traffic insights."
-      panelTitle="Property Operations Portal"
+      title="Sign in to Operations Dashboard"
+      subtitle="Monitor daily traffic, manage workflows, and maintain property readiness from one control center."
+      panelTitle="Vista Monte Mar Operations"
       panelBullets={[
-        'Manage inventory and checklist updates with audit visibility.',
-        'Review traffic history and operational activity in one place.',
-        'Secure access with token-based session verification.',
+        'Track visitor traffic trends by day, month, and year.',
+        'Coordinate inventory and checklist execution with clear accountability.',
+        'Use secure authenticated sessions for authorized team access.',
       ]}
     >
       <AuthComponent />

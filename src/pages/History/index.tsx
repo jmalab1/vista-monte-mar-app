@@ -1,13 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import {
-  ColumnDef,
-  PaginationState,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import axios from '../../utility/axiosInstance';
@@ -16,67 +8,57 @@ import AdminTopbar from '../../components/admin/AdminTopbar';
 import AdminStatPill from '../../components/admin/AdminStatPill';
 import AdminSurfaceCard from '../../components/admin/AdminSurfaceCard';
 
-type HistoryRow = Record<string, unknown>;
+type Period = 'day' | 'month' | 'year';
 
-const getFirstString = (row: HistoryRow, keys: string[]): string => {
-  for (const key of keys) {
-    const value = row[key];
-    if (typeof value === 'string' && value.trim()) {
-      return value;
-    }
-  }
-  return '';
-};
-
-const getHistoryTime = (row: HistoryRow): string => {
-  const raw = getFirstString(row, ['createdAt', 'created_at', 'timestamp', 'date']);
-
-  if (!raw) {
-    return 'N/A';
-  }
-
-  const parsed = new Date(raw);
-  if (Number.isNaN(parsed.getTime())) {
-    return raw;
-  }
-
-  return parsed.toLocaleString();
-};
-
-const normalizeRows = (raw: unknown): HistoryRow[] => {
-  if (Array.isArray(raw)) {
-    return raw.filter((entry): entry is HistoryRow => Boolean(entry) && typeof entry === 'object');
-  }
-
-  if (raw && typeof raw === 'object') {
-    const maybeRecords = (raw as { records?: unknown }).records;
-    if (Array.isArray(maybeRecords)) {
-      return maybeRecords.filter(
-        (entry): entry is HistoryRow => Boolean(entry) && typeof entry === 'object'
-      );
-    }
-  }
-
-  return [];
-};
-
-type TrafficTableRow = {
-  time: string;
+type HistoryRecord = {
+  createdAt: string;
   path: string;
-  referrer: string;
-  ip: string;
-  userAgent: string;
+  referrer: string | null;
+  userAgent: string | null;
+  ip: string | null;
+};
+
+type SeriesPoint = {
+  bucket: string;
+  count: number;
+};
+
+type VisitorHistoryResponse = {
+  records: HistoryRecord[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  series: SeriesPoint[];
+  period: Period;
+};
+
+const PERIOD_LABELS: Record<Period, string> = {
+  day: 'Day',
+  month: 'Month',
+  year: 'Year',
+};
+
+const formatTime = (value: string): string => {
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return value;
+  }
+  return parsed.toLocaleString();
 };
 
 const History = () => {
   const { isAuthenticated } = useAuth();
   const { showToast } = useToast();
+
   const [loading, setLoading] = useState(true);
-  const [rows, setRows] = useState<HistoryRow[]>([]);
-  const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 10,
-  });
+  const [records, setRecords] = useState<HistoryRecord[]>([]);
+  const [series, setSeries] = useState<SeriesPoint[]>([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
+  const [totalPages, setTotalPages] = useState(1);
+  const [period, setPeriod] = useState<Period>('day');
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -85,9 +67,18 @@ const History = () => {
 
     setLoading(true);
     axios
-      .get('/api/visitor-history')
+      .get<VisitorHistoryResponse>('/api/visitor-history', {
+        params: {
+          page,
+          pageSize,
+          period,
+        },
+      })
       .then((response) => {
-        setRows(normalizeRows(response.data));
+        setRecords(response.data.records || []);
+        setSeries(response.data.series || []);
+        setTotal(response.data.total || 0);
+        setTotalPages(Math.max(response.data.totalPages || 1, 1));
       })
       .catch(() => {
         showToast('Oh no! Unable to load traffic history.', 'error');
@@ -95,93 +86,32 @@ const History = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [isAuthenticated, showToast]);
+  }, [isAuthenticated, page, pageSize, period, showToast]);
 
-  const sortedRows = useMemo(() => {
-    return [...rows].sort((a, b) => {
-      const aRaw = getFirstString(a, ['createdAt', 'created_at', 'timestamp', 'date']);
-      const bRaw = getFirstString(b, ['createdAt', 'created_at', 'timestamp', 'date']);
-      const aTime = new Date(aRaw).getTime();
-      const bTime = new Date(bRaw).getTime();
+  const chartPoints = useMemo(() => {
+    if (!series.length) return '';
+    const width = 780;
+    const height = 240;
+    const padX = 24;
+    const padY = 20;
+    const innerWidth = width - padX * 2;
+    const innerHeight = height - padY * 2;
+    const maxCount = Math.max(...series.map((point) => point.count), 1);
 
-      if (!Number.isNaN(aTime) && !Number.isNaN(bTime)) {
-        return bTime - aTime;
-      }
+    return series
+      .map((point, index) => {
+        const x =
+          series.length === 1
+            ? width / 2
+            : padX + (index / (series.length - 1)) * innerWidth;
+        const y = padY + innerHeight - (point.count / maxCount) * innerHeight;
+        return `${x},${y}`;
+      })
+      .join(' ');
+  }, [series]);
 
-      return 0;
-    });
-  }, [rows]);
-
-  const tableData = useMemo<TrafficTableRow[]>(
-    () =>
-      sortedRows.map((row) => ({
-        time: getHistoryTime(row),
-        path: getFirstString(row, ['path', 'route']) || 'N/A',
-        referrer: getFirstString(row, ['referrer']) || 'N/A',
-        ip: getFirstString(row, ['ip', 'ipAddress']) || 'N/A',
-        userAgent: getFirstString(row, ['userAgent', 'user_agent', 'ua']) || 'N/A',
-      })),
-    [sortedRows]
-  );
-
-  const columns = useMemo<ColumnDef<TrafficTableRow>[]>(
-    () => [
-      {
-        accessorKey: 'time',
-        header: 'Time',
-        cell: ({ getValue }) => (
-          <span className="whitespace-nowrap font-medium text-slate-800">
-            {String(getValue())}
-          </span>
-        ),
-      },
-      {
-        accessorKey: 'path',
-        header: 'Path',
-        cell: ({ getValue }) => (
-          <span className="rounded-md bg-[#f7f2ed] px-2 py-1 font-mono text-xs text-[#6f4b34]">
-            {String(getValue())}
-          </span>
-        ),
-      },
-      {
-        accessorKey: 'referrer',
-        header: 'Referrer',
-        cell: ({ getValue }) => <span className="text-slate-600">{String(getValue())}</span>,
-      },
-      {
-        accessorKey: 'ip',
-        header: 'IP',
-        cell: ({ getValue }) => (
-          <span className="whitespace-nowrap font-mono text-xs text-slate-600">
-            {String(getValue())}
-          </span>
-        ),
-      },
-      {
-        accessorKey: 'userAgent',
-        header: 'User Agent',
-        cell: ({ getValue }) => (
-          <p className="line-clamp-2 max-w-[380px] break-all text-xs text-slate-600">
-            {String(getValue())}
-          </p>
-        ),
-      },
-    ],
-    []
-  );
-
-  const table = useReactTable({
-    data: tableData,
-    columns,
-    state: { pagination },
-    onPaginationChange: setPagination,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
-
-  const pageStart = pagination.pageIndex * pagination.pageSize + 1;
-  const pageEnd = Math.min((pagination.pageIndex + 1) * pagination.pageSize, tableData.length);
+  const pageStart = total === 0 ? 0 : (page - 1) * pageSize + 1;
+  const pageEnd = Math.min(page * pageSize, total);
 
   return (
     <>
@@ -190,105 +120,178 @@ const History = () => {
         <AdminDashboardLayout activeNavKey="history">
           <AdminTopbar
             title="Traffic History"
-            subtitle="Review visitor traffic events and paginate through recent records."
+            subtitle="Paginated visitor history with line trends by day, month, or year."
           />
 
-          <div className="flex flex-wrap items-center gap-2">
-            <AdminStatPill label="Records" value={sortedRows.length} tone="info" />
-            <AdminStatPill
-              label="Page"
-              value={`${table.getState().pagination.pageIndex + 1}/${Math.max(table.getPageCount(), 1)}`}
-            />
-          </div>
+          <div className="space-y-5 border-t border-slate-300 pt-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-2">
+                {(Object.keys(PERIOD_LABELS) as Period[]).map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => {
+                      setPeriod(option);
+                      setPage(1);
+                    }}
+                    className={[
+                      'rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-wide transition focus:outline-none focus:ring-2 focus:ring-blue-300',
+                      period === option
+                        ? 'border-blue-700 bg-blue-700 text-white shadow-sm'
+                        : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-100',
+                    ].join(' ')}
+                  >
+                    {PERIOD_LABELS[option]}
+                  </button>
+                ))}
+              </div>
 
-          <AdminSurfaceCard title="Recent Activity" subtitle="Traffic requests captured from visitors.">
-            {loading && <p className="text-sm text-slate-600">Loading traffic history...</p>}
-            {!loading && sortedRows.length === 0 && (
-              <p className="text-sm text-slate-600">No traffic history found.</p>
-            )}
-            {!loading && sortedRows.length > 0 && (
-              <>
-                <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-xs font-medium text-slate-600">
-                    Showing {pageStart}-{pageEnd} of {tableData.length}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <label className="text-xs font-medium text-slate-600" htmlFor="page-size">
-                      Rows
-                    </label>
-                    <select
-                      id="page-size"
-                      className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs text-slate-700"
-                      value={pagination.pageSize}
-                      onChange={(event) => {
-                        table.setPageSize(Number(event.target.value));
-                      }}
-                    >
-                      {[10, 20, 50].map((size) => (
-                        <option key={size} value={size}>
-                          {size}
-                        </option>
-                      ))}
-                    </select>
+              <div className="flex items-center gap-2">
+                <label className="text-xs font-medium text-slate-600" htmlFor="page-size">
+                  Rows
+                </label>
+                <select
+                  id="page-size"
+                  className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs text-slate-700"
+                  value={pageSize}
+                  onChange={(event) => {
+                    setPageSize(Number(event.target.value));
+                    setPage(1);
+                  }}
+                >
+                  {[10, 25, 50, 100].map((size) => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+              <AdminStatPill label="Total Records" value={total} tone="info" />
+              <AdminStatPill label="Page" value={`${page}/${totalPages}`} />
+              <AdminStatPill label="Showing" value={`${pageStart}-${pageEnd}`} tone="success" />
+              <AdminStatPill label="Period" value={PERIOD_LABELS[period]} tone="warning" />
+            </div>
+
+            <AdminSurfaceCard
+              title="Traffic Trend"
+              subtitle={`Line graph grouped by ${PERIOD_LABELS[period].toLowerCase()} over entire history.`}
+            >
+              {loading && records.length > 0 && (
+                <p className="mb-3 text-xs font-medium text-slate-500">Updating chart...</p>
+              )}
+              {series.length === 0 && !loading && <p className="text-sm text-slate-600">No trend data found.</p>}
+              {series.length > 0 && (
+                <div className="overflow-x-auto pb-2">
+                  <div className="min-w-[760px] rounded-lg border border-slate-300 bg-white p-4">
+                    <svg viewBox="0 0 780 240" className="h-64 w-full">
+                      <line x1="24" y1="220" x2="756" y2="220" stroke="#94a3b8" strokeWidth="1" />
+                      <polyline
+                        fill="none"
+                        stroke="#2563eb"
+                        strokeWidth="3"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        points={chartPoints}
+                      />
+                      {series.map((point, index) => {
+                        const maxCount = Math.max(...series.map((item) => item.count), 1);
+                        const x =
+                          series.length === 1
+                            ? 390
+                            : 24 + (index / (series.length - 1)) * (780 - 48);
+                        const y = 20 + (200 - (point.count / maxCount) * 200);
+                        return (
+                          <g key={`${point.bucket}-${index}`}>
+                            <circle cx={x} cy={y} r={5} fill="#3b82f6" stroke="#ffffff" strokeWidth="2" />
+                            <text x={x} y="236" textAnchor="middle" className="fill-slate-600 text-[10px] font-medium">
+                              {point.bucket}
+                            </text>
+                          </g>
+                        );
+                      })}
+                    </svg>
                   </div>
                 </div>
-                <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
-                  <table className="w-full min-w-[900px] text-left">
-                    <thead className="bg-slate-50">
-                      {table.getHeaderGroups().map((headerGroup) => (
-                        <tr key={headerGroup.id} className="text-xs uppercase tracking-wide text-slate-600">
-                          {headerGroup.headers.map((header) => (
-                            <th key={header.id} className="px-4 py-3 font-bold">
-                              {header.isPlaceholder
-                                ? null
-                                : flexRender(header.column.columnDef.header, header.getContext())}
-                            </th>
-                          ))}
+              )}
+            </AdminSurfaceCard>
+
+            <AdminSurfaceCard title="Events" subtitle="Paginated results. Use page controls to view complete history.">
+              {loading && records.length > 0 && (
+                <p className="mb-3 text-xs font-medium text-slate-500">Loading next page...</p>
+              )}
+              {records.length === 0 && !loading && <p className="text-sm text-slate-600">No events found.</p>}
+              {records.length > 0 && (
+                <>
+                  <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                    <table className="w-full min-w-[960px] text-left">
+                      <thead className="bg-slate-50">
+                        <tr className="text-xs uppercase tracking-wide text-slate-600">
+                          <th className="px-4 py-3 font-bold">Time</th>
+                          <th className="px-4 py-3 font-bold">Path</th>
+                          <th className="px-4 py-3 font-bold">Referrer</th>
+                          <th className="px-4 py-3 font-bold">IP</th>
+                          <th className="px-4 py-3 font-bold">User Agent</th>
                         </tr>
-                      ))}
-                    </thead>
-                    <tbody>
-                      {table.getRowModel().rows.map((row) => (
-                        <tr
-                          key={row.id}
-                          className="border-t border-slate-100 text-sm text-slate-700 odd:bg-white even:bg-slate-50/40"
-                        >
-                          {row.getVisibleCells().map((cell) => (
-                            <td key={cell.id} className="px-4 py-3 align-top">
-                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </thead>
+                      <tbody>
+                        {records.map((row, index) => (
+                          <tr
+                            key={`${row.createdAt}-${row.ip || 'na'}-${index}`}
+                            className="border-t border-slate-100 text-sm text-slate-700 odd:bg-white even:bg-slate-50/40"
+                          >
+                            <td className="whitespace-nowrap px-4 py-3 align-top font-medium text-slate-800">
+                              {formatTime(row.createdAt)}
                             </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-xs text-slate-600">
-                    Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
-                      onClick={() => table.previousPage()}
-                      disabled={!table.getCanPreviousPage()}
-                    >
-                      Previous
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
-                      onClick={() => table.nextPage()}
-                      disabled={!table.getCanNextPage()}
-                    >
-                      Next
-                    </button>
+                            <td className="px-4 py-3 align-top">
+                              <span className="rounded-md bg-slate-100 px-2 py-1 font-mono text-xs text-slate-700">
+                                {row.path || 'N/A'}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3 align-top text-slate-600">{row.referrer || 'N/A'}</td>
+                            <td className="whitespace-nowrap px-4 py-3 align-top font-mono text-xs text-slate-600">
+                              {row.ip || 'N/A'}
+                            </td>
+                            <td className="px-4 py-3 align-top">
+                              <p className="line-clamp-2 max-w-[420px] break-all text-xs text-slate-600">
+                                {row.userAgent || 'N/A'}
+                              </p>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                </div>
-              </>
-            )}
-          </AdminSurfaceCard>
+
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                    <p className="text-xs text-slate-600">
+                      Showing {pageStart}-{pageEnd} of {total}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+                        onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                        disabled={page <= 1}
+                      >
+                        Previous
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+                        onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                        disabled={page >= totalPages}
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </AdminSurfaceCard>
+          </div>
         </AdminDashboardLayout>
       )}
     </>
