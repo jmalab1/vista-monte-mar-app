@@ -52,6 +52,13 @@ const FormCard: FunctionComponent<TFormCard> = ({
     return false;
   };
 
+  const getToggleValue = (fieldKey: string): boolean => {
+    if (value && typeof value === 'object') {
+      return Boolean((value as Record<string, unknown>)[fieldKey]);
+    }
+    return false;
+  };
+
   const getJsx = (
     parentID: string,
     inputType: string,
@@ -88,7 +95,7 @@ const FormCard: FunctionComponent<TFormCard> = ({
             title={fieldTitle}
             id={id}
             onChange={(e) => onChange(parentID, id, e)}
-            checked={Boolean(value) || false}
+            checked={getToggleValue(id)}
           />
         );
       case 'text':
@@ -99,7 +106,7 @@ const FormCard: FunctionComponent<TFormCard> = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md h-full">
+    <div className="admin-form-card h-full rounded-lg border border-slate-300 bg-white p-6">
       {checkbox && (
         <Checkbox
           id={parentID}
@@ -109,12 +116,12 @@ const FormCard: FunctionComponent<TFormCard> = ({
         />
       )}
       {!checkbox && (
-        <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+        <h5 className="mb-2 block text-xl font-semibold leading-snug tracking-normal text-slate-900">
           {title}
           {onReset && (
             <FontAwesomeIcon
               icon={faEraser}
-              color="#dfb88d"
+              color="#2563eb"
               cursor="pointer"
               onClick={() => onReset?.(parentID)}
             />

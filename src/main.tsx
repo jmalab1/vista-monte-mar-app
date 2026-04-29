@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
+import { AdminPreferencesProvider } from './context/AdminPreferencesContext';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const rootElement = document.getElementById('root');
@@ -13,9 +14,11 @@ if (rootElement) {
     <React.StrictMode>
       <ErrorBoundary>
         <AuthProvider>
-          <ToastProvider>
-            <App />
-          </ToastProvider>
+          <AdminPreferencesProvider>
+            <ToastProvider>
+              <App />
+            </ToastProvider>
+          </AdminPreferencesProvider>
         </AuthProvider>
       </ErrorBoundary>
     </React.StrictMode>

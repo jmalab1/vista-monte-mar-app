@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useAdminPreferences, HistoryPeriod } from '../../context/AdminPreferencesContext';
 import { useToast } from '../../context/ToastContext';
 import axios from '../../utility/axiosInstance';
 import AdminDashboardLayout from '../../layouts/AdminDashboardLayout';
 import AdminTopbar from '../../components/admin/AdminTopbar';
 import AdminStatPill from '../../components/admin/AdminStatPill';
 import AdminSurfaceCard from '../../components/admin/AdminSurfaceCard';
-
-type Period = 'day' | 'month' | 'year';
 
 type HistoryRecord = {
   createdAt: string;
@@ -30,10 +29,10 @@ type VisitorHistoryResponse = {
   pageSize: number;
   totalPages: number;
   series: SeriesPoint[];
-  period: Period;
+  period: HistoryPeriod;
 };
 
-const PERIOD_LABELS: Record<Period, string> = {
+const PERIOD_LABELS: Record<HistoryPeriod, string> = {
   day: 'Day',
   month: 'Month',
   year: 'Year',
@@ -50,6 +49,8 @@ const formatTime = (value: string): string => {
 const History = () => {
   const { isAuthenticated } = useAuth();
   const { showToast } = useToast();
+  const { preferences, savePreferences } = useAdminPreferences();
+  const isDarkMode = Boolean(preferences.darkMode);
 
   const [loading, setLoading] = useState(true);
   const [records, setRecords] = useState<HistoryRecord[]>([]);
@@ -58,7 +59,16 @@ const History = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
   const [totalPages, setTotalPages] = useState(1);
-  const [period, setPeriod] = useState<Period>('day');
+  const [period, setPeriod] = useState<HistoryPeriod>('day');
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      return;
+    }
+
+    setPageSize(preferences.historyPageSize || 10);
+    setPeriod(preferences.historyPeriod || 'day');
+  }, [isAuthenticated, preferences.historyPageSize, preferences.historyPeriod]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -112,6 +122,11 @@ const History = () => {
 
   const pageStart = total === 0 ? 0 : (page - 1) * pageSize + 1;
   const pageEnd = Math.min(page * pageSize, total);
+  const axisColor = isDarkMode ? '#94a3b8' : '#64748b';
+  const gridColor = isDarkMode ? '#334155' : '#cbd5e1';
+  const tickColor = isDarkMode ? '#e2e8f0' : '#475569';
+  const pointStrokeColor = isDarkMode ? '#0f172a' : '#ffffff';
+  const maxSeriesCount = Math.max(...series.map((item) => item.count), 1);
 
   return (
     <>
@@ -126,13 +141,14 @@ const History = () => {
           <div className="space-y-5 border-t border-slate-300 pt-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
-                {(Object.keys(PERIOD_LABELS) as Period[]).map((option) => (
+                {(Object.keys(PERIOD_LABELS) as HistoryPeriod[]).map((option) => (
                   <button
                     key={option}
                     type="button"
                     onClick={() => {
                       setPeriod(option);
                       setPage(1);
+                      void savePreferences({ historyPeriod: option });
                     }}
                     className={[
                       'rounded-lg border px-3 py-2 text-xs font-semibold uppercase tracking-wide transition focus:outline-none focus:ring-2 focus:ring-blue-300',
@@ -146,7 +162,7 @@ const History = () => {
                 ))}
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <label className="text-xs font-medium text-slate-600" htmlFor="page-size">
                   Rows
                 </label>
@@ -155,8 +171,10 @@ const History = () => {
                   className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs text-slate-700"
                   value={pageSize}
                   onChange={(event) => {
-                    setPageSize(Number(event.target.value));
+                    const nextSize = Number(event.target.value);
+                    setPageSize(nextSize);
                     setPage(1);
+                    void savePreferences({ historyPageSize: nextSize });
                   }}
                 >
                   {[10, 25, 50, 100].map((size) => (
@@ -179,15 +197,24 @@ const History = () => {
               title="Traffic Trend"
               subtitle={`Line graph grouped by ${PERIOD_LABELS[period].toLowerCase()} over entire history.`}
             >
-              {loading && records.length > 0 && (
-                <p className="mb-3 text-xs font-medium text-slate-500">Updating chart...</p>
-              )}
               {series.length === 0 && !loading && <p className="text-sm text-slate-600">No trend data found.</p>}
               {series.length > 0 && (
-                <div className="overflow-x-auto pb-2">
+                <div className={['overflow-x-auto pb-2 transition-opacity', loading ? 'opacity-80' : 'opacity-100'].join(' ')}>
                   <div className="min-w-[760px] rounded-lg border border-slate-300 bg-white p-4">
                     <svg viewBox="0 0 780 240" className="h-64 w-full">
-                      <line x1="24" y1="220" x2="756" y2="220" stroke="#94a3b8" strokeWidth="1" />
+                      {[0, 1, 2, 3, 4].map((tick) => {
+                        const y = 20 + tick * 50;
+                        const value = Math.round(maxSeriesCount * (1 - tick / 4));
+                        return (
+                          <g key={`y-tick-${tick}`}>
+                            <line x1="24" y1={y} x2="756" y2={y} stroke={gridColor} strokeWidth="1" />
+                            <text x="18" y={y + 4} textAnchor="end" style={{ fill: tickColor, fontSize: 10, fontWeight: 600 }}>
+                              {value}
+                            </text>
+                          </g>
+                        );
+                      })}
+                      <line x1="24" y1="220" x2="756" y2="220" stroke={axisColor} strokeWidth="1.25" />
                       <polyline
                         fill="none"
                         stroke="#2563eb"
@@ -197,16 +224,15 @@ const History = () => {
                         points={chartPoints}
                       />
                       {series.map((point, index) => {
-                        const maxCount = Math.max(...series.map((item) => item.count), 1);
                         const x =
                           series.length === 1
                             ? 390
                             : 24 + (index / (series.length - 1)) * (780 - 48);
-                        const y = 20 + (200 - (point.count / maxCount) * 200);
+                        const y = 20 + (200 - (point.count / maxSeriesCount) * 200);
                         return (
                           <g key={`${point.bucket}-${index}`}>
-                            <circle cx={x} cy={y} r={5} fill="#3b82f6" stroke="#ffffff" strokeWidth="2" />
-                            <text x={x} y="236" textAnchor="middle" className="fill-slate-600 text-[10px] font-medium">
+                            <circle cx={x} cy={y} r={5} fill="#3b82f6" stroke={pointStrokeColor} strokeWidth="2" />
+                            <text x={x} y="236" textAnchor="middle" style={{ fill: tickColor, fontSize: 10, fontWeight: 600 }}>
                               {point.bucket}
                             </text>
                           </g>
@@ -219,14 +245,16 @@ const History = () => {
             </AdminSurfaceCard>
 
             <AdminSurfaceCard title="Events" subtitle="Paginated results. Use page controls to view complete history.">
-              {loading && records.length > 0 && (
-                <p className="mb-3 text-xs font-medium text-slate-500">Loading next page...</p>
-              )}
               {records.length === 0 && !loading && <p className="text-sm text-slate-600">No events found.</p>}
               {records.length > 0 && (
                 <>
-                  <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
-                    <table className="w-full min-w-[960px] text-left">
+                  <div
+                    className={[
+                      'history-table-wrap overflow-x-auto rounded-xl border border-slate-200 bg-white transition-opacity',
+                      loading ? 'opacity-80' : 'opacity-100',
+                    ].join(' ')}
+                  >
+                    <table className="history-table w-full min-w-[960px] text-left">
                       <thead className="bg-slate-50">
                         <tr className="text-xs uppercase tracking-wide text-slate-600">
                           <th className="px-4 py-3 font-bold">Time</th>
@@ -240,7 +268,10 @@ const History = () => {
                         {records.map((row, index) => (
                           <tr
                             key={`${row.createdAt}-${row.ip || 'na'}-${index}`}
-                            className="border-t border-slate-100 text-sm text-slate-700 odd:bg-white even:bg-slate-50/40"
+                            className={[
+                              'border-t border-slate-100 text-sm text-slate-700',
+                              index % 2 === 0 ? 'bg-white' : 'bg-slate-50/70',
+                            ].join(' ')}
                           >
                             <td className="whitespace-nowrap px-4 py-3 align-top font-medium text-slate-800">
                               {formatTime(row.createdAt)}
