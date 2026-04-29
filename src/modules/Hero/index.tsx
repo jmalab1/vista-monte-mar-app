@@ -249,12 +249,20 @@ export const Hero = () => {
               <span className="hero-chip">Pool and modern amenities</span>
               <span className="hero-chip">Minutes from Jaco Beach</span>
             </div>
-            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
               <Link to="/gallery" className="soft-button w-full sm:min-w-[12rem] sm:w-auto">
                 Explore the gallery
               </Link>
-              <a href="#contact" className="ghost-button w-full sm:min-w-[12rem] sm:w-auto">
-                Plan your stay
+              <a
+                href="https://www.airbnb.com/l/CdacQQqk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ghost-button w-full sm:min-w-[12rem] sm:w-auto"
+              >
+                View on Airbnb
+              </a>
+              <a href="#firstname" className="ghost-button w-full sm:min-w-[12rem] sm:w-auto">
+                Email us directly
               </a>
             </div>
             <div className="mt-8 hidden max-w-md rounded-[1.5rem] border border-white/80 bg-white/85 p-4 text-sm text-slate-600 shadow-[0_18px_40px_rgba(34,56,69,0.12)] backdrop-blur lg:block">
