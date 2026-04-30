@@ -120,8 +120,9 @@ const History = () => {
       .join(' ');
   }, [series]);
 
+  const visibleRecords = useMemo(() => records.slice(0, pageSize), [records, pageSize]);
   const pageStart = total === 0 ? 0 : (page - 1) * pageSize + 1;
-  const pageEnd = Math.min(page * pageSize, total);
+  const pageEnd = total === 0 ? 0 : Math.min(pageStart + visibleRecords.length - 1, total);
   const axisColor = isDarkMode ? '#94a3b8' : '#64748b';
   const gridColor = isDarkMode ? '#334155' : '#cbd5e1';
   const tickColor = isDarkMode ? '#e2e8f0' : '#475569';
@@ -245,8 +246,8 @@ const History = () => {
             </AdminSurfaceCard>
 
             <AdminSurfaceCard title="Events" subtitle="Paginated results. Use page controls to view complete history.">
-              {records.length === 0 && !loading && <p className="text-sm text-slate-600">No events found.</p>}
-              {records.length > 0 && (
+              {visibleRecords.length === 0 && !loading && <p className="text-sm text-slate-600">No events found.</p>}
+              {visibleRecords.length > 0 && (
                 <>
                   <div
                     className={[
@@ -265,7 +266,7 @@ const History = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {records.map((row, index) => (
+                        {visibleRecords.map((row, index) => (
                           <tr
                             key={`${row.createdAt}-${row.ip || 'na'}-${index}`}
                             className={[

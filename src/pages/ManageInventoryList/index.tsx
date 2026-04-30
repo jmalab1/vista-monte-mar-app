@@ -118,7 +118,6 @@ const ManageInventory: React.FC = () => {
             title="Manage Inventory Listing"
             subtitle="Edit inventory listing JSON and preview rendered forms."
           />
-
           <div className="flex flex-wrap items-center gap-2">
             <AdminStatPill label="Records" value={Object.keys(validJson).length} tone="info" />
             <AdminStatPill
@@ -134,10 +133,10 @@ const ManageInventory: React.FC = () => {
             subtitle="Submit writes changes to the listing endpoint. Preview opens the form modal."
           >
             <CodeEditor code={code} onChange={handleInputChange} />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mt-4">
               <ButtonItem
                 onClick={handleSubmitClick}
-                classValue="btn-secondary mt-4"
+                classValue="btn-secondary"
                 type="button"
                 saving={saving}
               >
@@ -145,14 +144,13 @@ const ManageInventory: React.FC = () => {
               </ButtonItem>
               <ButtonItem
                 onClick={() => setShowModal(true)}
-                classValue="btn-info mt-4"
+                classValue="btn-info"
                 type="button"
               >
                 Preview
               </ButtonItem>
             </div>
-
-            <div className="pt-6">{errorMessage}</div>
+            {errorMessage && <div className="pt-4 text-red-600 text-sm">{errorMessage}</div>}
           </AdminSurfaceCard>
 
           <Modal

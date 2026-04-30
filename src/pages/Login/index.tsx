@@ -4,9 +4,25 @@ import AuthComponent from '../../components/Authentication';
 import { useAuth } from '../../context/AuthContext';
 import AuthBusinessLayout from '../../layouts/AuthBusinessLayout';
 
+const AUTH_LOGOUT_REASON_KEY = 'auth_logout_reason';
+
 const Login = () => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [logoutReason, setLogoutReason] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    try {
+      const reason = window.localStorage.getItem(AUTH_LOGOUT_REASON_KEY);
+      if (reason) {
+        setLogoutReason(reason);
+        window.localStorage.removeItem(AUTH_LOGOUT_REASON_KEY);
+      }
+    } catch {
+      // no-op
+    }
+  }, []);
+
   const handleOpenGuestSite = () => {
     window.open('/vista_monte_mar/', '_blank', 'noopener,noreferrer');
   };
@@ -33,6 +49,14 @@ const Login = () => {
       ]}
     >
       <div className="space-y-4">
+        {logoutReason && (
+          <div
+            role="alert"
+            className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900"
+          >
+            {logoutReason}
+          </div>
+        )}
         <AuthComponent />
         <button
           type="button"

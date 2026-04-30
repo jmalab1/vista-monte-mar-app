@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Footer from './modules/Footer';
 import Navbar from './modules/Navbar';
@@ -21,6 +21,7 @@ import History from './pages/History';
 import ScrollToTop from 'react-scroll-up';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from './context/AuthContext';
 
 const RouteScrollToTop = () => {
   const location = useLocation();
@@ -52,6 +53,13 @@ const ADMIN_ROUTES = new Set([
 
 const AppShell = () => {
   const location = useLocation();
+  const {
+    isAuthenticated,
+    showSessionExpiryWarning,
+    keepSessionAlive,
+    sessionExpiryWarningEndsAt,
+  } = useAuth();
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
   const shouldHideChrome = APP_CHROME_HIDDEN_ROUTES.has(location.pathname);
   const isAdminRoute = ADMIN_ROUTES.has(location.pathname);
 
@@ -61,6 +69,25 @@ const AppShell = () => {
       document.body.classList.remove('admin-mode');
     };
   }, [isAdminRoute]);
+
+  useEffect(() => {
+    if (!showSessionExpiryWarning || !sessionExpiryWarningEndsAt) {
+      setRemainingSeconds(0);
+      return;
+    }
+
+    const updateRemaining = () => {
+      const seconds = Math.max(
+        0,
+        Math.ceil((sessionExpiryWarningEndsAt - Date.now()) / 1000)
+      );
+      setRemainingSeconds(seconds);
+    };
+
+    updateRemaining();
+    const interval = window.setInterval(updateRemaining, 1000);
+    return () => window.clearInterval(interval);
+  }, [showSessionExpiryWarning, sessionExpiryWarningEndsAt]);
 
   return (
     <>
@@ -93,6 +120,28 @@ const AppShell = () => {
         </div>
         {!shouldHideChrome && <Footer />}
       </div>
+      {isAuthenticated && showSessionExpiryWarning && (
+        <dialog className="modal modal-open">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg">Session Expiring Soon</h3>
+            <p className="py-4">
+              You have been inactive. Your session will end in 10 minutes unless you choose
+              to stay signed in.
+            </p>
+            <p className="text-sm font-semibold text-slate-800">
+              Time remaining: {remainingSeconds}s
+            </p>
+            <div className="modal-action">
+              <button
+                className="rounded-md border border-blue-900 bg-blue-900 px-4 py-2 text-sm font-semibold text-white transition hover:border-blue-950 hover:bg-blue-950 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+                onClick={keepSessionAlive}
+              >
+                Stay Signed In
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
     </>
   );
 };
