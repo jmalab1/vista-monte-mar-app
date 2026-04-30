@@ -23,6 +23,7 @@ import ScrollToTop from 'react-scroll-up';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from './context/AuthContext';
+import { useAdminPreferences } from './context/AdminPreferencesContext';
 
 const RouteScrollToTop = () => {
   const location = useLocation();
@@ -65,6 +66,7 @@ const AppShell = () => {
   const [remainingSeconds, setRemainingSeconds] = useState(0);
   const shouldHideChrome = APP_CHROME_HIDDEN_ROUTES.has(location.pathname);
   const isAdminRoute = ADMIN_ROUTES.has(location.pathname);
+  const { preferences } = useAdminPreferences();
 
   useEffect(() => {
     document.body.classList.toggle('admin-mode', isAdminRoute);
@@ -72,6 +74,14 @@ const AppShell = () => {
       document.body.classList.remove('admin-mode');
     };
   }, [isAdminRoute]);
+
+  useEffect(() => {
+    const shouldEnableAdminDark = isAdminRoute && preferences.darkMode;
+    document.body.classList.toggle('admin-dark-mode', shouldEnableAdminDark);
+    return () => {
+      document.body.classList.remove('admin-dark-mode');
+    };
+  }, [isAdminRoute, preferences.darkMode]);
 
   useEffect(() => {
     if (!showSessionExpiryWarning || !sessionExpiryWarningEndsAt) {

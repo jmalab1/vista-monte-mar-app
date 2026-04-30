@@ -216,13 +216,13 @@ const ManageInventory: React.FC = () => {
 
           <AdminSurfaceCard title="Recent Versions" subtitle="Restore previous inventory listing snapshots.">
             <div className="space-y-2">
-              {versions.length === 0 && <p className="text-sm text-slate-600">No versions yet. Click Submit or Publish Draft to create one.</p>}
+              {versions.length === 0 && <p className="text-sm text-slate-600 dark:text-slate-300">No versions yet. Click Submit or Publish Draft to create one.</p>}
               {versions.map((version) => (
-                <div key={version.id} className="flex items-center justify-between rounded border border-slate-200 px-3 py-2 text-sm">
-                  <span>{new Date(version.createdAt).toLocaleString()} by {version.actor}</span>
+                <div key={version.id} className="flex items-center justify-between rounded border border-slate-200 px-3 py-2 text-sm dark:border-slate-700">
+                  <span className="text-slate-700 dark:text-slate-200">{new Date(version.createdAt).toLocaleString()} by {version.actor}</span>
                   <button
                     type="button"
-                    className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-semibold"
+                    className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
                     onClick={() => handleRestore(version.id)}
                   >
                     Restore

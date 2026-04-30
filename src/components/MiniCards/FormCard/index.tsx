@@ -106,7 +106,7 @@ const FormCard: FunctionComponent<TFormCard> = ({
   };
 
   return (
-    <div className="admin-form-card h-full rounded-lg border border-slate-300 bg-white p-6">
+    <div className="admin-form-card h-full rounded-lg border border-slate-300 bg-white p-6 dark:border-slate-700 dark:bg-slate-800">
       {checkbox && (
         <Checkbox
           id={parentID}
@@ -116,7 +116,7 @@ const FormCard: FunctionComponent<TFormCard> = ({
         />
       )}
       {!checkbox && (
-        <h5 className="mb-2 block text-xl font-semibold leading-snug tracking-normal text-slate-900">
+        <h5 className="mb-2 block text-xl font-semibold leading-snug tracking-normal text-slate-900 dark:text-slate-100">
           {title}
           {onReset && (
             <FontAwesomeIcon

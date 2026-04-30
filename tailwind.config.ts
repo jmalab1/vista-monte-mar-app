@@ -1,7 +1,9 @@
 import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
 const withMT = require('@material-tailwind/react/utils/withMT');
 
 const config: Config = withMT({
+  darkMode: 'class',
   content: [
     './index.html',
     './node_modules/preline/preline.js',
@@ -9,6 +11,15 @@ const config: Config = withMT({
   ],
   theme: {
     extend: {
+      colors: {
+        slate: colors.slate,
+        gray: colors.gray,
+        blue: colors.blue,
+        emerald: colors.emerald,
+        amber: colors.amber,
+        rose: colors.rose,
+        red: colors.red,
+      },
       fontFamily: {
         sans: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
         serif: ['Georgia', 'serif'],

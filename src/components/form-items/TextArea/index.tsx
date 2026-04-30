@@ -34,7 +34,7 @@ const TextArea: FunctionComponent<TTextArea> = ({
         <span className="label-text-alt"></span>
       </div>
       <textarea
-        className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 shadow-inner focus:border-blue-500 focus:outline-none"
+        className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 shadow-inner focus:border-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
         id={id}
         name={id}
         placeholder={placeholder}

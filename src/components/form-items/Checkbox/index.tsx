@@ -39,7 +39,7 @@ const Checkbox: FunctionComponent<TCheckbox> = ({
           'admin-checkbox inline-flex h-5 w-5 items-center justify-center rounded border transition-colors duration-200',
           checked
             ? 'border-blue-700 bg-blue-600'
-            : 'border-slate-300 bg-white',
+            : 'border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-800',
         ].join(' ')}
       >
         <svg
