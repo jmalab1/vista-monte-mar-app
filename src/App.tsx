@@ -18,6 +18,7 @@ import ManageChecklist from './pages/ManageChecklist';
 import Inventory from './pages/Inventory';
 import Checklist from './pages/Checklist';
 import History from './pages/History';
+import Audit from './pages/Audit';
 import ScrollToTop from 'react-scroll-up';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
@@ -41,6 +42,7 @@ const APP_CHROME_HIDDEN_ROUTES = new Set([
   '/inventory',
   '/checklist',
   '/history',
+  '/audit',
 ]);
 
 const ADMIN_ROUTES = new Set([
@@ -49,6 +51,7 @@ const ADMIN_ROUTES = new Set([
   '/inventory',
   '/checklist',
   '/history',
+  '/audit',
 ]);
 
 const AppShell = () => {
@@ -115,6 +118,7 @@ const AppShell = () => {
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/checklist" element={<Checklist />} />
             <Route path="/history" element={<History />} />
+            <Route path="/audit" element={<Audit />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

@@ -19,6 +19,9 @@ const Inventory = () => {
   const [formData, setFormData] = useState<Record<string, Record<string, any>>>(
     {}
   );
+  const [alerts, setAlerts] = useState<
+    Array<{ sectionName: string; fieldName: string; value: number; min: number; unit: string; critical: boolean }>
+  >([]);
 
   // Ref to store the debounce timer ID, so it can be cleared on each trigger
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
@@ -28,13 +31,26 @@ const Inventory = () => {
       return;
     }
 
-    Promise.all([
+    Promise.allSettled([
       axios.get('/api/inventory-listing'),
       axios.get('/api/get-inventory'),
+      axios.get('/api/inventory-alerts'),
     ])
-      .then(([inventoryListing, inventory]) => {
-        setInventoryObj(inventoryListing.data);
-        setFormData(inventory.data);
+      .then(([inventoryListingResult, inventoryResult, alertsResult]) => {
+        if (inventoryListingResult.status === 'fulfilled' && inventoryResult.status === 'fulfilled') {
+          setInventoryObj(inventoryListingResult.value.data);
+          setFormData(inventoryResult.value.data);
+        } else {
+          showToast('Oh no! Unable to get inventory.', 'error');
+          return;
+        }
+
+        if (alertsResult.status === 'fulfilled') {
+          setAlerts(alertsResult.value.data.alerts || []);
+        } else {
+          setAlerts([]);
+          showToast('Unable to load inventory alerts.', 'warning');
+        }
       })
       .catch(() => {
         showToast('Oh no! Unable to get inventory.', 'error');
@@ -150,7 +166,30 @@ const Inventory = () => {
           <div className="flex flex-wrap items-center gap-2">
             <AdminStatPill label="Cards" value={Object.keys(inventoryObj).length} tone="info" />
             <AdminStatPill label="Save State" value={saving ? 'Saving' : 'Ready'} />
+            <AdminStatPill label="Low Stock" value={alerts.length} tone={alerts.length ? 'warning' : 'success'} />
+            <AdminStatPill
+              label="Critical"
+              value={alerts.filter((item) => item.critical).length}
+              tone={alerts.some((item) => item.critical) ? 'danger' : 'success'}
+            />
           </div>
+
+          <AdminSurfaceCard title="Needs Restock" subtitle="Fields at or below minimum threshold.">
+            {alerts.length === 0 && <p className="text-sm text-slate-600">No low-stock alerts.</p>}
+            {alerts.length > 0 && (
+              <div className="grid gap-2 md:grid-cols-2">
+                {alerts.map((alert, index) => (
+                  <div key={`${alert.sectionName}-${alert.fieldName}-${index}`} className="rounded border border-slate-200 px-3 py-2 text-sm">
+                    <p className="font-semibold text-slate-800">{alert.sectionName} - {alert.fieldName}</p>
+                    <p className="text-slate-600">
+                      {alert.value} {alert.unit} / min {alert.min} {alert.unit}
+                    </p>
+                    {alert.critical && <p className="text-xs font-semibold text-red-600">Critical</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </AdminSurfaceCard>
 
           <AdminSurfaceCard
             title="Inventory Form Cards"

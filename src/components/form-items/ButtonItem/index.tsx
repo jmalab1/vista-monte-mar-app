@@ -16,8 +16,8 @@ const ButtonItem: FunctionComponent<TButton> = ({
   children,
 }) => {
   const variantClass = classValue.includes('btn-info')
-    ? 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100'
-    : 'border-blue-700 bg-blue-700 text-white hover:bg-blue-800';
+    ? 'border-slate-300 bg-white text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700'
+    : 'border-blue-700 bg-blue-700 text-white hover:bg-blue-800 dark:border-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600';
 
   return (
     <div className={`flex ${classValue.replace('btn-secondary', '').replace('btn-info', '')}`}>

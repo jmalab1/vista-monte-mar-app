@@ -128,6 +128,34 @@ const ManageChecklist: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [validJson, setValidJson] = useState<Record<string, unknown>>({});
   const [showModal, setShowModal] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [versions, setVersions] = useState<Array<{ id: number; createdAt: string; actor: string }>>([]);
+
+  const loadVersions = async () => {
+    const responses = await Promise.allSettled([
+      axiosInstance.get('/api/versions', {
+        params: { domain: 'checklist_listing_draft', page: 1, pageSize: 10 },
+      }),
+      axiosInstance.get('/api/versions', {
+        params: { domain: 'checklist_publish', page: 1, pageSize: 10 },
+      }),
+    ]);
+
+    const records = responses
+      .filter((result): result is PromiseFulfilledResult<{ data: { records?: Array<{ id: number; createdAt: string; actor: string }> } }> => result.status === 'fulfilled')
+      .flatMap((result) => result.value.data.records || []);
+
+    const merged = Object.values(
+      records.reduce<Record<number, { id: number; createdAt: string; actor: string }>>((acc, version) => {
+        acc[version.id] = version;
+        return acc;
+      }, {})
+    )
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 10);
+
+    setVersions(merged);
+  };
 
   // Fetch data on component mount
   useEffect(() => {
@@ -140,6 +168,7 @@ const ManageChecklist: React.FC = () => {
         const response = await axiosInstance.get('/api/checklist-listing');
         setCode(JSON.stringify(response.data, null, 4));
         setValidJson(response.data);
+        await loadVersions();
       } catch (error) {
         console.log('Oh no!' + error);
       }
@@ -177,6 +206,7 @@ const ManageChecklist: React.FC = () => {
 
       if (response.status === 200) {
         showToast('Checklist Listing Updated Successfully.', 'success');
+        await loadVersions();
       } else {
         showToast('Checklist Listing Update Failed.', 'error');
       }
@@ -213,6 +243,29 @@ const ManageChecklist: React.FC = () => {
 
   const checklistSections = buildSections(validJson);
 
+  const handlePublish = async () => {
+    try {
+      setPublishing(true);
+      await axiosInstance.post('/api/publish/checklist');
+      showToast('Checklist draft published.', 'success');
+      await loadVersions();
+    } catch {
+      showToast('Publish failed.', 'error');
+    } finally {
+      setPublishing(false);
+    }
+  };
+
+  const handleRestore = async (id: number) => {
+    try {
+      await axiosInstance.post(`/api/versions/${id}/restore`);
+      showToast('Version restored.', 'success');
+      window.location.reload();
+    } catch {
+      showToast('Restore failed.', 'error');
+    }
+  };
+
   return (
     <>
       {!isAuthenticated && <Navigate to="/login" />}
@@ -238,10 +291,10 @@ const ManageChecklist: React.FC = () => {
             subtitle="Submit writes checklist listing changes. Preview opens grouped cards by day."
           >
             <CodeEditor code={code} onChange={handleInputChange} />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="mt-4 flex flex-wrap items-center gap-3 md:flex-nowrap">
               <ButtonItem
                 onClick={handleSubmitClick}
-                classValue="btn-secondary mt-4"
+                classValue="btn-secondary"
                 type="button"
                 saving={saving}
               >
@@ -249,14 +302,40 @@ const ManageChecklist: React.FC = () => {
               </ButtonItem>
               <ButtonItem
                 onClick={() => setShowModal(true)}
-                classValue="btn-info mt-4"
+                classValue="btn-info"
                 type="button"
               >
                 Preview
               </ButtonItem>
+              <ButtonItem
+                onClick={handlePublish}
+                classValue="btn-secondary"
+                type="button"
+                saving={publishing}
+              >
+                Publish Draft
+              </ButtonItem>
             </div>
 
             <div className="pt-6">{errorMessage}</div>
+          </AdminSurfaceCard>
+
+          <AdminSurfaceCard title="Recent Versions" subtitle="Restore previous checklist listing snapshots.">
+            <div className="space-y-2">
+              {versions.length === 0 && <p className="text-sm text-slate-600">No versions yet. Click Submit or Publish Draft to create one.</p>}
+              {versions.map((version) => (
+                <div key={version.id} className="flex items-center justify-between rounded border border-slate-200 px-3 py-2 text-sm">
+                  <span>{new Date(version.createdAt).toLocaleString()} by {version.actor}</span>
+                  <button
+                    type="button"
+                    className="rounded border border-slate-300 bg-white px-2 py-1 text-xs font-semibold"
+                    onClick={() => handleRestore(version.id)}
+                  >
+                    Restore
+                  </button>
+                </div>
+              ))}
+            </div>
           </AdminSurfaceCard>
 
           <Modal

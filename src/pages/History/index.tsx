@@ -60,6 +60,12 @@ const History = () => {
   const [pageSize, setPageSize] = useState(25);
   const [totalPages, setTotalPages] = useState(1);
   const [period, setPeriod] = useState<HistoryPeriod>('day');
+  const [pathFilter, setPathFilter] = useState('');
+  const [referrerFilter, setReferrerFilter] = useState('');
+  const [ipFilter, setIpFilter] = useState('');
+  const [uaFilter, setUaFilter] = useState('');
+  const [fromFilter, setFromFilter] = useState('');
+  const [toFilter, setToFilter] = useState('');
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -82,6 +88,12 @@ const History = () => {
           page,
           pageSize,
           period,
+          path: pathFilter || undefined,
+          referrer: referrerFilter || undefined,
+          ip: ipFilter || undefined,
+          uaContains: uaFilter || undefined,
+          from: fromFilter || undefined,
+          to: toFilter || undefined,
         },
       })
       .then((response) => {
@@ -96,7 +108,31 @@ const History = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [isAuthenticated, page, pageSize, period, showToast]);
+  }, [isAuthenticated, page, pageSize, period, pathFilter, referrerFilter, ipFilter, uaFilter, fromFilter, toFilter, showToast]);
+
+  const handleExport = async () => {
+    try {
+      const response = await axios.get('/api/visitor-history/export.csv', {
+        params: {
+          path: pathFilter || undefined,
+          referrer: referrerFilter || undefined,
+          ip: ipFilter || undefined,
+          uaContains: uaFilter || undefined,
+          from: fromFilter || undefined,
+          to: toFilter || undefined,
+        },
+        responseType: 'blob',
+      });
+      const blobUrl = window.URL.createObjectURL(response.data);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'visitor-history.csv';
+      link.click();
+      window.URL.revokeObjectURL(blobUrl);
+    } catch {
+      showToast('Unable to export CSV.', 'error');
+    }
+  };
 
   const chartPoints = useMemo(() => {
     if (!series.length) return '';
@@ -184,7 +220,23 @@ const History = () => {
                     </option>
                   ))}
                 </select>
+                <button
+                  type="button"
+                  className="rounded-md border border-blue-700 bg-blue-700 px-3 py-1.5 text-xs font-semibold text-white dark:border-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600"
+                  onClick={handleExport}
+                >
+                  Export CSV
+                </button>
               </div>
+            </div>
+
+            <div className="grid gap-2 md:grid-cols-3 xl:grid-cols-6">
+              <input className="rounded border border-slate-300 px-2 py-1 text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" placeholder="Path" value={pathFilter} onChange={(e) => { setPathFilter(e.target.value); setPage(1); }} />
+              <input className="rounded border border-slate-300 px-2 py-1 text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" placeholder="Referrer" value={referrerFilter} onChange={(e) => { setReferrerFilter(e.target.value); setPage(1); }} />
+              <input className="rounded border border-slate-300 px-2 py-1 text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" placeholder="IP" value={ipFilter} onChange={(e) => { setIpFilter(e.target.value); setPage(1); }} />
+              <input className="rounded border border-slate-300 px-2 py-1 text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" placeholder="User agent contains" value={uaFilter} onChange={(e) => { setUaFilter(e.target.value); setPage(1); }} />
+              <input className="rounded border border-slate-300 px-2 py-1 text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" type="date" value={fromFilter} onChange={(e) => { setFromFilter(e.target.value); setPage(1); }} />
+              <input className="rounded border border-slate-300 px-2 py-1 text-xs dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100" type="date" value={toFilter} onChange={(e) => { setToFilter(e.target.value); setPage(1); }} />
             </div>
 
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">

@@ -1,5 +1,5 @@
 export type AdminNavItem = {
-  key: 'manage_inventory' | 'manage_checklist' | 'inventory' | 'checklist' | 'history';
+  key: 'manage_inventory' | 'manage_checklist' | 'inventory' | 'checklist' | 'history' | 'audit';
   label: string;
   href: string;
 };
@@ -10,4 +10,5 @@ export const adminNavItems: AdminNavItem[] = [
   { key: 'inventory', label: 'Inventory', href: '/inventory' },
   { key: 'checklist', label: 'Checklist', href: '/checklist' },
   { key: 'history', label: 'Traffic History', href: '/history' },
+  { key: 'audit', label: 'Audit Log', href: '/audit' },
 ];

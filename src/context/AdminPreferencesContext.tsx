@@ -55,8 +55,10 @@ export const AdminPreferencesProvider: React.FC<{ children: React.ReactNode }> =
 
   useEffect(() => {
     document.body.classList.toggle('admin-dark-mode', preferences.darkMode);
+    document.documentElement.classList.toggle('dark', preferences.darkMode);
     return () => {
       document.body.classList.remove('admin-dark-mode');
+      document.documentElement.classList.remove('dark');
     };
   }, [preferences.darkMode]);
 

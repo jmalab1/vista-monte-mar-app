@@ -124,6 +124,12 @@ const Checklist = () => {
   const [saving, setSaving] = useState(false);
   const [checklistObj, setChecklistObj] = useState<Record<string, unknown>>({});
   const [formData, setFormData] = useState<Record<string, unknown>>({});
+  const [analytics, setAnalytics] = useState<{
+    totalItems: number;
+    completedItems: number;
+    completionRate: number;
+    overdueItems: number;
+  } | null>(null);
 
   // Ref to store the debounce timer ID, so it can be cleared on each trigger
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
@@ -133,13 +139,26 @@ const Checklist = () => {
       return;
     }
 
-    Promise.all([
+    Promise.allSettled([
       axios.get('/api/checklist-listing'),
       axios.get('/api/get-checklist'),
+      axios.get('/api/checklist-analytics'),
     ])
-      .then(([inventoryListing, inventory]) => {
-        setChecklistObj(inventoryListing.data);
-        setFormData(inventory.data);
+      .then(([checklistListingResult, checklistResult, analyticsResult]) => {
+        if (checklistListingResult.status === 'fulfilled' && checklistResult.status === 'fulfilled') {
+          setChecklistObj(checklistListingResult.value.data);
+          setFormData(checklistResult.value.data);
+        } else {
+          showToast('Oh no! Unable to get checklist.', 'error');
+          return;
+        }
+
+        if (analyticsResult.status === 'fulfilled') {
+          setAnalytics(analyticsResult.value.data);
+        } else {
+          setAnalytics(null);
+          showToast('Unable to load checklist analytics.', 'warning');
+        }
       })
       .catch(() => {
         showToast('Oh no! Unable to get checklist.', 'error');
@@ -236,6 +255,8 @@ const Checklist = () => {
               value={checklistSections.reduce((total, section) => total + section.items.length, 0)}
             />
             <AdminStatPill label="Save State" value={saving ? 'Saving' : 'Ready'} />
+            <AdminStatPill label="Completion" value={`${analytics?.completionRate ?? 0}%`} tone="success" />
+            <AdminStatPill label="Overdue" value={analytics?.overdueItems ?? 0} tone="warning" />
           </div>
 
           {_.map(checklistSections, (section) => (
