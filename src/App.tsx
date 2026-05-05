@@ -19,6 +19,7 @@ import Inventory from './pages/Inventory';
 import Checklist from './pages/Checklist';
 import History from './pages/History';
 import Audit from './pages/Audit';
+import EmailHistory from './pages/EmailHistory';
 import ScrollToTop from 'react-scroll-up';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
@@ -44,6 +45,7 @@ const APP_CHROME_HIDDEN_ROUTES = new Set([
   '/checklist',
   '/history',
   '/audit',
+  '/email-history',
 ]);
 
 const ADMIN_ROUTES = new Set([
@@ -53,6 +55,7 @@ const ADMIN_ROUTES = new Set([
   '/checklist',
   '/history',
   '/audit',
+  '/email-history',
 ]);
 
 const AppShell = () => {
@@ -129,18 +132,19 @@ const AppShell = () => {
             <Route path="/checklist" element={<Checklist />} />
             <Route path="/history" element={<History />} />
             <Route path="/audit" element={<Audit />} />
+            <Route path="/email-history" element={<EmailHistory />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         {!shouldHideChrome && <Footer />}
       </div>
-      {isAuthenticated && showSessionExpiryWarning && (
+      {isAuthenticated && isAdminRoute && showSessionExpiryWarning && (
         <dialog className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Session Expiring Soon</h3>
             <p className="py-4">
-              You have been inactive. Your session will end in 10 minutes unless you choose
-              to stay signed in.
+              You have been inactive. Your session will end soon unless you choose to stay
+              signed in.
             </p>
             <p className="text-sm font-semibold text-slate-800">
               Time remaining: {remainingSeconds}s

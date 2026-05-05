@@ -94,6 +94,21 @@ This project is built using the following technologies:
 - Legacy `src/modules/AdminNav` remains as a compatibility adapter and now reads from `adminNavItems` to avoid route/label drift.
 - This redesign is presentation-only; authenticated page logic, API payloads, and auth protection behavior are unchanged.
 
+## Email History Admin Route
+
+- New authenticated admin route: `/email-history`.
+- Route is protected by existing auth flow; unauthenticated users are redirected to `/login`.
+- Backend list endpoint: `GET /api/contact-email-history`
+  - Query params: `page`, `limit`, optional `email`
+  - Response shape:
+    - `records`: array of submissions (`name`, `email`, `phone`, `message`, `createdAt`)
+    - `total`: total matching records
+    - `page`: current page
+    - `limit`: page size
+- Backend CSV endpoint: `GET /api/contact-email-history/export.csv`
+  - Supports same optional `email` filter
+  - Returns CSV payload for download
+
 ## 🚀 Getting Started
 
 Follow these steps to get the project running on your local machine.
