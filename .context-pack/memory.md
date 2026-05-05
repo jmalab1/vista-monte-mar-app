@@ -9,35 +9,42 @@
 
 ## Repo
 - name: vista-monte-mar-app
-- purpose: Likely a Node or TypeScript project with manifest-driven setup.
-- project types: node
+- purpose: Frontend SPA for the Vista Monte Mar guest/admin experience.
+- project types: node, vite, react
 - primary languages: typescript, javascript
+- active branch: v2
 
 ## Read First
-- `README.md`: project overview
-- `package.json`: project manifest
-- `src\App.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
+- `AGENTS.md`: repo instruction to run context-pack and read this memory before edits.
+- `README.md`: frontend/local-dev notes and admin route documentation.
+- `package.json`: scripts, dependencies, test commands.
+- `src/App.tsx`: route registration and app-level admin chrome/session warning behavior.
 
 ## Entry Points
-- `src\App.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
-- `src\components\ErrorBoundary\index.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
+- `src/main.tsx`: React app bootstrap.
+- `src/App.tsx`: top-level router and shared route classification.
+- `src/context/AuthContext.tsx`: auth state, token verification, idle/session warning behavior.
+- `src/layouts/AdminDashboardLayout.tsx`: unified authenticated admin layout.
 
 ## Hotspots
-- `src\App.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
-- `src\components\ErrorBoundary\index.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
-- `src\App.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
-- `src\components\ErrorBoundary\index.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
-- `src\components\NotFound\index.tsx`: entrypoint-like source file, language-aware boost (typescript, top-1), referenced by active work or entrypoint
+- Admin navigation source of truth lives in `src/components/admin/adminNavItems.ts`.
+- Shared admin tables/components live in `src/components/admin`.
+- Email history admin page lives in `src/pages/EmailHistory/index.tsx` with tests in `src/pages/EmailHistory/index.test.tsx`.
+- Vitest setup lives in `vitest.config.ts` and `src/test`.
 
 ## Known Pitfalls
-- No AGENTS.md found.
-- tree entries omitted by limit: 13
+- This repo should own frontend application source and container build only; Kubernetes and deploy assets live in sibling repo `vista-monte-mar-services`.
+- Windows file-mode noise has happened in this workspace; repo config should keep `core.filemode=false`.
+- Auth session timeout should stay production-like unless explicitly doing local/manual expiry testing.
+- Context-pack memory should be used as orientation only; verify against current code before editing.
 
 ## Operational Notes
-- `package.json`: runtime dependencies `@fortawesome/fontawesome-svg-core`, `@fortawesome/free-solid-svg-icons`, `@fortawesome/react-fontawesome`, `@heroicons/react`; dev tools `@eslint/js`, `@types/leaflet`, `@types/lodash`, `@types/node`.
+- Frontend-only local dev command: `npm run dev:frontend`.
+- Test command: `npm test`.
+- Recent notable work added `/email-history`, CSV export UI, and Vitest/Testing Library coverage.
 
 ## Debugging Notes
-- Working tree clean
+- Working tree was clean when this memory was enriched.
 
 ## Open Questions
-- Fill this in as you learn where the repo still fights back.
+- Keep email-history frontend API assumptions aligned with backend contact-email-history endpoints.
