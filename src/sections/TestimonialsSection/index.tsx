@@ -3,39 +3,9 @@ import Container from '../../components/Container';
 import Paragraph from '../../components/ElementWrapper/Paragraph';
 import SectionHeader from '../../components/heading/SectionHeader';
 import { reviews as reviewsData } from './reviews';
+import { formatReviewDateForDisplay, getReviewRecencyScore } from './reviewDate';
 
 type FilterMode = 'most-relevant' | 'newest';
-
-const monthMap: Record<string, number> = {
-  january: 0,
-  february: 1,
-  march: 2,
-  april: 3,
-  may: 4,
-  june: 5,
-  july: 6,
-  august: 7,
-  september: 8,
-  october: 9,
-  november: 10,
-  december: 11,
-};
-
-const getRecencyScore = (posted: string): number => {
-  const normalized = posted.toLowerCase().trim();
-
-  if (normalized.includes('day ago')) return 10_000_000;
-  if (normalized.includes('days ago')) return 9_900_000;
-  if (normalized.includes('week ago')) return 9_800_000;
-  if (normalized.includes('weeks ago')) return 9_700_000;
-
-  const [monthWord, yearWord] = normalized.split(' ');
-  const month = monthMap[monthWord];
-  const year = Number(yearWord);
-
-  if (Number.isNaN(year) || month === undefined) return 0;
-  return year * 12 + month;
-};
 
 const TestimonialsSection = () => {
   const [filterMode, setFilterMode] = useState<FilterMode>('most-relevant');
@@ -48,7 +18,7 @@ const TestimonialsSection = () => {
         name: review.name || 'Guest',
         location: review.location || 'Airbnb guest',
         rating: review.rating || 5,
-        posted: review.posted || 'Recent stay',
+        posted: formatReviewDateForDisplay(review.posted || 'Recent stay'),
         quote: review.quote || '',
       })),
     []
@@ -88,7 +58,7 @@ const TestimonialsSection = () => {
     const filtered = [...reviews];
 
     if (filterMode === 'newest') {
-      return filtered.sort((a, b) => getRecencyScore(b.posted) - getRecencyScore(a.posted)).slice(0, visibleCount);
+      return filtered.sort((a, b) => getReviewRecencyScore(b.posted) - getReviewRecencyScore(a.posted)).slice(0, visibleCount);
     }
 
     return filtered.slice(0, visibleCount);
@@ -226,5 +196,3 @@ const TestimonialsSection = () => {
 };
 
 export default TestimonialsSection;
-
-

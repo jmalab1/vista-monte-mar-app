@@ -51,7 +51,7 @@ export const reviews: Review[] = [
     name: 'Olga',
     location: 'Randolph, New Jersey',
     rating: 5,
-    posted: '1 day ago',
+    posted: 'May 2026',
     stayType: 'Stayed a few nights',
     quote:
       'Beautiful place, great location very close to Jaco beach, excellent security and outstanding communication with the host. Highly recommend this place for anyone who is planning to visit Jaco Costa Rica.',
@@ -92,7 +92,7 @@ export const reviews: Review[] = [
     name: 'Corey',
     location: 'Montreal, Canada',
     rating: 5,
-    posted: '5 days ago',
+    posted: 'May 2026',
     stayType: 'Stayed over a week',
     quote:
       'I had a fantastic stay here. The condo is exactly what you hope for when traveling. It is beautifully appointed, spotless, and thoughtfully designed. The location is excellent with convenient access to everything nearby, yet it still feels peaceful and relaxing. Communication was smooth, welcoming, and incredibly helpful throughout. Highly recommended. I would happily stay here again.',
@@ -133,7 +133,7 @@ export const reviews: Review[] = [
     name: 'Colleen',
     location: 'Airbnb guest',
     rating: 5,
-    posted: '3 weeks ago',
+    posted: 'April 2026',
     stayType: 'Stayed a few nights',
     quote: 'Great stay and excellent host. We loved our location and the staff on property. Highly recommend for the Jaco area.',
   },
@@ -182,7 +182,7 @@ export const reviews: Review[] = [
     name: 'Johana',
     location: 'Alajuelita, Costa Rica',
     rating: 5,
-    posted: '3 weeks ago',
+    posted: 'April 2026',
     stayType: 'Stayed a few nights',
     quote:
       'The accommodation was exactly as shown in the pictures. The apartment is very well maintained, stylish, clean, and cool. It has all listed amenities, feels safe, and has parking. Overall, it was a very comfortable stay and we felt right at home.',
