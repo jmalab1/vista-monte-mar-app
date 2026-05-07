@@ -26,7 +26,7 @@ export const DirectionsSection = () => {
             the Central Pacific coast. It is roughly 1.5 hours, depending on
             traffic, from San Juan Santamaria International Airport (SJO).
           </Paragraph>
-          <ButtonItem type={'button'} classValue="w-full sm:w-40 btn-secondary">
+          <ButtonItem type={'button'} classValue="w-full sm:w-40 btn-guest">
             <Link
               to={`https://www.google.com/maps/dir/?api=1&origin=SJO&destination=Condominio+Torres+del+Mar`}
               target="_blank"

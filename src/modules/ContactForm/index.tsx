@@ -147,7 +147,7 @@ const ContactForm = () => {
               />
             </div>
             <div className="mr-1 mt-6 flex items-center justify-end gap-x-6">
-              <ButtonItem classValue="btn-secondary" type="submit" saving={saving}>
+              <ButtonItem classValue="btn-guest" type="submit" saving={saving}>
                 Submit
               </ButtonItem>
             </div>

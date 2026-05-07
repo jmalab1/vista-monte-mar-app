@@ -185,7 +185,7 @@ export const MapAndTable: FunctionComponent<TMapAndTable> = ({
 
         <section className="mt-4 rounded-xl border border-[#e2e8f0] bg-white p-3">
           <div className="mb-3 flex items-center gap-2">
-            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#1d4ed8] text-xs font-bold text-white">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#0f766e] text-xs font-bold text-white">
               2
             </span>
             <h4 className="text-sm font-bold uppercase tracking-wide text-[#334155]">
