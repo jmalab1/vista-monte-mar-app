@@ -33,187 +33,123 @@ import c2 from '/src/assets/common/image (2).jpg?w=800&webp';
 import m1 from '/src/assets/misc/image (1).jpg?w=800&webp';
 import m2 from '/src/assets/misc/image (2).jpg?w=800&webp';
 import movie from '/src/assets/movie/Condo.mp4?w=800&webp';
+import Container from '../../components/Container';
+
+type GalleryGroup = {
+  title: string;
+  description: string;
+  images: string[];
+};
+
+const galleryGroups: GalleryGroup[] = [
+  {
+    title: 'Living Room',
+    description: 'Main shared space with open seating, natural light, and relaxed gathering areas.',
+    images: [lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8],
+  },
+  {
+    title: 'Balcony',
+    description: 'Outdoor views and quiet corners for coffee, sunsets, and fresh air.',
+    images: [balcony1, balcony2, balcony3],
+  },
+  {
+    title: 'Kitchen',
+    description: 'Cooking and prep space with the essentials for an easy stay-in meal.',
+    images: [k1, k2, k3, k4, k5],
+  },
+  {
+    title: 'Bedrooms',
+    description: 'Sleeping areas set up for a comfortable, low-stress home base.',
+    images: [br1, br2, br3, br4, br5],
+  },
+  {
+    title: 'Bathrooms',
+    description: 'Clean, bright utility spaces with the basics close at hand.',
+    images: [bt1, bt2, bt3],
+  },
+  {
+    title: 'Common Areas',
+    description: 'Shared building spaces that shape the overall experience around the condo.',
+    images: [c1, c2],
+  },
+  {
+    title: 'Nature',
+    description: 'A few views from the surrounding area that help set the mood of the trip.',
+    images: [n1, n2, n3],
+  },
+  {
+    title: 'Miscellaneous',
+    description: 'Extra details and moments from around the property and stay.',
+    images: [m1, m2],
+  },
+];
+
+const renderPhotoGrid = (images: string[], title: string) => (
+  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    {images.map((image, index) => (
+      <figure
+        key={`${title}-${index}`}
+        className="aspect-[4/3] overflow-hidden rounded-[1.4rem] border border-white/80 bg-white/70 shadow-[0_12px_30px_rgba(34,56,69,0.08)]"
+      >
+        <img
+          className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]"
+          src={image}
+          alt={`${title} image ${index + 1}`}
+        />
+      </figure>
+    ))}
+  </div>
+);
 
 export const GallerySection = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [allImages, setAllImages] = useState<string[]>([]);
-
-  const balcony = [balcony1, balcony2, balcony3];
-
-  const living_room = [lr1, lr2, lr3, lr4, lr5, lr6, lr7, lr8];
-
-  const kitchen = [k1, k2, k3, k4, k5];
-
-  const bedrooms = [br1, br2, br3, br4, br5];
-
-  const bathrooms = [bt1, bt2, bt3];
-
-  const nature = [n1, n2, n3];
-
-  const common = [c1, c2];
-
-  const misc = [m1, m2];
-
-  const handleImageClick = (categoryImages: string[], imageIndex: number) => {
-    setAllImages(categoryImages);
-    setCurrentImageIndex(imageIndex);
-    setIsModalOpen(true);
-  };
-
-  const handleNext = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentImageIndex(
-      (prev) => (prev - 1 + allImages.length) % allImages.length
-    );
-  };
-
-  const handleClose = () => {
-    setIsModalOpen(false);
-  };
-
   return (
-    <section className="px-8 pb-10 bg-base-200 shadow-xl" id="gallery">
-      <div className="mb-10 grid lg:ml-56 lg:mr-56">
-        <SectionHeader title="Photos/Videos" centerText={true}>
-          <div className="mt-8 mb-8">
-            <video
-              className="h-auto max-w-full rounded-lg"
-              autoPlay
-              controls
-              loop
-            >
-              <source src={movie} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Living Room" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {living_room.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(living_room, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Balcony" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {balcony.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(balcony, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Kitchen" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {kitchen.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(kitchen, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Bedrooms" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {bedrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(bedrooms, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Bathrooms" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {bathrooms.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(bathrooms, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Miscellaneous" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {misc.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(misc, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Common Areas" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {common.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(common, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-        <SectionHeader title="Nature" horizontalLine={true}>
-          <div className="columns-1 md:columns-2 xl:columns-3 gap-7 mt-8">
-            {nature.map((image, index) => (
-              <div className="break-inside-avoid mb-8" key={index}>
-                <img
-                  className="h-auto max-w-full rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                  src={image}
-                  alt={'image ' + (index + 1)}
-                  onClick={() => handleImageClick(nature, index)}
-                />
-              </div>
-            ))}
-          </div>
-        </SectionHeader>
-      </div>
+    <Container classValue="bg-base-200 lg:px-8">
+      <SectionHeader
+        title="Gallery"
+        centerText={true}
+        classValue="mx-auto w-full max-w-6xl"
+        contentClassValue="mt-6"
+      >
+        <p className="mx-auto max-w-3xl text-base leading-7 text-slate-600">
+          A room-by-room look at the condo, plus a few surrounding views to help you get a feel
+          for the stay before you arrive.
+        </p>
+      </SectionHeader>
 
-      <ImageModal
-        isOpen={isModalOpen}
-        currentIndex={currentImageIndex}
-        images={allImages}
-        onClose={handleClose}
-        onNext={handleNext}
-        onPrev={handlePrev}
-      />
-    </section>
+      <SectionHeader
+        title="Video Tour"
+        horizontalLine={true}
+        classValue="mx-auto w-full max-w-6xl"
+        contentClassValue="mt-6"
+      >
+        <div className="overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/70 p-2 shadow-[0_16px_36px_rgba(34,56,69,0.1)] sm:p-3">
+          <video
+            className="h-auto max-w-full rounded-[1.1rem]"
+            controls
+            loop
+          >
+            <source src={movie} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </SectionHeader>
+
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 sm:gap-12">
+        {galleryGroups.map((group) => (
+          <SectionHeader
+            key={group.title}
+            title={group.title}
+            horizontalLine={true}
+            contentClassValue="mt-6"
+          >
+            <p className="mb-6 max-w-3xl text-base leading-7 text-slate-600">
+              {group.description}
+            </p>
+            {renderPhotoGrid(group.images, group.title)}
+          </SectionHeader>
+        ))}
+      </div>
+    </Container>
   );
 };
 

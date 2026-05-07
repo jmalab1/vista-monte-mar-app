@@ -8,6 +8,9 @@ type TSectionHeader = {
   centerText?: boolean;
   textSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   horizontalLine?: boolean;
+  classValue?: string;
+  headerPadding?: number;
+  contentClassValue?: string;
 };
 
 const SectionHeader: FunctionComponent<TSectionHeader> = ({
@@ -16,17 +19,28 @@ const SectionHeader: FunctionComponent<TSectionHeader> = ({
   centerText,
   textSize,
   horizontalLine,
+  classValue,
+  headerPadding = 14,
+  contentClassValue = 'mt-5',
 }) => {
+  let classNamePlus = classValue ? classValue : '';
+
+  if (centerText) {
+    classNamePlus += ' place-content-center text-center';
+  }
+
   return (
     <>
-      <div className={centerText ? 'place-content-center text-center' : ''}>
+      <div
+        className={classNamePlus}
+      >
         <h1
-          className={`text-secondary ${textSize ? 'text-' + textSize : 'text-4xl'} font-bold mt-14 font-pacifico`}
+          className={`font-pacifico text-[#d48a58] ${textSize ? 'text-' + textSize : 'text-4xl sm:text-5xl'}`}
         >
           {title}
         </h1>
         {horizontalLine && <HorizontalLine />}
-        {children}
+        {children && <div className={contentClassValue}>{children}</div>}
       </div>
     </>
   );

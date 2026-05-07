@@ -15,6 +15,14 @@ type TMapboxMap = {
   name: string;
 };
 
+const PRIMARY_ROUTING_SERVICE_URL =
+  import.meta.env.VITE_ROUTING_SERVICE_URL ||
+  'https://routing.openstreetmap.de/routed-car/route/v1';
+
+const FALLBACK_ROUTING_SERVICE_URL =
+  import.meta.env.VITE_ROUTING_FALLBACK_URL ||
+  'https://router.project-osrm.org/route/v1';
+
 const locate = L.AwesomeMarkers.icon({
   icon: 'location-arrow',
   markerColor: 'blue',
@@ -37,33 +45,74 @@ const RoutingControl = ({ start, end, name }) => {
 
   useEffect(() => {
     if (!map) return;
+    if (!(L as any).Routing?.control || !(L as any).Routing?.osrmv1) {
+      return;
+    }
 
-    const routingControl = L.Routing.control({
-      waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
-      routeWhileDragging: true,
-      createMarker: function (
-        i: number,
-        waypoint: { latLng: L.LatLngExpression }
-      ) {
-        // Create markers with custom icons and popups
-        const marker = L.marker(waypoint.latLng, {
-          icon: i === 0 ? home : locate, // Use start icon for start and end icon for end
-        });
+    let currentRoutingControl: any = null;
+    let disposed = false;
+    let fallbackAttempted = false;
 
-        // Add popup content based on the marker
-        if (i === 0) {
-          marker.bindPopup('<b>Vista Monte Mar</b>');
-        } else if (i === 1) {
-          marker.bindPopup(`<b>${name}</b>`);
+    const buildRoutingControl = (serviceUrl: string) => {
+      let control: any = null;
+      try {
+        control = L.Routing.control({
+          router: L.Routing.osrmv1({
+            serviceUrl,
+          }),
+          waypoints: [L.latLng(start[0], start[1]), L.latLng(end[0], end[1])],
+          routeWhileDragging: true,
+          showAlternatives: false,
+          fitSelectedRoutes: true,
+          createMarker: function (
+            i: number,
+            waypoint: { latLng: L.LatLngExpression }
+          ) {
+            // Create markers with custom icons and popups
+            const marker = L.marker(waypoint.latLng, {
+              icon: i === 0 ? home : locate, // Use start icon for start and end icon for end
+            });
+
+            // Add popup content based on the marker
+            if (i === 0) {
+              marker.bindPopup('<b>Vista Monte Mar</b>');
+            } else if (i === 1) {
+              marker.bindPopup(`<b>${name}</b>`);
+            }
+
+            return marker;
+          },
+        }).addTo(map);
+      } catch {
+        return null;
+      }
+
+      control.on('routingerror', () => {
+        if (disposed || fallbackAttempted) return;
+        fallbackAttempted = true;
+        try {
+          map.removeControl(control);
+        } catch {
+          // no-op
         }
+        currentRoutingControl = buildRoutingControl(FALLBACK_ROUTING_SERVICE_URL);
+      });
 
-        return marker;
-      },
-    }).addTo(map);
+      return control;
+    };
+
+    currentRoutingControl = buildRoutingControl(PRIMARY_ROUTING_SERVICE_URL);
 
     // Cleanup on component unmount
     return () => {
-      map.removeControl(routingControl);
+      disposed = true;
+      if (currentRoutingControl) {
+        try {
+          map.removeControl(currentRoutingControl);
+        } catch {
+          // no-op
+        }
+      }
     };
   }, [map, start, end]);
 
@@ -82,12 +131,13 @@ const MapboxMap: FunctionComponent<TMapboxMap> = ({ coordinates, name }) => {
   }, [latLon]);
 
   return (
-    <div className="rounded-xl overflow-hidden shadow-lg relative mb-5 z-0">
+    <div className="relative z-0 mb-5 overflow-hidden rounded-2xl border border-base-300 shadow-lg">
       <MapContainer
         center={latLon}
         zoom={14}
         ref={mapRef}
-        style={{ height: '26rem', width: '100%' }}
+        className="rounded-2xl"
+        style={{ height: 'min(26rem, 70vh)', width: '100%' }}
       >
         <TileLayer
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"

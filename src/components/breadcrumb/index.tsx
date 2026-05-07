@@ -27,7 +27,7 @@ const Breadcrumb: FunctionComponent<BreadcrumbType> = ({ crumbs, active }) => {
               <path
                 d="M6 13L10 3"
                 stroke="currentColor"
-                stroke-linecap="round"
+                strokeLinecap="round"
               ></path>
             </svg>
           </li>

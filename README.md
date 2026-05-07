@@ -1,4 +1,35 @@
-# Vista Monte Mar
+# Vista Monte Mar App
+
+## Runbook
+
+See the local deployment and operations runbook:
+
+- [CODEBASE_WIKI.md](./CODEBASE_WIKI.md)
+
+## Frontend-Only Local Dev
+
+To run only the frontend with the Vite dev server:
+
+```bash
+npm run dev:frontend
+```
+
+This starts Vite in normal local mode (base path `/`) with HMR enabled.
+
+## k3s Deploy
+
+Local development stays in this repo. Kubernetes deployment assets live in the sibling `vista-monte-mar-services` repo.
+
+Use `vista-monte-mar-services` for:
+
+- cluster manifests
+- deploy scripts
+- SSH/bootstrap helpers
+- ingress and service wiring
+
+This repo should only own the frontend application source and container build.
+
+# React + Vite
 
 Welcome to the **Vista Monte Mar** web application repository. This project is a
 modern, responsive single-page application (SPA) designed to provide guests with
@@ -37,6 +68,46 @@ This project is built using the following technologies:
 - **[Leaflet](https://leafletjs.com/) &
   [React Leaflet](https://react-leaflet.js.org/):** For interactive maps.
 - **[FontAwesome](https://fontawesome.com/):** For scalable vector icons.
+
+## Auth UI
+
+- `/login` uses a business-oriented auth layout inspired by Untitled UI dashboard/auth patterns.
+- Auth logic and API contracts remain unchanged (`/api/login`, `/api/verify-token`).
+- Reusable auth presentation components live in `src/components/auth` and `src/layouts`.
+- `/forgot-password` is scaffolded with the same layout for future recovery flow implementation.
+
+## Admin Dashboard UI
+
+- Authenticated routes now share a unified shell via `src/layouts/AdminDashboardLayout.tsx`.
+- Shared dashboard primitives live in `src/components/admin`:
+  - `AdminSidebar`
+  - `AdminTopbar`
+  - `AdminSurfaceCard`
+  - `AdminStatPill`
+  - `adminNavItems` (single source of truth for admin navigation labels/routes)
+- Unified shell is used by:
+  - `/manage_inventory`
+  - `/manage_checklist`
+  - `/inventory`
+  - `/checklist`
+  - `/history`
+- Legacy `src/modules/AdminNav` remains as a compatibility adapter and now reads from `adminNavItems` to avoid route/label drift.
+- This redesign is presentation-only; authenticated page logic, API payloads, and auth protection behavior are unchanged.
+
+## Email History Admin Route
+
+- New authenticated admin route: `/email-history`.
+- Route is protected by existing auth flow; unauthenticated users are redirected to `/login`.
+- Backend list endpoint: `GET /api/contact-email-history`
+  - Query params: `page`, `limit`, optional `email`
+  - Response shape:
+    - `records`: array of submissions (`name`, `email`, `phone`, `message`, `createdAt`)
+    - `total`: total matching records
+    - `page`: current page
+    - `limit`: page size
+- Backend CSV endpoint: `GET /api/contact-email-history/export.csv`
+  - Supports same optional `email` filter
+  - Returns CSV payload for download
 
 ## 🚀 Getting Started
 

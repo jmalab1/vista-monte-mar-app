@@ -3,9 +3,19 @@ import react from '@vitejs/plugin-react';
 import { imagetools } from 'vite-imagetools';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
+  const isWsl = Boolean(process.env.WSL_DISTRO_NAME);
+  const isMountedWindowsPath = process.cwd().startsWith('/mnt/');
+  const usePolling =
+    process.env.VITE_USE_POLLING === '1' || (isWsl && isMountedWindowsPath);
+  const hmrHost = process.env.VITE_HMR_HOST || 'localhost';
+  const hmrClientPort = Number(process.env.VITE_HMR_CLIENT_PORT || 5173);
+  const apiProxyTarget =
+    process.env.VITE_API_PROXY_TARGET || 'http://127.0.0.1:8135';
+
   return {
-    base: mode === 'server' ? '/vista_monte_mar/' : '/',
+    // Keep dev base at "/" for stable HMR; only use subpath base in production build.
+    base: command === 'build' && mode === 'server' ? '/vista_monte_mar/' : '/',
     plugins: [react(), imagetools()],
     define: { 'process.env': {} },
     resolve: {
@@ -33,10 +43,23 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      host: '0.0.0.0',
+      strictPort: true,
+      port: 5173,
+      watch: usePolling
+        ? {
+            usePolling: true,
+            interval: 150,
+          }
+        : undefined,
+      hmr: {
+        host: hmrHost,
+        clientPort: hmrClientPort,
+      },
       proxy: {
-        // When the frontend requests /api/*, it will be proxied to the backend at http://localhost:4000.
+        // Frontend /api/* requests are proxied to the backend.
         '/api': {
-          target: 'https://localhost', // Backend server
+          target: apiProxyTarget,
           changeOrigin: true,
           secure: false,
         },

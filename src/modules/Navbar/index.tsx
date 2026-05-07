@@ -1,8 +1,6 @@
-import { MouseEvent, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { MouseEvent, useEffect, useMemo, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logo from './images/logo.svg?w=256&webp';
-//import Breadcrumb from '../../components/breadcrumb';
-import { findInJson } from '../../utility/findInJsonUtil';
 
 const NAV_MENU = [
   {
@@ -15,94 +13,102 @@ const NAV_MENU = [
       {
         name: 'Directions',
         href: '/directions',
-        crumb: ['Home', 'Visit Information'],
       },
       {
         name: 'Arrival',
         href: '/arrival',
-        crumb: ['Home', 'Visit Information'],
       },
       {
         name: 'House Rules',
         href: '/house_rules',
-        crumb: ['Home', 'Visit Information'],
       },
       {
         name: 'Checkout Instructions',
         href: '/checkout',
-        crumb: ['Home', 'Visit Information'],
       },
     ],
   },
   {
-    name: 'Photos/Videos',
+    name: 'Photos / Videos',
     href: '/gallery',
-    crumb: ['Home'],
   },
   {
     name: 'About Us',
     href: '/about_us',
-    crumb: ['Home'],
   },
 ];
 
-const light = 'olight';
-const dark = 'odark';
-
-const getInitialTheme = () => {
-  return localStorage.getItem('theme') ?? light;
-};
-
 export const Navbar = () => {
-  const [theme, setTheme] = useState(getInitialTheme());
+  const location = useLocation();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [activeMenuItem, setActiveMenuItem] = useState('Home');
-  const [crumbs, setCrumbs] = useState([]);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme); // Save the user's preference
-  }, [theme]);
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('details')) {
+        setDropdownOpen(false);
+      }
+    };
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === light ? dark : light));
-  };
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
-  const handleMenuClick = (e: MouseEvent<HTMLAnchorElement>, name: string) => {
+  useEffect(() => {
+    setIsDrawerOpen(false);
+    setDropdownOpen(false);
+  }, [location.pathname]);
+
+  const visitInfoPaths = useMemo(
+    () => ['/directions', '/arrival', '/house_rules', '/checkout'],
+    []
+  );
+
+  const isActive = (href?: string) => href === location.pathname;
+  const isVisitInfoActive = visitInfoPaths.includes(location.pathname);
+
+  const handleMenuClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const button = e.currentTarget as unknown as HTMLButtonElement;
     button.blur();
-
-    setIsDrawerOpen(false);
-    setActiveMenuItem(name);
-    setDropdownOpen(false);
-
-    const data = findInJson(NAV_MENU, 'name', name);
-    setCrumbs(data?.crumb ?? []);
   };
 
-  const nav = () => {
+  const nav = (isMobile = false) => {
     return NAV_MENU.map(({ name, href, submenu }) => {
       if (submenu) {
         return (
-          <li>
+          <li key={name}>
             <details open={dropdownOpen}>
               <summary
-                className={`text-md font-bold ${activeMenuItem == name ? 'bg-secondary' : ''}`}
+                className={`px-4 py-2 text-sm font-semibold text-[#27414d] transition hover:bg-white/80 ${
+                  isMobile ? 'rounded-2xl' : 'rounded-full'
+                } ${
+                  isVisitInfoActive ? 'bg-[#d6a57d] text-white hover:bg-[#d6a57d]' : ''
+                }`}
                 onClick={(e) => {
                   e.preventDefault();
-                  setDropdownOpen(true);
+                  setDropdownOpen((value) => !value);
                 }}
               >
                 {name}
               </summary>
-              <ul className="rounded-t-none p-2 z-50">
+              <ul className={`z-50 mt-3 border border-[#efe2d5] bg-white/95 p-3 shadow-xl backdrop-blur ${
+                isMobile ? 'rounded-[1.75rem]' : 'rounded-3xl'
+              }`}>
                 {submenu.map(({ name, href }) => (
-                  <li>
+                  <li key={`${name}-${href}`}>
                     <Link
                       to={href}
-                      className={`text-md font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
-                      onClick={(e) => handleMenuClick(e, name)}
+                      className={`px-4 py-3 text-sm font-medium transition ${
+                        isMobile ? 'rounded-xl' : 'rounded-2xl'
+                      } ${
+                        isActive(href)
+                          ? 'bg-[#f4e0cd] text-[#9b5d31]'
+                          : 'text-slate-600 hover:bg-[#f8f2ea] hover:text-[#27414d]'
+                      }`}
+                      onClick={handleMenuClick}
                     >
                       <span className="whitespace-nowrap">{name}</span>
                     </Link>
@@ -112,117 +118,108 @@ export const Navbar = () => {
             </details>
           </li>
         );
-      } else {
-        return (
-          <li>
-            <Link
-              to={href}
-              className={`text-md text-nuetral font-bold ${activeMenuItem == name ? 'bg-secondary text-base-100 hover:bg-secondary' : ''}`}
-              onClick={(e) => handleMenuClick(e, name)}
-            >
-              {name}
-            </Link>
-          </li>
-        );
       }
+
+      return (
+        <li key={name}>
+          <Link
+            to={href}
+            className={`px-4 py-2 text-sm font-semibold transition ${
+              isMobile ? 'rounded-2xl' : 'rounded-full'
+            } ${
+              isActive(href)
+                ? 'bg-[#d6a57d] text-white hover:bg-[#d6a57d]'
+                : 'text-[#27414d] hover:bg-white/80'
+            }`}
+            onClick={handleMenuClick}
+          >
+            {name}
+          </Link>
+        </li>
+      );
     });
   };
 
   return (
-    <>
-      <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <Link to={'/'}>
-            <div className="btn bg-transparent hover:bg-transparent border-none shadow-none flex block min-w-40">
-              <img src={logo} className="w-14 flex-none" />
-              <h1
-                className={`text-2xl font-bold font-[Pacifico] flex-1 hidden md:block`}
-              >
-                Vista Monte Mar
-              </h1>
-              <div
-                className={`text-[12px] font-bold font-[Pacifico] flex-1 block md:hidden text-left`}
-              >
+    <header className="sticky top-0 z-[80] overflow-x-clip px-3 pt-3 sm:px-4 lg:px-6">
+      <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-28 bg-white/25 backdrop-blur-2xl [mask-image:linear-gradient(to_bottom,black_0%,black_38%,transparent_100%)] sm:block"></div>
+      <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-36 bg-[linear-gradient(180deg,rgba(255,253,248,0.92),rgba(255,253,248,0.55),rgba(255,253,248,0.12),transparent)] sm:block"></div>
+      <div className="section-frame">
+        <div className="navbar sunset-panel min-h-0 rounded-[1.75rem] border border-white/65 bg-white/55 px-3 py-2 shadow-[0_16px_45px_rgba(36,61,70,0.16)] backdrop-blur-2xl sm:px-5">
+          <div className="flex-1">
+            <Link to="/" className="group flex min-w-40 items-center gap-3 rounded-full px-2 py-1">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f7efe5] shadow-inner">
+                <img src={logo} className="w-10 flex-none transition duration-300 group-hover:scale-105" />
+              </div>
+              <div className="hidden md:block">
+                <p className="section-kicker">Costa Rica Retreat</p>
+                <h1 className="font-pacifico text-2xl text-[#23404b]">Vista Monte Mar</h1>
+              </div>
+              <div className="block text-left font-pacifico text-[12px] text-[#23404b] md:hidden">
                 <h1>Vista</h1>
                 <h1>Monte</h1>
                 <h1>Mar</h1>
               </div>
-            </div>
-          </Link>
-        </div>
-        {/* <div>
-          <label className="swap swap-rotate">
-            <input
-              type="checkbox"
-              className="theme-controller"
-              onClick={toggleTheme}
-              checked={theme === dark}
-            />
-            <svg
-              className="swap-off h-10 w-10 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-            </svg>
-            <svg
-              className="swap-on h-10 w-10 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-            </svg>
-          </label>
-        </div> */}
-        <div className="flex-none hidden lg:block">
-          <ul className="flex gap-1 menu menu-horizontal px-1">{nav()}</ul>
-        </div>
-        <div className="drawer lg:hidden sm:block w-12 ml-2 mr-2">
-          <input
-            id="my-drawer"
-            type="checkbox"
-            className="drawer-toggle"
-            checked={isDrawerOpen}
-            onChange={(e) => setIsDrawerOpen(e.target.checked)}
-          />
-          <div className="drawer-content">
-            {/* Page content here */}
-            <label
-              htmlFor="my-drawer"
-              className="drawer-button btn bg-base-100"
+            </Link>
+          </div>
+          <div className="hidden flex-none lg:block">
+            <ul className="menu menu-horizontal gap-2 rounded-full bg-[#fff7ef]/80 p-2">{nav()}</ul>
+          </div>
+          <div className="ml-2 w-12 lg:hidden">
+            <button
+              type="button"
+              aria-label="Open navigation menu"
+              className="btn rounded-full border-[#ead9ca] bg-white/80 text-[#27414d] shadow-none hover:bg-white"
+              onClick={() => setIsDrawerOpen(true)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                className="size-6 drawer-button"
+                className="size-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 />
               </svg>
-            </label>
-          </div>
-          <div className="drawer-side z-50 opacity-98">
-            <label
-              htmlFor="my-drawer"
-              aria-label="close sidebar"
-              className="drawer-overlay"
-            ></label>
-            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-              {nav()}
-            </ul>
+            </button>
           </div>
         </div>
       </div>
-      {/* <div className='ml-10 mt-4 mb-4'>
-        <Breadcrumb crumbs={crumbs} active={activeMenuItem} />
-      </div> */}
-    </>
+      {isDrawerOpen && (
+        <div className="fixed inset-0 z-[140] lg:hidden">
+          <div
+            className="absolute inset-0 bg-[#21414c]/18 backdrop-blur-sm"
+            onClick={() => setIsDrawerOpen(false)}
+          />
+          <div className="relative h-full w-full overflow-y-auto bg-[linear-gradient(180deg,#fffdf8,#f7f1e8)] px-4 py-5">
+            <div className="mx-auto flex max-w-7xl flex-col gap-5">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="section-kicker">Explore Your Stay</p>
+                  <p className="font-pacifico text-2xl text-[#23404b]">Vista Monte Mar</p>
+                </div>
+                <button
+                  type="button"
+                  aria-label="Close navigation menu"
+                  className="btn btn-sm h-11 min-h-0 w-11 rounded-full border-[#ead9ca] bg-white/90 p-0 text-[#27414d] shadow-none hover:bg-white"
+                  onClick={() => setIsDrawerOpen(false)}
+                >
+                  ✕
+                </button>
+              </div>
+              <ul className="menu gap-2 rounded-[2rem] border border-white/70 bg-white/70 p-3 shadow-[0_18px_40px_rgba(34,56,69,0.1)]">
+                {nav(true)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

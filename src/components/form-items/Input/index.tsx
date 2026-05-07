@@ -1,4 +1,8 @@
-import { ChangeEventHandler, FunctionComponent } from 'react';
+import {
+  ChangeEventHandler,
+  FocusEventHandler,
+  FunctionComponent,
+} from 'react';
 
 type TInput = {
   title?: string;
@@ -6,8 +10,10 @@ type TInput = {
   placeholder?: string;
   required?: boolean;
   type: 'password' | 'text' | 'email' | 'tel' | 'number';
-  callback: ChangeEventHandler;
+  onChange?: ChangeEventHandler;
   value: string;
+  readOnly?: boolean;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
 };
 
 const Input: FunctionComponent<TInput> = ({
@@ -16,14 +22,18 @@ const Input: FunctionComponent<TInput> = ({
   placeholder,
   required,
   type,
-  callback,
+  onChange,
   value,
+  readOnly,
+  onBlur,
 }) => {
   return (
     <label className="form-control sm:col-span-3">
       {title && (
         <div className="label">
-          <span className="label-text">{title}</span>
+          <span className="label-text block text-gray-700 text-sm font-bold">
+            {title}
+          </span>
           <span className="label-text-alt"></span>
         </div>
       )}
@@ -34,8 +44,10 @@ const Input: FunctionComponent<TInput> = ({
         placeholder={placeholder}
         className="input input-bordered input-sm shadow-inner"
         required={required}
-        onChange={callback}
+        onChange={onChange}
         value={value}
+        readOnly={readOnly}
+        onBlur={onBlur}
       />
       <div className="label">
         <span className="label-text-alt"></span>

@@ -15,7 +15,7 @@ export const AbbLogo: FunctionComponent<TLogos> = ({ size }) => {
           version="1.1"
           className="fill-current"
         >
-          <g id="Page-1" stroke="none" stroke-width="1">
+          <g id="Page-1" stroke="none" strokeWidth="1">
             <g
               id="Dribbble-Light-Preview"
               transform="translate(-261.000000, -7399.000000)"

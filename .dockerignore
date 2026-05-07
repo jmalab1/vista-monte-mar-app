@@ -1,0 +1,6 @@
+.git
+.codex
+node_modules
+dist
+dist_local
+*.log
